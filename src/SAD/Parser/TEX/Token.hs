@@ -503,7 +503,7 @@ environment p = do
           -- Check whether the environment of the @\\begin{...}@ and the @\\end{...}@
           -- commands match:
           let warning_2 = if envNameText' /= envNameText
-                then [Warning (tokensPos (fst endEnvCommand)) $ "Unexpected \"\\begin{" <> envNameText' <> "}\". \"\\end{" <> envNameText <> "}\" expected."]
+                then [Warning endEnvPos $ "Unexpected \"\\end{" <> envNameText' <> "}\". \"\\end{" <> envNameText <> "}\" expected."]
                 else []
           -- If the environment name is "@forthel@" then unset the @insideForthel@ flag:
           when (envNameText == "forthel") $ modify (\state -> state{insideForthel = False})
