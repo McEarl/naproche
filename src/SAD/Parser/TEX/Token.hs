@@ -249,6 +249,8 @@ group'' p = do
   insideForthel <- gets insideForthel
   return (fst content, snd content ++ warning)
 
+{- Uncomment when this function is needed.
+
 -- | Parse a bracket group (depending on a parser @p@ for the content of the#
 -- group), i.e. a string of the form @"[" <p> "]"@. If we are currently inside a
 -- ForTheL group, the tokens given by the opening bracket, the result of @p@ and
@@ -274,6 +276,8 @@ bracketGroup p = do
         then return $ concatUnzip [beginGroup, content]
         else return (fst content, snd content ++ warning)
 
+-}
+
 -- | Parse a bracket group (depending on a parser @p@ for the content of the#
 -- group), i.e. a string of the form @"[" <p> "]"@ and return the tokens given
 -- by the opening bracket, the result of @p@ and the closing bracket.
@@ -293,6 +297,8 @@ bracketGroup' p = do
     insideForthel <- gets insideForthel
     return $ concatUnzip [beginGroup, (fst content, snd content ++ warning)]
 
+{- Uncomment when this function is needed.
+
 -- | Parse a bracket group (depending on a parser @p@ for the content of the#
 -- group), i.e. a string of the form @"[" <p> "]"@ and return the result of @p@.
 bracketGroup'' :: Tokenizer ([Token], [Warning]) -> Tokenizer ([Token], [Warning])
@@ -307,6 +313,8 @@ bracketGroup'' p = do
     else empty
   insideForthel <- gets insideForthel
   return (fst content, snd content ++ warning)
+
+-}
 
 -- | Parse a @\\text{...}@ command, depending on a parser @p@ for the
 -- content of the argument of that command, and return the result of @p@.
@@ -665,6 +673,8 @@ anyWord = do
       pos = Position.range_position $ tokensRange wordLexeme
   return ([Token text pos], warnings)
 
+{- Uncomment when this function is needed.
+
 -- | Parse any word. Fails if the result does not match any string from a given
 -- list.
 anyWordOf :: [Text] -> Tokenizer ([Token], [Warning])
@@ -676,6 +686,10 @@ anyWordOf ws = do
     then return ([Token text pos], warnings)
     else empty
 
+-}
+
+{- Uncomment when this function is needed.
+
 -- | Parse any word. Fails if the result matches any string from a given list.
 anyWordExcept :: [Text] -> Tokenizer ([Token], [Warning])
 anyWordExcept ws = do
@@ -685,6 +699,8 @@ anyWordExcept ws = do
   if text `notElem` ws
     then return ([Token text pos], warnings)
     else empty
+
+-}
 
 
 -- ** Parsing Control Words
@@ -750,6 +766,9 @@ anyControlSymbol = do
       pos = sourcePos ctrlSymbolLexeme
   return ([Token text pos], [])
 
+
+{- Uncomment when this function is needed.
+
 -- | Parse a control symbol that matches any character from a given list.
 anyControlSymbolOf :: [Char] -> Tokenizer [Token]
 anyControlSymbolOf css = do
@@ -759,6 +778,10 @@ anyControlSymbolOf css = do
       text = "\\" <> symbol
       pos = sourcePos ctrlSymbolLexeme
   return [Token text pos]
+
+-}
+
+{- Uncomment when this function is needed.
 
 -- | Parse a control symbol that does not match any character from a given list.
 anyControlSymbolExcept :: [Char] -> Tokenizer ([Token], [Warning])
@@ -770,6 +793,7 @@ anyControlSymbolExcept css = do
       pos = sourcePos ctrlSymbolLexeme
   return ([Token text pos], [])
 
+-}
 
 -- ** Deprecation Warnings
 
