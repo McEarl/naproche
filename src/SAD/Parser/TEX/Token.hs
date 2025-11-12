@@ -713,7 +713,8 @@ controlWord cw = do
   let word = ctrlWordContent ctrlWordLexeme
       text = "\\" <> word
       pos = sourcePos ctrlWordLexeme
-  return ([Token text pos], [])
+      warnings = Maybe.maybeToList $ deprecatedMacroWarning pos word text
+  return ([Token text pos], warnings)
 
 -- | Parse any control word.
 anyControlWord :: Tokenizer ([Token], [Warning])
@@ -722,7 +723,8 @@ anyControlWord = do
   let word = ctrlWordContent ctrlWordLexeme
       text = "\\" <> word
       pos = sourcePos ctrlWordLexeme
-  return ([Token text pos], [])
+      warnings = Maybe.maybeToList $ deprecatedMacroWarning pos word text
+  return ([Token text pos], warnings)
 
 -- | Parse a control word that matches any string from a given list.
 anyControlWordOf :: [Text] -> Tokenizer ([Token], [Warning])
@@ -732,7 +734,8 @@ anyControlWordOf cws = do
   let word = ctrlWordContent ctrlWordLexeme
       text = "\\" <> word
       pos = sourcePos ctrlWordLexeme
-  return ([Token text pos], [])
+      warnings = Maybe.maybeToList $ deprecatedMacroWarning pos word text
+  return ([Token text pos], warnings)
 
 -- | Parse a control word that does not match any string from a given list.
 anyControlWordExcept :: [Text] -> Tokenizer ([Token], [Warning])
@@ -742,7 +745,8 @@ anyControlWordExcept cws = do
   let word = ctrlWordContent ctrlWordLexeme
       text = "\\" <> word
       pos = sourcePos ctrlWordLexeme
-  return ([Token text pos], [])
+      warnings = Maybe.maybeToList $ deprecatedMacroWarning pos word text
+  return ([Token text pos], warnings)
 
 
 -- ** Control Symbols
@@ -820,6 +824,39 @@ deprecatedDoubleMathShiftWarning pos delimiter = Warning pos $
   "Deprecated math mode delimiter \"" <> delimiter <>
   "\". Consider replacing expressions of the form \"" <> delimiter <>
   " ... " <> delimiter <>"\" by \"\\[ ... \\]\"."
+
+-- | Take a macro, its control sequence and position and return a warning if
+-- that macro is deprecated.
+deprecatedMacroWarning :: Position.T -> Text -> Text -> Maybe Warning
+deprecatedMacroWarning pos controlSequence macro = case controlSequence of
+  "bf" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"{\\bf ... }\" by " <>
+    "\"\\textbf{...}\" or \"{\\bfseries ...}\"."
+  "it" -> Just . Warning pos $ "Deprecated macro " <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"{\\it ... }\" by " <>
+    "\"\\textit{...}\" or \"{\\itshape ...}\"."
+  "rm" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"{\\rm ... }\" by " <>
+    "\"\\textrm{...}\" or \"{\\rmfamily ...}\"."
+  "sc" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"{\\sc ... }\" by " <>
+    "\"\\textsc{...}\" or \"{\\scshape ...}\"."
+  "sf" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"{\\sf ... }\" by " <>
+    "\"\\textsf{...}\" or \"{\\sffamily ...}\"."
+  "sl" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"{\\sl ... }\" by " <>
+    "\"\\textsl{...}\" or \"{\\slshape ...}\"."
+  "tt" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"{\\tt ... }\" by " <>
+    "\"\\texttt{...}\" or \"{\\ttfamily ...}\"."
+  "centerline" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"\\centerline{...}\" by " <>
+    "\"\\begin{center} ... \\end{center}\" or \"{\\centering ...}\"."
+  "over" -> Just . Warning pos $ "Deprecated macro \"" <> macro <> "\". " <>
+    "Consider replacing expressions of the form \"... \\over ...\" by " <>
+    "\"\\frac{...}{...}\"."
+  _ -> Nothing
 
 
 -- ** Misc

@@ -105,6 +105,19 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
     - `eqnarray`
     - `eqnarray*`
 
+* **New:** A deprecation warning is thrown when one of the following
+  macros is used:
+
+    - `\bf`
+    - `\it`
+    - `\rm`
+    - `\sc`
+    - `\sf`
+    - `\sl`
+    - `\tt`
+    - `\centerline`
+    - `\over`
+
 
 ### Misc
 
