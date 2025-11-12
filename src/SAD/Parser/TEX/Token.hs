@@ -150,9 +150,7 @@ doubleMathShiftChar = do
   (toks2, warns2) <- anyCharOfCat MathShiftCat
   let pos = tokensPos (toks1 ++ toks2)
       delimiter = tokensText (toks1 ++ toks2)
-      warning = Warning pos $ "Deprecated math mode delimiter \"" <> delimiter <>
-        "\". Consider replacing expressions of the form \"" <> delimiter <>
-        " ... " <> delimiter <>"\" by \"\\[ ... \\]\"."
+      warning = deprecatedDoubleMathShiftWarning pos delimiter
   return (toks1 ++ toks2, warns1 ++ warns2 ++ [warning])
 
 -- | Parse a single math mode delimiter.
@@ -449,19 +447,7 @@ environment p = do
   let envNameText = tokensText (fst envName)
       beginEnvCommand = concatUnzip [beginMacro, beginGroup, envName, endGroup]
       beginEnvPos = tokensPos (fst beginEnvCommand)
-      beginDeprecationWarnings = case envNameText of
-        "displaymath" -> [Warning beginEnvPos $ "Deprecated environment " <>
-          "\"displaymath\". Consider replacing expressions of the form "<>
-          "\"\\begin{displaymath} ... \\end{displaymath}\" by \"\\[ ... \\]\"."]
-        "eqnarray" -> [Warning beginEnvPos $ "Deprecated environment " <>
-          "\"eqnarray\". Consider replacing expressions of the form "<>
-          "\"\\begin{eqnarray} ... \\end{eqnarray}\" by " <>
-          "\"\\begin{align} ... \\end{align}\"."]
-        "eqnarray*" -> [Warning beginEnvPos $ "Deprecated environment " <>
-          "\"eqnarray*\". Consider replacing expressions of the form "<>
-          "\"\\begin{eqnarray*} ... \\end{eqnarray*}\" by " <>
-          "\"\\begin{align*} ... \\end{align*}\"."]
-        _ -> []
+      beginDeprecationWarnings = Maybe.maybeToList $ deprecatedEnvWarning beginEnvPos envNameText
   -- Fail if the environment name is @forthel@ and the @insideForthel@ flag is
   -- already set:
   when (envNameText == "forthel" && currentlyInsideForthel) $
@@ -512,19 +498,8 @@ environment p = do
           endGroup' <- catchUnexpected "an end-group lexeme" $ singleToken isEndGroupCharLexeme
           let envNameText' = tokensText (fst envName')
               endEnvCommand = concatUnzip [endMacro, beginGroup', envName', endGroup']
-              endDeprecationWarnings = case envNameText' of
-                "displaymath" -> [Warning beginEnvPos $ "Deprecated environment " <>
-                  "\"displaymath\". Consider replacing expressions of the form "<>
-                  "\"\\begin{displaymath} ... \\end{displaymath}\" by \"\\[ ... \\]\"."]
-                "eqnarray" -> [Warning beginEnvPos $ "Deprecated environment " <>
-                  "\"eqnarray\". Consider replacing expressions of the form "<>
-                  "\"\\begin{eqnarray} ... \\end{eqnarray}\" by " <>
-                  "\"\\begin{align} ... \\end{align}\"."]
-                "eqnarray*" -> [Warning beginEnvPos $ "Deprecated environment " <>
-                  "\"eqnarray*\". Consider replacing expressions of the form "<>
-                  "\"\\begin{eqnarray*} ... \\end{eqnarray*}\" by " <>
-                  "\"\\begin{align*} ... \\end{align*}\"."]
-                _ -> []
+              endEnvPos = tokensPos (fst endEnvCommand)
+              endDeprecationWarnings = Maybe.maybeToList $ deprecatedEnvWarning endEnvPos envNameText'
           -- Check whether the environment of the @\\begin{...}@ and the @\\end{...}@
           -- commands match:
           let warning_2 = if envNameText' /= envNameText
@@ -794,6 +769,33 @@ anyControlSymbolExcept css = do
       text = "\\" <> symbol
       pos = sourcePos ctrlSymbolLexeme
   return ([Token text pos], [])
+
+
+-- ** Deprecation Warnings
+
+-- | Take an environment name and the position of a slice of tokens it belongs
+-- to and if environments with that name are deprecated, return a warning.
+deprecatedEnvWarning :: Position.T -> Text -> Maybe Warning
+deprecatedEnvWarning pos envName = case envName of
+  "displaymath" -> Just . Warning pos $ "Deprecated environment " <>
+    "\"displaymath\". Consider replacing expressions of the form "<>
+    "\"\\begin{displaymath} ... \\end{displaymath}\" by \"\\[ ... \\]\"."
+  "eqnarray" -> Just . Warning pos $ "Deprecated environment " <>
+    "\"eqnarray\". Consider replacing expressions of the form "<>
+    "\"\\begin{eqnarray} ... \\end{eqnarray}\" by " <>
+    "\"\\begin{align} ... \\end{align}\"."
+  "eqnarray*" -> Just . Warning pos $ "Deprecated environment " <>
+    "\"eqnarray*\". Consider replacing expressions of the form "<>
+    "\"\\begin{eqnarray*} ... \\end{eqnarray*}\" by " <>
+    "\"\\begin{align*} ... \\end{align*}\"."
+  _ -> Nothing
+
+-- | Take two math shift characters and their position and return a warning.
+deprecatedDoubleMathShiftWarning :: Position.T -> Text -> Warning
+deprecatedDoubleMathShiftWarning pos delimiter = Warning pos $
+  "Deprecated math mode delimiter \"" <> delimiter <>
+  "\". Consider replacing expressions of the form \"" <> delimiter <>
+  " ... " <> delimiter <>"\" by \"\\[ ... \\]\"."
 
 
 -- ** Misc
