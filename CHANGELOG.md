@@ -98,6 +98,13 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
 * **New:** A deprecation warning is thrown when the math mode delimiter `$$` is
   used.
 
+* **New:** A deprecation warning is thrown when one of the following
+  environments is used:
+
+    - `displaymath`
+    - `eqnarray`
+    - `eqnarray*`
+
 
 ### Misc
 

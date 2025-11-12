@@ -449,6 +449,19 @@ environment p = do
   let envNameText = tokensText (fst envName)
       beginEnvCommand = concatUnzip [beginMacro, beginGroup, envName, endGroup]
       beginEnvPos = tokensPos (fst beginEnvCommand)
+      beginDeprecationWarnings = case envNameText of
+        "displaymath" -> [Warning beginEnvPos $ "Deprecated environment " <>
+          "\"displaymath\". Consider replacing expressions of the form "<>
+          "\"\\begin{displaymath} ... \\end{displaymath}\" by \"\\[ ... \\]\"."]
+        "eqnarray" -> [Warning beginEnvPos $ "Deprecated environment " <>
+          "\"eqnarray\". Consider replacing expressions of the form "<>
+          "\"\\begin{eqnarray} ... \\end{eqnarray}\" by " <>
+          "\"\\begin{align} ... \\end{align}\"."]
+        "eqnarray*" -> [Warning beginEnvPos $ "Deprecated environment " <>
+          "\"eqnarray*\". Consider replacing expressions of the form "<>
+          "\"\\begin{eqnarray*} ... \\end{eqnarray*}\" by " <>
+          "\"\\begin{align*} ... \\end{align*}\"."]
+        _ -> []
   -- Fail if the environment name is @forthel@ and the @insideForthel@ flag is
   -- already set:
   when (envNameText == "forthel" && currentlyInsideForthel) $
@@ -499,6 +512,19 @@ environment p = do
           endGroup' <- catchUnexpected "an end-group lexeme" $ singleToken isEndGroupCharLexeme
           let envNameText' = tokensText (fst envName')
               endEnvCommand = concatUnzip [endMacro, beginGroup', envName', endGroup']
+              endDeprecationWarnings = case envNameText' of
+                "displaymath" -> [Warning beginEnvPos $ "Deprecated environment " <>
+                  "\"displaymath\". Consider replacing expressions of the form "<>
+                  "\"\\begin{displaymath} ... \\end{displaymath}\" by \"\\[ ... \\]\"."]
+                "eqnarray" -> [Warning beginEnvPos $ "Deprecated environment " <>
+                  "\"eqnarray\". Consider replacing expressions of the form "<>
+                  "\"\\begin{eqnarray} ... \\end{eqnarray}\" by " <>
+                  "\"\\begin{align} ... \\end{align}\"."]
+                "eqnarray*" -> [Warning beginEnvPos $ "Deprecated environment " <>
+                  "\"eqnarray*\". Consider replacing expressions of the form "<>
+                  "\"\\begin{eqnarray*} ... \\end{eqnarray*}\" by " <>
+                  "\"\\begin{align*} ... \\end{align*}\"."]
+                _ -> []
           -- Check whether the environment of the @\\begin{...}@ and the @\\end{...}@
           -- commands match:
           let warning_2 = if envNameText' /= envNameText
@@ -515,11 +541,11 @@ environment p = do
           currentlyInsideForthel' <- gets insideForthel
           if (currentlyInsideForthel' || tlsEnvWithForthelFlagOutsideForthelEnv) && envNameText /= "forthel"
             then return $ concatUnzip [beginEnvCommand, content, endEnvCommand, ([], warning_2)]
-            else return (fst content, snd content ++ warning_2)
+            else return (fst content, snd content ++ warning_2 ++ beginDeprecationWarnings ++ endDeprecationWarnings)
         else do
           currentlyInsideForthel' <- gets insideForthel
           if (currentlyInsideForthel' || tlsEnvWithForthelFlagOutsideForthelEnv) && envNameText /= "forthel"
-            then return $ concatUnzip [beginEnvCommand, content, ([], warning_1)]
+            then return $ concatUnzip [beginEnvCommand, content, ([], warning_1 ++ beginDeprecationWarnings)]
             else return (fst content, snd content ++ warning_1)
   where
     tlsEnvNames = [
