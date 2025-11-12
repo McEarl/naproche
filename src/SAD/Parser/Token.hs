@@ -76,7 +76,7 @@ renderToken EOF{} = ""
 -- * Warnings
 
 -- | A warning: A message equipped with a position that message refers to.
-data Warning = Warning Text Position.T
+data Warning = Warning Position.T Text
 
 -- | Report several warnings at once.
 reportWarnings :: [Warning] -> IO ()
@@ -84,7 +84,7 @@ reportWarnings = foldr ((>>) . reportWarning) (return ())
 
 -- | Report a single warning.
 reportWarning :: Warning -> IO ()
-reportWarning (Warning text pos) = Message.outputTokenizer Message.WARNING pos text
+reportWarning (Warning pos text) = Message.outputTokenizer Message.WARNING pos text
 
 
 -- * Error Handling

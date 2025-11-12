@@ -62,7 +62,7 @@ filterTokens tokens warnings = do
   return tokens
   where
   reportWarnings = foldr ((>>) . reportWarning) (return ())
-  reportWarning (Warning text pos) = Message.outputTokenizer Message.WARNING pos text
+  reportWarning (Warning pos text) = Message.outputTokenizer Message.WARNING pos text
 
 
 -- * Tokenizing Errors and Warnings
@@ -191,7 +191,7 @@ group p = do
   let beginGroupPos = tokensPos (fst beginGroup)
   content <- p
   -- Throw an error if the end of the input is reached:
-  (_, warning) <- ifEofAddWarning $ Warning "LaTeX: Missing \"}\" character" beginGroupPos
+  (_, warning) <- ifEofAddWarning $ Warning beginGroupPos "LaTeX: Missing \"}\" character"
   if null warning
   then do
     endGroup <- singleToken isEndGroupCharLexeme
@@ -214,7 +214,7 @@ group' p = do
   let beginGroupPos = tokensPos (fst beginGroup)
   content <- p
   -- Throw an error if the end of the input is reached:
-  (_, warning) <- ifEofAddWarning $ Warning "LaTeX: Missing \"}\" character" beginGroupPos
+  (_, warning) <- ifEofAddWarning $ Warning beginGroupPos "LaTeX: Missing \"}\" character" 
   if null warning
     then do
       endGroup <- singleToken isEndGroupCharLexeme
@@ -232,7 +232,7 @@ group'' p = do
   let beginGroupPos = tokensPos (fst beginGroup)
   content <- p
   -- Throw an error if the end of the input is reached:
-  (_, warning) <- ifEofAddWarning $ Warning "LaTeX: Missing \"}\" character" beginGroupPos
+  (_, warning) <- ifEofAddWarning $ Warning beginGroupPos "LaTeX: Missing \"}\" character"
   if null warning
     then singleToken isEndGroupCharLexeme
     else empty
@@ -250,7 +250,7 @@ bracketGroup p = do
   let beginGroupPos = tokensPos (fst beginGroup)
   content <- p
   -- Throw an error if the end of the input is reached:
-  (_, warning) <- ifEofAddWarning $ Warning "LaTeX: Missing \"]\" character" beginGroupPos
+  (_, warning) <- ifEofAddWarning $ Warning beginGroupPos "LaTeX: Missing \"]\" character"
   if null warning
     then do
       endGroup <- singleToken isEndBracketGroupCharLexeme
@@ -273,7 +273,7 @@ bracketGroup' p = do
   let beginGroupPos = tokensPos (fst beginGroup)
   content <- p
   -- Throw an error if the end of the input is reached:
-  (_, warning) <- ifEofAddWarning $ Warning "LaTeX: Missing \"]\" character" beginGroupPos
+  (_, warning) <- ifEofAddWarning $ Warning beginGroupPos "LaTeX: Missing \"]\" character" 
   if null warning
   then do
     endGroup <- singleToken isEndBracketGroupCharLexeme
@@ -291,7 +291,7 @@ bracketGroup'' p = do
   let beginGroupPos = tokensPos (fst beginGroup)
   content <- p
   -- Throw an error if the end of the input is reached:
-  (_, warning) <- ifEofAddWarning $ Warning "LaTeX: Missing \"]\" character" beginGroupPos
+  (_, warning) <- ifEofAddWarning $ Warning beginGroupPos "LaTeX: Missing \"]\" character"
   if null warning
     then singleToken isEndBracketGroupCharLexeme
     else empty
@@ -366,7 +366,7 @@ verbCommand = do
     ]
   -- Fail if the end of the input is reached before the closing delimiter
   -- character:
-  ifEofAddWarning $ Warning ("LaTeX: Missing \"" <> Text.singleton delimiterChar <> "\" character") beginDelimiterPos
+  ifEofAddWarning . Warning beginDelimiterPos $ "LaTeX: Missing \"" <> Text.singleton delimiterChar <> "\" character"
   endDelimiter <- char delimiterChar
   return $ concatUnzip [macro, Maybe.fromMaybe ([], []) mbStar, beginDelimiter, content, endDelimiter]
 
@@ -406,7 +406,7 @@ catchInvalidGroupEnd :: Tokenizer ([Token], [Warning])
 catchInvalidGroupEnd = do
   endGroup <- singleToken isEndGroupCharLexeme
   let pos = tokensPos (fst endGroup)
-  let warning = Warning "LaTeX: Missing \"{\" character" pos
+  let warning = Warning pos "LaTeX: Missing \"{\" character"
   return ([], [warning])
 
 -- | Parse a TeX environment (depending on a parser @p@ for the content of the
@@ -454,7 +454,7 @@ environment p = do
           try nonVerbatimEndCommand
         ]
       -- Throw an error if the end of the input is reached:
-      ifEofAddWarning $ Warning ("LaTeX: Missing \"\\end{" <> envNameText <> "}\".") beginEnvPos
+      ifEofAddWarning . Warning beginEnvPos $ "LaTeX: Missing \"\\end{" <> envNameText <> "}\"."
       -- Parse an @\\end{verbatim}@ command:
       endMacro <- controlWord "end"
       beginGroup' <- singleToken isBeginGroupCharLexeme
@@ -477,7 +477,7 @@ environment p = do
       -- Run @p@:
       content <- p
       -- Throw an error if the end of the input is reached:
-      (_, warning_1) <- ifEofAddWarning $ Warning ("LaTeX: Missing \"\\end{" <> envNameText <> "}\".") beginEnvPos
+      (_, warning_1) <- ifEofAddWarning . Warning beginEnvPos $ "LaTeX: Missing \"\\end{" <> envNameText <> "}\"."
       if null warning_1
         then do 
           -- Parse an @\\end{...}@ command:
@@ -490,7 +490,7 @@ environment p = do
           -- Check whether the environment of the @\\begin{...}@ and the @\\end{...}@
           -- commands match:
           let warning_2 = if envNameText' /= envNameText
-                then [Warning ("LaTeX: Unexpected \"\\begin{" <> envNameText' <> "}\". \"\\end{" <> envNameText <> "}\" expected.") (tokensPos (fst endEnvCommand))]
+                then [Warning (tokensPos (fst endEnvCommand)) $ "LaTeX: Unexpected \"\\begin{" <> envNameText' <> "}\". \"\\end{" <> envNameText <> "}\" expected."]
                 else []
           -- If the environment name is "@forthel@" then unset the @insideForthel@ flag:
           when (envNameText == "forthel") $ modify (\state -> state{insideForthel = False})
@@ -553,7 +553,7 @@ catchInvalidEnvEnd = do
   let command = concatUnzip [endMacro, beginGroup, envName, endGroup]
       pos = tokensPos (fst command)
       envNameText = tokensText (fst envName)
-  let warning = Warning ("LaTeX: Missing \"\\begin{" <> envNameText <> "}\".") pos
+  let warning = Warning pos $ "LaTeX: Missing \"\\begin{" <> envNameText <> "}\"."
   return ([], [warning])
 
 
