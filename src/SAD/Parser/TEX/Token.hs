@@ -197,12 +197,12 @@ group p = do
     endGroup <- singleToken isEndGroupCharLexeme
     insideForthel <- gets insideForthel
     if insideForthel
-      then return $ concatTokWarn [beginGroup, content, endGroup]
+      then return $ concatUnzip [beginGroup, content, endGroup]
       else return content
     else do
       insideForthel <- gets insideForthel
       if insideForthel
-        then return $ concatTokWarn [beginGroup, content]
+        then return $ concatUnzip [beginGroup, content]
         else return (fst content, snd content ++ warning)
 
 -- | Parse a TeX group (depending on a parser @p@ for the content of the group).
@@ -219,10 +219,10 @@ group' p = do
     then do
       endGroup <- singleToken isEndGroupCharLexeme
       insideForthel <- gets insideForthel
-      return $ concatTokWarn [beginGroup, content, endGroup]
+      return $ concatUnzip [beginGroup, content, endGroup]
     else do
       insideForthel <- gets insideForthel
-      return $ concatTokWarn [beginGroup, (fst content, snd content ++ warning)]
+      return $ concatUnzip [beginGroup, (fst content, snd content ++ warning)]
 
 -- | Parse a TeX group (depending on a parser @p@ for the content of the group).
 -- and return the result of @p@.
@@ -256,12 +256,12 @@ bracketGroup p = do
       endGroup <- singleToken isEndBracketGroupCharLexeme
       insideForthel <- gets insideForthel
       if insideForthel
-        then return $ concatTokWarn [beginGroup, content, endGroup]
+        then return $ concatUnzip [beginGroup, content, endGroup]
         else return content
     else do
       insideForthel <- gets insideForthel
       if insideForthel
-        then return $ concatTokWarn [beginGroup, content]
+        then return $ concatUnzip [beginGroup, content]
         else return (fst content, snd content ++ warning)
 
 -- | Parse a bracket group (depending on a parser @p@ for the content of the#
@@ -278,10 +278,10 @@ bracketGroup' p = do
   then do
     endGroup <- singleToken isEndBracketGroupCharLexeme
     insideForthel <- gets insideForthel
-    return $ concatTokWarn [beginGroup, content, endGroup]
+    return $ concatUnzip [beginGroup, content, endGroup]
   else do
     insideForthel <- gets insideForthel
-    return $ concatTokWarn [beginGroup, (fst content, snd content ++ warning)]
+    return $ concatUnzip [beginGroup, (fst content, snd content ++ warning)]
 
 -- | Parse a bracket group (depending on a parser @p@ for the content of the#
 -- group), i.e. a string of the form @"[" <p> "]"@ and return the result of @p@.
@@ -322,7 +322,7 @@ urlCommand = do
       anyControlSymbol,
       anyControlWord
     ]
-  return $ concatTokWarn [macro, argument]
+  return $ concatUnzip [macro, argument]
 
 pathCommand :: Tokenizer ([Token], [Warning])
 pathCommand = do
@@ -341,7 +341,7 @@ pathCommand = do
       anyControlSymbol,
       anyControlWord
     ]
-  return $ concatTokWarn [macro, argument]
+  return $ concatUnzip [macro, argument]
 
 verbCommand :: Tokenizer ([Token], [Warning])
 verbCommand = do
@@ -368,7 +368,7 @@ verbCommand = do
   -- character:
   ifEofAddWarning $ Warning ("LaTeX: Missing \"" <> Text.singleton delimiterChar <> "\" character") beginDelimiterPos
   endDelimiter <- char delimiterChar
-  return $ concatTokWarn [macro, Maybe.fromMaybe ([], []) mbStar, beginDelimiter, content, endDelimiter]
+  return $ concatUnzip [macro, Maybe.fromMaybe ([], []) mbStar, beginDelimiter, content, endDelimiter]
 
 -- | Parse a @\\importmodule[...]{...}@ or @\\usemodule[...]{...}@ command.
 importCommand :: Tokenizer ([Token], [Warning])
@@ -376,7 +376,7 @@ importCommand = do
   command <- anyControlWordOf ["importmodule", "usemodule"]
   fstArg <- bracketGroup' $ concatUnzip <$> some (anyWord <|> anyDigit <|> char '/' <|> char '-' <|> char '_' <|> char '.')
   sndArg <- group' $ concatUnzip <$> some (anyWord <|> anyDigit <|> char '/' <|> char '?' <|> char '-' <|> char '_' <|> char '.')
-  return $ concatTokWarn [command, fstArg, sndArg]
+  return $ concatUnzip [command, fstArg, sndArg]
 
 -- | Parse a @\\importmodule[...]{...}@ or @\\usemodule[...]{...}@ command.
 inputCommand :: Tokenizer ([Token], [Warning])
@@ -384,7 +384,7 @@ inputCommand = do
   command <- controlWord "inputref"
   fstArg <- bracketGroup' $ concatUnzip <$> some (anyWord <|> anyDigit <|> char '/' <|> char '-' <|> char '_' <|> char '.')
   sndArg <- group' $ concatUnzip <$> some (anyWord <|> anyDigit <|> char '/' <|> char '-' <|> char '_' <|> char '.')
-  return $ concatTokWarn [command, fstArg, sndArg]
+  return $ concatUnzip [command, fstArg, sndArg]
 
 -- | Parse an @\\inlineforthel{...}@ command, depending on a parser @p@ for the
 -- content of the argument of that command, and return the result of @p@, where
@@ -435,7 +435,7 @@ environment p = do
   envName <- concatUnzip <$> some (someTokens isLetterCharLexeme <|> singleToken isOtherCharLexeme)
   endGroup <- catchUnexpected "an end-group lexeme" $ singleToken isEndGroupCharLexeme
   let envNameText = tokensText (fst envName)
-      beginEnvCommand = concatTokWarn [beginMacro, beginGroup, envName, endGroup]
+      beginEnvCommand = concatUnzip [beginMacro, beginGroup, envName, endGroup]
       beginEnvPos = tokensPos (fst beginEnvCommand)
   -- Fail if the environment name is @forthel@ and the @insideForthel@ flag is
   -- already set:
@@ -460,10 +460,10 @@ environment p = do
       beginGroup' <- singleToken isBeginGroupCharLexeme
       envName' <- word "verbatim"
       endGroup' <- singleToken isEndGroupCharLexeme
-      let beginEnvCommand = concatTokWarn [beginMacro, beginGroup, envName, endGroup]
-          endEnvCommand = concatTokWarn [endMacro, beginGroup', envName', endGroup']
+      let beginEnvCommand = concatUnzip [beginMacro, beginGroup, envName, endGroup]
+          endEnvCommand = concatUnzip [endMacro, beginGroup', envName', endGroup']
       if currentlyInsideForthel
-        then return $ concatTokWarn [beginEnvCommand, content, endEnvCommand]
+        then return $ concatUnzip [beginEnvCommand, content, endEnvCommand]
         else return ([], [])
     -- In any other case, parse the content of the environment via the given
     -- parser @p@ (while keeping track of the @forthel@ flag):
@@ -486,7 +486,7 @@ environment p = do
           envName' <- concatUnzip <$> some (someTokens isLetterCharLexeme <|> singleToken isOtherCharLexeme)
           endGroup' <- catchUnexpected "an end-group lexeme" $ singleToken isEndGroupCharLexeme
           let envNameText' = tokensText (fst envName')
-              endEnvCommand = concatTokWarn [endMacro, beginGroup', envName', endGroup']
+              endEnvCommand = concatUnzip [endMacro, beginGroup', envName', endGroup']
           -- Check whether the environment of the @\\begin{...}@ and the @\\end{...}@
           -- commands match:
           let warning_2 = if envNameText' /= envNameText
@@ -502,12 +502,12 @@ environment p = do
           -- @\\end{...}@ command; otherwise return just the result of @p@:
           currentlyInsideForthel' <- gets insideForthel
           if (currentlyInsideForthel' || tlsEnvWithForthelFlagOutsideForthelEnv) && envNameText /= "forthel"
-            then return $ concatTokWarn [beginEnvCommand, content, endEnvCommand, ([], warning_2)]
+            then return $ concatUnzip [beginEnvCommand, content, endEnvCommand, ([], warning_2)]
             else return (fst content, snd content ++ warning_2)
         else do
           currentlyInsideForthel' <- gets insideForthel
           if (currentlyInsideForthel' || tlsEnvWithForthelFlagOutsideForthelEnv) && envNameText /= "forthel"
-            then return $ concatTokWarn [beginEnvCommand, content, ([], warning_1)]
+            then return $ concatUnzip [beginEnvCommand, content, ([], warning_1)]
             else return (fst content, snd content ++ warning_1)
   where
     tlsEnvNames = [
@@ -537,7 +537,7 @@ environment p = do
       envName <- concatUnzip <$> some (someTokens isLetterCharLexeme <|> singleToken isOtherCharLexeme)
       endGroup <- singleToken isEndGroupCharLexeme
       let envNameText = tokensText (fst envName)
-          endEnvCommand = concatTokWarn [endMacro, beginGroup, envName, endGroup]
+          endEnvCommand = concatUnzip [endMacro, beginGroup, envName, endGroup]
       if envNameText == "verbatim"
         then empty
         else return endEnvCommand
@@ -550,7 +550,7 @@ catchInvalidEnvEnd = do
   beginGroup <- singleToken isBeginGroupCharLexeme
   envName <- concatUnzip <$> some (someTokens isLetterCharLexeme <|> singleToken isOtherCharLexeme)
   endGroup <- singleToken isEndGroupCharLexeme
-  let command = concatTokWarn [endMacro, beginGroup, envName, endGroup]
+  let command = concatUnzip [endMacro, beginGroup, envName, endGroup]
       pos = tokensPos (fst command)
       envNameText = tokensText (fst envName)
   let warning = Warning ("LaTeX: Missing \"\\begin{" <> envNameText <> "}\".") pos
@@ -637,7 +637,7 @@ anyDigit = charOf ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 -- | Parse any word. Fails if the result does not match a given string.
 word :: Text -> Tokenizer ([Token], [Warning])
 word w = do
-  (wordLexeme, warnings) <- concatTokWarn <$> some (anyCharOfCat LetterCat)
+  (wordLexeme, warnings) <- concatUnzip <$> some (anyCharOfCat LetterCat)
   let text = Text.concat $ map tokenText wordLexeme
       pos = Position.range_position $ tokensRange wordLexeme
   if text == w
@@ -647,7 +647,7 @@ word w = do
 -- | Parse any word.
 anyWord :: Tokenizer ([Token], [Warning])
 anyWord = do
-  (wordLexeme, warnings) <- concatTokWarn <$> some (anyCharOfCat LetterCat)
+  (wordLexeme, warnings) <- concatUnzip <$> some (anyCharOfCat LetterCat)
   let text = Text.concat $ map tokenText wordLexeme
       pos = Position.range_position $ tokensRange wordLexeme
   return ([Token text pos], warnings)
@@ -656,7 +656,7 @@ anyWord = do
 -- list.
 anyWordOf :: [Text] -> Tokenizer ([Token], [Warning])
 anyWordOf ws = do
-  (wordLexeme, warnings) <- concatTokWarn <$> some (anyCharOfCat LetterCat)
+  (wordLexeme, warnings) <- concatUnzip <$> some (anyCharOfCat LetterCat)
   let text = Text.concat $ map tokenText wordLexeme
       pos = Position.range_position $ tokensRange wordLexeme
   if text `elem` ws
@@ -666,7 +666,7 @@ anyWordOf ws = do
 -- | Parse any word. Fails if the result matches any string from a given list.
 anyWordExcept :: [Text] -> Tokenizer ([Token], [Warning])
 anyWordExcept ws = do
-  (wordLexeme, warnings) <- concatTokWarn <$> some (anyCharOfCat LetterCat)
+  (wordLexeme, warnings) <- concatUnzip <$> some (anyCharOfCat LetterCat)
   let text = Text.concat $ map tokenText wordLexeme
       pos = Position.range_position $ tokensRange wordLexeme
   if text `notElem` ws

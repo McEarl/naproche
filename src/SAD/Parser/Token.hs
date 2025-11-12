@@ -16,7 +16,6 @@ module SAD.Parser.Token (
 
   Warning(..),
   reportWarnings,
-  concatTokWarn,
 
   handleError,
   unknownError,
@@ -38,7 +37,6 @@ import Data.List.NonEmpty qualified as NonEmpty
 import Data.Set (Set)
 import Data.Set qualified as Set
 import Data.List
-import Data.Bifunctor (bimap)
 import Text.Megaparsec hiding (State, Pos, Token)
 
 import SAD.Core.Message qualified as Message
@@ -87,11 +85,6 @@ reportWarnings = foldr ((>>) . reportWarning) (return ())
 -- | Report a single warning.
 reportWarning :: Warning -> IO ()
 reportWarning (Warning text pos) = Message.outputTokenizer Message.WARNING pos text
-
--- | Concatenate a list of tokens/warnings-pairs.
-concatTokWarn :: [([Token], [Warning])] -> ([Token], [Warning])
-concatTokWarn [] = ([],[])
-concatTokWarn ((xs,ys) : rest) = bimap (xs ++) (ys ++) (concatTokWarn rest)
 
 
 -- * Error Handling
