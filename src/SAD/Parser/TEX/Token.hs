@@ -143,9 +143,21 @@ controlSpace = singleToken isControlSpaceLexeme
 parameter :: Tokenizer ([Token], [Warning])
 parameter = singleToken isParameterLexeme
 
+-- | Parse two math shift characters and return a deprecation warning.
+doubleMathShiftChar :: Tokenizer ([Token], [Warning])
+doubleMathShiftChar = do
+  (toks1, warns1) <- anyCharOfCat MathShiftCat
+  (toks2, warns2) <- anyCharOfCat MathShiftCat
+  let pos = tokensPos (toks1 ++ toks2)
+      delimiter = tokensText (toks1 ++ toks2)
+      warning = Warning pos $ "Deprecated math mode delimiter \"" <> delimiter <>
+        "\". Consider replacing expressions of the form \"" <> delimiter <>
+        " ... " <> delimiter <>"\" by \"\\[ ... \\]\"."
+  return (toks1 ++ toks2, warns1 ++ warns2 ++ [warning])
+
 -- | Parse a single math mode delimiter.
 mathModeDelimiter :: Tokenizer ([Token], [Warning])
-mathModeDelimiter = do
+mathModeDelimiter = try doubleMathShiftChar <|> do
   (tokens, _) <- choice [
       anyCharOfCat MathShiftCat,
       controlSymbol '(',

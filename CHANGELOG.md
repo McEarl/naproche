@@ -95,6 +95,9 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
 * **Changed:** The labelling/referencing mechanism was reset so that it works
   exactly as in Isabelle/Naproche 2024.
 
+* **New:** A deprecation warning is thrown when the math mode delimiter `$$` is
+  used.
+
 
 ### Misc
 
