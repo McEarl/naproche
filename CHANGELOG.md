@@ -127,6 +127,10 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
   `--dialect` with possible values `ftl`, `tex` and `stex` for the FTL, TeX and
   sTeX dialect of ForTheL.
 
+* **Changed:** The command line interface – which has never been officially
+  supported and never properly worked on Windows – now immediately aborts with
+  an error message when it is called on Windows.
+
 
 --------------------------------------------------------------------------------
 

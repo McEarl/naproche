@@ -149,6 +149,8 @@ in the PATH, but it is convenient to put it into a standard place once, e.g.:
 
 ### Command Line Interface
 
+**Note:** The command line interface is only supported on Linux and macOS.
+
 Set the environment variables listed in the first column of the below table to
 the output of the commands listed in its second column.
 

@@ -82,6 +82,8 @@ main  = do
 
 mainTerminal :: [Instr] -> [String] -> IO ()
 mainTerminal initInstrs fileArgs = do
+  when is_windows $ error
+    "[Error] The command line interface of Naproche is not supported on Windows."
   if getInstr helpParam initInstrs
     then putStr $ GetOpt.usageInfo usageHeader options
     else do
@@ -334,36 +336,31 @@ verifyInputText dialect mesonCache proverCache proofTexts = do
 
 renderInputFile :: FilePath -> FilePath -> FilePath -> IO Int
 renderInputFile inputPath texExe bibtexExe = do
-  if is_windows
-    then do
-      putStrLn "[Error] \"render\" mode is not supported on Windows."
-      return 1
-  else do
-    putStrLn "[Warning] This is an experimental feature. Please be gentle.\n"
+  putStrLn "[Warning] This is an experimental feature. Please be gentle.\n"
 
-    mathhubVar <- getNaprocheMathhub
+  mathhubVar <- getNaprocheMathhub
 
-    putStrLn $ "[Info] PDFLaTeX binary:  " ++ texExe
-    putStrLn $ "[Info] BibTeX binary:    " ++ bibtexExe
-    putStrLn $ "[Info] MATHHUB variable: " ++ mathhubVar
+  putStrLn $ "[Info] PDFLaTeX binary:  " ++ texExe
+  putStrLn $ "[Info] BibTeX binary:    " ++ bibtexExe
+  putStrLn $ "[Info] MATHHUB variable: " ++ mathhubVar
 
-    putStr $ "\nReady to render \"" ++ inputPath ++ "\" to PDF. Continue? (Y/n) "
-    hFlush stdout
-    answer <- getLine
-    putStr "\n"
+  putStr $ "\nReady to render \"" ++ inputPath ++ "\" to PDF. Continue? (Y/n) "
+  hFlush stdout
+  answer <- getLine
+  putStr "\n"
 
-    when (answer `elem` ["Y", "y", ""]) $ do
-      -- Render the input file as PDF:
-      let inputDir = takeDirectory inputPath
-          inputFile = takeFileName inputPath
-          inputFileBase = takeBaseName inputFile
-      setCurrentDirectory inputDir
-      callCommand $ "MATHHUB=\"" ++ mathhubVar ++ "\" STEX_WRITESMS=true " ++ texExe ++ " " ++ inputFile
-      callCommand $ bibtexExe ++ " " ++ inputFileBase ++ " | true" -- succeed even if bibtex fails
-      callCommand $ "MATHHUB=\"" ++ mathhubVar ++ "\" STEX_USESMS=true " ++ texExe ++ " " ++ inputFile
-      callCommand $ "MATHHUB=\"" ++ mathhubVar ++ "\" STEX_USESMS=true " ++ texExe ++ " " ++ inputFile
+  when (answer `elem` ["Y", "y", ""]) $ do
+    -- Render the input file as PDF:
+    let inputDir = takeDirectory inputPath
+        inputFile = takeFileName inputPath
+        inputFileBase = takeBaseName inputFile
+    setCurrentDirectory inputDir
+    callCommand $ "MATHHUB=\"" ++ mathhubVar ++ "\" STEX_WRITESMS=true " ++ texExe ++ " " ++ inputFile
+    callCommand $ bibtexExe ++ " " ++ inputFileBase ++ " | true" -- succeed even if bibtex fails
+    callCommand $ "MATHHUB=\"" ++ mathhubVar ++ "\" STEX_USESMS=true " ++ texExe ++ " " ++ inputFile
+    callCommand $ "MATHHUB=\"" ++ mathhubVar ++ "\" STEX_USESMS=true " ++ texExe ++ " " ++ inputFile
 
-    return 0
+  return 0
 
 
 -- * Arguments
