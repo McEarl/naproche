@@ -141,7 +141,7 @@ showErrorMessage msg = case msg of
   Unknown -> "unknown parse error"
   WellFormednessMessage m -> commasOr $ clean $ map Text.unpack m
   ExpectMsg unexpected expected msgs -> case clean $ map Text.unpack msgs of
-    [] -> unlines $ clean ["unexpected " ++ Text.unpack unexpected, showMany "expecting" (clean $ map Text.unpack expected)]
+    [] -> unwords $ clean ["Unexpected \"" ++ Text.unpack unexpected ++ "\".", showMany "Expecting" (clean $ map Text.unpack expected) ++ "."]
     messages -> commasOr messages
   where
     showMany :: String -> [String] -> String
