@@ -26,6 +26,7 @@ import System.IO
 import System.FilePath.Posix
 import System.Directory
 import System.Process (callCommand)
+import System.Exit (die)
 import Network.Socket (Socket)
 
 import SAD.Prove.MESON qualified as MESON
@@ -82,8 +83,8 @@ main  = do
 
 mainTerminal :: [Instr] -> [String] -> IO ()
 mainTerminal initInstrs fileArgs = do
-  when is_windows $ error
-    "[Error] The command line interface of Naproche is not supported on Windows."
+  when is_windows $ die
+    "[Info] The command line interface of Naproche is not supported on Windows."
   if getInstr helpParam initInstrs
     then putStr $ GetOpt.usageInfo usageHeader options
     else do
