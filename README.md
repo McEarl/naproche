@@ -76,6 +76,8 @@ in the PATH, but it is convenient to put it into a standard place once, e.g.:
     isabelle naproche_test -o naproche_server_debugging
     ```
 
+    **Note:** The tool `naproche_test` is only supported on Linux and macOS.
+
   - Package the Isabelle/Naproche component as follows:
     ```shell
     isabelle naproche_build && isabelle naproche_component -P
