@@ -7,53 +7,53 @@
 \importmodule[libraries/arithmetics]{even-and-odd-numbers.ftl}
 
 \begin{proposition}[forthel]
-  Let $n, m$ be natural numbers such that $m \NATgtr \NATzero$.
+  Let $n, m$ be natural numbers such that $m \Greater \Zero$.
   Assume that $n$ is even.
-  Then $\NATexp{n}{m}$ is even.
+  Then $\Exp{n}{m}$ is even.
 \end{proposition}
 \begin{proof}[forthel]
-  Take a natural number $k$ such that $n \Eq \NATtwo \NATmul k$.
-  Consider a natural number $m'$ such that $m \Eq m' \NATplus \NATone$.
-  Then $\NATexp{n}{m}
-    \Eq \NATexp{\NATtwo \NATmul k}{m}
-    \Eq (\NATexp{\NATtwo}{m} \NATmul (\NATexp{k}{m}))
-    \Eq (\NATexp{\NATtwo}{m' \NATplus \NATone} \NATmul (\NATexp{k}{m}))
-    \Eq (\NATexp{\NATtwo}{m'} \NATmul \NATtwo) \NATmul (\NATexp{k}{m})
-    \Eq (\NATtwo \NATmul \NATexp{\NATtwo}{m'}) \NATmul (\NATexp{k}{m})
-    \Eq \NATtwo \NATmul (\NATexp{\NATtwo}{m'} \NATmul (\NATexp{k}{m}))$.
-  Hence $\NATexp{n}{m}$ is even.
+  Take a natural number $k$ such that $n \Eq \Two \Mul k$.
+  Consider a natural number $m'$ such that $m \Eq m' \Plus \One$.
+  Then $\Exp{n}{m}
+    \Eq \Exp{\Two \Mul k}{m}
+    \Eq (\Exp{\Two}{m} \Mul (\Exp{k}{m}))
+    \Eq (\Exp{\Two}{m' \Plus \One} \Mul (\Exp{k}{m}))
+    \Eq (\Exp{\Two}{m'} \Mul \Two) \Mul (\Exp{k}{m})
+    \Eq (\Two \Mul \Exp{\Two}{m'}) \Mul (\Exp{k}{m})
+    \Eq \Two \Mul (\Exp{\Two}{m'} \Mul (\Exp{k}{m}))$.
+  Hence $\Exp{n}{m}$ is even.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ is odd.
-  Then $\NATexp{n}{m}$ is odd.
+  Then $\Exp{n}{m}$ is odd.
 \end{proposition}
 \begin{proof}[forthel]
-  Define $\Phi \DefEq \SClass{m'}{\Nat}{\NATexp{n}{m'}\text{ is odd}}$.
+  Define $\Phi \DefEq \SClass{m'}{\Naturals}{\Exp{n}{m'}\text{ is odd}}$.
 
-  (1) $\Phi$ contains $\NATzero$.
-  Indeed $\NATexp{n}{\NATzero} \Eq \NATone$ and $\NATone$ is odd.
+  (1) $\Phi$ contains $\Zero$.
+  Indeed $\Exp{n}{\Zero} \Eq \One$ and $\One$ is odd.
 
-  (2) For all $m' \Elem \Phi$ we have $m' \NATplus \NATone \Elem \Phi$.
+  (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
   \begin{proof}
     Let $m' \Elem \Phi$.
-    We have $\NATexp{n}{m' \NATplus \NATone} \Eq \NATexp{n}{m'} \NATmul n$.
-    $\NATexp{n}{m'}$ is odd.
-    Hence we can take a natural number $k$ such that $\NATexp{n}{m'} \Eq (\NATtwo \NATmul k) \NATplus \NATone$.
-    Then $\NATexp{n}{m' \NATplus \NATone}
-      \Eq ((\NATtwo \NATmul k) \NATplus \NATone) \NATmul n
-      \Eq ((\NATtwo \NATmul k) \NATmul n) \NATplus (\NATone \NATmul n)
-      \Eq ((\NATtwo \NATmul k) \NATmul n) \NATplus n
-      \Eq (\NATtwo \NATmul (k \NATmul n)) \NATplus n$.
-    $\NATtwo \NATmul (k \NATmul n)$ is even and $n$ is odd.
-    Thus $(\NATtwo \NATmul (k \NATmul n)) \NATplus n$ is odd.
-    Therefore $\NATexp{n}{m' \NATplus \NATone}$ is odd.
-    Consequently $m' \NATplus \NATone \Elem \Phi$.
+    We have $\Exp{n}{m' \Plus \One} \Eq \Exp{n}{m'} \Mul n$.
+    $\Exp{n}{m'}$ is odd.
+    Hence we can take a natural number $k$ such that $\Exp{n}{m'} \Eq (\Two \Mul k) \Plus \One$.
+    Then $\Exp{n}{m' \Plus \One}
+      \Eq ((\Two \Mul k) \Plus \One) \Mul n
+      \Eq ((\Two \Mul k) \Mul n) \Plus (\One \Mul n)
+      \Eq ((\Two \Mul k) \Mul n) \Plus n
+      \Eq (\Two \Mul (k \Mul n)) \Plus n$.
+    $\Two \Mul (k \Mul n)$ is even and $n$ is odd.
+    Thus $(\Two \Mul (k \Mul n)) \Plus n$ is odd.
+    Therefore $\Exp{n}{m' \Plus \One}$ is odd.
+    Consequently $m' \Plus \One \Elem \Phi$.
   \end{proof}
 
   Hence $\Phi$ contains every natural number (by \sr{induction I}{induction}).
-  Thus $\NATexp{n}{m}$ is odd.
+  Thus $\Exp{n}{m}$ is odd.
 \end{proof}
 \end{smodule}
 \end{document}

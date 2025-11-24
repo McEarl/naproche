@@ -20,44 +20,44 @@
 \symdecl*{Cantor Paradox II}
 
 \noindent \emph{Cantor's First Paradox}, discovered by Georg Cantor in 1897,
-states that the collection $\Card$ of all (infinite) cardinal numbers is a
+states that the collection $\Cardinals$ of all (infinite) cardinal numbers is a
 proper class \cite[chapter 156]{Cantor1991}.
 
 \begin{theorem}[forthel,title=Cantor's First Paradox,name=Cantor Paradox I]
-  $\Card$ is not a set.
+  $\Cardinals$ is not a set.
 \end{theorem}
 \begin{proof}[forthel]
-  Suppose that $\Card$ is a set.
-  Then $\SETunionover \Card$ is a set.
+  Suppose that $\Cardinals$ is a set.
+  Then $\UnionOver \Cardinals$ is a set.
 
-  Let us show that $\SETunionover \Card$ contains every ordinal.
+  Let us show that $\UnionOver \Cardinals$ contains every ordinal.
     Let $\alpha$ be an ordinal.
-    Choose an infinite ordinal $\beta$ such that $\beta \ORDgeq \alpha$.
+    Choose an infinite ordinal $\beta$ such that $\beta \Geq \alpha$.
     Choose a cardinal $\kappa$ greater than $\beta$.
-    Then $\alpha \Elem \kappa \Elem \Card$.
-    Hence $\alpha \Elem \SETunionover \Card$.
+    Then $\alpha \Elem \kappa \Elem \Cardinals$.
+    Hence $\alpha \Elem \UnionOver \Cardinals$.
   End.
 
-  Therefore $\Ord \SETinclude \SETunionover \Card$.
-  Thus $\Ord$ is a set.
+  Therefore $\Ordinals \Subclass \UnionOver \Cardinals$.
+  Thus $\Ordinals$ is a set.
   Contradiction.
 \end{proof}
 
 \emph{Cantor's Second Paradox} denotes the observation that the collection
-$\Set$ of all set is a proper class.
+$\Sets$ of all set is a proper class.
 It was shown by Georg Cantor in 1899 via his famous theorem stating that the
 cardinality of any set is strictly smaller than the cardinality of its 
 powerset \cite[chapter 163]{Cantor1991}.
 
 \begin{theorem}[forthel,title=Cantor's Second Paradox,name=Cantor Paradox II]
-  $\Set$ is not a set.
+  $\Sets$ is not a set.
 \end{theorem}
 \begin{proof}[forthel]
   Assume the contrary.
-  Then $\SETpow(\Set)$ is a subset of $\Set$.
-  Hence $\SETcard{\SETpow(\Set)} \ORDleq \SETcard{\Set}$.
+  Then $\Pow(\Sets)$ is a subset of $\Sets$.
+  Hence $\Card{\Pow(\Sets)} \Leq \Card{\Sets}$.
   Contradiction.
-  Indeed $\SETcard{x} \ORDless \SETcard{\SETpow(x)}$ for any set $x$.
+  Indeed $\Card{x} \Less \Card{\Pow(x)}$ for any set $x$.
 \end{proof}
 
 \printbibliography

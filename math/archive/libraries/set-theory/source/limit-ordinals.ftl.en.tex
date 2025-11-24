@@ -5,30 +5,30 @@
 \begin{smodule}{limit-ordinals.ftl}
 \importmodule[libraries/set-theory]{zero.ftl}
 \importmodule[libraries/set-theory]{successor-ordinals.ftl}
-\symdef{ORDlim}{\mathop{\textsf{lim}}}
+\symdef{Limit}{\mathop{\textsf{lim}}}
 \symdecl*{limit ordinal}
 
-\begin{convention}[forthel,for=ORDlim]
-  Let $\ORDlim x$ stand for $\SETunionover x$.
+\begin{convention}[forthel,for=Limit]
+  Let $\Limit x$ stand for $\UnionOver x$.
 \end{convention}
 
 \begin{proposition}[forthel]
-  Let $x$ be a subset of $\Ord$.
-  Then $\ORDlim x$ is an ordinal.
+  Let $x$ be a subset of $\Ordinals$.
+  Then $\Limit x$ is an ordinal.
 \end{proposition}
 \begin{proof}[forthel]
-  (1) $\ORDlim x$ is transitive.
+  (1) $\Limit x$ is transitive.
   \begin{proof}
-    Let $y \Elem \ORDlim x$ and $z \Elem y$.
+    Let $y \Elem \Limit x$ and $z \Elem y$.
     Take $w \Elem x$ such that $y \Elem w$.
     Hence $w$ is transitive.
     Thus $z \Elem w$.
-    Therefore $z \Elem \ORDlim x$.
+    Therefore $z \Elem \Limit x$.
   \end{proof}
 
-  (2) Every element of $\ORDlim x$ is transitive.
+  (2) Every element of $\Limit x$ is transitive.
   \begin{proof}
-    Let $y \Elem \ORDlim x$.
+    Let $y \Elem \Limit x$.
     Let $z \Elem y$ and $v \Elem z$.
     Take $w \Elem x$ such that $y \Elem w$.
     Hence $w$ is an ordinal.
@@ -39,7 +39,7 @@
 \end{proof}
 
 \begin{definition}[forthel,for=limit ordinal]
-  A \emph{limit ordinal} is an ordinal $\lambda$ such that neither $\lambda$ is a successor ordinal nor $\lambda \Eq \ORDzero$.
+  A \emph{limit ordinal} is an ordinal $\lambda$ such that neither $\lambda$ is a successor ordinal nor $\lambda \Eq \Zero$.
 \end{definition}
 \end{smodule}
 \end{document}

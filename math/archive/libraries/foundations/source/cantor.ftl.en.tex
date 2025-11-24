@@ -10,13 +10,13 @@
 
 \begin{theorem}[forthel,title=Cantor's Theorem,name=Cantor I]
   Let $x$ be a set.
-  There exists no surjective map from $x$ onto $\SETpow(x)$.
+  There exists no surjective map from $x$ onto $\Pow(x)$.
 \end{theorem}
 \begin{proof}[forthel]
   Assume the contrary.
-  Take a surjective map $f$ from $x$ onto $\SETpow(x)$.
+  Take a surjective map $f$ from $x$ onto $\Pow(x)$.
   Define $C \DefEq \SClass{u}{x}{u \NotElem f(u)}$.
-  Then $C \Elem \SETpow(x)$.
+  Then $C \Elem \Pow(x)$.
   Hence we can take a $u \Elem x$ such that $f(u) \Eq C$.
   Then $u \Elem C$ iff $u \Elem f(u)$ iff $u \NotElem C$.
   Contradiction.

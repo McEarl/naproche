@@ -82,6 +82,10 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
 * **New:** The formalizations in `math/archive` now have associated
   `archive.json` files to list them on the landing page of the FLAMS dashboard.
 
+* **Changed:** The names of the TeX macros provided by the Naproche libraries
+  were simplified. E.g. `\NATplus` became `\Plus`. This makes them less
+  ambiguous but easier to type and read.
+
 
 ### Changes on the Parser
 

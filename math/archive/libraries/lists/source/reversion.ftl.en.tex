@@ -4,70 +4,70 @@
 \begin{document}
 \begin{smodule}{reversion.ftl}
 \importmodule[libraries/lists]{concatenation.ftl}
-\symdef{LISTrev}{\textsf{rev}}
+\symdef{Rev}{\textsf{rev}}
 
-\begin{signature}[forthel,for=LISTrev]
+\begin{signature}[forthel,for=Rev]
   Let $L$ be a list.
-  $\emph{\LISTrev(L)}$ is a list.
+  $\emph{\Rev(L)}$ is a list.
 \end{signature}
 
-\begin{axiom}[forthel,for=LISTrev]
+\begin{axiom}[forthel,for=Rev]
   Let $L$ be a list.
-  Then $\LISTrev(\LISTlist{}) \Eq \LISTlist{}$.
+  Then $\Rev(\List{}) \Eq \List{}$.
 \end{axiom}
 
-\begin{axiom}[forthel,for=LISTrev]
+\begin{axiom}[forthel,for=Rev]
   Let $a$ be an object and $L$ be a list.
-  Then $\LISTrev(a \LISTcons L) \Eq \LISTrev(L) \LISTconcat \LISTlist{a}$.
+  Then $\Rev(a \Cons L) \Eq \Rev(L) \Concat \List{a}$.
 \end{axiom}
 
 \begin{proposition}[forthel]
-  $\LISTrev(L \LISTconcat L') \Eq \LISTrev(L') \LISTconcat \LISTrev(L)$ for any lists $L, L'$.
+  $\Rev(L \Concat L') \Eq \Rev(L') \Concat \Rev(L)$ for any lists $L, L'$.
 \end{proposition}
 \begin{proof}[forthel,method=induction on $L$]
   Let $L,L'$ be lists.
 
-  \begin{case}{$L \Eq \LISTlist{}$.} \end{case}
+  \begin{case}{$L \Eq \List{}$.} \end{case}
 
-  \begin{case}{$L \Eq a \LISTcons L''$ for some object $a$ and some list $L''$.}
-    Take an object $a$ and a list $L''$ such that $L \Eq a \LISTcons L''$.
+  \begin{case}{$L \Eq a \Cons L''$ for some object $a$ and some list $L''$.}
+    Take an object $a$ and a list $L''$ such that $L \Eq a \Cons L''$.
     Then $L'' \ILess L$.
-    Hence $\LISTrev(L'' \LISTconcat L') \Eq \LISTrev(L') \LISTconcat \LISTrev(L'')$.
+    Hence $\Rev(L'' \Concat L') \Eq \Rev(L') \Concat \Rev(L'')$.
     Thus
     \begin{align*}
-      \LISTrev(L \LISTconcat L')
-        &\Eq \LISTrev((a \LISTcons L'') \LISTconcat L')\\
-        &\Eq \LISTrev(a \LISTcons (L'' \LISTconcat L'))\\
-        &\Eq \LISTrev(L'' \LISTconcat L') \LISTconcat \LISTlist{a}\\
-        &\Eq (\LISTrev(L') \LISTconcat \LISTrev(L'')) \LISTconcat \LISTlist{a}\\
-        &\Eq \LISTrev(L') \LISTconcat (\LISTrev(L'') \LISTconcat \LISTlist{a})\\
-        &\Eq \LISTrev(L') \LISTconcat \LISTrev(a \LISTcons L'')\\
-        &\Eq \LISTrev(L') \LISTconcat \LISTrev(L)
+      \Rev(L \Concat L')
+        &\Eq \Rev((a \Cons L'') \Concat L')\\
+        &\Eq \Rev(a \Cons (L'' \Concat L'))\\
+        &\Eq \Rev(L'' \Concat L') \Concat \List{a}\\
+        &\Eq (\Rev(L') \Concat \Rev(L'')) \Concat \List{a}\\
+        &\Eq \Rev(L') \Concat (\Rev(L'') \Concat \List{a})\\
+        &\Eq \Rev(L') \Concat \Rev(a \Cons L'')\\
+        &\Eq \Rev(L') \Concat \Rev(L)
     \end{align*}.
-    Indeed $(\LISTrev(L') \LISTconcat \LISTrev(L'')) \LISTconcat \LISTlist{a} \Eq \LISTrev(L') \LISTconcat (\LISTrev(L'') \LISTconcat \LISTlist{a})$ (by \sn{associativity of concatenation}).
+    Indeed $(\Rev(L') \Concat \Rev(L'')) \Concat \List{a} \Eq \Rev(L') \Concat (\Rev(L'') \Concat \List{a})$ (by \sn{associativity of concatenation}).
   \end{case}
 \end{proof}
 
 \begin{proposition}[forthel]
-  $\LISTrev(\LISTrev(L)) \Eq L$ for every list $L$.
+  $\Rev(\Rev(L)) \Eq L$ for every list $L$.
 \end{proposition}
 \begin{proof}[forthel,method=induction on $L$]
   Let $L$ be a list.
 
-  \begin{case}{$L \Eq \LISTlist{}$.}\end{case}
+  \begin{case}{$L \Eq \List{}$.}\end{case}
 
-  \begin{case}{$L \Eq a \LISTcons L'$ for some object $a$ and some list $L'$.}
-    Take an object $a$ and a list $L'$ such that $L \Eq a \LISTcons L'$.
+  \begin{case}{$L \Eq a \Cons L'$ for some object $a$ and some list $L'$.}
+    Take an object $a$ and a list $L'$ such that $L \Eq a \Cons L'$.
     Then $L' \ILess L$.
-    Hence $\LISTrev(\LISTrev(L')) \Eq L'$.
+    Hence $\Rev(\Rev(L')) \Eq L'$.
     Thus
     \begin{align*}
-      \LISTrev(\LISTrev(L))
-        &\Eq \LISTrev(\LISTrev(a \LISTcons L'))\\
-        &\Eq \LISTrev(\LISTrev(L') \LISTconcat \LISTlist{a})\\
-        &\Eq \LISTrev(\LISTlist{a}) \LISTconcat \LISTrev(\LISTrev(L'))\\
-        &\Eq a \LISTcons \LISTrev(\LISTrev(L'))\\
-        &\Eq a \LISTcons L'\\
+      \Rev(\Rev(L))
+        &\Eq \Rev(\Rev(a \Cons L'))\\
+        &\Eq \Rev(\Rev(L') \Concat \List{a})\\
+        &\Eq \Rev(\List{a}) \Concat \Rev(\Rev(L'))\\
+        &\Eq a \Cons \Rev(\Rev(L'))\\
+        &\Eq a \Cons L'\\
         &\Eq L
     \end{align*}.
   \end{case}

@@ -14,11 +14,11 @@
 
 \importmodule[libraries/meta]{preliminaries.ftl}
 
-\symdef{varzero}{x_0}
-\symdef{abs}[args=2]{\comp\lambda#1\comp.\,#2}
-\symdef{app}[args=2]{\comp(#1\comp)\comp(#2\comp)}
-\symdef{fix}{\texttt{fix}}
-\symdef{impl}{\,\comp\rightarrow\,}
+\symdef{VarZero}{x_0}
+\symdef{Abs}[args=2]{\comp\lambda#1\comp.\,#2}
+\symdef{App}[args=2]{\comp(#1\comp)\comp(#2\comp)}
+\symdef{Fix}{\texttt{fix}}
+\symdef{Impl}{\,\comp\rightarrow\,}
 \symdecl*{beta reduction}
 \symdecl*{reflexivity}
 \symdecl*{modus ponens}
@@ -51,22 +51,22 @@ untyped $\lambda$-calculus:
     A \emph{variable} is an expression.
   \end{signature*}
 
-  \begin{signature*}[for=varzero]
-    $\emph{\varzero}$ is a variable.
+  \begin{signature*}[for=VarZero]
+    $\emph{\VarZero}$ is a variable.
   \end{signature*}
 
-  \begin{signature*}[title=Abstraction,for=abs]
+  \begin{signature*}[title=Abstraction,for=Abs]
     Let $x$ be a variable.
-    $\emph{\abs{x}{E}}$ is an expression.
+    $\emph{\Abs{x}{E}}$ is an expression.
   \end{signature*}
 
-  \begin{signature*}[title=Application,for=app]
-    $\emph{\app{E}{E'}}$ is an expression.
+  \begin{signature*}[title=Application,for=App]
+    $\emph{\App{E}{E'}}$ is an expression.
   \end{signature*}
 
-  \begin{signature*}[title=Fixed-point combinator,for=fix]
-    $\fix$ is an expression such that
-    \[\app{\fix}{E} \Eq \app{E}{\app{\fix}{E}}\]
+  \begin{signature*}[title=Fixed-point combinator,for=Fix]
+    $\Fix$ is an expression such that
+    \[\App{\Fix}{E} \Eq \App{E}{\App{\Fix}{E}}\]
     for every expression $E$.
   \end{signature*}
 \end{forthel}
@@ -81,8 +81,8 @@ logic:
   Let $E, E'$ denote expressions.
   Let $x$ denote a variable.
 
-  \begin{signature*}[title=Implication,for=impl]
-    $\emph{E \impl E'}$ is an expression.
+  \begin{signature*}[title=Implication,for=Impl]
+    $\emph{E \Impl E'}$ is an expression.
   \end{signature*}
 
   \begin{signature*}[title=Truth,for=true]
@@ -90,19 +90,19 @@ logic:
   \end{signature*}
 
   \begin{axiom*}[title=$\beta$-reduction,name=beta reduction]
-    $\app{\abs{x}{x \impl E'}}{E} \Eq E \impl E'$.
+    $\App{\Abs{x}{x \Impl E'}}{E} \Eq E \Impl E'$.
   \end{axiom*}
 
   \begin{axiom*}[title=Reflexivity,name=reflexivity]
-    $E \impl E$ is true.
+    $E \Impl E$ is true.
   \end{axiom*}
 
   \begin{axiom*}[title=Modus Ponens,name=modus ponens]
-    If $E$ is true and $E \impl E'$ is true then $E'$ is true.
+    If $E$ is true and $E \Impl E'$ is true then $E'$ is true.
   \end{axiom*}
 
   \begin{axiom*}[title=Strengthening,name=strengthening]
-    If $E \impl (E \impl E')$ is true then $E \impl E'$ is true.
+    If $E \Impl (E \Impl E')$ is true then $E \Impl E'$ is true.
   \end{axiom*}
 \end{forthel}
 
@@ -112,7 +112,7 @@ logic:
 \noindent Using the fixpoint combinator from above we can formulate a 
 self-referential expression $X$ of the form ``If $X$ is true then $E$ is
 true'' for any arbitrary expression $E$ by defining
-$X \Eq \app{\fix}{\abs{\varzero}{\varzero \impl E}}$.
+$X \Eq \App{\Fix}{\Abs{\VarZero}{\VarZero \Impl E}}$.
 From the existence of such an expression $X$ together with the above axioms 
 we can then derive that any expression $E$ is true.
 
@@ -122,13 +122,13 @@ we can then derive that any expression $E$ is true.
   \end{theorem*}
   \begin{proof}
     Let $E$ be an expression.
-    Take $N \Eq \abs{\varzero}{\varzero \impl E}$ and $X \Eq \app{\fix}{N}.$
+    Take $N \Eq \Abs{\VarZero}{\VarZero \Impl E}$ and $X \Eq \App{\Fix}{N}.$
 
-    (1) Then $X \Eq \app{N}{X} \Eq X \impl E$ (by \sr{beta reduction}{$\beta$-reduction}).
+    (1) Then $X \Eq \App{N}{X} \Eq X \Impl E$ (by \sr{beta reduction}{$\beta$-reduction}).
 
-    Hence $X \impl (X \impl E)$ is true (by 1, \sn{reflexivity}).
+    Hence $X \Impl (X \Impl E)$ is true (by 1, \sn{reflexivity}).
 
-    (2) Thus $X \impl E$ is true (by \sn{strengthening}).
+    (2) Thus $X \Impl E$ is true (by \sn{strengthening}).
 
     (3) Therefore $X$ is true (by 1, 2).
 

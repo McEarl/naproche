@@ -22,32 +22,32 @@ point \cite{Schroeder2012}.
 
 \begin{theorem}[forthel,title=Knaster-Tarski,name=Knaster-Tarski]
   Let $x$ be a set.
-  Let $h$ be a map from $\SETpow(x)$ to $\SETpow(x)$ that preserves subsets.
+  Let $h$ be a map from $\Pow(x)$ to $\Pow(x)$ that preserves subsets.
   Then $h$ has a fixed point.
 \end{theorem}
 \begin{proof}[forthel]
-  (1) Define $A \DefEq \SClass{y}{\SETpow(x)}{y \SETinclude h(y)}$.
-  Then $A$ is a subset of $\SETpow(x)$.
-  We have $\SETunionover A \Elem \SETpow(x)$.
+  (1) Define $A \DefEq \SClass{y}{\Pow(x)}{y \Subclass h(y)}$.
+  Then $A$ is a subset of $\Pow(x)$.
+  We have $\UnionOver A \Elem \Pow(x)$.
 
-  Let us show that (2) $\SETunionover A \SETinclude h(\SETunionover A)$.
-    Let $u \Elem \SETunionover A$.
+  Let us show that (2) $\UnionOver A \Subclass h(\UnionOver A)$.
+    Let $u \Elem \UnionOver A$.
     Take $y \Elem A$ such that $u \Elem y$.
     Then $u \Elem h(y)$.
-    We have $y \SETinclude \SETunionover A$.
-    Hence $h(y) \SETinclude h(\SETunionover A)$.
-    Indeed $h$ is a subset preserving map between systems of sets and $y, \SETunionover A \Elem \Dom(h)$.
-    Thus $h(y) \SETinclude h(\SETunionover A)$.
-    Therefore $u \Elem h(\SETunionover A)$.
+    We have $y \Subclass \UnionOver A$.
+    Hence $h(y) \Subclass h(\UnionOver A)$.
+    Indeed $h$ is a subset preserving map between systems of sets and $y, \UnionOver A \Elem \Dom(h)$.
+    Thus $h(y) \Subclass h(\UnionOver A)$.
+    Therefore $u \Elem h(\UnionOver A)$.
   End.
 
-  Then $h(\SETunionover A) \Elem A$ (by 1).
-  Indeed $h(\SETunionover A) \SETinclude x$.
-  (3) Hence $h(\SETunionover A) \SETinclude \SETunionover A$.
-  Indeed every element of $h(\SETunionover A)$ is an element of some element of
+  Then $h(\UnionOver A) \Elem A$ (by 1).
+  Indeed $h(\UnionOver A) \Subclass x$.
+  (3) Hence $h(\UnionOver A) \Subclass \UnionOver A$.
+  Indeed every element of $h(\UnionOver A)$ is an element of some element of
   $A$.
 
-  Thus $h(\SETunionover A) \Eq \SETunionover A$ (by 2, 3).
+  Thus $h(\UnionOver A) \Eq \UnionOver A$ (by 2, 3).
 \end{proof}
 
 

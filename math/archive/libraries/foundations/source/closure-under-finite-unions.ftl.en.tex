@@ -9,101 +9,101 @@
 
 \begin{definition}[forthel,for=closed under finite unions]
   Let $X$ be a system of sets.
-  $X$ is \emph{closed under finite unions} iff $\SETunionover U \Elem X$ for every nonempty finite subclass $U$ of $X$.
+  $X$ is \emph{closed under finite unions} iff $\UnionOver U \Elem X$ for every nonempty finite subclass $U$ of $X$.
 \end{definition}
 
 \begin{proposition}[forthel]
   Let $X$ be a system of sets.
-  $X$ is closed under finite unions iff $U \SETunion V \Elem X$ for every $U, V \Elem X$.
+  $X$ is closed under finite unions iff $U \Union V \Elem X$ for every $U, V \Elem X$.
 \end{proposition}
 \begin{proof}[forthel]
   \begin{case}{$X$ is closed under finite unions.}
     Let $U, V \Elem X$.
-    Then $\SETpair{U}{V}$ is a nonempty finite subclass of $X$.
-    Hence $U \SETunion V \Eq \SETunionover \SETpair{U}{V} \Elem X$.
+    Then $\Pair{U}{V}$ is a nonempty finite subclass of $X$.
+    Hence $U \Union V \Eq \UnionOver \Pair{U}{V} \Elem X$.
   \end{case}
 
-  \begin{case}{$U \SETunion V \Elem X$ for every $U, V \Elem X$.}
-    Define $\Phi \DefEq \SClass{n}{\Nat}{\SETunionover U \Elem X\text{ for every nonempty subclass }U\text{ of }X\text{ that has }n\text{ elements}}$.
+  \begin{case}{$U \Union V \Elem X$ for every $U, V \Elem X$.}
+    Define $\Phi \DefEq \SClass{n}{\Naturals}{\UnionOver U \Elem X\text{ for every nonempty subclass }U\text{ of }X\text{ that has }n\text{ elements}}$.
 
-    (1) $\Phi$ contains $\NATzero$.
+    (1) $\Phi$ contains $\Zero$.
 
-    (2) For every $n \Elem \Phi$ we have $n \NATplus \NATone \Elem \Phi$.
+    (2) For every $n \Elem \Phi$ we have $n \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $n \Elem \Phi$.
-      Then $\SETunionover U \Elem X$ for every nonempty subclass $U$ of $X$ that has $n$ elements.
+      Then $\UnionOver U \Elem X$ for every nonempty subclass $U$ of $X$ that has $n$ elements.
 
-      Let us show that $\SETunionover U \Elem X$ for every nonempty subclass $U$ of $X$ that has $n \NATplus \NATone$ elements.
+      Let us show that $\UnionOver U \Elem X$ for every nonempty subclass $U$ of $X$ that has $n \Plus \One$ elements.
 
-        \begin{case}{$n \Eq \NATzero$.} \end{case}
+        \begin{case}{$n \Eq \Zero$.} \end{case}
 
-        \begin{case}{$n \NotEq \NATzero$.}
-          Let $U$ be a nonempty subclass of $X$ such that $U$ has $n \NATplus \NATone$ elements.
-          Take a bijection $f$ between $\NATsegment{\NATone}{n \NATplus \NATone}$ and $U$.
-          We have $\NATsegment{\NATone}{n \NATplus \NATone} \Eq \NATsegment{\NATone}{n} \SETunion \SETsingleton{n \NATplus \NATone}$.
-          Take $V \Eq \FUNim{f}{\NATsegment{\NATone}{n}}$.
-          We have $\NATsegment{\NATone}{n} \SETinclude \NATsegment{\NATone}{n \NATplus \NATone}$.
+        \begin{case}{$n \NotEq \Zero$.}
+          Let $U$ be a nonempty subclass of $X$ such that $U$ has $n \Plus \One$ elements.
+          Take a bijection $f$ between $\NatSegment{\One}{n \Plus \One}$ and $U$.
+          We have $\NatSegment{\One}{n \Plus \One} \Eq \NatSegment{\One}{n} \Union \Singleton{n \Plus \One}$.
+          Take $V \Eq \Im{f}{\NatSegment{\One}{n}}$.
+          We have $\NatSegment{\One}{n} \Subclass \NatSegment{\One}{n \Plus \One}$.
 
-          Let us show that $V \SETinclude U$.
+          Let us show that $V \Subclass U$.
             Let $x \Elem V$.
-            Take $k \Elem \NATsegment{\NATone}{n}$ such that $x \Eq f(k)$.
-            Indeed we can show that there exists a $k \Elem \NATsegment{\NATone}{n}$ such that $x \Eq f(k)$.
+            Take $k \Elem \NatSegment{\One}{n}$ such that $x \Eq f(k)$.
+            Indeed we can show that there exists a $k \Elem \NatSegment{\One}{n}$ such that $x \Eq f(k)$.
               Assume the contrary.
-              Then $x \NotEq f(k)$ for all $k \Elem \NATsegment{\NATone}{n}$.
-              Hence $x \NotElem \FUNim{f}{\NATsegment{\NATone}{n}} \Eq V$.
+              Then $x \NotEq f(k)$ for all $k \Elem \NatSegment{\One}{n}$.
+              Hence $x \NotElem \Im{f}{\NatSegment{\One}{n}} \Eq V$.
               Contradiction.
             End.
             Hence $x \Elem U$.
-            Indeed $x \Elem \FUNim{f}{\NATsegment{\NATone}{n \NATplus \NATone}}$.
+            Indeed $x \Elem \Im{f}{\NatSegment{\One}{n \Plus \One}}$.
           End.
 
           $V$ is nonempty.
-          Indeed $f(\NATone) \Elem \FUNim{f}{\NATsegment{\NATone}{n}}$.
-          Indeed $\NATone \Elem \NATsegment{\NATone}{n}$.
-          Hence $f \FUNrest \NATsegment{\NATone}{n}$ is a bijection between $\NATsegment{\NATone}{n}$ and $V$ (by \sn{bijectivity of restriction of injection}).
+          Indeed $f(\One) \Elem \Im{f}{\NatSegment{\One}{n}}$.
+          Indeed $\One \Elem \NatSegment{\One}{n}$.
+          Hence $f \Rest \NatSegment{\One}{n}$ is a bijection between $\NatSegment{\One}{n}$ and $V$ (by \sn{bijectivity of restriction of injection}).
           Thus $V$ has $n$ elements.
-          Consequently $\SETunionover V \Elem X$.
+          Consequently $\UnionOver V \Elem X$.
 
-          Let us show that $U \Eq V \SETunion \SETsingleton{f(n \NATplus \NATone)}$.
+          Let us show that $U \Eq V \Union \Singleton{f(n \Plus \One)}$.
 
-            (1) $\FUNim{f}{A \SETunion B} \Eq \FUNim{f}{A} \SETunion \FUNim{f}{B}$ for all $A, B \SETinclude \Dom(f)$.
+            (1) $\Im{f}{A \Union B} \Eq \Im{f}{A} \Union \Im{f}{B}$ for all $A, B \Subclass \Dom(f)$.
 
-            (2) $\FUNim{f}{\SETsingleton{a}} \Eq \SETsingleton{f(a)}$ for all $a \Elem \Dom(f)$.
+            (2) $\Im{f}{\Singleton{a}} \Eq \Singleton{f(a)}$ for all $a \Elem \Dom(f)$.
 
             Hence $U
-              \Eq \FUNim{f}{\Dom(f)}
-              \Eq \FUNim{f}{\NATsegment{\NATone}{n \NATplus \NATone}}
-              \Eq \FUNim{f}{\NATsegment{\NATone}{n} \SETunion \SETsingleton{n \NATplus \NATone}}
-              \Eq \FUNim{f}{\NATsegment{\NATone}{n}} \SETunion \FUNim{f}{\SETsingleton{n \NATplus \NATone}}
-              \Eq \FUNim{f}{\NATsegment{\NATone}{n}} \SETunion \SETsingleton{f(n \NATplus \NATone)}
-              \Eq V \SETunion \SETsingleton{f(n \NATplus \NATone)}$.
-            Indeed $n \NATplus \NATone \Elem \Dom(f)$ and $\NATsegment{\NATone}{n}, \SETsingleton{\NATone \NATplus n} \SETinclude \Dom(f)$.
+              \Eq \Im{f}{\Dom(f)}
+              \Eq \Im{f}{\NatSegment{\One}{n \Plus \One}}
+              \Eq \Im{f}{\NatSegment{\One}{n} \Union \Singleton{n \Plus \One}}
+              \Eq \Im{f}{\NatSegment{\One}{n}} \Union \Im{f}{\Singleton{n \Plus \One}}
+              \Eq \Im{f}{\NatSegment{\One}{n}} \Union \Singleton{f(n \Plus \One)}
+              \Eq V \Union \Singleton{f(n \Plus \One)}$.
+            Indeed $n \Plus \One \Elem \Dom(f)$ and $\NatSegment{\One}{n}, \Singleton{\One \Plus n} \Subclass \Dom(f)$.
           End.
 
-          Let us show that $\SETunionover (A \SETunion B) \Eq (\SETunionover A) \SETunion (\SETunionover B)$ for any nonempty systems of sets $A, B$.
+          Let us show that $\UnionOver (A \Union B) \Eq (\UnionOver A) \Union (\UnionOver B)$ for any nonempty systems of sets $A, B$.
             Let $A, B$ be nonempty systems of sets.
-            $\SETunionover (A \SETunion B) \SETinclude (\SETunionover A) \SETunion (\SETunionover B)$.
-            $((\SETunionover A) \SETunion (\SETunionover B)) \SETinclude \SETunionover (A \SETunion B)$. %!
+            $\UnionOver (A \Union B) \Subclass (\UnionOver A) \Union (\UnionOver B)$.
+            $((\UnionOver A) \Union (\UnionOver B)) \Subclass \UnionOver (A \Union B)$. %!
           End.
 
-          Let us show that $f(n \NATplus \NATone)$ and $f(k)$ are sets for every $k \Elem \NATsegment{\NATone}{n}$.
-            Let $k \Elem \NATsegment{\NATone}{n}$.
-            Then $f(k), f(n \NATplus \NATone) \Elem U$.
-            Hence $f(k)$ and $f(n \NATplus \NATone)$ are sets.
+          Let us show that $f(n \Plus \One)$ and $f(k)$ are sets for every $k \Elem \NatSegment{\One}{n}$.
+            Let $k \Elem \NatSegment{\One}{n}$.
+            Then $f(k), f(n \Plus \One) \Elem U$.
+            Hence $f(k)$ and $f(n \Plus \One)$ are sets.
           End.
 
-          Hence $V$ and $\SETsingleton{f(n \NATplus \NATone)}$ are nonempty systems of sets.
-          Thus $\SETunionover U
-            \Eq \SETunionover (V \SETunion \SETsingleton{f(n \NATplus \NATone)})
-            \Eq (\SETunionover V) \SETunion (\SETunionover \SETsingleton{f(n \NATplus \NATone)})
-            \Eq (\SETunionover V) \SETunion f(n \NATplus \NATone)
+          Hence $V$ and $\Singleton{f(n \Plus \One)}$ are nonempty systems of sets.
+          Thus $\UnionOver U
+            \Eq \UnionOver (V \Union \Singleton{f(n \Plus \One)})
+            \Eq (\UnionOver V) \Union (\UnionOver \Singleton{f(n \Plus \One)})
+            \Eq (\UnionOver V) \Union f(n \Plus \One)
             \Elem X$.
         \end{case}
       End.
     \end{proof}
 
     Therefore $\Phi$ contains every natural number (by \sr{induction I}{induction}).
-    Thus $\SETunionover U \Elem X$ for every nonempty finite subclass $U$ of $X$.
+    Thus $\UnionOver U \Elem X$ for every nonempty finite subclass $U$ of $X$.
     Consequently $X$ is closed under finite unions.
   \end{case}
 \end{proof}

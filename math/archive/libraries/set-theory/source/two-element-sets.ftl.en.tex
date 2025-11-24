@@ -8,21 +8,21 @@
 
 \begin{proposition}[forthel]
   Let $a, b$ be distinct objects.
-  Then $\SETcard{\SETpair{a}{b}} \Eq \ORDtwo$.
+  Then $\Card{\Pair{a}{b}} \Eq \Two$.
 \end{proposition}
 \begin{proof}[forthel]
   Define \[ f(x) \DefEq
     \begin{cases}
-      \ORDzero  & x \Eq a
+      \Zero  & x \Eq a
       \\
-      \ORDone   & x \Eq b
+      \One   & x \Eq b
     \end{cases} \]
-  for $x \Elem \SETpair{a}{b}$.
-  Then $f$ is a map from $\SETpair{a}{b}$ to $\ORDtwo$.
-  $f$ is injective and surjective onto $\ORDtwo$.
-  Hence $f$ is a bijection between $\SETpair{a}{b}$ and $\ORDtwo$.
-  Consequently $\SETpair{a}{b}$ and $\ORDtwo$ are equinumerous.
-  Thus $\SETcard{\SETpair{a}{b}} \Eq \SETcard{\ORDtwo} \Eq \ORDtwo$.
+  for $x \Elem \Pair{a}{b}$.
+  Then $f$ is a map from $\Pair{a}{b}$ to $\Two$.
+  $f$ is injective and surjective onto $\Two$.
+  Hence $f$ is a bijection between $\Pair{a}{b}$ and $\Two$.
+  Consequently $\Pair{a}{b}$ and $\Two$ are equinumerous.
+  Thus $\Card{\Pair{a}{b}} \Eq \Card{\Two} \Eq \Two$.
 \end{proof}
 \end{smodule}
 \end{document}

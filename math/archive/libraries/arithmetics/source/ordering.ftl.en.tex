@@ -4,82 +4,82 @@
 \begin{document}
 \begin{smodule}{ordering.ftl}
 \importmodule[libraries/arithmetics]{natural-numbers.ftl}
-\symdef{NATless}[name=less]{\;<\;}
-\symdef{NATnless}{\;\not<\;}
-\symdef{NATgtr}[name=greater]{\;>\;}
-\symdef{NATngtr}{\;\not>\;}
-\symdef{NATleq}{\;\leq\;}
-\symdef{NATnleq}{\;\not\leq\;}
-\symdef{NATgeq}{\;\geq\;}
-\symdef{NATngeq}{\;\not\geq\;}
-\symdef{Natlessthan}[args=1]{\comp{\mathbb{N}}_{\comp<#1}}
-\symdef{Natgtrthan}[args=1]{\comp[\mathbb{N}]_{\comp>#1}}
-\symdef{Natleqthan}[args=1]{\comp{\mathbb{N}}_{\comp\leq#1}}
-\symdef{Natgeqthan}[args=1]{\comp{\mathbb{N}}_{\comp\geq#1}}
+\symdef{Less}[name=less]{\;<\;}
+\symdef{NotLess}{\;\not<\;}
+\symdef{Greater}[name=greater]{\;>\;}
+\symdef{NotGreater}{\;\not>\;}
+\symdef{Leq}{\;\leq\;}
+\symdef{NotLeq}{\;\not\leq\;}
+\symdef{Geq}{\;\geq\;}
+\symdef{NotGeq}{\;\not\geq\;}
+\symdef{NatLess}[args=1]{\comp{\mathbb{N}}_{\comp<#1}}
+\symdef{NatGreater}[args=1]{\comp[\mathbb{N}]_{\comp>#1}}
+\symdef{NatLeq}[args=1]{\comp{\mathbb{N}}_{\comp\leq#1}}
+\symdef{NatGeq}[args=1]{\comp{\mathbb{N}}_{\comp\geq#1}}
 \symdecl*{positive}
 \symdecl*{predecessor}
 \symdecl*{successor}
 
 \begin{sfragment}{Definitions and Immediate Consequences}
-  \begin{definition}[forthel,for={less,NATnless,greater,NATngtr}]
+  \begin{definition}[forthel,for={less,NotLess,greater,NotGreater}]
     Let $n, m$ be natural numbers.
-    $\emph{n \NATless m}$ iff there exists a nonzero natural number $k$ such that $m \Eq n \NATplus k$.
-    Let $n$ is \emph{less than $m$} stand for $n \NATless m$.
-    Let $\emph{n \NATgtr m}$ stand for $m \NATless n$.
-    Let $n$ is \emph{greater than $m$} stand for $n \NATgtr m$.
-    Let $\emph{n \NATnless m}$ stand for $n$ is not less than $m$.
-    Let $\emph{n \NATngtr m}$ stand for $n$ is not greater than $m$.
+    $\emph{n \Less m}$ iff there exists a nonzero natural number $k$ such that $m \Eq n \Plus k$.
+    Let $n$ is \emph{less than $m$} stand for $n \Less m$.
+    Let $\emph{n \Greater m}$ stand for $m \Less n$.
+    Let $n$ is \emph{greater than $m$} stand for $n \Greater m$.
+    Let $\emph{n \NotLess m}$ stand for $n$ is not less than $m$.
+    Let $\emph{n \NotGreater m}$ stand for $n$ is not greater than $m$.
   \end{definition}
 
-  \begin{definition}[forthel,for=Natlessthan]
+  \begin{definition}[forthel,for=NatLess]
     Let $n$ be a natural number.
-    $\emph{\Natlessthan{n}} \DefEq \SClass{k}{\Nat}{k \NATless n}$.
+    $\emph{\NatLess{n}} \DefEq \SClass{k}{\Naturals}{k \Less n}$.
   \end{definition}
 
-  \begin{definition}[forthel,for=Natgtrthan]
+  \begin{definition}[forthel,for=NatGreater]
     Let $n$ be a natural number.
-    $\emph{\Natgtrthan{n}} \DefEq \SClass{k}{\Nat}{k \NATgtr n}$.
+    $\emph{\NatGreater{n}} \DefEq \SClass{k}{\Naturals}{k \Greater n}$.
   \end{definition}
 
   \begin{definition}[forthel,for=positive]
     Let $n$ be a natural number.
-    $n$ is \emph{positive} iff $n \NATgtr \NATzero$.
+    $n$ is \emph{positive} iff $n \Greater \Zero$.
 \end{definition}
 
-  \begin{definition}[forthel,for={NATleq,NATgeq,NATnleq,NATngeq}]
+  \begin{definition}[forthel,for={Leq,Geq,NotLeq,NotGeq}]
     Let $n, m$ be natural numbers.
-    $\emph{n \NATleq m}$ iff there exists a natural number $k$ such that $m \Eq n \NATplus k$.
-    Let $n$ is \emph{less than or equal to $m$} stand for $n \NATleq m$.
-    Let $\emph{n \NATgeq m}$ stand for $m \NATleq n$.
-    Let $n$ is \emph{greater than or equal to $m$} stand for $n \NATgeq m$.
-    Let $\emph{n \NATnleq m}$ stand for $n$ is not less than or equal to $m$.
-    Let $\emph{n \NATngeq m}$ stand for $n$ is not greater than or equal to $m$.
+    $\emph{n \Leq m}$ iff there exists a natural number $k$ such that $m \Eq n \Plus k$.
+    Let $n$ is \emph{less than or equal to $m$} stand for $n \Leq m$.
+    Let $\emph{n \Geq m}$ stand for $m \Leq n$.
+    Let $n$ is \emph{greater than or equal to $m$} stand for $n \Geq m$.
+    Let $\emph{n \NotLeq m}$ stand for $n$ is not less than or equal to $m$.
+    Let $\emph{n \NotGeq m}$ stand for $n$ is not greater than or equal to $m$.
   \end{definition}
 
-  \begin{definition}[forthel,for=Natleqthan]
+  \begin{definition}[forthel,for=NatLeq]
     Let $n$ be a natural number.
-    $\emph{\Natleqthan{n}} \DefEq \SClass{k}{\Nat}{k \NATleq n}$.
+    $\emph{\NatLeq{n}} \DefEq \SClass{k}{\Naturals}{k \Leq n}$.
   \end{definition}
 
-  \begin{definition}[forthel,for=Natgeqthan]
+  \begin{definition}[forthel,for=NatGeq]
     Let $n$ be a natural number.
-    $\emph{\Natgeqthan{n}} \DefEq \SClass{k}{\Nat}{k \NATgeq n }$.
+    $\emph{\NatGeq{n}} \DefEq \SClass{k}{\Naturals}{k \Geq n }$.
   \end{definition}
 
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    $n \NATleq m$ iff $n \NATless m$ or $n \Eq m$.
+    $n \Leq m$ iff $n \Less m$ or $n \Eq m$.
   \end{proposition}
   \begin{proof}[forthel]
-    \begin{case}{$n \NATleq m$.}
-      Take a natural number $k$ such that $m \Eq n \NATplus k$.
-      If $k \Eq \NATzero$ then $n \Eq m$. If $k \NotEq \NATzero$ then $n \NATless m$.
+    \begin{case}{$n \Leq m$.}
+      Take a natural number $k$ such that $m \Eq n \Plus k$.
+      If $k \Eq \Zero$ then $n \Eq m$. If $k \NotEq \Zero$ then $n \Less m$.
     \end{case}
 
-    \begin{case}{$n \NATless m$ or $n \Eq m$.}
-      If $n \NATless m$ then there is a positive natural number $k$ such that $m \Eq n \NATplus k$.
-      If $n \Eq m$ then $m \Eq n \NATplus \NATzero$.
-      Thus if $n \NATless m$ then there is a natural number $k$ such that $m \Eq n \NATplus k$.
+    \begin{case}{$n \Less m$ or $n \Eq m$.}
+      If $n \Less m$ then there is a positive natural number $k$ such that $m \Eq n \Plus k$.
+      If $n \Eq m$ then $m \Eq n \Plus \Zero$.
+      Thus if $n \Less m$ then there is a natural number $k$ such that $m \Eq n \Plus k$.
     \end{case}
   \end{proof}
 
@@ -99,15 +99,15 @@
   \end{proposition}
   \begin{proof}[forthel]
     \begin{case}{$n$ is positive.}
-      Take a positive natural number $k$ such that $n \Eq \NATzero \NATplus k \Eq k$.
-      Then we have $n \NotEq \NATzero$.
+      Take a positive natural number $k$ such that $n \Eq \Zero \Plus k \Eq k$.
+      Then we have $n \NotEq \Zero$.
     \end{case}
 
     \begin{case}{$n$ is nonzero.}
-      Take a natural number $k$ such that $n \Eq k \NATplus \NATone$.
-      Then $n \Eq \NATzero \NATplus (k \NATplus \NATone)$.
-      $k \NATplus \NATone$ is positive.
-      Hence $\NATzero \NATless n$.
+      Take a natural number $k$ such that $n \Eq k \Plus \One$.
+      Then $n \Eq \Zero \Plus (k \Plus \One)$.
+      $k \Plus \One$ is positive.
+      Hence $\Zero \Less n$.
     \end{case}
   \end{proof}
 \end{sfragment}
@@ -115,163 +115,163 @@
 \begin{sfragment}{Basic Properties}
   \begin{proposition}[forthel]
     Let $n$ be a natural number.
-    Then \[ n \NATnless n. \]
+    Then \[ n \NotLess n. \]
   \end{proposition}
   \begin{proof}[forthel]
     Assume the contrary.
-    Then we can take a positive natural number $k$ such that $n \Eq n \NATplus k$.
-    Then we have $\NATzero \Eq k$.
+    Then we can take a positive natural number $k$ such that $n \Eq n \Plus k$.
+    Then we have $\Zero \Eq k$.
     Contradiction.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    Then \[ n \NATless m \Implies n \NotEq m. \]
+    Then \[ n \Less m \Implies n \NotEq m. \]
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATless m$.
-    Take a positive natural number $k$ such that $m \Eq n \NATplus k$.
-    If $n \Eq m$ then $k \Eq \NATzero$.
+    Assume $n \Less m$.
+    Take a positive natural number $k$ such that $m \Eq n \Plus k$.
+    If $n \Eq m$ then $k \Eq \Zero$.
     Hence $n \NotEq m$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    If $n \NATleq m$ and $m \NATleq n$ then $n \Eq m$.
+    If $n \Leq m$ and $m \Leq n$ then $n \Eq m$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATleq m$ and $m \NATleq n$.
-    Take natural numbers $k, l$ such that $m \Eq n \NATplus k$ and $n \Eq m \NATplus l$.
+    Assume $n \Leq m$ and $m \Leq n$.
+    Take natural numbers $k, l$ such that $m \Eq n \Plus k$ and $n \Eq m \Plus l$.
     Then $m
-      \Eq n \NATplus k
-      \Eq (m \NATplus l) \NATplus k
-      \Eq m \NATplus (l \NATplus k)$.
-    Hence $l \NATplus k \Eq \NATzero$.
-    Thus $l \Eq \NATzero \Eq k$.
-    Indeed if $l \NotEq \NATzero$ or $k \NotEq \NATzero$ then $l \NATplus k$ is the direct successor of
+      \Eq n \Plus k
+      \Eq (m \Plus l) \Plus k
+      \Eq m \Plus (l \Plus k)$.
+    Hence $l \Plus k \Eq \Zero$.
+    Thus $l \Eq \Zero \Eq k$.
+    Indeed if $l \NotEq \Zero$ or $k \NotEq \Zero$ then $l \Plus k$ is the direct successor of
     some natural number.
     Therefore $m \Eq n$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m, k$ be natural numbers.
-    If $n \NATless m \NATless k$ then $n \NATless k$.
+    If $n \Less m \Less k$ then $n \Less k$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATless m \NATless k$.
-    Take a positive natural number $a$ such that $m \Eq n \NATplus a$.
-    Take a positive natural number $b$ such that $k \Eq m \NATplus b$.
+    Assume $n \Less m \Less k$.
+    Take a positive natural number $a$ such that $m \Eq n \Plus a$.
+    Take a positive natural number $b$ such that $k \Eq m \Plus b$.
     Then $k
-      \Eq m \NATplus b
-      \Eq (n \NATplus a) \NATplus b
-      \Eq n \NATplus (a \NATplus b)$.
-    $a \NATplus b$ is positive.
-    Hence $n \NATless k$.
+      \Eq m \Plus b
+      \Eq (n \Plus a) \Plus b
+      \Eq n \Plus (a \Plus b)$.
+    $a \Plus b$ is positive.
+    Hence $n \Less k$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m, k$ be natural numbers.
-    If $n \NATleq m \NATleq k$ then $n \NATleq k$.
+    If $n \Leq m \Leq k$ then $n \Leq k$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATleq m \NATleq k$.
+    Assume $n \Leq m \Leq k$.
     \begin{case}{$n \Eq m \Eq k$.} \end{case}
-    \begin{case}{$n \Eq m \NATless k$.} \end{case}
-    \begin{case}{$n \NATless m \Eq k$.} \end{case}
-    \begin{case}{$n \NATless m \NATless k$.} \end{case}
+    \begin{case}{$n \Eq m \Less k$.} \end{case}
+    \begin{case}{$n \Less m \Eq k$.} \end{case}
+    \begin{case}{$n \Less m \Less k$.} \end{case}
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m, k$ be natural numbers.
-    If $n \NATleq m \NATless k$ then $n \NATless k$.
+    If $n \Leq m \Less k$ then $n \Less k$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATleq m \NATless k$.
-    If $n \Eq m$ then $n \NATless k$.
-    If $n \NATless m$ then $n \NATless k$.
+    Assume $n \Leq m \Less k$.
+    If $n \Eq m$ then $n \Less k$.
+    If $n \Less m$ then $n \Less k$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m, k$ be natural numbers.
-    If $n \NATless m \NATleq k$ then $n \NATless k$.
+    If $n \Less m \Leq k$ then $n \Less k$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATless m \NATleq k$.
-    If $m \Eq k$ then $n \NATless k$.
-    If $m \NATless k$ then $n \NATless k$.
+    Assume $n \Less m \Leq k$.
+    If $m \Eq k$ then $n \Less k$.
+    If $m \Less k$ then $n \Less k$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    If $n \NATless m$ then $n \NATplus \NATone \NATleq m$.
+    If $n \Less m$ then $n \Plus \One \Leq m$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATless m$.
-    Take a positive natural number $k$ such that $m \Eq n \NATplus k$.
+    Assume $n \Less m$.
+    Take a positive natural number $k$ such that $m \Eq n \Plus k$.
 
-    \begin{case}{$k \Eq \NATone$.}
-      Then $m \Eq n \NATplus \NATone$.
-      Hence $n \NATplus \NATone \NATleq m$.
+    \begin{case}{$k \Eq \One$.}
+      Then $m \Eq n \Plus \One$.
+      Hence $n \Plus \One \Leq m$.
     \end{case}
 
-    \begin{case}{$k \NotEq \NATone$.}
-      Then we can take a natural number $l$ such that $k \Eq l \NATplus \NATone$.
+    \begin{case}{$k \NotEq \One$.}
+      Then we can take a natural number $l$ such that $k \Eq l \Plus \One$.
       Then $m
-        \Eq n \NATplus (l \NATplus \NATone)
-        \Eq (n \NATplus l) \NATplus \NATone
-        \Eq (n \NATplus \NATone) \NATplus l$.
+        \Eq n \Plus (l \Plus \One)
+        \Eq (n \Plus l) \Plus \One
+        \Eq (n \Plus \One) \Plus l$.
       $l$ is positive.
-      Thus $n \NATplus \NATone \NATless m$.
+      Thus $n \Plus \One \Less m$.
     \end{case}
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    Then $n \NATless m$ or $n \Eq m$ or $n \NATgtr m$.
+    Then $n \Less m$ or $n \Eq m$ or $n \Greater m$.
   \end{proposition}
   \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{m'}{\Nat}{n \NATless m'\text{ or }n \Eq m'\text{ or }n \NATgtr m'}$.
+    Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Less m'\text{ or }n \Eq m'\text{ or }n \Greater m'}$.
 
-    (1) $\Phi$ contains $\NATzero$.
+    (1) $\Phi$ contains $\Zero$.
 
-    (2) For all $m' \Elem \Phi$ we have $m' \NATplus \NATone \Elem \Phi$.
+    (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $m' \Elem \Phi$.
 
-      \begin{case}{$n \NATless m'$.} \end{case}
+      \begin{case}{$n \Less m'$.} \end{case}
 
       \begin{case}{$n \Eq m'$.} \end{case}
 
-      \begin{case}{$n \NATgtr m'$.}
-        Take a positive natural number $k$ such that $n \Eq m' \NATplus k$.
+      \begin{case}{$n \Greater m'$.}
+        Take a positive natural number $k$ such that $n \Eq m' \Plus k$.
 
-        \begin{case}{$k \Eq \NATone$.} \end{case}
+        \begin{case}{$k \Eq \One$.} \end{case}
 
-        \begin{case}{$k \NotEq \NATone$.}
-          Take a natural number $l$ such that $n \Eq (m' \NATplus \NATone) \NATplus l$.
-          Hence $n \NATgtr m' \NATplus \NATone$.
+        \begin{case}{$k \NotEq \One$.}
+          Take a natural number $l$ such that $n \Eq (m' \Plus \One) \Plus l$.
+          Hence $n \Greater m' \Plus \One$.
           Indeed $l$ is positive.
         \end{case}
       \end{case}
     \end{proof}
 
     Thus every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-    Therefore $n \NATless m$ or $n \Eq m$ or $n \NATgtr m$.
+    Therefore $n \Less m$ or $n \Eq m$ or $n \Greater m$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    Then $n \NATnless m$ iff $n \NATgeq m$.
+    Then $n \NotLess m$ iff $n \Geq m$.
   \end{proposition}
   \begin{proof}[forthel]
-    \begin{case}{$n \NATnless m$.}
-      Then $n \Eq m$ or $n \NATgtr m$.
-      Hence $n \NATgeq m$.
+    \begin{case}{$n \NotLess m$.}
+      Then $n \Eq m$ or $n \Greater m$.
+      Hence $n \Geq m$.
     \end{case}
 
-    \begin{case}{$n \NATgeq m$.}
-      Assume $n \NATless m$.
-      Then $n \NATleq m$.
+    \begin{case}{$n \Geq m$.}
+      Assume $n \Less m$.
+      Then $n \Leq m$.
       Hence $n \Eq m$.
       Contradiction.
     \end{case}
@@ -281,98 +281,98 @@
 \begin{sfragment}{Ordering and Successors}
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    If $n \NATless m \NATleq n \NATplus \NATone$ then $m \Eq n \NATplus \NATone$.
+    If $n \Less m \Leq n \Plus \One$ then $m \Eq n \Plus \One$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATless m \NATleq n \NATplus \NATone$.
-    Take a positive natural number $k$ such that $m \Eq n \NATplus k$.
-    Take a natural number $l$ such that $n \NATplus \NATone \Eq m \NATplus l$.
-    Then $n \NATplus \NATone
-      \Eq m \NATplus l
-      \Eq (n \NATplus k) \NATplus l
-      \Eq n \NATplus (k \NATplus l)$.
-    Hence $k \NATplus l \Eq \NATone$.
+    Assume $n \Less m \Leq n \Plus \One$.
+    Take a positive natural number $k$ such that $m \Eq n \Plus k$.
+    Take a natural number $l$ such that $n \Plus \One \Eq m \Plus l$.
+    Then $n \Plus \One
+      \Eq m \Plus l
+      \Eq (n \Plus k) \Plus l
+      \Eq n \Plus (k \Plus l)$.
+    Hence $k \Plus l \Eq \One$.
 
-    We have $l \Eq \NATzero$.
+    We have $l \Eq \Zero$.
     \begin{proof}
       Assume the contrary.
-      Then $k,l \NATgtr \NATzero$.
+      Then $k,l \Greater \Zero$.
 
-      \begin{case}{$k,l \Eq \NATone$.}
-        Then $k \NATplus l
-          \Eq \NATtwo
-          \NotEq \NATone$.
+      \begin{case}{$k,l \Eq \One$.}
+        Then $k \Plus l
+          \Eq \Two
+          \NotEq \One$.
         Contradiction.
       \end{case}
 
-      \begin{case}{$k \Eq \NATone and l \NotEq \NATone$.}
-        Then $l \NATgtr \NATone$.
-        Hence $k \NATplus l
-          \NATgtr \NATone \NATplus l
-          \NATgtr \NATone$.
+      \begin{case}{$k \Eq \One and l \NotEq \One$.}
+        Then $l \Greater \One$.
+        Hence $k \Plus l
+          \Greater \One \Plus l
+          \Greater \One$.
         Contradiction.
       \end{case}
 
-      \begin{case}{$k \NotEq \NATone and l \Eq \NATone$.}
-        Then $k \NATgtr \NATone$.
-        Hence $k \NATplus l
-          \NATgtr k \NATplus \NATone
-          \NATgtr \NATone$.
+      \begin{case}{$k \NotEq \One and l \Eq \One$.}
+        Then $k \Greater \One$.
+        Hence $k \Plus l
+          \Greater k \Plus \One
+          \Greater \One$.
         Contradiction.
       \end{case}
 
-      \begin{case}{$k, l \NotEq \NATone$.}
-        Take natural numbers $a, b$ such that $k \Eq a \NATplus \NATone$ and $l \Eq b \NATplus \NATone$.
-        Indeed $k, l \NotEq \NATzero$.
-        Hence $k \Eq a \NATplus \NATone$ and $l \Eq b \NATplus \NATone$.
-        Thus $k, l \NATgtr \NATone$. Indeed $a, b$ are positive.
+      \begin{case}{$k, l \NotEq \One$.}
+        Take natural numbers $a, b$ such that $k \Eq a \Plus \One$ and $l \Eq b \Plus \One$.
+        Indeed $k, l \NotEq \Zero$.
+        Hence $k \Eq a \Plus \One$ and $l \Eq b \Plus \One$.
+        Thus $k, l \Greater \One$. Indeed $a, b$ are positive.
       \end{case}
     \end{proof}
 
-    Then we have $n \NATplus \NATone
-      \Eq m \NATplus l
-      \Eq m \NATplus \NATzero
+    Then we have $n \Plus \One
+      \Eq m \Plus l
+      \Eq m \Plus \Zero
       \Eq m$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n, m$ be natural numbers.
-    If $n \NATleq m \NATless n \NATplus \NATone$ then $n \Eq m$.
+    If $n \Leq m \Less n \Plus \One$ then $n \Eq m$.
   \end{proposition}
   \begin{proof}[forthel]
-    Assume $n \NATleq m \NATless n \NATplus \NATone$.
+    Assume $n \Leq m \Less n \Plus \One$.
 
     \begin{case}{$n \Eq m$.} \end{case}
 
-    \begin{case}{$n \NATless m$.}
-      Then $n \NATless m \NATleq n \NATplus \NATone$.
+    \begin{case}{$n \Less m$.}
+      Then $n \Less m \Leq n \Plus \One$.
       Hence $n \Eq m$.
     \end{case}
   \end{proof}
 
   \begin{corollary}[forthel]
     Let $n$ be a natural number.
-    There is no natural number $m$ such that $n \NATless m \NATless n \NATplus \NATone$.
+    There is no natural number $m$ such that $n \Less m \Less n \Plus \One$.
   \end{corollary}
   \begin{proof}[forthel]
     Assume the contrary.
-    Take a natural number $m$ such that $n \NATless m \NATless n \NATplus \NATone$.
-    Then $n \NATless m \NATleq n \NATplus \NATone$ and $n \NATleq m \NATless n \NATplus \NATone$.
-    Hence $m \Eq n \NATplus \NATone$ and $m \Eq n$.
-    Hence $n \Eq n \NATplus \NATone$.
+    Take a natural number $m$ such that $n \Less m \Less n \Plus \One$.
+    Then $n \Less m \Leq n \Plus \One$ and $n \Leq m \Less n \Plus \One$.
+    Hence $m \Eq n \Plus \One$ and $m \Eq n$.
+    Hence $n \Eq n \Plus \One$.
     Contradiction.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n$ be a natural number.
-    Then $n \NATplus \NATone \NATgeq \NATone$.
+    Then $n \Plus \One \Geq \One$.
   \end{proposition}
   \begin{proof}[forthel]
-    \begin{case}{$n \Eq \NATzero$.} \end{case}
+    \begin{case}{$n \Eq \Zero$.} \end{case}
 
-    \begin{case}{$n \NotEq \NATzero$.}
-      Then $n \NATgtr \NATzero$.
-      Hence $n \NATplus \NATone \NATgtr \NATzero \NATplus \NATone \Eq \NATone$.
+    \begin{case}{$n \NotEq \Zero$.}
+      Then $n \Greater \Zero$.
+      Hence $n \Plus \One \Greater \Zero \Plus \One \Eq \One$.
     \end{case}
   \end{proof}
 \end{sfragment}
@@ -383,46 +383,46 @@
 
   \begin{proposition}[forthel,name=preservation of ordering under right-addition]
     Let $n, m, k$ be natural numbers.
-    Then $n \NATless m$ iff $n \NATplus k \NATless m \NATplus k$.
+    Then $n \Less m$ iff $n \Plus k \Less m \Plus k$.
   \end{proposition}
   \begin{proof}[forthel]
-    \begin{case}{$n \NATless m$.}
-      Take a positive natural number $l$ such that $m \Eq n \NATplus l$.
-      Then $m \NATplus k
-        \Eq (n \NATplus l) \NATplus k
-        \Eq (n \NATplus k) \NATplus l$.
-      Hence $n \NATplus k \NATless m \NATplus k$.
+    \begin{case}{$n \Less m$.}
+      Take a positive natural number $l$ such that $m \Eq n \Plus l$.
+      Then $m \Plus k
+        \Eq (n \Plus l) \Plus k
+        \Eq (n \Plus k) \Plus l$.
+      Hence $n \Plus k \Less m \Plus k$.
     \end{case}
 
-    \begin{case}{$n \NATplus k \NATless m \NATplus k$.}
-      Take a positive natural number $l$ such that $m \NATplus k \Eq (n \NATplus k) \NATplus l$.
-      $((n \NATplus k) \NATplus l)
-        \Eq n \NATplus (k \NATplus l)
-        \Eq n \NATplus (l \NATplus k)
-        \Eq (n \NATplus l) \NATplus k$.
-      Hence $m \NATplus k \Eq (n \NATplus l) \NATplus k$.
-      Thus $m \Eq n \NATplus l$ (by \sn{right-cancellability of addition}).
-      Therefore $n \NATless m$.
+    \begin{case}{$n \Plus k \Less m \Plus k$.}
+      Take a positive natural number $l$ such that $m \Plus k \Eq (n \Plus k) \Plus l$.
+      $((n \Plus k) \Plus l)
+        \Eq n \Plus (k \Plus l)
+        \Eq n \Plus (l \Plus k)
+        \Eq (n \Plus l) \Plus k$.
+      Hence $m \Plus k \Eq (n \Plus l) \Plus k$.
+      Thus $m \Eq n \Plus l$ (by \sn{right-cancellability of addition}).
+      Therefore $n \Less m$.
     \end{case}
   \end{proof}
 
   \begin{corollary}[forthel]
     Let $n, m, k$ be natural numbers.
-    Then $n \NATless m$ iff $k \NATplus n \NATless k \NATplus m$.
+    Then $n \Less m$ iff $k \Plus n \Less k \Plus m$.
   \end{corollary}
   \begin{proof}[forthel]
-    We have $k \NATplus n \Eq n \NATplus k$ and $k \NATplus m \Eq m \NATplus k$.
-    Hence $k \NATplus n \NATless k \NATplus m$ iff $n \NATplus k \NATless m \NATplus k$.
+    We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
+    Hence $k \Plus n \Less k \Plus m$ iff $n \Plus k \Less m \Plus k$.
   \end{proof}
 
   \begin{corollary}[forthel]
     Let $n, m, k$ be natural numbers.
-    Then $n \NATleq m$ iff $k \NATplus n \NATleq k \NATplus m$.
+    Then $n \Leq m$ iff $k \Plus n \Leq k \Plus m$.
   \end{corollary}
 
   \begin{corollary}[forthel]
     Let $n, m, k$ be natural numbers.
-    Then $n \NATleq m$ iff $n \NATplus k \NATleq m \NATplus k$.
+    Then $n \Leq m$ iff $n \Plus k \Leq m \Plus k$.
   \end{corollary}
 \end{sfragment}
 
@@ -431,36 +431,36 @@
   \symdecl*{wellfoundedness of ordering}
 
   \begin{proposition}[forthel,name=wellfoundedness of ordering]
-    Let $A$ be a nonempty subclass of $\Nat$.
-    Then there exists a $m \Elem A$ such that $m \NATleq n$ for all $n \Elem A$.
+    Let $A$ be a nonempty subclass of $\Naturals$.
+    Then there exists a $m \Elem A$ such that $m \Leq n$ for all $n \Elem A$.
   \end{proposition}
   \begin{proof}[forthel]
     Assume the contrary.
 
-    Let us show that for each $n \Elem A$ there exists a $m \Elem A$ such that $m \NATless n$.
+    Let us show that for each $n \Elem A$ there exists a $m \Elem A$ such that $m \Less n$.
       Let $n \Elem A$.
-      Assume that there exists no $m \Elem A$ such that $m \NATless n$.
-      Then $n \NATleq m$ for all $m \Elem A$.
+      Assume that there exists no $m \Elem A$ such that $m \Less n$.
+      Then $n \Leq m$ for all $m \Elem A$.
       Contradiction.
     End.
 
-    (a) Define $\Phi \DefEq \SClass{n}{\Nat}{n\text{ is less than any element of }A}$.
+    (a) Define $\Phi \DefEq \SClass{n}{\Naturals}{n\text{ is less than any element of }A}$.
 
-    (1) $\Phi$ contains $\NATzero$.
+    (1) $\Phi$ contains $\Zero$.
     \begin{proof}
-      $\NATzero \NotElem A$.
-      Hence $\NATzero$ is less than every element of $A$.
-      Thus $\NATzero \Elem \Phi$.
+      $\Zero \NotElem A$.
+      Hence $\Zero$ is less than every element of $A$.
+      Thus $\Zero \Elem \Phi$.
     \end{proof}
 
-    (2) For all $n \Elem \Phi$ we have $n \NATplus \NATone \Elem \Phi$.
+    (2) For all $n \Elem \Phi$ we have $n \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $n \Elem \Phi$.
       Then $n$ is less than any element of $A$.
-      Assume that $\Phi$ does not contain $n \NATplus \NATone$.
-      Then we can take an $m \Elem A$ such that $n \NATplus \NATone \NATnless m$ (by a).
-      Then $n \NATless m \NATleq n \NATplus \NATone$.
-      Hence $m \Eq n \NATplus \NATone$.
+      Assume that $\Phi$ does not contain $n \Plus \One$.
+      Then we can take an $m \Elem A$ such that $n \Plus \One \NotLess m$ (by a).
+      Then $n \Less m \Leq n \Plus \One$.
+      Hence $m \Eq n \Plus \One$.
       Contradiction.
     \end{proof}
 
@@ -474,15 +474,15 @@
 
   \begin{theorem}[forthel,name=induction II]
     Let $A$ be a class.
-    Assume for all $n \Elem \Nat$ if $A$ contains all predecessors of $n$ then $A$ contains $n$.
+    Assume for all $n \Elem \Naturals$ if $A$ contains all predecessors of $n$ then $A$ contains $n$.
     Then $A$ contains every natural number.
   \end{theorem}
   \begin{proof}[forthel]
     Assume the contrary.
     Take a natural number $n$ that is not contained in $A$.
-    Then $n$ is contained in $\Nat \SETdiff A$.
-    Hence we can take a $m \Elem \Nat \SETdiff A$ such that $m \NATleq k$ for all $k \Elem \Nat \SETdiff A$.
-    Then $\Nat \SETdiff A$ does not contain any predecessor of $m$.
+    Then $n$ is contained in $\Naturals \Diff A$.
+    Hence we can take a $m \Elem \Naturals \Diff A$ such that $m \Leq k$ for all $k \Elem \Naturals \Diff A$.
+    Then $\Naturals \Diff A$ does not contain any predecessor of $m$.
     Therefore $A$ contains all predecessors of $m$.
     Consequently $A$ contains $m$.
     Contradiction.
@@ -493,38 +493,38 @@
   \begin{theorem}[forthel,name=induction III]
     Let $A$ be a class.
     Let $k$ be a natural number such that $k \Elem A$.
-    Assume that for all $n \Elem \Natgeqthan{k}$ if $n \Elem A$ then $n \NATplus \NATone \Elem A$.
-    Then for all $n \Elem \Natgeqthan{k}$ we have $n \Elem A$.
+    Assume that for all $n \Elem \NatGeq{k}$ if $n \Elem A$ then $n \Plus \One \Elem A$.
+    Then for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
   \end{theorem}
   \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{n}{\Nat}{\text{ if }n \NATgeq k\text{ then }n \Elem A}$.
+    Define $\Phi \DefEq \SClass{n}{\Naturals}{\text{ if }n \Geq k\text{ then }n \Elem A}$.
 
-    (1) $\Phi$ contains $\NATzero$.
-    Indeed if $\NATzero \NATgeq k$ then $\NATzero \Eq k \Elem A$.
+    (1) $\Phi$ contains $\Zero$.
+    Indeed if $\Zero \Geq k$ then $\Zero \Eq k \Elem A$.
 
-    (2) For all $n \Elem \Phi$ we have $n \NATplus \NATone \Elem \Phi$.
+    (2) For all $n \Elem \Phi$ we have $n \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $n \Elem \Phi$.
 
-      Let us show that if $n \NATplus \NATone \NATgeq k$ then $n \NATplus \NATone \Elem A$.
-        Assume $n \NATplus \NATone \NATgeq k$.
+      Let us show that if $n \Plus \One \Geq k$ then $n \Plus \One \Elem A$.
+        Assume $n \Plus \One \Geq k$.
 
-        \begin{case}{$n \NATless k$.}
-          Then $n \NATplus \NATone \Eq k$.
-          Hence $n \NATplus \NATone \Elem A$.
+        \begin{case}{$n \Less k$.}
+          Then $n \Plus \One \Eq k$.
+          Hence $n \Plus \One \Elem A$.
         \end{case}
 
-        \begin{case}{$n \NATgeq k$.}
+        \begin{case}{$n \Geq k$.}
           Then $n \Elem A$.
-          Hence $n \NATplus \NATone \Elem A$.
+          Hence $n \Plus \One \Elem A$.
         \end{case}
       End.
 
-      Therefore $n \NATplus \NATone \Elem \Phi$.
+      Therefore $n \Plus \One \Elem \Phi$.
     \end{proof}
 
     Thus $\Phi$ contains every natural number (by \sr{induction I}{induction}).
-    Consequently for all $n \Elem \Natgeqthan{k}$ we have $n \Elem A$.
+    Consequently for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
   \end{proof}
 \end{sfragment}
 \end{smodule}

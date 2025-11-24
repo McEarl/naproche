@@ -4,7 +4,7 @@
 \begin{document}
 \begin{smodule}{invertible-maps.ftl}
 \importmodule[libraries/foundations]{injections-surjections-bijections.ftl}
-\symdef{FUNinv}[args=1]{#1^{\comp{-1}}}
+\symdef{Inv}[args=1]{#1^{\comp{-1}}}
 \symdecl*{inverse}
 \symdecl*{invertible}
 \symdecl*{involutory}
@@ -14,7 +14,7 @@
 \begin{sfragment}{Definitions}
   \begin{definition}[forthel,for=inverse]
     Let $f$ be a map.
-    An \emph{inverse of $f$} is a map $g$ from $\FUNrange(f)$ to $\Dom(f)$ such that $f(a) \Eq b \Iff g(b) \Eq a$ for all $a \Elem \Dom(f)$ and all $b \Elem \Dom(g)$.
+    An \emph{inverse of $f$} is a map $g$ from $\Range(f)$ to $\Dom(f)$ such that $f(a) \Eq b \Iff g(b) \Eq a$ for all $a \Elem \Dom(f)$ and all $b \Elem \Dom(g)$.
   \end{definition}
 
   \begin{definition}[forthel,for=invertible]
@@ -27,10 +27,10 @@
     Then $g \Eq g'$.
   \end{lemma}
   \begin{proof}[forthel]
-    We have $\Dom(g) \Eq \FUNrange(f) \Eq \Dom(g')$.
+    We have $\Dom(g) \Eq \Range(f) \Eq \Dom(g')$.
 
-    Let us show that $g(b) \Eq g'(b)$ for all $b \Elem \FUNrange(f)$.
-      Let $b \Elem \FUNrange(f)$.
+    Let us show that $g(b) \Eq g'(b)$ for all $b \Elem \Range(f)$.
+      Let $b \Elem \Range(f)$.
       Take $a \Eq g'(b)$.
       Then $g(b) \Eq a$ iff $f(a) \Eq b$.
       We have $f(a) \Eq b$ iff $g'(b) \Eq a$.
@@ -38,9 +38,9 @@
     End.
   \end{proof}
 
-  \begin{definition}[forthel,for={FUNinv,involutory,selfinverse}]
+  \begin{definition}[forthel,for={Inv,involutory,selfinverse}]
     Let $f$ be an invertible map.
-    $\emph{\FUNinv{f}}$ is the inverse of $f$.
+    $\emph{\Inv{f}}$ is the inverse of $f$.
     Let $f$ is \emph{involutory} stand for $f$ is the inverse of $f$.
     Let $f$ is \emph{selfinverse} stand for $f$ is the inverse of $f$.
   \end{definition}
@@ -48,252 +48,252 @@
 
 \begin{sfragment}{Basic Properties}
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$ and $g \FUNfromonto{B}{A}$.
-    Then $g$ is the inverse of $f$ iff $g \FUNcomp f \Eq \FUNid{A}$ and $f \FUNcomp g \Eq \FUNid{B}$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{A}$.
+    Then $g$ is the inverse of $f$ iff $g \Comp f \Eq \Id{A}$ and $f \Comp g \Eq \Id{B}$.
   \end{proposition}
   \begin{proof}[forthel]
     \begin{case}{$g$ is the inverse of $f$.}
       We have
-      $\Dom(g \FUNcomp f)
+      $\Dom(g \Comp f)
         \Eq \Dom(f)
         \Eq A
-        \Eq \Dom(\FUNid{A})$.
+        \Eq \Dom(\Id{A})$.
       For all $a \Elem A$ we have
-      $(g \FUNcomp f)(a)
+      $(g \Comp f)(a)
         \Eq g(f(a))
         \Eq a$.
-      Hence $g \FUNcomp f \Eq \FUNid{A}$.
+      Hence $g \Comp f \Eq \Id{A}$.
 
       We have
-      $\Dom(f \FUNcomp g)
+      $\Dom(f \Comp g)
         \Eq \Dom(g)
         \Eq B
-        \Eq \Dom(\FUNid{B})$.
+        \Eq \Dom(\Id{B})$.
       For all $b \Elem B$ we have
-      $(f \FUNcomp g)(b)
+      $(f \Comp g)(b)
         \Eq f(g(b))
         \Eq b$.
-      Hence $f \FUNcomp g \Eq \FUNid{B}$.
+      Hence $f \Comp g \Eq \Id{B}$.
     \end{case}
 
-    \begin{case}{$g \FUNcomp f \Eq \FUNid{A}$ and $f \FUNcomp g \Eq \FUNid{B}$.}
+    \begin{case}{$g \Comp f \Eq \Id{A}$ and $f \Comp g \Eq \Id{B}$.}
       Then $\Dom(g)
         \Eq B
-        \Eq \FUNrange(f)$
-      and $\FUNrange(g)
+        \Eq \Range(f)$
+      and $\Range(g)
         \Eq A
         \Eq \Dom(f)$.
       Let $a \Elem \Dom(f)$ and $b \Elem \Dom(g)$.
       If $f(a) \Eq b$ then
       $g(b)
         \Eq g(f(a))
-        \Eq (g \FUNcomp f)(a)
-        \Eq \FUNid{A}(a)
+        \Eq (g \Comp f)(a)
+        \Eq \Id{A}(a)
         \Eq a$.
       If $g(b) \Eq a$ then
       $f(a)
         \Eq f(g(b))
-        \Eq (f \FUNcomp g)(b)
-        \Eq \FUNid{B}(b)
+        \Eq (f \Comp g)(b)
+        \Eq \Id{B}(b)
         \Eq b$.
       Hence $f(a) \Eq b$ iff $g(b) \Eq a$.
     \end{case}
   \end{proof}
 
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
     Assume that $f$ is invertible.
-    Then $\FUNinv{f}$ is an invertible surjective map from $B$ onto $A$ such that $\FUNinv{(\FUNinv{f})} \Eq f$.
+    Then $\Inv{f}$ is an invertible surjective map from $B$ onto $A$ such that $\Inv{(\Inv{f})} \Eq f$.
   \end{proposition}
   \begin{proof}[forthel]
-    $\FUNinv{f}$ is a map from $B$ to $A$.
-    Indeed $\FUNrange(f) \Eq B$ and $\Dom(f) \Eq A$.
-    $\FUNinv{f}$ is surjective onto $A$.
-    Indeed for any $a \Elem A$ we have $\FUNinv{f}(f(a)) \Eq a$.
-    $\FUNinv{f}$ is the inverse of $f$.
-    Thus $f \FUNcomp \FUNinv{f} \Eq \FUNid{B}$ and $\FUNinv{f} \FUNcomp f \Eq \FUNid{A}$.
-    Therefore $f$ is the inverse of $\FUNinv{f}$.
+    $\Inv{f}$ is a map from $B$ to $A$.
+    Indeed $\Range(f) \Eq B$ and $\Dom(f) \Eq A$.
+    $\Inv{f}$ is surjective onto $A$.
+    Indeed for any $a \Elem A$ we have $\Inv{f}(f(a)) \Eq a$.
+    $\Inv{f}$ is the inverse of $f$.
+    Thus $f \Comp \Inv{f} \Eq \Id{B}$ and $\Inv{f} \Comp f \Eq \Id{A}$.
+    Therefore $f$ is the inverse of $\Inv{f}$.
   \end{proof}
 
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
     Assume that $f$ is invertible.
-    Then $f \FUNcomp \FUNinv{f} \Eq \FUNid{B}$ and $\FUNinv{f} \FUNcomp f \Eq \FUNid{A}$.
+    Then $f \Comp \Inv{f} \Eq \Id{B}$ and $\Inv{f} \Comp f \Eq \Id{A}$.
   \end{proposition}
   \begin{proof}[forthel]
-    $\FUNinv{f}$ is a surjective map from $B$ onto $A$ .
-    $\FUNinv{f}$ is the inverse of $f$.
+    $\Inv{f}$ is a surjective map from $B$ onto $A$ .
+    $\Inv{f}$ is the inverse of $f$.
   \end{proof}
 
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$ and $a \Elem A$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $a \Elem A$.
     Assume that $f$ is invertible.
-    Then $\FUNinv{f}(f(a)) \Eq a$.
+    Then $\Inv{f}(f(a)) \Eq a$.
   \end{proposition}
   \begin{proof}[forthel]
-    We have $\FUNinv{f}(f(a)) \Eq (\FUNinv{f} \FUNcomp f)(a) \Eq \FUNid{A}(a) \Eq a$.
+    We have $\Inv{f}(f(a)) \Eq (\Inv{f} \Comp f)(a) \Eq \Id{A}(a) \Eq a$.
   \end{proof}
 
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$ and $b \Elem B$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
     Assume that $f$ is invertible.
-    Then $f(\FUNinv{f}(b)) \Eq b$.
+    Then $f(\Inv{f}(b)) \Eq b$.
   \end{proposition}
   \begin{proof}[forthel]
     We have
-    $f(\FUNinv{f}(b))
-      \Eq (f \FUNcomp \FUNinv{f})(b)
-      \Eq \FUNid{B}(b)
+    $f(\Inv{f}(b))
+      \Eq (f \Comp \Inv{f})(b)
+      \Eq \Id{B}(b)
       \Eq b$.
   \end{proof}
 
   \symdecl*{invertibility of composition of invertible maps}
 
   \begin{proposition}[forthel,name=invertibility of composition of invertible maps]
-    Let $A, B, C$ be classes and $f \FUNfromonto{A}{B}$ and $g \FUNfromonto{B}{C}$.
+    Let $A, B, C$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{C}$.
     Assume that $f$ and $g$ are invertible.
-    Then $g \FUNcomp f$ is invertible and $\FUNinv{g \FUNcomp f} \Eq \FUNinv{f} \FUNcomp \FUNinv{g}$.
+    Then $g \Comp f$ is invertible and $\Inv{g \Comp f} \Eq \Inv{f} \Comp \Inv{g}$.
   \end{proposition}
   \begin{proof}[forthel]
-    $\FUNinv{f}$ is a surjective map from $B$ onto $A$.
-    $\FUNinv{g}$ is a surjective map from $C$ onto $B$.
-    Take $h \Eq \FUNinv{f} \FUNcomp \FUNinv{g}$.
+    $\Inv{f}$ is a surjective map from $B$ onto $A$.
+    $\Inv{g}$ is a surjective map from $C$ onto $B$.
+    Take $h \Eq \Inv{f} \Comp \Inv{g}$.
     Then $h$ is a surjective map from $C$ onto $A$ (by \sn{surjectivity of composition of surjections}).
-    $g \FUNcomp f$ is a map from $A$ to $C$.
+    $g \Comp f$ is a map from $A$ to $C$.
 
-    Let us show that $((g \FUNcomp f) \FUNcomp h) \Eq \FUNid{C}$.
-      We have $f \FUNcomp (\FUNinv{f} \FUNcomp \FUNinv{g}) \Eq (f \FUNcomp \FUNinv{f}) \FUNcomp \FUNinv{g}$.
-      Indeed $f \FUNcomp (\FUNinv{f} \FUNcomp \FUNinv{g})$ and $(f \FUNcomp \FUNinv{f}) \FUNcomp \FUNinv{g}$ are maps of $C$.
-      $f \FUNcomp h$ is a map from $C$ to $B$.
+    Let us show that $((g \Comp f) \Comp h) \Eq \Id{C}$.
+      We have $f \Comp (\Inv{f} \Comp \Inv{g}) \Eq (f \Comp \Inv{f}) \Comp \Inv{g}$.
+      Indeed $f \Comp (\Inv{f} \Comp \Inv{g})$ and $(f \Comp \Inv{f}) \Comp \Inv{g}$ are maps of $C$.
+      $f \Comp h$ is a map from $C$ to $B$.
       Hence
-      \[  (g \FUNcomp f) \FUNcomp h                           \]
-      \[    \Eq g \FUNcomp (f \FUNcomp h)                       \]
-      \[    \Eq g \FUNcomp (f \FUNcomp (\FUNinv{f} \FUNcomp \FUNinv{g}))   \]
-      \[    \Eq g \FUNcomp ((f \FUNcomp \FUNinv{f}) \FUNcomp \FUNinv{g})   \]
-      \[    \Eq g \FUNcomp (\FUNid{B} \FUNcomp \FUNinv{g})            \]
-      \[    \Eq g \FUNcomp \FUNinv{g}                            \]
-      \[    \Eq \FUNid{C}.                                  \]
+      \[  (g \Comp f) \Comp h                           \]
+      \[    \Eq g \Comp (f \Comp h)                       \]
+      \[    \Eq g \Comp (f \Comp (\Inv{f} \Comp \Inv{g}))   \]
+      \[    \Eq g \Comp ((f \Comp \Inv{f}) \Comp \Inv{g})   \]
+      \[    \Eq g \Comp (\Id{B} \Comp \Inv{g})            \]
+      \[    \Eq g \Comp \Inv{g}                            \]
+      \[    \Eq \Id{C}.                                  \]
     End.
 
-    Let us show that $h \FUNcomp (g \FUNcomp f) \Eq \FUNid{A}$.
-      We have $(\FUNinv{f} \FUNcomp \FUNinv{g}) \FUNcomp g \Eq \FUNinv{f} \FUNcomp (\FUNinv{g} \FUNcomp g)$.
-      $g \FUNcomp f$ is a map from $A$ to $C$.
+    Let us show that $h \Comp (g \Comp f) \Eq \Id{A}$.
+      We have $(\Inv{f} \Comp \Inv{g}) \Comp g \Eq \Inv{f} \Comp (\Inv{g} \Comp g)$.
+      $g \Comp f$ is a map from $A$ to $C$.
       Hence
-      \[  h \FUNcomp (g \FUNcomp f)                           \]
-      \[    \Eq (h \FUNcomp g) \FUNcomp f                       \]
-      \[    \Eq ((\FUNinv{f} \FUNcomp \FUNinv{g}) \FUNcomp g) \FUNcomp f   \]
-      \[    \Eq (\FUNinv{f} \FUNcomp (\FUNinv{g} \FUNcomp g)) \FUNcomp f   \]
-      \[    \Eq (\FUNinv{f} \FUNcomp \FUNid{B}) \FUNcomp f            \]
-      \[    \Eq \FUNinv{f} \FUNcomp f                            \]
-      \[    \Eq \FUNid{A}.                                  \]
+      \[  h \Comp (g \Comp f)                           \]
+      \[    \Eq (h \Comp g) \Comp f                       \]
+      \[    \Eq ((\Inv{f} \Comp \Inv{g}) \Comp g) \Comp f   \]
+      \[    \Eq (\Inv{f} \Comp (\Inv{g} \Comp g)) \Comp f   \]
+      \[    \Eq (\Inv{f} \Comp \Id{B}) \Comp f            \]
+      \[    \Eq \Inv{f} \Comp f                            \]
+      \[    \Eq \Id{A}.                                  \]
     End.
 
-    Thus $h$ is the inverse of $g \FUNcomp f$.
-    Indeed $g \FUNcomp f$ is a surjective map from $A$ onto $C$ and $h$ is a surjective map from $C$ onto $A$.
+    Thus $h$ is the inverse of $g \Comp f$.
+    Indeed $g \Comp f$ is a surjective map from $A$ onto $C$ and $h$ is a surjective map from $C$ onto $A$.
   \end{proof}
 
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$ and $X \SETinclude A$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $X \Subclass A$.
     Assume that $f$ is invertible.
-    Then $f \FUNrest X$ is invertible and $\FUNinv{f\FUNrest X} \Eq \FUNinv{f} \FUNrest (\FUNim{f}{X})$.
+    Then $f \Rest X$ is invertible and $\Inv{f\Rest X} \Eq \Inv{f} \Rest (\Im{f}{X})$.
   \end{proposition}
   \begin{proof}[forthel]
-    $f \FUNrest X$ is a surjective map from $X$ onto $\FUNim{f}{X}$.
-    Take $g \Eq \FUNinv{f} \FUNrest (\FUNim{f}{X})$.
-    Then $g$ is a map of $\FUNim{f}{X}$.
+    $f \Rest X$ is a surjective map from $X$ onto $\Im{f}{X}$.
+    Take $g \Eq \Inv{f} \Rest (\Im{f}{X})$.
+    Then $g$ is a map of $\Im{f}{X}$.
 
-    Let us show that $X \SETinclude \FUNrange(g)$.
+    Let us show that $X \Subclass \Range(g)$.
       Let $a \Elem X$.
-      Then $f(a) \Elem \FUNim{f}{X}$.
-      Hence $g(f(a)) \Eq \FUNinv{f}(f(a)) \Eq a$.
+      Then $f(a) \Elem \Im{f}{X}$.
+      Hence $g(f(a)) \Eq \Inv{f}(f(a)) \Eq a$.
       Thus $a$ is a value of $g$.
     End.
 
-    Let us show that $\FUNrange(g) \SETinclude X$.
-      Let $a \Elem \FUNrange(g)$.
-      Take $b \Elem \FUNim{f}{X}$ such that $a \Eq g(b)$.
+    Let us show that $\Range(g) \Subclass X$.
+      Let $a \Elem \Range(g)$.
+      Take $b \Elem \Im{f}{X}$ such that $a \Eq g(b)$.
       Take $c \Elem X$ such that $b \Eq f(c)$.
       Then $a
-        \Eq (\FUNinv{f} \FUNrest (\FUNim{f}{X}))(b)
-        \Eq \FUNinv{f}(b)
-        \Eq \FUNinv{f}(f(c))
+        \Eq (\Inv{f} \Rest (\Im{f}{X}))(b)
+        \Eq \Inv{f}(b)
+        \Eq \Inv{f}(f(c))
         \Eq c$.
       Hence $a \Elem X$.
     End.
 
-    Hence $\FUNrange(g) \Eq X$.
+    Hence $\Range(g) \Eq X$.
     Thus $g$ is a surjective map onto $X$.
 
-    Let us show that $g((f \FUNrest X)(a)) \Eq a$ for all $a \Elem X$.
+    Let us show that $g((f \Rest X)(a)) \Eq a$ for all $a \Elem X$.
       Let $a \Elem X$.
-      Then $g((f \FUNrest X)(a))
+      Then $g((f \Rest X)(a))
         \Eq g(f(a))
-        \Eq (\FUNinv{f} \FUNrest (\FUNim{f}{X}))(f(a))
-        \Eq \FUNinv{f}(f(a))
+        \Eq (\Inv{f} \Rest (\Im{f}{X}))(f(a))
+        \Eq \Inv{f}(f(a))
         \Eq a$.
     End.
 
-    Let us show that $((f \FUNrest X)(g(b))) \Eq b$ for all $b \Elem \FUNim{f}{X}$.
-      Let $b \Elem \FUNim{f}{X}$.
+    Let us show that $((f \Rest X)(g(b))) \Eq b$ for all $b \Elem \Im{f}{X}$.
+      Let $b \Elem \Im{f}{X}$.
       Take $a \Elem X$ such that $b \Eq f(a)$.
       We have $g(b)
         \Eq g(f(a))
-        \Eq (\FUNinv{f} \FUNrest (\FUNim{f}{X}))(f(a))
-        \Eq \FUNinv{f}(f(a))
+        \Eq (\Inv{f} \Rest (\Im{f}{X}))(f(a))
+        \Eq \Inv{f}(f(a))
         \Eq a$.
-      Hence $(f \FUNrest X)(g(b))
-        \Eq (f \FUNrest X)(a)
+      Hence $(f \Rest X)(g(b))
+        \Eq (f \Rest X)(a)
         \Eq f(a)
         \Eq b$.
     End.
 
-    Thus $g \FUNcomp (f \FUNrest X) \Eq \FUNid{X}$ and $(f \FUNrest X) \FUNcomp g \Eq \FUNid{\FUNim{f}{X}}$.
-    Therefore $g$ is the inverse of $f \FUNrest X$.
+    Thus $g \Comp (f \Rest X) \Eq \Id{X}$ and $(f \Rest X) \Comp g \Eq \Id{\Im{f}{X}}$.
+    Therefore $g$ is the inverse of $f \Rest X$.
   \end{proof}
 
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$ and $Y \SETinclude B$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $Y \Subclass B$.
     Assume that $f$ is invertible.
-    Then \[ \FUNpreim{f}{Y} \Eq \FUNim{\FUNinv{f}}{Y}. \]
+    Then \[ \PreIm{f}{Y} \Eq \Im{\Inv{f}}{Y}. \]
   \end{proposition}
   \begin{proof}[forthel]
-    We have $\FUNim{\FUNinv{f}}{Y} \Eq \CClass{\FUNinv{f}(b)}{b \Elem Y}$ and $\FUNpreim{f}{Y} \Eq \SClass{a}{A}{f(a) \Elem Y}$.
+    We have $\Im{\Inv{f}}{Y} \Eq \CClass{\Inv{f}(b)}{b \Elem Y}$ and $\PreIm{f}{Y} \Eq \SClass{a}{A}{f(a) \Elem Y}$.
 
-    Let us show that $\FUNpreim{f}{Y} \SETinclude \FUNim{\FUNinv{f}}{Y}$.
-      Let $a \Elem \FUNpreim{f}{Y}$.
+    Let us show that $\PreIm{f}{Y} \Subclass \Im{\Inv{f}}{Y}$.
+      Let $a \Elem \PreIm{f}{Y}$.
       Take $b \Elem Y$ such that $b \Eq f(a)$.
-      Then $\FUNinv{f}(b) \Eq \FUNinv{f}(f(a)) \Eq a$.
-      Hence $a \Elem \FUNim{\FUNinv{f}}{Y}$.
+      Then $\Inv{f}(b) \Eq \Inv{f}(f(a)) \Eq a$.
+      Hence $a \Elem \Im{\Inv{f}}{Y}$.
     End.
 
-    Let us show that $\FUNim{\FUNinv{f}}{Y} \SETinclude \FUNpreim{f}{Y}$.
-      Let $a \Elem \FUNim{\FUNinv{f}}{Y}$.
-      Take $b \Elem Y$ such that $a \Eq \FUNinv{f}(b)$.
-      Then $f(a) \Eq f(\FUNinv{f}(b)) \Eq b$.
-      Hence $a \Elem \FUNpreim{f}{Y}$.
+    Let us show that $\Im{\Inv{f}}{Y} \Subclass \PreIm{f}{Y}$.
+      Let $a \Elem \Im{\Inv{f}}{Y}$.
+      Take $b \Elem Y$ such that $a \Eq \Inv{f}(b)$.
+      Then $f(a) \Eq f(\Inv{f}(b)) \Eq b$.
+      Hence $a \Elem \PreIm{f}{Y}$.
     End.
   \end{proof}
 
   \begin{corollary}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$ and $b \Elem B$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
     Assume that $f$ is invertible.
-    Then \[ \FUNpreim{f}{\SETsingleton{b}} \Eq \SETsingleton{\FUNinv{f}(b)}. \]
+    Then \[ \PreIm{f}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}. \]
   \end{corollary}
   \begin{proof}[forthel]
-    $\FUNpreim{f}{\SETsingleton{b}} \Eq \FUNim{\FUNinv{f}}{\SETsingleton{b}}$.
-    We have $\FUNim{\FUNinv{f}}{\SETsingleton{b}} \Eq \CClass{\FUNinv{f}(c)}{c \Elem \SETsingleton{b}}$.
-    Hence $\FUNim{\FUNinv{f}}{\SETsingleton{b}} \Eq \SETsingleton{\FUNinv{f}(b)}$.
+    $\PreIm{f}{\Singleton{b}} \Eq \Im{\Inv{f}}{\Singleton{b}}$.
+    We have $\Im{\Inv{f}}{\Singleton{b}} \Eq \CClass{\Inv{f}(c)}{c \Elem \Singleton{b}}$.
+    Hence $\Im{\Inv{f}}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}$.
   \end{proof}
 
   \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
     Then $f$ is invertible iff $f$ is injective.
   \end{proposition}
   \begin{proof}[forthel]
     \begin{case}{$f$ is invertible.}
       Let $a, b \Elem A$.
       Assume $f(a) \Eq f(b)$.
-      Then $a \Eq \FUNinv{f}(f(a)) \Eq \FUNinv{f}(f(b)) \Eq b$.
+      Then $a \Eq \Inv{f}(f(a)) \Eq \Inv{f}(f(b)) \Eq b$.
     \end{case}
 
     \begin{case}{$f$ is injective.}
@@ -309,15 +309,15 @@
   \end{proof}
 
   \begin{corollary}[forthel]
-    Let $A, B$ be classes and $f \FUNfromonto{A}{B}$.
+    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
     Assume that $f$ is invertible.
-    Then $\FUNinv{f}$ is a bijection between $B$ and $A$.
+    Then $\Inv{f}$ is a bijection between $B$ and $A$.
   \end{corollary}
   \begin{proof}[forthel]
-    $\FUNinv{f}$ is a surjective map from $B$ onto $A$.
-    $\FUNinv{f}$ is invertible.
-    Hence $\FUNinv{f}$ is injective.
-    Therefore $\FUNinv{f}$ is a bijection between $B$ and $A$.
+    $\Inv{f}$ is a surjective map from $B$ onto $A$.
+    $\Inv{f}$ is invertible.
+    Hence $\Inv{f}$ is injective.
+    Therefore $\Inv{f}$ is a bijection between $B$ and $A$.
   \end{proof}
 \end{sfragment}
 
@@ -329,44 +329,44 @@
 
   \begin{proposition}[forthel]
     Let $A$ be a class.
-    $\FUNid{A}$ is an involution on $A$.
+    $\Id{A}$ is an involution on $A$.
   \end{proposition}
   \begin{proof}[forthel]
-    We have $\FUNid{A} \FUNcomp \FUNid{A} \Eq \FUNid{A}$.
-    Hence $\FUNid{A}$ is selfinverse.
+    We have $\Id{A} \Comp \Id{A} \Eq \Id{A}$.
+    Hence $\Id{A}$ is selfinverse.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $A$ be a class and $f, g$ be involutions on $A$.
-    Then $g \FUNcomp f$ is an involution on $A$ iff $g \FUNcomp f \Eq f \FUNcomp g$.
+    Then $g \Comp f$ is an involution on $A$ iff $g \Comp f \Eq f \Comp g$.
   \end{proposition}
   \begin{proof}[forthel]
-    \begin{case}{$g \FUNcomp f$ is an involution on $A$.}
-      Then $\FUNinv{g \FUNcomp f}
-        \Eq \FUNinv{f} \FUNcomp \FUNinv{g}
-        \Eq f \FUNcomp g$
+    \begin{case}{$g \Comp f$ is an involution on $A$.}
+      Then $\Inv{g \Comp f}
+        \Eq \Inv{f} \Comp \Inv{g}
+        \Eq f \Comp g$
       (by \sn{invertibility of composition of invertible maps}).
       Indeed $f$ and $g$ are invertible and surjective onto $A$.
     \end{case}
 
-    \begin{case}{$g \FUNcomp f \Eq f \FUNcomp g$.}
+    \begin{case}{$g \Comp f \Eq f \Comp g$.}
       [prover vampire]
-      $f \FUNcomp f$, $f \FUNcomp g$ and $f \FUNcomp g$ are maps on $A$.
+      $f \Comp f$, $f \Comp g$ and $f \Comp g$ are maps on $A$.
       Hence
-      \[  (g \FUNcomp f) \FUNcomp (g \FUNcomp f)       \]
-      \[    \Eq (g \FUNcomp f) \FUNcomp (f \FUNcomp g)   \]
-      \[    \Eq ((g \FUNcomp f) \FUNcomp f) \FUNcomp g   \]
-      \[    \Eq (g \FUNcomp (f \FUNcomp f)) \FUNcomp g   \]
-      \[    \Eq (g \FUNcomp \FUNid{A}) \FUNcomp g       \]
-      \[    \Eq g \FUNcomp g                       \]
-      \[    \Eq \FUNid{A}.                        \]
-      Thus $g \FUNcomp f$ is selfinverse.
+      \[  (g \Comp f) \Comp (g \Comp f)       \]
+      \[    \Eq (g \Comp f) \Comp (f \Comp g)   \]
+      \[    \Eq ((g \Comp f) \Comp f) \Comp g   \]
+      \[    \Eq (g \Comp (f \Comp f)) \Comp g   \]
+      \[    \Eq (g \Comp \Id{A}) \Comp g       \]
+      \[    \Eq g \Comp g                       \]
+      \[    \Eq \Id{A}.                        \]
+      Thus $g \Comp f$ is selfinverse.
     \end{case}
   \end{proof}
 
   \begin{corollary}[forthel]
     Let $A$ be a class and $f$ be an involutions on $A$.
-    Then $f \FUNcomp f$ is an involution on $A$.
+    Then $f \Comp f$ is an involution on $A$.
   \end{corollary}
 
   \begin{proposition}[forthel]

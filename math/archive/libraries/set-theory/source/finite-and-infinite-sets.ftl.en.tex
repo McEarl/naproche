@@ -9,7 +9,7 @@
 
 \begin{definition}[forthel,for=finite]
   Let $x$ be a set.
-  $x$ is \emph{finite} iff $\SETcard{x} \ORDless \ORDomega$.
+  $x$ is \emph{finite} iff $\Card{x} \Less \Infinity$.
 \end{definition}
 
 \begin{definition}[forthel,for=infinite]
@@ -19,19 +19,19 @@
 
 \begin{proposition}[forthel]
   Let $x$ be a set.
-  Then $x$ is finite iff $\SETcard{x} \Eq n$ for some $n \Elem \ORDomega$.
+  Then $x$ is finite iff $\Card{x} \Eq n$ for some $n \Elem \Infinity$.
 \end{proposition}
 
 \begin{proposition}[forthel]
   Let $x$ be a set.
-  Then $x$ is infinite iff $\SETcard{x} \ORDgeq \ORDomega$.
+  Then $x$ is infinite iff $\Card{x} \Geq \Infinity$.
 \end{proposition}
 \begin{proof}[forthel]
-  $\SETcard{x} \ORDgeq \ORDomega$ iff $\SETcard{x} \ORDnless \ORDomega$.
+  $\Card{x} \Geq \Infinity$ iff $\Card{x} \NotLess \Infinity$.
 \end{proof}
 
 \begin{proposition}[forthel]
-  $\ORDomega$ is infinite.
+  $\Infinity$ is infinite.
 \end{proposition}
 \end{smodule}
 \end{document}

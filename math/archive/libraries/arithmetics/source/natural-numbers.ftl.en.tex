@@ -4,18 +4,18 @@
 \begin{document}
 \begin{smodule}{natural-numbers.ftl}
 \importmodule[libraries/foundations]{classes.ftl}
-\symdef{Nat}{\mathbb N}
-\symdef{NATplus}[name=sum]{\,+\,}
-\symdef{NATzero}[name=zero]{0}
-\symdef{NATone}[name=one]{1}
-\symdef{NATtwo}[name=two]{2}
-\symdef{NATthree}[name=three]{3}
-\symdef{NATfour}[name=four]{4}
-\symdef{NATfive}[name=five]{5}
-\symdef{NATsix}[name=six]{6}
-\symdef{NATseven}[name=seven]{7}
-\symdef{NATeight}[name=eight]{8}
-\symdef{NATnine}[name=nine]{9}
+\symdef{Naturals}{\mathbb N}
+\symdef{Plus}[name=sum]{\,+\,}
+\symdef{Zero}[name=zero]{0}
+\symdef{One}[name=one]{1}
+\symdef{Two}[name=two]{2}
+\symdef{Three}[name=three]{3}
+\symdef{Four}[name=four]{4}
+\symdef{Five}[name=five]{5}
+\symdef{Six}[name=six]{6}
+\symdef{Seven}[name=seven]{7}
+\symdef{Eight}[name=eight]{8}
+\symdef{Nine}[name=nine]{9}
 \symdecl*{natural number}
 \symdecl*{nonzero}
 \symdecl*{direct successor}
@@ -25,66 +25,66 @@
     A \emph{natural number} is an object.
   \end{signature}
 
-  \begin{definition}[forthel,for=Nat]
-    $\emph{\Nat}$ is the class of natural numbers.
+  \begin{definition}[forthel,for=Naturals]
+    $\emph{\Naturals}$ is the class of natural numbers.
   \end{definition}
 
   \begin{signature}[forthel,for=sum]
     Let $n, m$ be natural numbers.
-    $\emph{n \NATplus m}$ is a natural number.
-    Let the \emph{sum of $n$ and $m$} stand for $n \NATplus m$.
+    $\emph{n \Plus m}$ is a natural number.
+    Let the \emph{sum of $n$ and $m$} stand for $n \Plus m$.
   \end{signature}
 
   \begin{signature}[forthel,for={zero,nonzero}]
-    $\emph{\NATzero}$ is a natural number.
-    Let \emph{zero} stand for $\NATzero$.
-    Let $n$ is \emph{nonzero} stand for $n \NotEq \NATzero$.
+    $\emph{\Zero}$ is a natural number.
+    Let \emph{zero} stand for $\Zero$.
+    Let $n$ is \emph{nonzero} stand for $n \NotEq \Zero$.
   \end{signature}
 
   \begin{signature}[forthel,for={one,direct successor}]
-    $\emph{\NATone}$ is a natural number.
-    Let \emph{one} stand for $\NATone$.
-    Let the \emph{direct successor of $n$} stand for $n \NATplus \NATone$.
+    $\emph{\One}$ is a natural number.
+    Let \emph{one} stand for $\One$.
+    Let the \emph{direct successor of $n$} stand for $n \Plus \One$.
   \end{signature}
 
   \begin{definition}[forthel,for=two]
-    $\emph{\NATtwo} \DefEq \NATone \NATplus \NATone$.
-    Let \emph{two} stand for $\NATtwo$.
+    $\emph{\Two} \DefEq \One \Plus \One$.
+    Let \emph{two} stand for $\Two$.
   \end{definition}
 
   \begin{definition}[forthel,for=three]
-    $\emph{\NATthree} \DefEq \NATtwo \NATplus \NATone$.
-    Let \emph{three} stand for $\NATthree$.
+    $\emph{\Three} \DefEq \Two \Plus \One$.
+    Let \emph{three} stand for $\Three$.
   \end{definition}
 
   \begin{definition}[forthel,for=four]
-    $\emph{\NATfour} \DefEq \NATthree \NATplus \NATone$.
-    Let \emph{four} stand for $\NATfour$.
+    $\emph{\Four} \DefEq \Three \Plus \One$.
+    Let \emph{four} stand for $\Four$.
   \end{definition}
 
   \begin{definition}[forthel,for=five]
-    $\emph{\NATfive} \DefEq \NATfour \NATplus \NATone$.
-    Let \emph{five} stand for $\NATfive$.
+    $\emph{\Five} \DefEq \Four \Plus \One$.
+    Let \emph{five} stand for $\Five$.
   \end{definition}
 
   \begin{definition}[forthel,for=six]
-    $\emph{\NATsix} \DefEq \NATfive \NATplus \NATone$.
-    Let \emph{six} stand for $\NATsix$.
+    $\emph{\Six} \DefEq \Five \Plus \One$.
+    Let \emph{six} stand for $\Six$.
   \end{definition}
 
   \begin{definition}[forthel,for=seven]
-    $\emph{\NATseven} \DefEq \NATsix \NATplus \NATone$.
-    Let \emph{seven} stand for $\NATseven$.
+    $\emph{\Seven} \DefEq \Six \Plus \One$.
+    Let \emph{seven} stand for $\Seven$.
   \end{definition}
 
   \begin{definition}[forthel,for=eight]
-    $\emph{\NATeight} \DefEq \NATseven \NATplus \NATone$.
-    Let \emph{eight} stand for $\NATeight$.
+    $\emph{\Eight} \DefEq \Seven \Plus \One$.
+    Let \emph{eight} stand for $\Eight$.
   \end{definition}
 
   \begin{definition}[forthel,for=nine]
-    $\emph{\NATnine} \DefEq \NATeight \NATplus \NATone$.
-    Let \emph{nine} stand for $\NATnine$.
+    $\emph{\Nine} \DefEq \Eight \Plus \One$.
+    Let \emph{nine} stand for $\Nine$.
   \end{definition}
 \end{sfragment}
 
@@ -94,69 +94,69 @@
 
   \begin{axiom}[forthel,name=injectivity of successor function]
     Let $n, m$ be natural numbers.
-    If $n \NATplus \NATone \Eq m \NATplus \NATone$ then $n \Eq m$.
+    If $n \Plus \One \Eq m \Plus \One$ then $n \Eq m$.
   \end{axiom}
 
   \begin{axiom}[forthel]
-    There exists no natural number $n$ such that $n \NATplus \NATone \Eq \NATzero$.
+    There exists no natural number $n$ such that $n \Plus \One \Eq \Zero$.
   \end{axiom}
 
   \symdecl*{induction I}
 
   \begin{axiom}[forthel,title=Induction,name=induction I]
     Let $\Phi$ be a class.
-    Assume $\NATzero \Elem \Phi$ and for all natural numbers $n$ if $n \Elem \Phi$ then
-    $n \NATplus \NATone \Elem \Phi$.
+    Assume $\Zero \Elem \Phi$ and for all natural numbers $n$ if $n \Elem \Phi$ then
+    $n \Plus \One \Elem \Phi$.
     Then $\Phi$ contains every natural number.
   \end{axiom}
 
   \begin{axiom}[forthel]
-    Then $\NATone \Eq \NATzero \NATplus \NATone$.
+    Then $\One \Eq \Zero \Plus \One$.
   \end{axiom}
 
   \begin{axiom}[forthel]
     Let $n$ be a natural number.
-    Then $n \NATplus \NATzero \Eq n$.
+    Then $n \Plus \Zero \Eq n$.
   \end{axiom}
 
   \begin{axiom}[forthel]
     Let $n, m$ be natural numbers.
-    Then $n \NATplus (m \NATplus \NATone) \Eq (n \NATplus m) \NATplus \NATone$.
+    Then $n \Plus (m \Plus \One) \Eq (n \Plus m) \Plus \One$.
   \end{axiom}
 \end{sfragment}
 
 \begin{sfragment}{Immediate Consequences of the Axioms}
   \begin{proposition}[forthel]
     Let $n$ be a natural number.
-    Then $n \Eq \NATzero$ or $n \Eq m \NATplus \NATone$ for some natural number $m$.
+    Then $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
   \end{proposition}
   \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{n'}{\Nat}{n' \Eq \NATzero\text{ or }n' \Eq m' \NATplus \NATone\text{ for some natural number }m'}$.
-    $\NATzero \Elem \Phi$ and for all $n' \Elem  \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+    Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \Eq \Zero\text{ or }n' \Eq m' \Plus \One\text{ for some natural number }m'}$.
+    $\Zero \Elem \Phi$ and for all $n' \Elem  \Phi$ we have $n' \Plus \One \Elem \Phi$.
     Hence every natural number is contained in $\Phi$.
-    Thus $n \Eq \NATzero$ or $n \Eq m \NATplus \NATone$ for some natural number $m$.
+    Thus $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
   \end{proof}
 
   \begin{proposition}[forthel]
     Let $n$ be a natural number.
-    Then $n \NotEq n \NATplus \NATone$.
+    Then $n \NotEq n \Plus \One$.
   \end{proposition}
   \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{n'}{\Nat}{n' \NotEq n' \NATplus \NATone}$.
+    Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \NotEq n' \Plus \One}$.
 
-    (1) $\NATzero$ belongs to $\Phi$.
+    (1) $\Zero$ belongs to $\Phi$.
 
-    (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+    (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $n' \Elem \Phi$.
-      Then $n' \NotEq n' \NATplus \NATone$.
-      If $n' \NATplus \NATone \Eq (n' \NATplus \NATone) \NATplus \NATone$ then $n' \Eq n' \NATplus \NATone$.
-      Thus it is wrong that $n' \NATplus \NATone \Eq (n' \NATplus \NATone) \NATplus \NATone$.
-      Hence $n' \NATplus \NATone \Elem \Phi$.
+      Then $n' \NotEq n' \Plus \One$.
+      If $n' \Plus \One \Eq (n' \Plus \One) \Plus \One$ then $n' \Eq n' \Plus \One$.
+      Thus it is wrong that $n' \Plus \One \Eq (n' \Plus \One) \Plus \One$.
+      Hence $n' \Plus \One \Elem \Phi$.
     \end{proof}
 
     Therefore every natural number is an element of $\Phi$.
-    Consequently $n \NotEq n \NATplus \NATone$.
+    Consequently $n \NotEq n \Plus \One$.
   \end{proof}
 \end{sfragment}
 
@@ -164,100 +164,100 @@
   \begin{sfragment}{Associativity}
     \begin{proposition}[forthel]
       Let $n, m, k$ be natural numbers.
-      Then $n \NATplus (m \NATplus k) \Eq (n \NATplus m) \NATplus k$.
+      Then $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
     \end{proposition}
     \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{k'}{\Nat}{n \NATplus (m \NATplus k') \Eq (n \NATplus m) \NATplus k'}$.
+      Define $\Phi \DefEq \SClass{k'}{\Naturals}{n \Plus (m \Plus k') \Eq (n \Plus m) \Plus k'}$.
 
-      (1) $\NATzero$ is contained in $\Phi$.
-      Indeed $n \NATplus (m \NATplus \NATzero) \Eq n \NATplus m \Eq (n \NATplus m) \NATplus \NATzero$.
+      (1) $\Zero$ is contained in $\Phi$.
+      Indeed $n \Plus (m \Plus \Zero) \Eq n \Plus m \Eq (n \Plus m) \Plus \Zero$.
 
-      (2) For all $k' \Elem \Phi$ we have $k' \NATplus \NATone \Elem \Phi$.
+      (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
       \begin{proof}
         Let $k' \Elem \Phi$.
-        Then $n \NATplus (m \NATplus k') \Eq (n \NATplus m) \NATplus k'$.
+        Then $n \Plus (m \Plus k') \Eq (n \Plus m) \Plus k'$.
         Hence
-        \[  n \NATplus (m \NATplus (k' \NATplus \NATone))        \]
-        \[    \Eq n \NATplus ((m \NATplus k') \NATplus \NATone)    \]
-        \[    \Eq (n \NATplus (m \NATplus k')) \NATplus \NATone    \]
-        \[    \Eq ((n \NATplus m) \NATplus k') \NATplus \NATone    \]
-        \[    \Eq (n \NATplus m) \NATplus (k' \NATplus \NATone).   \]
-        Thus $k' \NATplus \NATone \Elem \Phi$.
+        \[  n \Plus (m \Plus (k' \Plus \One))        \]
+        \[    \Eq n \Plus ((m \Plus k') \Plus \One)    \]
+        \[    \Eq (n \Plus (m \Plus k')) \Plus \One    \]
+        \[    \Eq ((n \Plus m) \Plus k') \Plus \One    \]
+        \[    \Eq (n \Plus m) \Plus (k' \Plus \One).   \]
+        Thus $k' \Plus \One \Elem \Phi$.
       \end{proof}
 
       Thus every natural number is an element of $\Phi$.
-      Therefore $n \NATplus (m \NATplus k) \Eq (n \NATplus m) \NATplus k$.
+      Therefore $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
     \end{proof}
   \end{sfragment}
 
   \begin{sfragment}{Commutativity}
     \begin{proposition}[forthel]
       Let $n, m$ be natural numbers.
-      Then $n \NATplus m \Eq m \NATplus n$.
+      Then $n \Plus m \Eq m \Plus n$.
     \end{proposition}
     \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{m'}{\Nat}{n \NATplus m' \Eq m' \NATplus n}$.
+      Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Plus m' \Eq m' \Plus n}$.
 
-      (1) $\NATzero$ is an element of $\Phi$.
+      (1) $\Zero$ is an element of $\Phi$.
       \begin{proof}
-        Define $\Psi \DefEq \SClass{n'}{\Nat}{n' \NATplus \NATzero \Eq \NATzero \NATplus n'}$.
+        Define $\Psi \DefEq \SClass{n'}{\Naturals}{n' \Plus \Zero \Eq \Zero \Plus n'}$.
 
-        (1a) $\NATzero$ belongs to $\Psi$.
+        (1a) $\Zero$ belongs to $\Psi$.
 
-        (1b) For all $n' \Elem \Psi$ we have $n' \NATplus \NATone \Elem \Psi$.
+        (1b) For all $n' \Elem \Psi$ we have $n' \Plus \One \Elem \Psi$.
         \begin{proof}
           Let $n' \Elem \Psi$.
-          Then $n' \NATplus \NATzero \Eq \NATzero \NATplus n'$.
+          Then $n' \Plus \Zero \Eq \Zero \Plus n'$.
           Hence
-          \[  (n' \NATplus \NATone) \NATplus \NATzero        \]
-          \[    \Eq n' \NATplus \NATone          \]
-          \[    \Eq (n' \NATplus \NATzero) \NATplus \NATone    \]
-          \[    \Eq (\NATzero \NATplus n') \NATplus \NATone    \]
-          \[    \Eq \NATzero \NATplus (n' \NATplus \NATone).   \]
+          \[  (n' \Plus \One) \Plus \Zero        \]
+          \[    \Eq n' \Plus \One          \]
+          \[    \Eq (n' \Plus \Zero) \Plus \One    \]
+          \[    \Eq (\Zero \Plus n') \Plus \One    \]
+          \[    \Eq \Zero \Plus (n' \Plus \One).   \]
         \end{proof}
 
         Hence every natural number belongs to $\Psi$.
-        Thus $n \NATplus \NATzero \Eq \NATzero \NATplus n$.
-        Therefore $\NATzero$ is an element of $\Phi$.
+        Thus $n \Plus \Zero \Eq \Zero \Plus n$.
+        Therefore $\Zero$ is an element of $\Phi$.
       \end{proof}
 
-      Let us show that (2) $n \NATplus \NATone \Eq \NATone \NATplus n$.
+      Let us show that (2) $n \Plus \One \Eq \One \Plus n$.
       \begin{proof}
-        Define $\Theta \DefEq \SClass{n'}{\Nat}{n' \NATplus \NATone \Eq \NATone \NATplus n'}$.
+        Define $\Theta \DefEq \SClass{n'}{\Naturals}{n' \Plus \One \Eq \One \Plus n'}$.
 
-        (2a) $\NATzero$ is an element of $\Theta$.
+        (2a) $\Zero$ is an element of $\Theta$.
 
-        (2b) For all $n' \Elem \Theta$ we have $n' \NATplus \NATone \Elem \Theta$.
+        (2b) For all $n' \Elem \Theta$ we have $n' \Plus \One \Elem \Theta$.
         \begin{proof}
           Let $n' \Elem \Theta$.
-          Then $n' \NATplus \NATone \Eq \NATone \NATplus n'$.
+          Then $n' \Plus \One \Eq \One \Plus n'$.
           Hence
-          \[  (n' \NATplus \NATone) \NATplus \NATone        \]
-          \[    \Eq (\NATone \NATplus n') \NATplus \NATone    \]
-          \[    \Eq \NATone \NATplus (n' \NATplus \NATone).   \]
-          Thus $n' \NATplus \NATone \Elem \Theta$.
+          \[  (n' \Plus \One) \Plus \One        \]
+          \[    \Eq (\One \Plus n') \Plus \One    \]
+          \[    \Eq \One \Plus (n' \Plus \One).   \]
+          Thus $n' \Plus \One \Elem \Theta$.
         \end{proof}
 
         Thus every natural number belongs to $\Theta$.
-        Therefore $n \NATplus \NATone \Eq \NATone \NATplus n$.
+        Therefore $n \Plus \One \Eq \One \Plus n$.
       \end{proof}
 
-      (3) For all $m' \Elem \Phi$ we have $m' \NATplus \NATone \Elem \Phi$.
+      (3) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
       \begin{proof}
         Let $m' \Elem \Phi$.
-        Then $n \NATplus m' \Eq m' \NATplus n$.
+        Then $n \Plus m' \Eq m' \Plus n$.
         Hence
-        \[  n \NATplus (m'  \NATplus \NATone)       \]
-        \[    \Eq (n \NATplus m') \NATplus \NATone    \]
-        \[    \Eq (m' \NATplus n) \NATplus \NATone    \]
-        \[    \Eq m' \NATplus (n \NATplus \NATone)    \]
-        \[    \Eq m' \NATplus (\NATone \NATplus n)    \]
-        \[    \Eq (m' \NATplus \NATone) \NATplus n.   \]
-        Thus $m' \NATplus \NATone \Elem \Phi$.
+        \[  n \Plus (m'  \Plus \One)       \]
+        \[    \Eq (n \Plus m') \Plus \One    \]
+        \[    \Eq (m' \Plus n) \Plus \One    \]
+        \[    \Eq m' \Plus (n \Plus \One)    \]
+        \[    \Eq m' \Plus (\One \Plus n)    \]
+        \[    \Eq (m' \Plus \One) \Plus n.   \]
+        Thus $m' \Plus \One \Elem \Phi$.
       \end{proof}
 
       Thus every natural number is an element of $\Phi$.
-      Therefore $n \NATplus m \Eq m \NATplus n$.
+      Therefore $n \Plus m \Eq m \Plus n$.
     \end{proof}
   \end{sfragment}
 
@@ -267,36 +267,36 @@
 
     \begin{proposition}[forthel,name=right-cancellability of addition]
       Let $n, m, k$ be natural numbers.
-      If $n \NATplus k \Eq m \NATplus k$ then $n \Eq m$.
+      If $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
     \end{proposition}
     \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{k'}{\Nat}{\text{ if }n \NATplus k' \Eq m \NATplus k'\text{ then }n \Eq m}$.
+      Define $\Phi \DefEq \SClass{k'}{\Naturals}{\text{ if }n \Plus k' \Eq m \Plus k'\text{ then }n \Eq m}$.
 
-      (1) $\NATzero$ is an element of $\Phi$.
+      (1) $\Zero$ is an element of $\Phi$.
 
-      (2) For all $k' \Elem \Phi$ we have $k' \NATplus \NATone \Elem \Phi$.
+      (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
       \begin{proof}
         Let $k' \Elem \Phi$.
-        Suppose $n \NATplus (k' \NATplus \NATone) \Eq m \NATplus (k' \NATplus \NATone)$.
-        Then $(n \NATplus k') \NATplus \NATone \Eq (m \NATplus k') \NATplus \NATone$.
-        Hence $n \NATplus k' \Eq m \NATplus k'$.
+        Suppose $n \Plus (k' \Plus \One) \Eq m \Plus (k' \Plus \One)$.
+        Then $(n \Plus k') \Plus \One \Eq (m \Plus k') \Plus \One$.
+        Hence $n \Plus k' \Eq m \Plus k'$.
         Thus $n \Eq m$.
       \end{proof}
 
       Therefore every natural number is an element of $\Phi$.
-      Consequently if $n \NATplus k \Eq m \NATplus k$ then $n \Eq m$.
+      Consequently if $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
     \end{proof}
 
     \symdecl*{left-cancellability of addition}
 
     \begin{corollary}[forthel,name=left-cancellability of addition]
       Let $n, m, k$ be natural numbers.
-      If $k \NATplus n \Eq k \NATplus m$ then $n \Eq m$.
+      If $k \Plus n \Eq k \Plus m$ then $n \Eq m$.
     \end{corollary}
     \begin{proof}[forthel]
-      Assume $k \NATplus n \Eq k \NATplus m$.
-      We have $k \NATplus n \Eq n \NATplus k$ and $k \NATplus m \Eq m \NATplus k$.
-      Hence $n \NATplus k \Eq m \NATplus k$.
+      Assume $k \Plus n \Eq k \Plus m$.
+      We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
+      Hence $n \Plus k \Eq m \Plus k$.
       Thus $n \Eq m$.
     \end{proof}
   \end{sfragment}
@@ -304,17 +304,17 @@
   \begin{sfragment}{Zero Sums}
     \begin{proposition}[forthel]
       Let $n, m$ be natural numbers.
-      If $n \NATplus m \Eq \NATzero$ then $n \Eq \NATzero$ and $m \Eq \NATzero$.
+      If $n \Plus m \Eq \Zero$ then $n \Eq \Zero$ and $m \Eq \Zero$.
     \end{proposition}
     \begin{proof}[forthel]
-      Assume $n \NATplus m \Eq \NATzero$.
-      Suppose $n \NotEq \NATzero$ or $m \NotEq \NATzero$.
-      Then we can take a $k \Elem \Nat$ such that $n \Eq k \NATplus \NATone$ or $m \Eq k \NATplus \NATone$.
+      Assume $n \Plus m \Eq \Zero$.
+      Suppose $n \NotEq \Zero$ or $m \NotEq \Zero$.
+      Then we can take a $k \Elem \Naturals$ such that $n \Eq k \Plus \One$ or $m \Eq k \Plus \One$.
       Hence there exists a natural number $l$ such that
-      $n \NATplus m
-        \Eq l \NATplus (k \NATplus \NATone)
-        \Eq (l \NATplus k) \NATplus \NATone
-        \NotEq \NATzero$.
+      $n \Plus m
+        \Eq l \Plus (k \Plus \One)
+        \Eq (l \Plus k) \Plus \One
+        \NotEq \Zero$.
       Contradiction.
     \end{proof}
   \end{sfragment}

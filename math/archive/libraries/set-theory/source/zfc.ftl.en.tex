@@ -16,173 +16,173 @@
 \importmodule[libraries/foundations]{invertible-maps.ftl}
 
 \begin{proposition}[forthel]
-  $\SETempty$ is a set.
+  $\EmptyClass$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
   Take a set $x$ (by \sn{Set Existence Axiom}).
   Define $A \DefEq \SClass{y}{x}{y \NotEq y}$.
   Then $A$ is a set (by \sn{Separation Axiom}).
-  We have $A \Eq \SETempty$.
-  Hence $\SETempty$ is a set.
+  We have $A \Eq \EmptyClass$.
+  Hence $\EmptyClass$ is a set.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $x, y$ be sets.
-  Then $x \SETunion y$ is a set.
+  Then $x \Union y$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
-  Take $X \Eq \SETpair{x}{y}$.
+  Take $X \Eq \Pair{x}{y}$.
   Then $X$ is a set.
-  Hence $\SETunionover X$ is a set (by \sn{Union Axiom}).
+  Hence $\UnionOver X$ is a set (by \sn{Union Axiom}).
   Indeed $X$ is a system of sets.
-  We have $x \SETunion y \Eq \SETunionover X$.
-  Thus $x \SETunion y$ is a set.
+  We have $x \Union y \Eq \UnionOver X$.
+  Thus $x \Union y$ is a set.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $x, y$ be sets.
-  Then $x \SETintersect y$ is a set.
+  Then $x \Intersect y$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
-  We have $x \SETintersect y \SETinclude x$.
-  Hence $x \SETintersect y$ is a set (by \sn{Separation Axiom}).
+  We have $x \Intersect y \Subclass x$.
+  Hence $x \Intersect y$ is a set (by \sn{Separation Axiom}).
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $x, y$ be sets.
-  Then $x \SETdiff y$ is a set.
+  Then $x \Diff y$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
-  We have $x \SETdiff y \SETinclude x$.
-  Hence $x \SETdiff y$ is a set (by \sn{Separation Axiom}).
+  We have $x \Diff y \Subclass x$.
+  Hence $x \Diff y$ is a set (by \sn{Separation Axiom}).
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $x, y$ be sets.
-  Then $x \SETprod y$ is a set.
+  Then $x \Prod y$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
-  $\SETsingleton{a}$ and $\SETpair{a}{b}$ are sets for each $a \Elem x$ and each $b \Elem y$.
-  Define $P \DefEq \CClass{\SETpair{\SETsingleton{a}}{\SETpair{a}{b}}}{a \Elem x\text{ and }b \Elem y}$.
+  $\Singleton{a}$ and $\Pair{a}{b}$ are sets for each $a \Elem x$ and each $b \Elem y$.
+  Define $P \DefEq \CClass{\Pair{\Singleton{a}}{\Pair{a}{b}}}{a \Elem x\text{ and }b \Elem y}$.
 
   (1) $P$ is a set.
   \begin{proof}
-    Let us show that $P \SETinclude \SETpow(\SETpow(x \SETunion y))$.
+    Let us show that $P \Subclass \Pow(\Pow(x \Union y))$.
       Let $p \Elem P$.
-      Consider $a \Elem x$ and $b \Elem y$ such that $p \Eq \SETpair{\SETsingleton{a}}{\SETpair{a}{b}}$.
-      Then $a, b \Elem x \SETunion y$.
-      Hence $\SETsingleton{a}, \SETpair{a}{b} \Elem \SETpow(x \SETunion y)$.
-      Thus $\SETpair{\SETsingleton{a}}{\SETpair{a}{b}} \Elem \SETpow(\SETpow(x \SETunion y))$.
+      Consider $a \Elem x$ and $b \Elem y$ such that $p \Eq \Pair{\Singleton{a}}{\Pair{a}{b}}$.
+      Then $a, b \Elem x \Union y$.
+      Hence $\Singleton{a}, \Pair{a}{b} \Elem \Pow(x \Union y)$.
+      Thus $\Pair{\Singleton{a}}{\Pair{a}{b}} \Elem \Pow(\Pow(x \Union y))$.
     End.
 
-    $x \SETunion y$ is a set.
-    Consequently $\SETpow(\SETpow(x \SETunion y))$ is a set (by \sn{Powerset Axiom}).
+    $x \Union y$ is a set.
+    Consequently $\Pow(\Pow(x \Union y))$ is a set (by \sn{Powerset Axiom}).
     Therefore $P$ is a set (by \sn{Separation Axiom}).
   \end{proof}
 
-  Define $l(p) \DefEq$ ``choose $a \Elem x$, choose $b \Elem y$ such that $p \Eq \SETpair{\SETsingleton{a}}{\SETpair{a}{b}}$ in $a$'' for $p \Elem P$.
-  Define $r(p) \DefEq$ ``choose $a \Elem x$, choose $b \Elem y$ such that $p \Eq \SETpair{\SETsingleton{a}}{\SETpair{a}{b}}$ in $b$'' for $p \Elem P$.
+  Define $l(p) \DefEq$ ``choose $a \Elem x$, choose $b \Elem y$ such that $p \Eq \Pair{\Singleton{a}}{\Pair{a}{b}}$ in $a$'' for $p \Elem P$.
+  Define $r(p) \DefEq$ ``choose $a \Elem x$, choose $b \Elem y$ such that $p \Eq \Pair{\Singleton{a}}{\Pair{a}{b}}$ in $b$'' for $p \Elem P$.
 
   Define $f(p) \DefEq (l(p), r(p))$ for $p \Elem P$.
 
   Let us show that for any objects $u, u', v, v'$ if
-  $\SETpair{\SETsingleton{u}}{\SETpair{u}{v}} \Eq \SETpair{\SETsingleton{u'}}{\SETpair{u'}{v'}}$ then $u \Eq u'$ and $v \Eq v'$.
+  $\Pair{\Singleton{u}}{\Pair{u}{v}} \Eq \Pair{\Singleton{u'}}{\Pair{u'}{v'}}$ then $u \Eq u'$ and $v \Eq v'$.
     Let $u, u', v, v'$ be objects.
-    Assume $\SETpair{\SETsingleton{u}}{\SETpair{u}{v}} \Eq \SETpair{\SETsingleton{u'}}{\SETpair{u'}{v'}}$.
-    Then ($\SETsingleton{u} \Eq \SETsingleton{u'}$ or $\SETsingleton{u} \Eq \SETpair{u'}{v'}$) and ($\SETpair{u}{v} \Eq \SETsingleton{u'}$ or $\SETpair{u}{v} \Eq \SETpair{u'}{v'}$).
-    Thus ($\SETsingleton{u} \Eq \SETsingleton{u'}$ and ($\SETpair{u}{v} \Eq \SETsingleton{u'}$ or $\SETpair{u}{v} \Eq \SETpair{u'}{v'}$)) or ($\SETsingleton{u} \Eq \SETpair{u'}{v'}$ and ($\SETpair{u}{v} \Eq \SETsingleton{u'}$ or $\SETpair{u}{v} \Eq \SETpair{u'}{v'}$)).
+    Assume $\Pair{\Singleton{u}}{\Pair{u}{v}} \Eq \Pair{\Singleton{u'}}{\Pair{u'}{v'}}$.
+    Then ($\Singleton{u} \Eq \Singleton{u'}$ or $\Singleton{u} \Eq \Pair{u'}{v'}$) and ($\Pair{u}{v} \Eq \Singleton{u'}$ or $\Pair{u}{v} \Eq \Pair{u'}{v'}$).
+    Thus ($\Singleton{u} \Eq \Singleton{u'}$ and ($\Pair{u}{v} \Eq \Singleton{u'}$ or $\Pair{u}{v} \Eq \Pair{u'}{v'}$)) or ($\Singleton{u} \Eq \Pair{u'}{v'}$ and ($\Pair{u}{v} \Eq \Singleton{u'}$ or $\Pair{u}{v} \Eq \Pair{u'}{v'}$)).
 
-    \begin{case}{$\SETsingleton{u} \Eq \SETsingleton{u'}$ and ($\SETpair{u}{v} \Eq \SETsingleton{u'}$ or $\SETpair{u}{v} \Eq \SETpair{u'}{v'}$).}
-      We have $\SETsingleton{u} \Eq \SETsingleton{u'}$.
+    \begin{case}{$\Singleton{u} \Eq \Singleton{u'}$ and ($\Pair{u}{v} \Eq \Singleton{u'}$ or $\Pair{u}{v} \Eq \Pair{u'}{v'}$).}
+      We have $\Singleton{u} \Eq \Singleton{u'}$.
       Hence $u \Eq u'$.
 
-      \begin{case}{$\SETpair{u}{v} \Eq \SETsingleton{u'}$.}
+      \begin{case}{$\Pair{u}{v} \Eq \Singleton{u'}$.}
         Then $u \Eq u'\Eq v$.
-        Hence $\SETpair{\SETsingleton{u}}{\SETpair{u}{u}} \Eq \SETpair{\SETsingleton{u}}{\SETpair{u}{v'}}$ (by 1).
-        Thus $\SETsingleton{\SETsingleton{u}} \Eq \SETpair{\SETsingleton{u}}{\SETpair{u}{v'}}$.
-        Therefore $\SETsingleton{u} \Eq \SETpair{u}{v'}$.
+        Hence $\Pair{\Singleton{u}}{\Pair{u}{u}} \Eq \Pair{\Singleton{u}}{\Pair{u}{v'}}$ (by 1).
+        Thus $\Singleton{\Singleton{u}} \Eq \Pair{\Singleton{u}}{\Pair{u}{v'}}$.
+        Therefore $\Singleton{u} \Eq \Pair{u}{v'}$.
         Consequently $v' \Eq u \Eq v$.
       \end{case}
 
-      \begin{case}{$\SETpair{u}{v} \Eq \SETpair{u'}{v'}$.}
-        Then $\SETpair{u}{v} \Eq \SETpair{u}{v'}$.
+      \begin{case}{$\Pair{u}{v} \Eq \Pair{u'}{v'}$.}
+        Then $\Pair{u}{v} \Eq \Pair{u}{v'}$.
         Hence $v \Eq v'$.
       \end{case}
     \end{case}
 
-    \begin{case}{$\SETsingleton{u} \Eq \SETpair{u'}{v'}$ and ($\SETpair{u}{v} \Eq \SETsingleton{u'}$ or $\SETpair{u}{v} \Eq \SETpair{u'}{v'}$).}
-      We have $\SETsingleton{u} \Eq \SETpair{u'}{v'}$.
+    \begin{case}{$\Singleton{u} \Eq \Pair{u'}{v'}$ and ($\Pair{u}{v} \Eq \Singleton{u'}$ or $\Pair{u}{v} \Eq \Pair{u'}{v'}$).}
+      We have $\Singleton{u} \Eq \Pair{u'}{v'}$.
       Hence $u \Eq u'$.
 
-      \begin{case}{$\SETpair{u}{v} \Eq \SETsingleton{u'}$.}
+      \begin{case}{$\Pair{u}{v} \Eq \Singleton{u'}$.}
         Then $u \Eq v \Eq u'$.
         Hence $v \Eq v'$.
       \end{case}
 
-      \begin{case}{$\SETpair{u}{v} \Eq \SETpair{u'}{v'}$.}
-        Then $\SETpair{u}{v} \Eq \SETpair{u}{v'}$.
+      \begin{case}{$\Pair{u}{v} \Eq \Pair{u'}{v'}$.}
+        Then $\Pair{u}{v} \Eq \Pair{u}{v'}$.
         Hence $v \Eq v'$.
       \end{case}
     \end{case}
   End.
 
-  $\SETpair{\SETsingleton{a}}{\SETpair{a}{b}} \Elem \Dom(f)$ for any $a \Elem x$ and any $b \Elem y$. % Needed for ontological checking
+  $\Pair{\Singleton{a}}{\Pair{a}{b}} \Elem \Dom(f)$ for any $a \Elem x$ and any $b \Elem y$. % Needed for ontological checking
   \begin{proof}
     Let $a \Elem x$ and $b \Elem y$.
-    Then $\SETpair{\SETsingleton{a}}{\SETpair{a}{b}} \Elem P$.
+    Then $\Pair{\Singleton{a}}{\Pair{a}{b}} \Elem P$.
   \end{proof}
 
-  Let us show that for any $a \Elem x$ and any $b \Elem y$ we have $f(\SETpair{\SETsingleton{a}}{\SETpair{a}{b}}) \Eq (a,b)$.
+  Let us show that for any $a \Elem x$ and any $b \Elem y$ we have $f(\Pair{\Singleton{a}}{\Pair{a}{b}}) \Eq (a,b)$.
     Let $a \Elem x$ and $b \Elem y$.
-    Take $p \Eq \SETpair{\SETsingleton{a}}{\SETpair{a}{b}}$.
+    Take $p \Eq \Pair{\Singleton{a}}{\Pair{a}{b}}$.
     Then $p$ is a set.
-    Then we can choose $a' \Elem x$ and $b' \Elem y$ such that $p \Eq \SETpair{\SETsingleton{a'}}{\SETpair{a'}{b'}}$ and $l(p) \Eq a'$.
+    Then we can choose $a' \Elem x$ and $b' \Elem y$ such that $p \Eq \Pair{\Singleton{a'}}{\Pair{a'}{b'}}$ and $l(p) \Eq a'$.
     Then $a \Eq a'$ and $b \Eq b'$.
     Hence $l(p) \Eq a$.
-    Choose $a'' \Elem x$ and $b'' \Elem y$ such that $p \Eq \SETpair{\SETsingleton{a''}}{\SETpair{a''}{b''}}$ and $r(p) \Eq b''$.
+    Choose $a'' \Elem x$ and $b'' \Elem y$ such that $p \Eq \Pair{\Singleton{a''}}{\Pair{a''}{b''}}$ and $r(p) \Eq b''$.
     Then $a \Eq a''$ and $b \Eq b''$.
     Thus $r(p) \Eq b$.
     Therefore $f(p) \Eq (a,b)$.
   End.
 
-  (2) $x \SETprod y \Eq \FUNim{f}{P}$.
+  (2) $x \Prod y \Eq \Im{f}{P}$.
   \begin{proof}
     For all $p \Elem P$ we have $l(p) \Elem x$ and $r(p) \Elem y$.
-    Hence $f(p) \Elem x \SETprod y$ for all $p \Elem P$.
-    Therefore $\FUNim{f}{P} \SETinclude x \SETprod y$.
+    Hence $f(p) \Elem x \Prod y$ for all $p \Elem P$.
+    Therefore $\Im{f}{P} \Subclass x \Prod y$.
 
-    Let us show that $x \SETprod y \SETinclude \FUNim{f}{P}$.
-      Let $z \Elem x \SETprod y$.
+    Let us show that $x \Prod y \Subclass \Im{f}{P}$.
+      Let $z \Elem x \Prod y$.
       Take $a \Elem x$ and $b \Elem y$ such that $z \Eq (a,b)$.
-      Then $(a,b) \Eq f(\SETpair{\SETsingleton{a}}{\SETpair{a}{b}})$.
+      Then $(a,b) \Eq f(\Pair{\Singleton{a}}{\Pair{a}{b}})$.
       Hence there exists a $p \Elem P$ such that $(a,b) \Eq f(p)$.
-      Thus $(a,b) \Elem \FUNim{f}{P}$.
+      Thus $(a,b) \Elem \Im{f}{P}$.
     End.
 
-    Consequently $x \SETprod y \Eq \FUNim{f}{P}$.
+    Consequently $x \Prod y \Eq \Im{f}{P}$.
   \end{proof}
 
-  Thus $x \SETprod y$ is the image of some set under some map.
-  Therefore $x \SETprod y$ is a set (by \sn{Replacement Axiom}).
+  Thus $x \Prod y$ is the image of some set under some map.
+  Therefore $x \Prod y$ is a set (by \sn{Replacement Axiom}).
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $X$ be a nonempty system of sets.
-  Then $\SETintersectover X$ is a set.
+  Then $\IntersectOver X$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
   Take an element $x$ of $X$.
-  Then $\SETintersectover X \SETinclude x$.
-  Hence $\SETintersectover X$ is a set (by \sn{Separation Axiom}).
+  Then $\IntersectOver X \Subclass x$.
+  Hence $\IntersectOver X$ is a set (by \sn{Separation Axiom}).
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $f$ be a map such that $\Dom(f)$ is a set.
-  Then $\FUNrange(f)$ is a set.
+  Then $\Range(f)$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
-  $\FUNrange(f) \Eq \FUNim{f}{\Dom(f)}$ and $\FUNim{f}{\Dom(f)}$ is a set.
-  Hence $\FUNrange(f)$ is a set (by \sn{Replacement Axiom}).
+  $\Range(f) \Eq \Im{f}{\Dom(f)}$ and $\Im{f}{\Dom(f)}$ is a set.
+  Hence $\Range(f)$ is a set (by \sn{Replacement Axiom}).
 \end{proof}
 
 \begin{proposition}[forthel]
@@ -192,9 +192,9 @@
 \end{proposition}
 \begin{proof}[forthel]
   Consider an injective map $f$ from $A$ to $x$.
-  Then $\FUNinv{f}$ is a bijection between $\FUNrange(f)$ and $A$.
-  $\FUNrange(f)$ is a set and $A$ is the image of $\FUNrange(f)$ under $\FUNinv{f}$.
-  Indeed $\FUNrange(f) \SETinclude x$.
+  Then $\Inv{f}$ is a bijection between $\Range(f)$ and $A$.
+  $\Range(f)$ is a set and $A$ is the image of $\Range(f)$ under $\Inv{f}$.
+  Indeed $\Range(f) \Subclass x$.
   Thus $A$ is a set (by \sn{Replacement Axiom}).
 \end{proof}
 
@@ -204,18 +204,18 @@
 \begin{proof}[forthel]
   Assume the contrary.
   Take sets $x,y$ such that $x \Elem y$ and $y \Elem x$.
-  Consider an element $z$ of $\SETpair{x}{y}$ such that $\SETpair{x}{y}$ and $z$ are disjoint (by \sn{Foundation Axiom}).
-  Indeed $\SETpair{x}{y}$ is a nonempty system of sets.
+  Consider an element $z$ of $\Pair{x}{y}$ such that $\Pair{x}{y}$ and $z$ are disjoint (by \sn{Foundation Axiom}).
+  Indeed $\Pair{x}{y}$ is a nonempty system of sets.
   Then we have $z \Eq x$ or $z \Eq y$.
 
   \begin{case}{$z \Eq x$.}
-    Then $x$ and $\SETpair{x}{y}$ are disjoint.
+    Then $x$ and $\Pair{x}{y}$ are disjoint.
     Hence $y \NotElem x$.
     Contradiction.
   \end{case}
 
   \begin{case}{$z \Eq y$.}
-    Then $y$ and $\SETpair{x}{y}$ are disjoint.
+    Then $y$ and $\Pair{x}{y}$ are disjoint.
     Hence $x \NotElem y$.
     Contradiction.
   \end{case}
@@ -234,27 +234,27 @@
 
 \begin{proposition}[forthel]
   Let $x, y$ be sets.
-  Then $\FUNfunspace{x}{y}$ is a set.
+  Then $\FunSpace{x}{y}$ is a set.
 \end{proposition}
 \begin{proof}[forthel]
-  Define $R \DefEq \SClass{F}{\SETpow(x \SETprod y)}{\text{ (for all }a \Elem x\text{ there exists a }b \Elem y\text{ such that }(a,b) \Elem F\text{) and for all }a \Elem x\text{ and all }b, b' \Elem y\text{ such that }(a,b), (a,b') \Elem F\text{ we have }b \Eq b'}$.
+  Define $R \DefEq \SClass{F}{\Pow(x \Prod y)}{\text{ (for all }a \Elem x\text{ there exists a }b \Elem y\text{ such that }(a,b) \Elem F\text{) and for all }a \Elem x\text{ and all }b, b' \Elem y\text{ such that }(a,b), (a,b') \Elem F\text{ we have }b \Eq b'}$.
 
   [prover vampire]
   Every element of $R$ is a set. % Needed for ontological checking
   Define $h(F) \DefEq \Map{a}{x}$ ``choose $b \Elem y$ such that $(a,b) \Elem F$ in $b$'' for $F \Elem R$.
   [prover eprover]
 
-  Let us show that $\FUNfunspace{x}{y} \SETinclude \FUNrange(h)$.
-    Let $f \Elem \FUNfunspace{x}{y}$.
+  Let us show that $\FunSpace{x}{y} \Subclass \Range(h)$.
+    Let $f \Elem \FunSpace{x}{y}$.
     Define $F \DefEq \CClass{(a,f(a))}{a \Elem x}$.
 
     Then $F \Elem R$.
     \begin{proof}
       Define $g(a) \DefEq (a,f(a))$ for $a \Elem x$.
-      Then $F \Eq \FUNrange(g)$.
+      Then $F \Eq \Range(g)$.
       Hence $F$ is a set.
-      Thus $F \Elem \SETpow(x \SETprod y)$.
-      Indeed $F \SETinclude x \SETprod y$.
+      Thus $F \Elem \Pow(x \Prod y)$.
+      Indeed $F \Subclass x \Prod y$.
 
       (1) For all $a \Elem x$ there exists a $b \Elem y$ such that $(a,b) \Elem F$.
 
@@ -275,10 +275,10 @@
 
     $\Dom(f) \Eq \Dom(h(F))$ and for each $a \Elem \Dom(f)$ we have $h(F)(a) \Eq f(a)$.
     Hence $f \Eq h(F)$.
-    Thus $f \Elem \FUNrange(h)$.
+    Thus $f \Elem \Range(h)$.
   End.
 
-  Therefore $\FUNfunspace{x}{y}$ is a set.
+  Therefore $\FunSpace{x}{y}$ is a set.
   Indeed $R$ is a set.
 \end{proof}
 \end{smodule}

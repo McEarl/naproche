@@ -7,54 +7,54 @@
 \importmodule[libraries/set-theory]{cardinals.ftl}
 
 \begin{theorem}[forthel]
-  Let $n \Elem \ORDomega$.
-  Then $\SETcard{n} \Eq n$.
+  Let $n \Elem \Infinity$.
+  Then $\Card{n} \Eq n$.
 \end{theorem}
 \begin{proof}[forthel]
-  Define $\Phi \DefEq \SClass{n'}{\ORDomega}{\SETcard{n'} \Eq n'}$.
+  Define $\Phi \DefEq \SClass{n'}{\Infinity}{\Card{n'} \Eq n'}$.
 
-  (1) $\ORDzero \Elem \Phi$.
-  Indeed $\SETcard{\ORDzero} \Eq \SETcard{\SETempty} \Eq \ORDzero$.
+  (1) $\Zero \Elem \Phi$.
+  Indeed $\Card{\Zero} \Eq \Card{\EmptyClass} \Eq \Zero$.
 
-  (2) For all $n' \Elem \Phi$ we have $\ORDsucc(n') \Elem \Phi$.
+  (2) For all $n' \Elem \Phi$ we have $\Succ(n') \Elem \Phi$.
   \begin{proof}
     Let $n' \Elem \Phi$.
-    Then $\SETcard{n'} \Eq n'$.
-    We have $\SETcard{\ORDsucc(n')} \ORDleq \ORDsucc(n')$.
+    Then $\Card{n'} \Eq n'$.
+    We have $\Card{\Succ(n')} \Leq \Succ(n')$.
 
-    Let us show that $\ORDsucc(n') \ORDleq \SETcard{\ORDsucc(n')}$.
+    Let us show that $\Succ(n') \Leq \Card{\Succ(n')}$.
       Assume the contrary.
-      Then $\SETcard{\ORDsucc(n')} \ORDless \ORDsucc(n')$.
-      Take a bijection $f$ between $\SETcard{\ORDsucc(n')}$ and $\ORDsucc(n')$.
-      $\SETcard{\ORDsucc(n')}$ is nonzero.
-      Hence we can take a $m \Elem \ORDomega$ such that $\SETcard{\ORDsucc(n')} \Eq \ORDsucc(m)$.
-      Indeed $\SETcard{\ORDsucc(n')} \Elem \ORDsucc(\ORDsucc(n')) \Elem \ORDomega$.
-      Then $\FUNinv{f}(n') \ORDleq m$.
+      Then $\Card{\Succ(n')} \Less \Succ(n')$.
+      Take a bijection $f$ between $\Card{\Succ(n')}$ and $\Succ(n')$.
+      $\Card{\Succ(n')}$ is nonzero.
+      Hence we can take a $m \Elem \Infinity$ such that $\Card{\Succ(n')} \Eq \Succ(m)$.
+      Indeed $\Card{\Succ(n')} \Elem \Succ(\Succ(n')) \Elem \Infinity$.
+      Then $\Inv{f}(n') \Leq m$.
 
-      We can show that $\FUNinv{f}(n') \ORDless m$.
+      We can show that $\Inv{f}(n') \Less m$.
         Assume the contrary.
-        Then $\FUNinv{f}(n') \Eq m$.
-        $f \FUNrest m$ is a bijection between $m$ and $\FUNim{f}{m}$ (by \sn{bijectivity of restriction of injection}).
-        Indeed $f$ is an injective map from $\SETcard{\ORDsucc(n')}$ to $\ORDsucc(n')$ and
-        $m \SETinclude \SETcard{\ORDsucc(n')}$.
-        We have $\FUNim{f}{m} \SETinclude n'$ and $n' \SETinclude \FUNim{f}{m}$.
-        Hence $\FUNim{f}{m} \Eq n'$.
-        Thus $f \FUNrest m$ is a bijection between $m$ and $n'$.
+        Then $\Inv{f}(n') \Eq m$.
+        $f \Rest m$ is a bijection between $m$ and $\Im{f}{m}$ (by \sn{bijectivity of restriction of injection}).
+        Indeed $f$ is an injective map from $\Card{\Succ(n')}$ to $\Succ(n')$ and
+        $m \Subclass \Card{\Succ(n')}$.
+        We have $\Im{f}{m} \Subclass n'$ and $n' \Subclass \Im{f}{m}$.
+        Hence $\Im{f}{m} \Eq n'$.
+        Thus $f \Rest m$ is a bijection between $m$ and $n'$.
         Therefore $n'
-          \Eq \SETcard{n'}
-          \ORDleq m
-          \ORDless \SETcard{\ORDsucc(n')}
-          \ORDless \ORDsucc(n')$.
+          \Eq \Card{n'}
+          \Leq m
+          \Less \Card{\Succ(n')}
+          \Less \Succ(n')$.
         Consequently $m \Eq n'$.
-        Then we have $\ORDsucc(n') \Eq \SETcard{\ORDsucc(n')} \ORDless \ORDsucc(n')$.
+        Then we have $\Succ(n') \Eq \Card{\Succ(n')} \Less \Succ(n')$.
         Contradiction.
       End.
 
       Define \[ g(i) \DefEq
         \begin{cases}
-          f(i)  & : i \NotEq \FUNinv{f}(n')
+          f(i)  & : i \NotEq \Inv{f}(n')
           \\
-          f(m)  & : i \Eq \FUNinv{f}(n')
+          f(m)  & : i \Eq \Inv{f}(n')
         \end{cases} \]
       for $i \Elem m$.
 
@@ -62,22 +62,22 @@
       Indeed we can show that $g(i) \Elem n'$ for each $i \Elem m$.
       \begin{proof}
         Let $i \Elem m$.
-        We have $g(i) \Elem \ORDsucc(n')$.
-        Indeed $f(i), f(m) \Elem \ORDsucc(n')$ and ($g(i) \Eq f(i)$ or $g(i) \Eq f(m)$).
+        We have $g(i) \Elem \Succ(n')$.
+        Indeed $f(i), f(m) \Elem \Succ(n')$ and ($g(i) \Eq f(i)$ or $g(i) \Eq f(m)$).
         Hence if $g(i) \NotEq n'$ then $g(i) \Elem n'$.
 
-        \begin{case}{$i \NotEq \FUNinv{f}(n')$.}
-          Then $g(i) \Eq f(i) \Elem \ORDsucc(n')$.
-          If $g(i) \Eq n'$ then $f(i) \Eq n' \Eq f(\FUNinv{f}(n'))$.
-          Hence if $g(i) \Eq n'$ then $i \Eq \FUNinv{f}(n')$.
+        \begin{case}{$i \NotEq \Inv{f}(n')$.}
+          Then $g(i) \Eq f(i) \Elem \Succ(n')$.
+          If $g(i) \Eq n'$ then $f(i) \Eq n' \Eq f(\Inv{f}(n'))$.
+          Hence if $g(i) \Eq n'$ then $i \Eq \Inv{f}(n')$.
           Thus $g(i) \NotEq n'$.
           Therefore $g(i) \Elem n'$.
         \end{case}
 
-        \begin{case}{$i \Eq \FUNinv{f}(n')$.}
+        \begin{case}{$i \Eq \Inv{f}(n')$.}
           Then $g(i)
             \Eq f(m)
-            \NotEq f(\FUNinv{f}(n'))
+            \NotEq f(\Inv{f}(n'))
             \Eq n'$.
           Hence $g(i) \Elem n'$.
         \end{case}
@@ -87,21 +87,21 @@
       Indeed we can show that for all $k \Elem n'$ there exists a $l \Elem m$ such that $k \Eq g(l)$.
       \begin{proof}
         Let $k \Elem n'$.
-        Then $\FUNinv{f}(k) \NotEq \FUNinv{f}(n')$.
+        Then $\Inv{f}(k) \NotEq \Inv{f}(n')$.
 
-        \begin{case}{$\FUNinv{f}(k) \Eq m$.}
+        \begin{case}{$\Inv{f}(k) \Eq m$.}
           Then $k
-            \Eq f(\FUNinv{f}(k))
+            \Eq f(\Inv{f}(k))
             \Eq f(m)
-            \Eq g(\FUNinv{f}(n'))$.
+            \Eq g(\Inv{f}(n'))$.
         \end{case}
 
-        \begin{case}{$\FUNinv{f}(k) \NotEq m$.}
-          Then $\FUNinv{f}(k) \Elem m$.
-          Indeed $\FUNinv{f}(k) \Elem \SETcard{\ORDsucc(n')} \Eq \ORDsucc(m) \Eq m \SETunion \SETsingleton{m}$.
+        \begin{case}{$\Inv{f}(k) \NotEq m$.}
+          Then $\Inv{f}(k) \Elem m$.
+          Indeed $\Inv{f}(k) \Elem \Card{\Succ(n')} \Eq \Succ(m) \Eq m \Union \Singleton{m}$.
           Hence $k
-            \Eq f(\FUNinv{f}(k))
-            \Eq g(\FUNinv{f}(k))$.
+            \Eq f(\Inv{f}(k))
+            \Eq g(\Inv{f}(k))$.
         \end{case}
       \end{proof}
 
@@ -111,29 +111,29 @@
         Let $i, j \Elem m$.
         Assume $i \NotEq j$.
 
-        \begin{case}{$i, j \NotEq \FUNinv{f}(n')$.}
+        \begin{case}{$i, j \NotEq \Inv{f}(n')$.}
           Then $g(i)
             \Eq f(i)
             \NotEq f(j)
             \Eq g(j)$.
         \end{case}
 
-        \begin{case}{$i \Eq \FUNinv{f}(n')$.}
-          Then $j \NotEq \FUNinv{f}(n')$.
+        \begin{case}{$i \Eq \Inv{f}(n')$.}
+          Then $j \NotEq \Inv{f}(n')$.
           Hence $g(i)
-            \Eq g(\FUNinv{f}(n'))
+            \Eq g(\Inv{f}(n'))
             \Eq f(m)
             \NotEq f(j)
             \Eq g(j)$.
           Indeed $m \NotEq j$.
         \end{case}
 
-        \begin{case}{$j \Eq \FUNinv{f}(n')$.}
-          Then $i \NotEq \FUNinv{f}(n')$.
+        \begin{case}{$j \Eq \Inv{f}(n')$.}
+          Then $i \NotEq \Inv{f}(n')$.
           Hence $g(i)
             \Eq f(i)
             \NotEq f(m)
-            \Eq g(\FUNinv{f}(n'))
+            \Eq g(\Inv{f}(n'))
             \Eq g(j)$.
           Indeed $i \NotEq m$.
         \end{case}
@@ -141,9 +141,9 @@
     End.
   \end{proof}
 
-  Thus $\ORDomega \SETinclude \Phi$ (by \sn{transfinite induction III}).
+  Thus $\Infinity \Subclass \Phi$ (by \sn{transfinite induction III}).
   Consequently $n \Elem \Phi$.
-  Therefore $\SETcard{n} \Eq n$.
+  Therefore $\Card{n} \Eq n$.
 \end{proof}
 
 \begin{corollary}[forthel]

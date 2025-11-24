@@ -1,44 +1,44 @@
-\documentclass[lang=en,debug=all]{stex}
+\documentclass{stex}
 \libusepackage{naproche}
 \libinput{preamble}
 \begin{document}
 \begin{smodule}{concatenation.ftl}
 \importmodule[libraries/lists]{lists.ftl}
-\symdef{LISTconcat}[op=+\mkern-10mu+]{\,\comp+\mkern-10mu\comp+\,}
+\symdef{Concat}[op=+\mkern-10mu+]{\,\comp+\mkern-10mu\comp+\,}
 
-\begin{signature}[forthel,for=LISTconcat]
+\begin{signature}[forthel,for=Concat]
   Let $L, L'$ be lists.
-  $\emph{L \LISTconcat L'}$ is a list.
+  $\emph{L \Concat L'}$ is a list.
 \end{signature}
 
-\begin{axiom}[forthel,for=LISTconcat]
+\begin{axiom}[forthel,for=Concat]
   Let $L$ be a list.
-  Then $\LISTlist{} \LISTconcat L \Eq L$.
+  Then $\List{} \Concat L \Eq L$.
 \end{axiom}
 
-\begin{axiom}[forthel,for=LISTconcat]
+\begin{axiom}[forthel,for=Concat]
   Let $a$ be an object and $L, L'$ be lists.
-  Then $(a \LISTcons L) \LISTconcat L' \Eq a \LISTcons (L \LISTconcat L')$.
+  Then $(a \Cons L) \Concat L' \Eq a \Cons (L \Concat L')$.
 \end{axiom}
 
 \begin{proposition}[forthel]
-  $L \LISTconcat \LISTlist{} \Eq L$ for every list $L$.
+  $L \Concat \List{} \Eq L$ for every list $L$.
 \end{proposition}
 \begin{proof}[forthel,method=induction on $L$]
   Let $L$ be a list.
 
-  \begin{case}{$L \Eq \LISTlist{}$.} \end{case}
+  \begin{case}{$L \Eq \List{}$.} \end{case}
   
-  \begin{case}{$L \Eq a \LISTcons L'$ for some object $a$ and some list $L'$.}
-    Consider an object $a$ and a list $L'$ such that $L \Eq a \LISTcons L'$.
+  \begin{case}{$L \Eq a \Cons L'$ for some object $a$ and some list $L'$.}
+    Consider an object $a$ and a list $L'$ such that $L \Eq a \Cons L'$.
     Then $L' \ILess L$.
-    Hence $L' \LISTconcat \LISTlist{} \Eq L'$.
+    Hence $L' \Concat \List{} \Eq L'$.
     Thus
     \begin{align*}
-      L \LISTconcat \LISTlist{}
-        &\Eq (a \LISTcons L') \LISTconcat \LISTlist{}\\
-        &\Eq a \LISTcons (L' \LISTconcat \LISTlist{})\\
-        &\Eq a \LISTcons L'\\
+      L \Concat \List{}
+        &\Eq (a \Cons L') \Concat \List{}\\
+        &\Eq a \Cons (L' \Concat \List{})\\
+        &\Eq a \Cons L'\\
         &\Eq L
     \end{align*}.
   \end{case}
@@ -47,27 +47,27 @@
 \symdecl*{associativity of concatenation}
 
 \begin{proposition}[forthel,name=associativity of concatenation]
-  $L \LISTconcat (L' \LISTconcat L'') \Eq (L \LISTconcat L') \LISTconcat L''$ for any lists $L, L', L''$.
+  $L \Concat (L' \Concat L'') \Eq (L \Concat L') \Concat L''$ for any lists $L, L', L''$.
 \end{proposition}
 \begin{proof}[forthel,method=induction on $L$]
   Let $L$ be a list.
 
-  \begin{case}{$L \Eq \LISTlist{}$.} \end{case}
+  \begin{case}{$L \Eq \List{}$.} \end{case}
 
-  \begin{case}{$L \Eq a \LISTcons L'''$ for some object $a$ and some list $L'''$.}
-    Consider an object $a$ and a list $L'''$ such that $L \Eq a \LISTcons L'''$.
+  \begin{case}{$L \Eq a \Cons L'''$ for some object $a$ and some list $L'''$.}
+    Consider an object $a$ and a list $L'''$ such that $L \Eq a \Cons L'''$.
     Then $L''' \ILess L$.
     Let $L',L''$ be lists.
-    Then $L''' \LISTconcat (L' \LISTconcat L'') \Eq (L''' \LISTconcat L') \LISTconcat L''$.
+    Then $L''' \Concat (L' \Concat L'') \Eq (L''' \Concat L') \Concat L''$.
     Thus
     \begin{align*}
-      L \LISTconcat (L' \LISTconcat L'') 
-        &\Eq (a \LISTcons L''') \LISTconcat (L' \LISTconcat L'')\\
-        &\Eq a \LISTcons (L''' \LISTconcat (L' \LISTconcat L''))\\
-        &\Eq a \LISTcons ((L''' \LISTconcat L') \LISTconcat L'')\\
-        &\Eq (a \LISTcons (L''' \LISTconcat L')) \LISTconcat L''\\
-        &\Eq ((a \LISTcons L''') \LISTconcat L') \LISTconcat L''\\
-        &\Eq (L \LISTconcat L') \LISTconcat L''
+      L \Concat (L' \Concat L'') 
+        &\Eq (a \Cons L''') \Concat (L' \Concat L'')\\
+        &\Eq a \Cons (L''' \Concat (L' \Concat L''))\\
+        &\Eq a \Cons ((L''' \Concat L') \Concat L'')\\
+        &\Eq (a \Cons (L''' \Concat L')) \Concat L''\\
+        &\Eq ((a \Cons L''') \Concat L') \Concat L''\\
+        &\Eq (L \Concat L') \Concat L''
     \end{align*}.
   \end{case}
 \end{proof}

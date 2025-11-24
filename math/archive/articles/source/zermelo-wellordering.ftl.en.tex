@@ -3,7 +3,7 @@
 \libusepackage{copyright}
 \libinput{preamble}
 
-\newcommand\Ord{\textbf{Ord}}
+\newcommand\Ordinals{\textbf{Ord}}
 
 \title{Zermelo's Well-ordering Theorem in \Naproche}
 \author{Marcel Schütz}
@@ -26,98 +26,98 @@ set is equinumerous to some ordinal number, where an ordinal number is
 regarded as a transitive set whose elements are transitive sets as well.
 The proof of this theorem presented here is oriented on \cite{Koepke2018}.
 
-In the following, for any class $A$, we write $\ORDfunspace{A}$ to
-denote the collection of all maps $f \FUNfromto{\alpha}{A}$ for some ordinal
+In the following, for any class $A$, we write $\OrdFunSpace{A}$ to
+denote the collection of all maps $f \FromTo{\alpha}{A}$ for some ordinal
 $\alpha$.
-Moreover, for any map $G \FUNfromto{\ORDfunspace{A}}{A}$ we say that a map
-$F \FUNfromto{\Ord}{A}$, where $\Ord$ denotes the class of all ordinals, is
-recursive regarding $G$ if $F(\alpha) \Eq G(F \FUNrest \alpha)$ for all
-$\alpha \Elem \Ord$.
+Moreover, for any map $G \FromTo{\OrdFunSpace{A}}{A}$ we say that a map
+$F \FromTo{\Ordinals}{A}$, where $\Ordinals$ denotes the class of all ordinals, is
+recursive regarding $G$ if $F(\alpha) \Eq G(F \Rest \alpha)$ for all
+$\alpha \Elem \Ordinals$.
 
 \begin{theorem}[forthel,title=Zermelo's Well-Ordering Theorem,name=Zermelo]
   Every set is equinumerous to some ordinal.
 \end{theorem}
 \begin{proof}[forthel]
   Let $x$ be a set.
-  Consider a choice map $g$ for $\SETpow(x) \SETdiff \SETsingleton{\SETempty}$.
-  Take $A \Eq x \SETunion \SETsingleton{x}$.
-  Every $F \Elem \ORDfunspace{A}$ is a map from some ordinal to $A$.
-  For any $F \Elem \ORDfunspace{A}$ if $x \SETdiff \FUNrange(F) \NotEq \SETempty$ then $x \SETdiff \FUNrange(F) \Elem \Dom(g)$.
-  Indeed\linebreak $x \SETdiff \FUNrange(F)$ is a subset of $x$ for any $F \Elem \ORDfunspace{A}$.
+  Consider a choice map $g$ for $\Pow(x) \Diff \Singleton{\EmptyClass}$.
+  Take $A \Eq x \Union \Singleton{x}$.
+  Every $F \Elem \OrdFunSpace{A}$ is a map from some ordinal to $A$.
+  For any $F \Elem \OrdFunSpace{A}$ if $x \Diff \Range(F) \NotEq \EmptyClass$ then $x \Diff \Range(F) \Elem \Dom(g)$.
+  Indeed\linebreak $x \Diff \Range(F)$ is a subset of $x$ for any $F \Elem \OrdFunSpace{A}$.
   Define \[ G(F) \DefEq
     \begin{cases}
-      g(x \SETdiff \FUNrange(F))
-      & : x \SETdiff \FUNrange(F) \NotEq \SETempty
+      g(x \Diff \Range(F))
+      & : x \Diff \Range(F) \NotEq \EmptyClass
       \\
       x
-      & : x \SETdiff \FUNrange(F) \Eq \SETempty
+      & : x \Diff \Range(F) \Eq \EmptyClass
     \end{cases} \]
-  for $F \Elem \ORDfunspace{A}$.
-  We can show that for any $F \Elem \ORDfunspace{A}$ if $x \SETdiff \FUNrange(F) \NotEq \SETempty$ then $G(F) \Elem x \SETdiff \FUNrange(F)$.
-    Let $F \Elem \ORDfunspace{A}$.
-    Assume $x \SETdiff \FUNrange(F) \NotEq \SETempty$.  
-    Then $G(F) \Elem x \SETdiff \FUNrange(F)$.
+  for $F \Elem \OrdFunSpace{A}$.
+  We can show that for any $F \Elem \OrdFunSpace{A}$ if $x \Diff \Range(F) \NotEq \EmptyClass$ then $G(F) \Elem x \Diff \Range(F)$.
+    Let $F \Elem \OrdFunSpace{A}$.
+    Assume $x \Diff \Range(F) \NotEq \EmptyClass$.  
+    Then $G(F) \Elem x \Diff \Range(F)$.
   End.
-  $G$ is a map from $\ORDfunspace{A}$ to $A$.
-  Indeed we can show that for any $F \Elem \ORDfunspace{A}$ we have $G(F) \Elem A$.
-    Let $F \Elem \ORDfunspace{A}$.
-    If $x \SETdiff \FUNrange(F) \NotEq \SETempty$ then\linebreak $G(F) \Elem x \SETdiff \FUNrange(F)$.
-    If $x \SETdiff \FUNrange(F) \Eq \SETempty$ then $G(F) \Eq x$.
+  $G$ is a map from $\OrdFunSpace{A}$ to $A$.
+  Indeed we can show that for any $F \Elem \OrdFunSpace{A}$ we have $G(F) \Elem A$.
+    Let $F \Elem \OrdFunSpace{A}$.
+    If $x \Diff \Range(F) \NotEq \EmptyClass$ then\linebreak $G(F) \Elem x \Diff \Range(F)$.
+    If $x \Diff \Range(F) \Eq \EmptyClass$ then $G(F) \Eq x$.
     Hence $G(F) \Elem A$.
   End.
-  Hence we can take a map $F$ from $\Ord$ to $A$ that is recursive regarding $G$.
-  For any ordinal $\alpha$ we have $F \FUNrest \alpha \Elem \ORDfunspace{A}$.
+  Hence we can take a map $F$ from $\Ordinals$ to $A$ that is recursive regarding $G$.
+  For any ordinal $\alpha$ we have $F \Rest \alpha \Elem \OrdFunSpace{A}$.
 
-  For any $\alpha \Elem \Ord$ we have
-  \[ x \SETdiff \FUNim{F}{\alpha} \NotEq \SETempty \Implies F(\alpha) \Elem x \SETdiff \FUNim{F}{\alpha} \]
+  For any $\alpha \Elem \Ordinals$ we have
+  \[ x \Diff \Im{F}{\alpha} \NotEq \EmptyClass \Implies F(\alpha) \Elem x \Diff \Im{F}{\alpha} \]
   and
-  \[ x \SETdiff \FUNim{F}{\alpha} \Eq \SETempty \Implies F(\alpha) \Eq x. \]
+  \[ x \Diff \Im{F}{\alpha} \Eq \EmptyClass \Implies F(\alpha) \Eq x. \]
   \begin{proof}
-    Let $\alpha \Elem \Ord$.
-    We have $\FUNim{F}{\alpha} \Eq \CClass{F(\beta)}{\beta \Elem \alpha}$.
-    Hence $\FUNim{F}{\alpha} \Eq \CClass{G(F \FUNrest \beta)}{\beta \Elem \alpha}$.
-    We have $\FUNrange(F \FUNrest \alpha) \Eq \CClass{F(\beta)}{\beta \Elem \alpha}$.
-    Thus\linebreak $\FUNrange(F \FUNrest \alpha) \Eq \FUNim{F}{\alpha}$.
+    Let $\alpha \Elem \Ordinals$.
+    We have $\Im{F}{\alpha} \Eq \CClass{F(\beta)}{\beta \Elem \alpha}$.
+    Hence $\Im{F}{\alpha} \Eq \CClass{G(F \Rest \beta)}{\beta \Elem \alpha}$.
+    We have $\Range(F \Rest \alpha) \Eq \CClass{F(\beta)}{\beta \Elem \alpha}$.
+    Thus\linebreak $\Range(F \Rest \alpha) \Eq \Im{F}{\alpha}$.
 
-    \begin{case}{$x \SETdiff \FUNim{F}{\alpha} \NotEq \SETempty$.}
-      Then $x \SETdiff \FUNrange(F \FUNrest \alpha) \NotEq \SETempty$.
+    \begin{case}{$x \Diff \Im{F}{\alpha} \NotEq \EmptyClass$.}
+      Then $x \Diff \Range(F \Rest \alpha) \NotEq \EmptyClass$.
       Hence $F(\alpha)
-        \Eq G(F \FUNrest \alpha)
-        \Elem\linebreak x \SETdiff \FUNrange(F \FUNrest \alpha)
-        \Eq x \SETdiff \FUNim{F}{\alpha}$.
+        \Eq G(F \Rest \alpha)
+        \Elem\linebreak x \Diff \Range(F \Rest \alpha)
+        \Eq x \Diff \Im{F}{\alpha}$.
     \end{case}
 
-    \begin{case}{$x \SETdiff \FUNim{F}{\alpha} \NotEq \SETempty$.}
-      Then $x \SETdiff \FUNrange(F \FUNrest \alpha) \Eq \SETempty$.
+    \begin{case}{$x \Diff \Im{F}{\alpha} \NotEq \EmptyClass$.}
+      Then $x \Diff \Range(F \Rest \alpha) \Eq \EmptyClass$.
       Hence $F(\alpha)
-        \Eq G(F \FUNrest \alpha)
+        \Eq G(F \Rest \alpha)
         \Eq\linebreak x$.
     \end{case}
   \end{proof}
 
-  (1) For any ordinals $\alpha, \beta$ such that $\alpha \ORDless \beta$ and $F(\beta) \NotEq x$ we have $F(\alpha),\linebreak F(\beta) \Elem x$ and $F(\alpha) \NotEq F(\beta)$.
+  (1) For any ordinals $\alpha, \beta$ such that $\alpha \Less \beta$ and $F(\beta) \NotEq x$ we have $F(\alpha),\linebreak F(\beta) \Elem x$ and $F(\alpha) \NotEq F(\beta)$.
   \begin{proof}
-    Let $\alpha, \beta \Elem \Ord$.
-    Assume $\alpha \ORDless \beta$ and $F(\beta) \NotEq x$.
-    Then $x \SETdiff \FUNim{F}{\beta} \NotEq \SETempty$.
-    (a) Hence $F(\beta) \Elem x \SETdiff \FUNim{F}{\beta}$.
-    We have $\FUNim{F}{\alpha} \SETinclude \FUNim{F}{\beta}$.
-    Thus $x \SETdiff \FUNim{F}{\alpha} \NotEq \SETempty$.
-    (b) Therefore $F(\alpha) \Elem x \SETdiff \FUNim{F}{\alpha}$.
+    Let $\alpha, \beta \Elem \Ordinals$.
+    Assume $\alpha \Less \beta$ and $F(\beta) \NotEq x$.
+    Then $x \Diff \Im{F}{\beta} \NotEq \EmptyClass$.
+    (a) Hence $F(\beta) \Elem x \Diff \Im{F}{\beta}$.
+    We have $\Im{F}{\alpha} \Subclass \Im{F}{\beta}$.
+    Thus $x \Diff \Im{F}{\alpha} \NotEq \EmptyClass$.
+    (b) Therefore $F(\alpha) \Elem x \Diff \Im{F}{\alpha}$.
     Consequently $F(\alpha), F(\beta) \Elem x$ (by a, b).
-    We have $F(\alpha) \Elem \FUNim{F}{\beta}$ and $F(\beta) \NotElem \FUNim{F}{\beta}$.
+    We have $F(\alpha) \Elem \Im{F}{\beta}$ and $F(\beta) \NotElem \Im{F}{\beta}$.
     Thus $F(\alpha) \NotEq F(\beta)$.
   \end{proof}
 
   (2) There exists an ordinal $\alpha$ such that $F(\alpha) \Eq x$.
   \begin{proof}
     Assume the contrary.
-    Then $F$ is a map from $\Ord$ to $x$.
+    Then $F$ is a map from $\Ordinals$ to $x$.
 
     Let us show that $F$ is injective.
-      Let $\alpha, \beta \Elem \Ord$.
+      Let $\alpha, \beta \Elem \Ordinals$.
       Assume $\alpha \NotEq \beta$.
-      Then $\alpha \ORDless \beta$ or $\beta \ORDless \alpha$.
+      Then $\alpha \Less \beta$ or $\beta \Less \alpha$.
       Hence $F(\alpha) \NotEq F(\beta)$ (by 1).
       Indeed $F(\alpha), F(\beta) \NotEq x$.
     End.
@@ -126,22 +126,22 @@ $\alpha \Elem \Ord$.
     Contradiction.
   \end{proof}
 
-  Define $\Phi \DefEq \SClass{\alpha}{\Ord}{F(\alpha) \Eq x}$.
+  Define $\Phi \DefEq \SClass{\alpha}{\Ordinals}{F(\alpha) \Eq x}$.
   $\Phi$ is nonempty.
-  Let us show that we can take an $\alpha \Elem \Phi$ such that $\alpha \ORDleq \beta$ for all $\beta \Elem \Phi$.
-    Take an $\alpha \Elem \Phi$ such that for no $\beta \Elem \Phi$ we have $\beta \ORDless \alpha$ (by \sn{wellfoundedness of membership relation}).
-    Then $\alpha \ORDleq \beta$ for all $\beta \Elem \Phi$.
+  Let us show that we can take an $\alpha \Elem \Phi$ such that $\alpha \Leq \beta$ for all $\beta \Elem \Phi$.
+    Take an $\alpha \Elem \Phi$ such that for no $\beta \Elem \Phi$ we have $\beta \Less \alpha$ (by \sn{wellfoundedness of membership relation}).
+    Then $\alpha \Leq \beta$ for all $\beta \Elem \Phi$.
   End.
-  Take $f \Eq F \FUNrest \alpha$.
+  Take $f \Eq F \Rest \alpha$.
   Then $f$ is a map from $\alpha$ to $x$.
   Indeed for no $\beta \Elem \alpha$ we have $F(\beta) \Eq x$.
 
   (3) $f$ is surjective onto $x$.
   \begin{proof}
-    $x \SETdiff \FUNim{F}{\alpha} \Eq \SETempty$.
-    Hence $\FUNrange(f)
-      \Eq \FUNim{f}{\alpha}
-      \Eq \FUNim{F}{\alpha}
+    $x \Diff \Im{F}{\alpha} \Eq \EmptyClass$.
+    Hence $\Range(f)
+      \Eq \Im{f}{\alpha}
+      \Eq \Im{F}{\alpha}
       \Eq x$.
   \end{proof}
 
@@ -151,7 +151,7 @@ $\alpha \Elem \Ord$.
     Assume $\beta \NotEq \gamma$.
     We have $f(\beta), f(\gamma) \NotEq x$.
     Hence $f(\beta) \NotEq f(\gamma)$ (by 1).
-    Indeed $\beta \ORDless \gamma$ or $\gamma \ORDless \beta$.
+    Indeed $\beta \Less \gamma$ or $\gamma \Less \beta$.
   \end{proof}
 
   Therefore $f$ is a bijection between $\alpha$ and $x$.

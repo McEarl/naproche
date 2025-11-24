@@ -4,42 +4,42 @@
 \begin{document}
 \begin{smodule}{factorial.ftl}
 \importmodule[libraries/arithmetics]{multiplication.ftl}
-\symdef{NATfac}[args=1]{#1\comp!}
+\symdef{Factorial}[args=1]{#1\comp!}
 
-\begin{signature}[forthel,for=NATfac]
+\begin{signature}[forthel,for=Factorial]
   Let $n$ be a natural number.
-  $\emph{\NATfac{n}}$ is a natural number.
+  $\emph{\Factorial{n}}$ is a natural number.
 \end{signature}
 
-\begin{axiom}[forthel,for=NATfac]
-  $\NATfac{\NATzero} \Eq \NATone$.
+\begin{axiom}[forthel,for=Factorial]
+  $\Factorial{\Zero} \Eq \One$.
 \end{axiom}
 
-\begin{axiom}[forthel,for=NATfac]
+\begin{axiom}[forthel,for=Factorial]
   Let $n$ be a natural number.
-  Then $\NATfac{n \NATplus \NATone} \Eq \NATfac{n} \NATmul (n \NATplus \NATone)$.
+  Then $\Factorial{n \Plus \One} \Eq \Factorial{n} \Mul (n \Plus \One)$.
 \end{axiom}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Then $\NATfac{n} \NotEq \NATzero$.
+  Then $\Factorial{n} \NotEq \Zero$.
 \end{proposition}
 \begin{proof}[forthel]
-  Define $\Phi \DefEq \SClass{n'}{\Nat}{\NATfac{n'} \NotEq \NATzero}$.
+  Define $\Phi \DefEq \SClass{n'}{\Naturals}{\Factorial{n'} \NotEq \Zero}$.
 
-  (1) $\Phi$ contains $\NATzero$.
-  Indeed $\NATfac{\NATzero} \Eq \NATone \NotEq \NATzero$.
+  (1) $\Phi$ contains $\Zero$.
+  Indeed $\Factorial{\Zero} \Eq \One \NotEq \Zero$.
 
-  (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
   \begin{proof}
     Let $n' \Elem \Phi$.
-    We have $\NATfac{n' \NATplus \NATone} \Eq (n' \NATplus \NATone) \NATmul \NATfac{n'}$.
-    $n' \NATplus \NATone$ and $\NATfac{n'}$ are nonzero.
-    Hence $\NATfac{n' \NATplus \NATone} \NotEq \NATzero$.
+    We have $\Factorial{n' \Plus \One} \Eq (n' \Plus \One) \Mul \Factorial{n'}$.
+    $n' \Plus \One$ and $\Factorial{n'}$ are nonzero.
+    Hence $\Factorial{n' \Plus \One} \NotEq \Zero$.
   \end{proof}
 
   Thus $\Phi$ contains every natural number (by \sr{induction I}{induction}).
-  Therefore $\NATfac{n} \NotEq \NATzero$.
+  Therefore $\Factorial{n} \NotEq \Zero$.
 \end{proof}
 \end{smodule}
 \end{document}

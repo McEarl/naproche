@@ -4,8 +4,8 @@
 \begin{document}
 \begin{smodule}{divisibility.ftl}
 \importmodule[libraries/arithmetics]{multiplication-and-ordering.ftl}
-\symdef{NATmid}{\,\mid\,}
-\symdef{NATnmid}{\,\nmid\,}
+\symdef{Divides}{\,\mid\,}
+\symdef{NotDivides}{\,\nmid\,}
 \symdecl*{divisible}
 \symdecl*{divide}
 \symdecl*{factor}
@@ -15,15 +15,15 @@
 
 \begin{definition}[forthel,for={divisible,divide}]
   Let $n, m$ be natural numbers.
-  $\emph{n \NATmid m}$ iff there exists a natural number $k$ such that $n \NATmul k \Eq m$.
-  Let $m$ is \emph{divisible by $n$} stand for $n \NATmid m$.
-  Let $n$ \emph{divides $m$} stand for $n \NATmid m$.
-  Let $\emph{n \NATnmid m}$ stand for $\Not n \NATmid m$.
+  $\emph{n \Divides m}$ iff there exists a natural number $k$ such that $n \Mul k \Eq m$.
+  Let $m$ is \emph{divisible by $n$} stand for $n \Divides m$.
+  Let $n$ \emph{divides $m$} stand for $n \Divides m$.
+  Let $\emph{n \NotDivides m}$ stand for $\Not n \Divides m$.
 \end{definition}
 
 \begin{lemma}[forthel]
   Let $n, m$ be natural numbers.
-  $n$ divides $m$ iff there exists a natural number $k$ such that $k \NATmul n \Eq m$.
+  $n$ divides $m$ iff there exists a natural number $k$ such that $k \Mul n \Eq m$.
 \end{lemma}
 
 \begin{definition}[forthel,for={factor,divisor}]
@@ -34,250 +34,250 @@
 
 \begin{definition}[forthel,for=trivial divisor]
   Let $n$ be a natural number.
-  A \emph{trivial divisor of $n$} is a divisor $m$ of $n$ such that $m \Eq \NATone$ or $m \Eq n$.
+  A \emph{trivial divisor of $n$} is a divisor $m$ of $n$ such that $m \Eq \One$ or $m \Eq n$.
 \end{definition}
 
 \begin{definition}[forthel,for=nontrivial divisor]
   Let $n$ be a natural number.
-  A \emph{nontrivial divisor of $n$} is a divisor $m$ of $n$ such that $m \NotEq \NATone$ and $m \NotEq n$.
+  A \emph{nontrivial divisor of $n$} is a divisor $m$ of $n$ such that $m \NotEq \One$ and $m \NotEq n$.
 \end{definition}
 
 \begin{definition}[forthel]
   Let $n$ be a natural number.
-  $n$ is \emph{composite} iff $n \NATgtr \NATone$ and $n$ has a nontrivial divisor.
+  $n$ is \emph{composite} iff $n \Greater \One$ and $n$ has a nontrivial divisor.
 \end{definition}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Then $n \NATmid \NATzero$.
+  Then $n \Divides \Zero$.
 \end{proposition}
 \begin{proof}[forthel]
-  We have $n \NATmul \NATzero \Eq \NATzero$.
-  Hence $n \NATmid \NATzero$.
+  We have $n \Mul \Zero \Eq \Zero$.
+  Hence $n \Divides \Zero$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  If $\NATzero \NATmid n$ then $n \Eq \NATzero$.
+  If $\Zero \Divides n$ then $n \Eq \Zero$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $\NATzero \NATmid n$.
-  Consider a natural number $k$ such that $\NATzero \NATmul k \Eq n$.
-  Then $n \Eq \NATzero$.
+  Assume $\Zero \Divides n$.
+  Consider a natural number $k$ such that $\Zero \Mul k \Eq n$.
+  Then $n \Eq \Zero$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Then $\NATone \NATmid n$.
+  Then $\One \Divides n$.
 \end{proposition}
 \begin{proof}[forthel]
-  We have $\NATone \NATmul n \Eq n$.
-  Hence $\NATone \NATmid n$.
+  We have $\One \Mul n \Eq n$.
+  Hence $\One \Divides n$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Then $n \NATmid n$.
+  Then $n \Divides n$.
 \end{proposition}
 \begin{proof}[forthel]
-  We have $n \NATmul \NATone \Eq n$.
-  Hence $n \NATmid n$.
+  We have $n \Mul \One \Eq n$.
+  Hence $n \Divides n$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  If $n \NATmid \NATone$ then $n \Eq \NATone$.
+  If $n \Divides \One$ then $n \Eq \One$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $n \NATmid \NATone$.
-  Take a natural number $k$ such that $n \NATmul k \Eq \NATone$.
-  Suppose $n \NotEq \NATone$.
-  Then $n \NATless \NATone$ or $n \NATgtr \NATone$.
+  Assume $n \Divides \One$.
+  Take a natural number $k$ such that $n \Mul k \Eq \One$.
+  Suppose $n \NotEq \One$.
+  Then $n \Less \One$ or $n \Greater \One$.
 
-  \begin{case}{$n \NATless \NATone$.}
-    Then $n \Eq \NATzero$.
-    Hence $\NATzero
-      \Eq \NATzero \NATmul k
-      \Eq n \NATmul k
-      \Eq \NATone$.
+  \begin{case}{$n \Less \One$.}
+    Then $n \Eq \Zero$.
+    Hence $\Zero
+      \Eq \Zero \Mul k
+      \Eq n \Mul k
+      \Eq \One$.
     Contradiction.
   \end{case}
 
-  \begin{case}{$n \NATgtr \NATone$.}
-    We have $k \NotEq \NATzero$.
-    Indeed if $k \Eq \NATzero$ then
-    $\NATone
-      \Eq n \NATmul k
-      \Eq n \NATmul \NATzero
-      \Eq \NATzero$.
-    Hence $k \NATgeq \NATone$.
-    Take a positive natural number $l$ such that $n \Eq \NATone \NATplus l$.
-    Then $\NATone
-      \NATless \NATone \NATplus l
+  \begin{case}{$n \Greater \One$.}
+    We have $k \NotEq \Zero$.
+    Indeed if $k \Eq \Zero$ then
+    $\One
+      \Eq n \Mul k
+      \Eq n \Mul \Zero
+      \Eq \Zero$.
+    Hence $k \Geq \One$.
+    Take a positive natural number $l$ such that $n \Eq \One \Plus l$.
+    Then $\One
+      \Less \One \Plus l
       \Eq n
-      \Eq n \NATmul \NATone
-      \NATleq n \NATmul k$.
-    Hence $\NATone \NATless n$.
+      \Eq n \Mul \One
+      \Leq n \Mul k$.
+    Hence $\One \Less n$.
     Contradiction.
   \end{case}
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $n \NATmid m$ then $n \NATmid m \NATmul k$.
+  If $n \Divides m$ then $n \Divides m \Mul k$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $n \NATmid m$.
-  Take $l \Elem \Nat$ such that $n \NATmul l \Eq m$.
-  Then $n \NATmul (l \NATmul k)
-    \Eq (n \NATmul l) \NATmul k
-    \Eq m \NATmul k$.
-  Hence $n \NATmid m \NATmul k$.
+  Assume $n \Divides m$.
+  Take $l \Elem \Naturals$ such that $n \Mul l \Eq m$.
+  Then $n \Mul (l \Mul k)
+    \Eq (n \Mul l) \Mul k
+    \Eq m \Mul k$.
+  Hence $n \Divides m \Mul k$.
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $n \NATmid m$ then $n \NATmid k \NATmul m$.
+  If $n \Divides m$ then $n \Divides k \Mul m$.
 \end{corollary}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $n \NATmid m \NATmid k$ then $n \NATmid k$.
+  If $n \Divides m \Divides k$ then $n \Divides k$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $n \NATmid m$ and $m \NATmid k$.
-  Take natural numbers $l,l'$ such that $n \NATmul l \Eq m$ and $m \NATmul l' \Eq k$.
-  Then $n \NATmul (l \NATmul l')
-    \Eq (n \NATmul l) \NATmul l'
-    \Eq m \NATmul l'
+  Assume $n \Divides m$ and $m \Divides k$.
+  Take natural numbers $l,l'$ such that $n \Mul l \Eq m$ and $m \Mul l' \Eq k$.
+  Then $n \Mul (l \Mul l')
+    \Eq (n \Mul l) \Mul l'
+    \Eq m \Mul l'
     \Eq k$.
-  Hence $n \NATmid k$.
+  Hence $n \Divides k$.
 \end{proof}
 
 \begin{proposition}[forthel]
-  Let $n, m$ be natural numbers such that $n \NotEq \NATzero$.
-  If $n \NATmid m$ and $m \NATmid n$ then $n \Eq m$.
+  Let $n, m$ be natural numbers such that $n \NotEq \Zero$.
+  If $n \Divides m$ and $m \Divides n$ then $n \Eq m$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $n \NATmid m$ and $m \NATmid n$.
-  Take natural numbers $k,k'$ such that $n \NATmul k \Eq m$ and $m \NATmul k' \Eq n$.
+  Assume $n \Divides m$ and $m \Divides n$.
+  Take natural numbers $k,k'$ such that $n \Mul k \Eq m$ and $m \Mul k' \Eq n$.
   Then $n
-    \Eq m \NATmul k'
-    \Eq (n \NATmul k) \NATmul k'
-    \Eq n \NATmul (k \NATmul k')$.
-  Hence $k \NATmul k' \Eq \NATone$.
-  Thus $k \Eq \NATone \Eq k'$.
+    \Eq m \Mul k'
+    \Eq (n \Mul k) \Mul k'
+    \Eq n \Mul (k \Mul k')$.
+  Hence $k \Mul k' \Eq \One$.
+  Thus $k \Eq \One \Eq k'$.
   Therefore $n \Eq m$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $n \NATmid m$ then $k \NATmul n \NATmid k \NATmul m$.
+  If $n \Divides m$ then $k \Mul n \Divides k \Mul m$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $n \NATmid m$.
-  Take a natural number $l$ such that $n \NATmul l \Eq m$.
-  Then $(k \NATmul n) \NATmul l
-    \Eq k \NATmul (n \NATmul l)
-    \Eq k \NATmul m$.
-  Hence $k \NATmul n \NATmid k \NATmul m$.
+  Assume $n \Divides m$.
+  Take a natural number $l$ such that $n \Mul l \Eq m$.
+  Then $(k \Mul n) \Mul l
+    \Eq k \Mul (n \Mul l)
+    \Eq k \Mul m$.
+  Hence $k \Mul n \Divides k \Mul m$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  If $k \NATmul n \NATmid k \NATmul m$ then $n \NATmid m$.
+  Assume $k \NotEq \Zero$.
+  If $k \Mul n \Divides k \Mul m$ then $n \Divides m$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $k \NATmul n \NATmid k \NATmul m$.
-  Take a natural number $l$ such that $(k \NATmul n) \NATmul l \Eq k \NATmul m$.
-  Then $k \NATmul (n \NATmul l) \Eq k \NATmul m$.
-  Hence $n \NATmul l \Eq m$ (by \sn{left-cancellability of multiplication}).
-  Thus $n \NATmid m$.
+  Assume $k \Mul n \Divides k \Mul m$.
+  Take a natural number $l$ such that $(k \Mul n) \Mul l \Eq k \Mul m$.
+  Then $k \Mul (n \Mul l) \Eq k \Mul m$.
+  Hence $n \Mul l \Eq m$ (by \sn{left-cancellability of multiplication}).
+  Thus $n \Divides m$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $k \NATmid n$ and $k \NATmid m$ then $k \NATmid (n' \NATmul n) \NATplus (m' \NATmul m)$
+  If $k \Divides n$ and $k \Divides m$ then $k \Divides (n' \Mul n) \Plus (m' \Mul m)$
   for all natural numbers $n', m'$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $k \NATmid n$ and $k \NATmid m$.
+  Assume $k \Divides n$ and $k \Divides m$.
   Let $n', m'$ be natural numbers.
-  Take natural numbers $l,l'$ such that $k \NATmul l \Eq n$ and $k \NATmul l' \Eq m$.
+  Take natural numbers $l,l'$ such that $k \Mul l \Eq n$ and $k \Mul l' \Eq m$.
   Then
-  \[  k \NATmul ((n' \NATmul l) \NATplus (m' \NATmul l'))                \]
-  \[    \Eq (k \NATmul (n' \NATmul l)) \NATplus (k \NATmul (m' \NATmul l'))  \]
-  \[    \Eq ((k \NATmul n') \NATmul l) \NATplus ((k \NATmul m') \NATmul l')  \]
-  \[    \Eq (n' \NATmul (k \NATmul l)) \NATplus (m' \NATmul (k \NATmul l'))  \]
-  \[    \Eq (n' \NATmul n) \NATplus (m' \NATmul m).                      \]
+  \[  k \Mul ((n' \Mul l) \Plus (m' \Mul l'))                \]
+  \[    \Eq (k \Mul (n' \Mul l)) \Plus (k \Mul (m' \Mul l'))  \]
+  \[    \Eq ((k \Mul n') \Mul l) \Plus ((k \Mul m') \Mul l')  \]
+  \[    \Eq (n' \Mul (k \Mul l)) \Plus (m' \Mul (k \Mul l'))  \]
+  \[    \Eq (n' \Mul n) \Plus (m' \Mul m).                      \]
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $k \NATmid n$ and $k \NATmid m$ then $k \NATmid n \NATplus m$.
+  If $k \Divides n$ and $k \Divides m$ then $k \Divides n \Plus m$.
 \end{corollary}
 \begin{proof}[forthel]
-  Assume $k \NATmid n$ and $k \NATmid m$.
-  Take $n' \Eq \NATone$ and $m' \Eq \NATone$.
-  Then $k \NATmid (n' \NATmul n) \NATplus (m' \NATmul m)$.
-  $(n' \NATmul n) \NATplus (m' \NATmul m) \Eq n \NATplus m$.
-  Hence $k \NATmid n \NATplus m$.
+  Assume $k \Divides n$ and $k \Divides m$.
+  Take $n' \Eq \One$ and $m' \Eq \One$.
+  Then $k \Divides (n' \Mul n) \Plus (m' \Mul m)$.
+  $(n' \Mul n) \Plus (m' \Mul m) \Eq n \Plus m$.
+  Hence $k \Divides n \Plus m$.
 \end{proof}
 
 \symdecl*{divisibility of summands}
 
 \begin{proposition}[forthel,name=divisibility of summands]
   Let $n, m, k$ be natural numbers.
-  If $k \NATmid n$ and $k \NATmid n \NATplus m$ then $k \NATmid m$.
+  If $k \Divides n$ and $k \Divides n \Plus m$ then $k \Divides m$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $k \NATmid n$ and $k \NATmid n \NATplus m$.
+  Assume $k \Divides n$ and $k \Divides n \Plus m$.
 
-  \begin{case}{$k \Eq \NATzero$.} \end{case}
+  \begin{case}{$k \Eq \Zero$.} \end{case}
 
-  \begin{case}{$k \NotEq \NATzero$.}
-    Take a natural number $l$ such that $n \Eq k \NATmul l$.
-    Take a natural number $l'$ such that $n \NATplus m \Eq k \NATmul l'$.
-    Then $(k \NATmul l) \NATplus m \Eq k \NATmul l'$.
-    We have $l' \NATgeq l$.
-    Indeed if $l' \NATless l$ then
-    $n \NATplus m
-      \Eq k \NATmul l'
-      \NATless k \NATmul l
+  \begin{case}{$k \NotEq \Zero$.}
+    Take a natural number $l$ such that $n \Eq k \Mul l$.
+    Take a natural number $l'$ such that $n \Plus m \Eq k \Mul l'$.
+    Then $(k \Mul l) \Plus m \Eq k \Mul l'$.
+    We have $l' \Geq l$.
+    Indeed if $l' \Less l$ then
+    $n \Plus m
+      \Eq k \Mul l'
+      \Less k \Mul l
       \Eq n$ (by \sn{preservation of ordering under left-multiplication}).
-    Hence we can take a natural number $l''$ such that $l' \Eq l \NATplus l''$.
-    Then $(k \NATmul l) \NATplus m
-      \Eq k \NATmul l'
-      \Eq k \NATmul (l \NATplus l'')
-      \Eq (k \NATmul l) \NATplus (k \NATmul l'')$.
-    Indeed $k \NATmul (l \NATplus l'') \Eq (k \NATmul l) \NATplus (k \NATmul l'')$ (by \sn{left-distributivity of multiplication over addition}).
-    Thus $m \Eq (k \NATmul l'')$ (by \sn{left-cancellability of addition}).
-    Indeed $k \NATmul l$ and $k \NATmul l''$ are natural numbers.
-    Therefore $k \NATmid m$.
+    Hence we can take a natural number $l''$ such that $l' \Eq l \Plus l''$.
+    Then $(k \Mul l) \Plus m
+      \Eq k \Mul l'
+      \Eq k \Mul (l \Plus l'')
+      \Eq (k \Mul l) \Plus (k \Mul l'')$.
+    Indeed $k \Mul (l \Plus l'') \Eq (k \Mul l) \Plus (k \Mul l'')$ (by \sn{left-distributivity of multiplication over addition}).
+    Thus $m \Eq (k \Mul l'')$ (by \sn{left-cancellability of addition}).
+    Indeed $k \Mul l$ and $k \Mul l''$ are natural numbers.
+    Therefore $k \Divides m$.
   \end{case}
 \end{proof}
 
 \begin{proposition}[forthel]
-  Let $n, m$ be natural numbers such that $n, m \NotEq \NATzero$.
-  If $m \NATmid n$ then $m \NATleq n$.
+  Let $n, m$ be natural numbers such that $n, m \NotEq \Zero$.
+  If $m \Divides n$ then $m \Leq n$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $m \NATmid n$.
-  Take a natural number $k$ such that $m \NATmul k \Eq n$.
-  If $k \Eq \NATzero$ then
+  Assume $m \Divides n$.
+  Take a natural number $k$ such that $m \Mul k \Eq n$.
+  If $k \Eq \Zero$ then
   $n
-    \Eq m \NATmul k
-    \Eq m \NATmul \NATzero
-    \Eq \NATzero$.
-  Thus $k \NATgeq \NATone$.
-  Assume $m \NATgtr n$.
+    \Eq m \Mul k
+    \Eq m \Mul \Zero
+    \Eq \Zero$.
+  Thus $k \Geq \One$.
+  Assume $m \Greater n$.
   Then $n
-    \Eq m \NATmul k
-    \NATgeq m \NATmul \NATone
+    \Eq m \Mul k
+    \Geq m \Mul \One
     \Eq m
-    \NATgtr n$.
-  Hence $n \NATgtr n$.
+    \Greater n$.
+  Hence $n \Greater n$.
   Contradiction.
 \end{proof}
 \end{smodule}

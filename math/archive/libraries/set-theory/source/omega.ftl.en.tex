@@ -5,101 +5,101 @@
 \begin{smodule}{omega.ftl}
 \importmodule[libraries/set-theory]{zero.ftl}
 \importmodule[libraries/set-theory]{successor-ordinals.ftl}
-\symdef{ORDomega}{\omega}
+\symdef{Infinity}{\omega}
 \symdecl*{natural number}
 
-\begin{definition}[forthel,for={ORDomega,natural number}]
-  \[ \emph{\ORDomega} \DefEq \SClass{n}{\Ord}{\classtext{$n \Elem X$ for every $X \SETinclude \Ord$ such that $\ORDzero \Elem X$ and for all $x \Elem X$ we have $\ORDsucc(x) \Elem X$}}. \]
-  Let a \emph{natural number} stand for an element of $\ORDomega$.
+\begin{definition}[forthel,for={Infinity,natural number}]
+  \[ \emph{\Infinity} \DefEq \SClass{n}{\Ordinals}{\classtext{$n \Elem X$ for every $X \Subclass \Ordinals$ such that $\Zero \Elem X$ and for all $x \Elem X$ we have $\Succ(x) \Elem X$}}. \]
+  Let a \emph{natural number} stand for an element of $\Infinity$.
 \end{definition}
 
 \begin{proposition}[forthel]
-  $\ORDzero \Elem \ORDomega$.
+  $\Zero \Elem \Infinity$.
 \end{proposition}
 
 \begin{proposition}[forthel]
-  Let $n \Elem \ORDomega$.
-  Then $\ORDsucc(n) \Elem \ORDomega$.
+  Let $n \Elem \Infinity$.
+  Then $\Succ(n) \Elem \Infinity$.
 \end{proposition}
 
 \symdecl*{transfinite induction III}
 
 \begin{proposition}[forthel,name=transfinite induction III]
-  Let $\Phi \SETinclude \ORDomega$.
-  Assume that $\ORDzero \Elem \Phi$ and for every $x \Elem \Phi$ we have
-  $\ORDsucc(x) \Elem \Phi$.
-  Then $\Phi \Eq \ORDomega$.
+  Let $\Phi \Subclass \Infinity$.
+  Assume that $\Zero \Elem \Phi$ and for every $x \Elem \Phi$ we have
+  $\Succ(x) \Elem \Phi$.
+  Then $\Phi \Eq \Infinity$.
 \end{proposition}
 \begin{proof}[forthel]
-  Suppose $\Phi \NotEq \ORDomega$.
-  Consider an element $n$ of $\ORDomega$ that is not contained in $\Phi$.
-  Take $\Phi' \Eq \Phi \SETdiff \SETsingleton{n}$.
+  Suppose $\Phi \NotEq \Infinity$.
+  Consider an element $n$ of $\Infinity$ that is not contained in $\Phi$.
+  Take $\Phi' \Eq \Phi \Diff \Singleton{n}$.
 
-  (1) $\ORDzero \Elem \Phi'$.
-  Indeed $\ORDzero \Elem \Phi$ and $\ORDzero \NotEq n$.
+  (1) $\Zero \Elem \Phi'$.
+  Indeed $\Zero \Elem \Phi$ and $\Zero \NotEq n$.
 
-  (2) For each $x \Elem \Phi'$ we have $\ORDsucc(x) \Elem \Phi'$.
+  (2) For each $x \Elem \Phi'$ we have $\Succ(x) \Elem \Phi'$.
   \begin{proof}
     Let $x \Elem \Phi'$.
-    Then $\ORDsucc(x) \Elem \Phi$.
+    Then $\Succ(x) \Elem \Phi$.
 
-    Let us show that $\ORDsucc(x) \NotEq n$.
-      Assume $\ORDsucc(x) \Eq n$.
+    Let us show that $\Succ(x) \NotEq n$.
+      Assume $\Succ(x) \Eq n$.
       Then $x \NotElem \Phi$.
       Indeed $n \NotElem \Phi$ and if $x \Elem \Phi$ then
-      $n \Eq \ORDsucc(x) \Elem \Phi$.
+      $n \Eq \Succ(x) \Elem \Phi$.
       Contradiction.
     End.
 
-    Thus $\ORDsucc(x) \Elem \Phi'$.
+    Thus $\Succ(x) \Elem \Phi'$.
   \end{proof}
 
-  Therefore every element of $\ORDomega$ lies in $\Phi'$.
-  Indeed $\Phi' \SETinclude \Ord$.
+  Therefore every element of $\Infinity$ lies in $\Phi'$.
+  Indeed $\Phi' \Subclass \Ordinals$.
   Consequently $n \Elem \Phi'$.
   Contradiction.
 \end{proof}
 
 \begin{corollary}[forthel]
-  $\ORDomega$ is a set.
+  $\Infinity$ is a set.
 \end{corollary}
 \begin{proof}[forthel]
-  Define $f(n) \DefEq \ORDsucc(n)$ for $n \Elem \ORDomega$.
-  Take a subset $X$ of $\ORDomega$ that is inductive regarding $\ORDzero$ and $f$.
-  Indeed $f$ is a map from $\ORDomega$ to $\ORDomega$.
-  Then we have $\ORDzero \Elem X$ and for each $n \Elem X$ we have $\ORDsucc(n) \Elem X$.
-  Thus $X \Eq \ORDomega$.
-  Therefore $\ORDomega$ is a set.
+  Define $f(n) \DefEq \Succ(n)$ for $n \Elem \Infinity$.
+  Take a subset $X$ of $\Infinity$ that is inductive regarding $\Zero$ and $f$.
+  Indeed $f$ is a map from $\Infinity$ to $\Infinity$.
+  Then we have $\Zero \Elem X$ and for each $n \Elem X$ we have $\Succ(n) \Elem X$.
+  Thus $X \Eq \Infinity$.
+  Therefore $\Infinity$ is a set.
 \end{proof}
 
 \begin{proposition}[forthel]
-  Let $n \Elem \ORDomega$.
-  Then $n \Eq \ORDzero$ or $n \Eq \ORDsucc(m)$ for some $m \Elem \ORDomega$.
+  Let $n \Elem \Infinity$.
+  Then $n \Eq \Zero$ or $n \Eq \Succ(m)$ for some $m \Elem \Infinity$.
 \end{proposition}
 \begin{proof}[forthel]
   Assume the contrary.
-  Consider a $k \Elem \ORDomega$ such that neither $k \Eq \ORDzero$ nor $k \Eq \ORDsucc(m)$ for
-  some $m \Elem \ORDomega$.
-  Take a class $\omega'$ such that $\omega' \Eq \ORDomega \SETdiff \SETsingleton{k}$. %!
+  Consider a $k \Elem \Infinity$ such that neither $k \Eq \Zero$ nor $k \Eq \Succ(m)$ for
+  some $m \Elem \Infinity$.
+  Take a class $\omega'$ such that $\omega' \Eq \Infinity \Diff \Singleton{k}$. %!
   Then $\omega'$ is a set.
 
-  (1) $\ORDzero \Elem \omega'$.
-  Indeed $k \NotEq \ORDzero$.
+  (1) $\Zero \Elem \omega'$.
+  Indeed $k \NotEq \Zero$.
 
-  (2) For all $m \Elem \omega'$ we have $\ORDsucc(m) \Elem \omega'$.
+  (2) For all $m \Elem \omega'$ we have $\Succ(m) \Elem \omega'$.
   \begin{proof}
     Let $m \Elem \omega'$.
-    Then $\ORDsucc(m) \NotEq k$.
-    Hence $\ORDsucc(m) \Elem \omega'$.
+    Then $\Succ(m) \NotEq k$.
+    Hence $\Succ(m) \Elem \omega'$.
   \end{proof}
 
-  Thus every element of $\ORDomega$ is contained in $\omega'$.
+  Thus every element of $\Infinity$ is contained in $\omega'$.
   Therefore $k \Elem \omega'$.
   Contradiction.
 \end{proof}
 
 \begin{proposition}[forthel]
-  Every element of $\ORDomega$ is an ordinal.
+  Every element of $\Infinity$ is an ordinal.
 \end{proposition}
 \end{smodule}
 \end{document}

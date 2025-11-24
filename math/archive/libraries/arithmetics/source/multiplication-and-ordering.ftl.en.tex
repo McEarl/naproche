@@ -10,39 +10,39 @@
 
 \begin{proposition}[forthel,name=preservation of ordering under right-multiplication]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  Then $n \NATless m$ iff $n \NATmul k \NATless m \NATmul k$.
+  Assume $k \NotEq \Zero$.
+  Then $n \Less m$ iff $n \Mul k \Less m \Mul k$.
 \end{proposition}
 \begin{proof}[forthel]
-  \begin{case}{$n \NATmul k \NATless m \NATmul k$.}
-    Define $\Phi \DefEq \SClass{n'}{\Nat}{\text{ if }n' \NATmul k \NATless m \NATmul k\text{ then }n' \NATless m}$.
+  \begin{case}{$n \Mul k \Less m \Mul k$.}
+    Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ if }n' \Mul k \Less m \Mul k\text{ then }n' \Less m}$.
 
-    (1) $\Phi$ contains $\NATzero$.
+    (1) $\Phi$ contains $\Zero$.
 
-    (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+    (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $n' \Elem \Phi$.
 
-      Let us show that if $(n' \NATplus \NATone) \NATmul k \NATless m \NATmul k$ then $n' \NATplus \NATone \NATless m$.
-        Assume $(n' \NATplus \NATone) \NATmul k \NATless m \NATmul k$.
-        Then $(n' \NATmul k) \NATplus k \NATless m \NATmul k$.
-        Hence $n' \NATmul k \NATless m \NATmul k$.
-        Thus $n' \NATless m$.
-        Then $n' \NATplus \NATone \NATleq m$.
-        If $n' \NATplus \NATone \Eq m$ then $(n' \NATplus \NATone) \NATmul k \Eq m \NATmul k$.
-        Hence $n' \NATplus \NATone \NATless m$.
+      Let us show that if $(n' \Plus \One) \Mul k \Less m \Mul k$ then $n' \Plus \One \Less m$.
+        Assume $(n' \Plus \One) \Mul k \Less m \Mul k$.
+        Then $(n' \Mul k) \Plus k \Less m \Mul k$.
+        Hence $n' \Mul k \Less m \Mul k$.
+        Thus $n' \Less m$.
+        Then $n' \Plus \One \Leq m$.
+        If $n' \Plus \One \Eq m$ then $(n' \Plus \One) \Mul k \Eq m \Mul k$.
+        Hence $n' \Plus \One \Less m$.
       End.
     \end{proof}
 
     Therefore every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-    Consequently $n \NATless m$.
+    Consequently $n \Less m$.
   \end{case}
 
-  \begin{case}{$n \NATless m$.}
-    Take a positive natural number $l$ such that $m \Eq n \NATplus l$.
-    Then $m \NATmul k \Eq (n \NATplus l) \NATmul k \Eq (n \NATmul k) \NATplus (l \NATmul k)$.
-    $l \NATmul k$ is positive.
-    Hence $n \NATmul k \NATless m \NATmul k$.
+  \begin{case}{$n \Less m$.}
+    Take a positive natural number $l$ such that $m \Eq n \Plus l$.
+    Then $m \Mul k \Eq (n \Plus l) \Mul k \Eq (n \Mul k) \Plus (l \Mul k)$.
+    $l \Mul k$ is positive.
+    Hence $n \Mul k \Less m \Mul k$.
   \end{case}
 \end{proof}
 
@@ -50,8 +50,8 @@
 
 \begin{corollary}[forthel,name=preservation of ordering under left-multiplication]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  Then $n \NATless m$ iff $k \NATmul n \NATless k \NATmul m$.
+  Assume $k \NotEq \Zero$.
+  Then $n \Less m$ iff $k \Mul n \Less k \Mul m$.
 \end{corollary}
 \begin{proof}[forthel]
   The thesis (by \sn{preservation of ordering under right-multiplication}, \sn{commutativity of multiplication}).
@@ -59,82 +59,82 @@
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $n, m \NATgtr k$ then $n \NATmul m \NATgtr k$.
+  If $n, m \Greater k$ then $n \Mul m \Greater k$.
 \end{proposition}
 \begin{proof}[forthel]
-  Define $\Phi \DefEq \SClass{n'}{\Nat}{\text{ if }n', m \NATgtr k\text{ then }n' \NATmul m \NATgtr k}$.
+  Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ if }n', m \Greater k\text{ then }n' \Mul m \Greater k}$.
 
-  (1) $\Phi$ contains $\NATzero$.
+  (1) $\Phi$ contains $\Zero$.
 
-  (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
   \begin{proof}
     Let $n' \Elem \Phi$.
 
-    Let us show that if $n' \NATplus \NATone, m \NATgtr k$ then $(n' \NATplus \NATone) \NATmul m \NATgtr k$.
-      Assume $n' \NATplus \NATone, m \NATgtr k$.
-      Then $(n' \NATplus \NATone) \NATmul m \Eq (n' \NATmul m) \NATplus m$.
-      If $n' \Eq \NATzero$ then
-      $(n' \NATmul m) \NATplus m
-        \Eq \NATzero \NATplus m
+    Let us show that if $n' \Plus \One, m \Greater k$ then $(n' \Plus \One) \Mul m \Greater k$.
+      Assume $n' \Plus \One, m \Greater k$.
+      Then $(n' \Plus \One) \Mul m \Eq (n' \Mul m) \Plus m$.
+      If $n' \Eq \Zero$ then
+      $(n' \Mul m) \Plus m
+        \Eq \Zero \Plus m
         \Eq m
-        \NATgtr k$.
-      If $n' \NotEq \NATzero$ then
-      $(n' \NATmul m) \NATplus m
-        \NATgtr m
-        \NATgtr k$.
-      Indeed if $n' \NotEq \NATzero$ then $n' \NATmul m \NATgtr \NATzero$.
-      Indeed $m \NATgtr \NATzero$.
-      Hence $(n' \NATplus \NATone) \NATmul m \NATgtr k$.
+        \Greater k$.
+      If $n' \NotEq \Zero$ then
+      $(n' \Mul m) \Plus m
+        \Greater m
+        \Greater k$.
+      Indeed if $n' \NotEq \Zero$ then $n' \Mul m \Greater \Zero$.
+      Indeed $m \Greater \Zero$.
+      Hence $(n' \Plus \One) \Mul m \Greater k$.
     End.
   \end{proof}
 
   Thus every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-  Therefore if $n, m \NATgtr k$ then $n \NATmul m \NATgtr k$.
+  Therefore if $n, m \Greater k$ then $n \Mul m \Greater k$.
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $n \NATleq m$ then $k \NATmul n \NATleq k \NATmul m$.
+  If $n \Leq m$ then $k \Mul n \Leq k \Mul m$.
 \end{corollary}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  If $k \NATmul n \NATleq k \NATmul m$ then $n \NATleq m$.
+  Assume $k \NotEq \Zero$.
+  If $k \Mul n \Leq k \Mul m$ then $n \Leq m$.
 \end{corollary}
 \begin{proof}[forthel]
-  If $k \NATmul n \Eq k \NATmul m$ then $n \Eq m$ (by \sn{left-cancellability of multiplication}).
-  If $k \NATmul n \NATless k \NATmul m$ then $n \NATless m$ (by \sn{preservation of ordering under left-multiplication}).
+  If $k \Mul n \Eq k \Mul m$ then $n \Eq m$ (by \sn{left-cancellability of multiplication}).
+  If $k \Mul n \Less k \Mul m$ then $n \Less m$ (by \sn{preservation of ordering under left-multiplication}).
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  If $n \NATleq m$ then $n \NATmul k \NATleq m \NATmul k$.
+  If $n \Leq m$ then $n \Mul k \Leq m \Mul k$.
 \end{corollary}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  If $n \NATmul k \NATleq m \NATmul k$ then $n \NATleq m$.
+  Assume $k \NotEq \Zero$.
+  If $n \Mul k \Leq m \Mul k$ then $n \Leq m$.
 \end{corollary}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $m \NATgtr \NATzero$ and $k \NATgtr \NATone$.
-  Then $k \NATmul m \NATgtr m$.
+  Assume $m \Greater \Zero$ and $k \Greater \One$.
+  Then $k \Mul m \Greater m$.
 \end{proposition}
 \begin{proof}[forthel]
-  Take a natural number $l$ such that $k \Eq l \NATplus \NATtwo$.
+  Take a natural number $l$ such that $k \Eq l \Plus \Two$.
   Then
-  \[  k \NATmul m                       \]
-  \[    \Eq (l \NATplus \NATtwo) \NATmul m             \]
-  \[    \Eq (l \NATmul m) \NATplus (\NATtwo \NATmul m)   \]
-  \[    \Eq (l \NATmul m) \NATplus (m \NATplus m)       \]
-  \[    \Eq ((l \NATmul m) \NATplus m) \NATplus m       \]
-  \[    \Eq ((l \NATplus \NATone) \NATmul m) \NATplus m       \]
-  \[    \NATgeq \NATone \NATplus m                    \]
-  \[    \NATgtr m.                          \]
-  Indeed $((l \NATplus \NATone) \NATmul m) \NATplus m \NATgeq \NATone \NATplus m$.
+  \[  k \Mul m                       \]
+  \[    \Eq (l \Plus \Two) \Mul m             \]
+  \[    \Eq (l \Mul m) \Plus (\Two \Mul m)   \]
+  \[    \Eq (l \Mul m) \Plus (m \Plus m)       \]
+  \[    \Eq ((l \Mul m) \Plus m) \Plus m       \]
+  \[    \Eq ((l \Plus \One) \Mul m) \Plus m       \]
+  \[    \Geq \One \Plus m                    \]
+  \[    \Greater m.                          \]
+  Indeed $((l \Plus \One) \Mul m) \Plus m \Geq \One \Plus m$.
 \end{proof}
 \end{smodule}
 \end{document}

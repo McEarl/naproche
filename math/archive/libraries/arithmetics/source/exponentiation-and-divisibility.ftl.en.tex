@@ -7,43 +7,43 @@
 \importmodule[libraries/arithmetics]{divisibility.ftl}
 
 \begin{proposition}[forthel]
-  Let $n, m, k$ be natural numbers such that $n, m \NotEq \NATzero$ and $k \NATgtr \NATone$.
-  Then $\NATexp{k}{n} \NATmid \NATexp{k}{m}$ iff $n \NATleq m$.
+  Let $n, m, k$ be natural numbers such that $n, m \NotEq \Zero$ and $k \Greater \One$.
+  Then $\Exp{k}{n} \Divides \Exp{k}{m}$ iff $n \Leq m$.
 \end{proposition}
 \begin{proof}[forthel]
-  \begin{case}{$\NATexp{k}{n} \NATmid \NATexp{k}{m}$.}
-    Assume $n \NATgtr m$.
-    Take a nonzero natural number $l$ such that $n \Eq m \NATplus l$.
-    Then $\NATexp{k}{n}
-      \Eq \NATexp{k}{m \NATplus l}
-      \Eq \NATexp{k}{m} \NATmul \NATexp{k}{l}$.
-    Hence $\NATexp{k}{m} \NATmid \NATexp{k}{n}$.
-    Thus $\NATexp{k}{m} \Eq \NATexp{k}{n}$.
+  \begin{case}{$\Exp{k}{n} \Divides \Exp{k}{m}$.}
+    Assume $n \Greater m$.
+    Take a nonzero natural number $l$ such that $n \Eq m \Plus l$.
+    Then $\Exp{k}{n}
+      \Eq \Exp{k}{m \Plus l}
+      \Eq \Exp{k}{m} \Mul \Exp{k}{l}$.
+    Hence $\Exp{k}{m} \Divides \Exp{k}{n}$.
+    Thus $\Exp{k}{m} \Eq \Exp{k}{n}$.
     Therefore $m \Eq n$.
     Contradiction.
   \end{case}
 
-  \begin{case}{$n \NATleq m$.}
-    Take a natural number $l$ such that $m \Eq n \NATplus l$.
-    Then $\NATexp{k}{m}
-      \Eq \NATexp{k}{n \NATplus l}
-      \Eq \NATexp{k}{n} \NATmul \NATexp{k}{l}$.
-    Hence $\NATexp{k}{n} \NATmid \NATexp{k}{m}$.
+  \begin{case}{$n \Leq m$.}
+    Take a natural number $l$ such that $m \Eq n \Plus l$.
+    Then $\Exp{k}{m}
+      \Eq \Exp{k}{n \Plus l}
+      \Eq \Exp{k}{n} \Mul \Exp{k}{l}$.
+    Hence $\Exp{k}{n} \Divides \Exp{k}{m}$.
   \end{case}
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a composite natural number.
-  Then $n$ has a nontrivial divisor $m$ such that $\NATexp{m}{\NATtwo} \NATleq n$.
+  Then $n$ has a nontrivial divisor $m$ such that $\Exp{m}{\Two} \Leq n$.
 \end{proposition}
 \begin{proof}[forthel]
-  Define $A \DefEq \SClass{m}{\Nat}{m\text{ is a nontrivial divisor of }n}$.
+  Define $A \DefEq \SClass{m}{\Naturals}{m\text{ is a nontrivial divisor of }n}$.
   $A$ is nonempty.
-  Hence we can take a $m \Elem A$ such that $m \NATleq l$ for all $l \Elem A$.
-  Consider a natural number $k$ such that $m \NATmul k \Eq n$.
-  Then $m \NATleq k$.
-  Hence $\NATexp{m}{\NATtwo} \Eq m \NATmul m \NATleq m \NATmul k \Eq n$.
-  Therefore $\NATexp{m}{\NATtwo} \NATleq n$.
+  Hence we can take a $m \Elem A$ such that $m \Leq l$ for all $l \Elem A$.
+  Consider a natural number $k$ such that $m \Mul k \Eq n$.
+  Then $m \Leq k$.
+  Hence $\Exp{m}{\Two} \Eq m \Mul m \Leq m \Mul k \Eq n$.
+  Therefore $\Exp{m}{\Two} \Leq n$.
 \end{proof}
 \end{smodule}
 \end{document}

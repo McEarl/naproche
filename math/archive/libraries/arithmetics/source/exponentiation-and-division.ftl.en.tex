@@ -8,17 +8,17 @@
 \importmodule[libraries/arithmetics]{subtraction.ftl}
 
 \begin{proposition}[forthel]
-  Let $n, m, k$ be natural numbers such that $k$ is nonzero and $n \NATgeq m$.
-  Then \[\NATfrac{\NATexp{k}{n}}{\NATexp{k}{m}} \Eq \NATexp{k}{n \NATsub m}.\]
+  Let $n, m, k$ be natural numbers such that $k$ is nonzero and $n \Geq m$.
+  Then \[\Frac{\Exp{k}{n}}{\Exp{k}{m}} \Eq \Exp{k}{n \Minus m}.\]
 \end{proposition}
 \begin{proof}[forthel]
-  We have $\NATexp{k}{n} \Eq \NATexp{k}{(n \NATsub m) \NATplus m} \Eq \NATexp{k}{n \NATsub m} \NATmul \NATexp{k}{m}$.
+  We have $\Exp{k}{n} \Eq \Exp{k}{(n \Minus m) \Plus m} \Eq \Exp{k}{n \Minus m} \Mul \Exp{k}{m}$.
   Hence
-  \[  \NATfrac{\NATexp{k}{n}}{\NATexp{k}{m}}
-      \Eq \NATfrac{\NATexp{k}{n \NATsub m} \NATmul \NATexp{k}{m}}{\NATexp{k}{m}}
-      \Eq \NATfrac{\NATexp{k}{n \NATsub m} \NATmul \NATexp{k}{m}}{\NATone \NATmul \NATexp{k}{m}}
-      \Eq \NATfrac{\NATexp{k}{n \NATsub m}}{\NATone}
-      \Eq \NATexp{k}{n \NATsub m}. \]
+  \[  \Frac{\Exp{k}{n}}{\Exp{k}{m}}
+      \Eq \Frac{\Exp{k}{n \Minus m} \Mul \Exp{k}{m}}{\Exp{k}{m}}
+      \Eq \Frac{\Exp{k}{n \Minus m} \Mul \Exp{k}{m}}{\One \Mul \Exp{k}{m}}
+      \Eq \Frac{\Exp{k}{n \Minus m}}{\One}
+      \Eq \Exp{k}{n \Minus m}. \]
 \end{proof}
 \end{smodule}
 \end{document}

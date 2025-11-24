@@ -4,106 +4,106 @@
 \begin{document}
 \begin{smodule}{division.ftl}
 \importmodule[libraries/arithmetics]{divisibility.ftl}
-\symdef{NATfrac}[args=2]{\frac{#1}{#2}}
+\symdef{Frac}[args=2]{\frac{#1}{#2}}
 \symdecl*{quotient}
 
 \begin{definition}[forthel,for=quotient]
   Let $n$ be a natural number and $m$ be a nonzero divisor of $n$.
-  $\emph{\NATfrac{n}{m}}$ is the natural number $k$ such that $k \NATmul m \Eq n$.
-  Let the \emph{quotient of $n$ and $m$} stand for $\NATfrac{n}{m}$.
+  $\emph{\Frac{n}{m}}$ is the natural number $k$ such that $k \Mul m \Eq n$.
+  Let the \emph{quotient of $n$ and $m$} stand for $\Frac{n}{m}$.
 \end{definition}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  $\NATfrac{n}{\NATone} \Eq n$.
+  $\Frac{n}{\One} \Eq n$.
 \end{proposition}
 \begin{proof}[forthel]
-  We have $\NATfrac{n}{\NATone}
-    \Eq \NATfrac{n}{\NATone} \NATmul \NATone
+  We have $\Frac{n}{\One}
+    \Eq \Frac{n}{\One} \Mul \One
     \Eq n$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number and $m$ be a nonzero divisor of $n$.
-  Then $\NATfrac{n}{m} \Eq \NATzero$ iff $n \Eq \NATzero$.
+  Then $\Frac{n}{m} \Eq \Zero$ iff $n \Eq \Zero$.
 \end{proposition}
 \begin{proof}[forthel]
-  \begin{case}{$\NATfrac{n}{m} \Eq \NATzero$.}
+  \begin{case}{$\Frac{n}{m} \Eq \Zero$.}
     Then $n
-      \Eq \NATfrac{n}{m} \NATmul m
-      \Eq \NATzero \NATmul m
-      \Eq \NATzero$.
+      \Eq \Frac{n}{m} \Mul m
+      \Eq \Zero \Mul m
+      \Eq \Zero$.
   \end{case}
 
-  \begin{case}{$n \Eq \NATzero$.}
-    Then $\NATfrac{n}{m} \NATmul m
+  \begin{case}{$n \Eq \Zero$.}
+    Then $\Frac{n}{m} \Mul m
       \Eq n
-      \Eq \NATzero$.
-    Hence $\NATfrac{n}{m} \Eq \NATzero$ or $m \Eq \NATzero$.
+      \Eq \Zero$.
+    Hence $\Frac{n}{m} \Eq \Zero$ or $m \Eq \Zero$.
     $m$ is nonzero.
-    Thus $\NATfrac{n}{m} \Eq \NATzero$.
+    Thus $\Frac{n}{m} \Eq \Zero$.
   \end{case}
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers such that $k$ is nonzero.
-  Assume $k \NATmid n,m$.
-  Then \[\NATfrac{n \NATplus m}{k} \Eq \NATfrac{n}{k} \NATplus \NATfrac{m}{k}.\]
+  Assume $k \Divides n,m$.
+  Then \[\Frac{n \Plus m}{k} \Eq \Frac{n}{k} \Plus \Frac{m}{k}.\]
 \end{proposition}
 \begin{proof}[forthel]
-  We have $\NATfrac{n \NATplus m}{k} \NATmul k \Eq n \NATplus m$ and $\NATfrac{n}{k} \NATmul k \Eq n$ and $\NATfrac{m}{k} \NATmul k \Eq m$.
+  We have $\Frac{n \Plus m}{k} \Mul k \Eq n \Plus m$ and $\Frac{n}{k} \Mul k \Eq n$ and $\Frac{m}{k} \Mul k \Eq m$.
   Hence
-  \[  \NATfrac{n \NATplus m}{k} \NATmul k
-      \Eq \left( \NATfrac{n}{k} \NATmul k \right) \NATplus \left( \NATfrac{m}{k} \NATmul k \right)
-      \Eq \left( \NATfrac{n}{k} \NATplus \NATfrac{m}{k} \right) \NATmul k. \]
-  Thus $\NATfrac{n \NATplus m}{k} \Eq \NATfrac{n}{k} \NATplus \NATfrac{m}{k}$.
+  \[  \Frac{n \Plus m}{k} \Mul k
+      \Eq \left( \Frac{n}{k} \Mul k \right) \Plus \left( \Frac{m}{k} \Mul k \right)
+      \Eq \left( \Frac{n}{k} \Plus \Frac{m}{k} \right) \Mul k. \]
+  Thus $\Frac{n \Plus m}{k} \Eq \Frac{n}{k} \Plus \Frac{m}{k}$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $m$.
-  Then \[\NATfrac{n \NATmul m}{k} \Eq n \NATmul \NATfrac{m}{k}.\]
+  Then \[\Frac{n \Mul m}{k} \Eq n \Mul \Frac{m}{k}.\]
 \end{proposition}
 \begin{proof}[forthel]
-  We have $\NATfrac{n \NATmul m}{k} \NATmul k \Eq n \NATmul m$ and $\NATfrac{m}{k} \NATmul k \Eq m$.
+  We have $\Frac{n \Mul m}{k} \Mul k \Eq n \Mul m$ and $\Frac{m}{k} \Mul k \Eq m$.
   Hence
-  \[  \NATfrac{n \NATmul m}{k} \NATmul k
-      \Eq n \NATmul \left( \NATfrac{m}{k} \NATmul k \right)
-      \Eq \left( n \NATmul \NATfrac{m}{k} \right) \NATmul k. \]
-  Thus $\NATfrac{n \NATmul m}{k} \Eq n \NATmul \NATfrac{m}{k}$.
+  \[  \Frac{n \Mul m}{k} \Mul k
+      \Eq n \Mul \left( \Frac{m}{k} \Mul k \right)
+      \Eq \left( n \Mul \Frac{m}{k} \right) \Mul k. \]
+  Thus $\Frac{n \Mul m}{k} \Eq n \Mul \Frac{m}{k}$.
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $m$.
-  Then \[\NATfrac{n \NATmul m}{k} \Eq \NATfrac{m}{k} \NATmul n.\]
+  Then \[\Frac{n \Mul m}{k} \Eq \Frac{m}{k} \Mul n.\]
 \end{corollary}
 
 \begin{corollary}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $n$.
-  Then \[\NATfrac{n \NATmul m}{k} \Eq \NATfrac{n}{k} \NATmul m.\]
+  Then \[\Frac{n \Mul m}{k} \Eq \Frac{n}{k} \Mul m.\]
 \end{corollary}
 
 \begin{corollary}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $n$.
-  Then \[\NATfrac{n \NATmul m}{k} \Eq m \NATmul \NATfrac{n}{k}.\]
+  Then \[\Frac{n \Mul m}{k} \Eq m \Mul \Frac{n}{k}.\]
 \end{corollary}
 
 \begin{proposition}[forthel]
   Let $n, k$ be natural numbers such that $k$ be nonzero and $m$ be a nonzero divisor of $n$.
-  Then \[\NATfrac{n \NATmul k}{m \NATmul k} \Eq \NATfrac{n}{m}.\]
+  Then \[\Frac{n \Mul k}{m \Mul k} \Eq \Frac{n}{m}.\]
 \end{proposition}
 \begin{proof}[forthel]
-  We have $\NATfrac{n \NATmul k}{m \NATmul k} \NATmul (m \NATmul k) \Eq n \NATmul k$.
+  We have $\Frac{n \Mul k}{m \Mul k} \Mul (m \Mul k) \Eq n \Mul k$.
   Hence
-  \[  \left( \NATfrac{n \NATmul k}{m \NATmul k} \NATmul m \right) \NATmul k
-      \Eq \NATfrac{n \NATmul k}{m \NATmul k} \NATmul (m \NATmul k)
-      \Eq n \NATmul k. \]
-  Thus $\NATfrac{n \NATmul k}{m \NATmul k} \NATmul m \Eq n$.
-  Therefore $\NATfrac{n}{m} \Eq \NATfrac{n \NATmul k}{m \NATmul k}$.
+  \[  \left( \Frac{n \Mul k}{m \Mul k} \Mul m \right) \Mul k
+      \Eq \Frac{n \Mul k}{m \Mul k} \Mul (m \Mul k)
+      \Eq n \Mul k. \]
+  Thus $\Frac{n \Mul k}{m \Mul k} \Mul m \Eq n$.
+  Therefore $\Frac{n}{m} \Eq \Frac{n \Mul k}{m \Mul k}$.
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, k$ be natural numbers such that $k$ be nonzero and $m$ be a nonzero divisor of $n$.
-  Then \[\NATfrac{k \NATmul n}{k \NATmul m} \Eq \NATfrac{n}{m}.\]
+  Then \[\Frac{k \Mul n}{k \Mul m} \Eq \Frac{n}{m}.\]
 \end{corollary}
 \end{smodule}
 \end{document}

@@ -8,377 +8,377 @@
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  Then $n \NATless m$ iff $\NATexp{n}{k} \NATless \NATexp{m}{k}$.
+  Assume $k \NotEq \Zero$.
+  Then $n \Less m$ iff $\Exp{n}{k} \Less \Exp{m}{k}$.
 \end{proposition}
 \begin{proof}[forthel]
-  \begin{case}{$n \NATless m$.}
-    Define $\Phi \DefEq \SClass{k'}{\Nat}{\text{ if }k' \NATgtr \NATone\text{ then }\NATexp{n}{k'} \NATless \NATexp{m}{k'}}$.
+  \begin{case}{$n \Less m$.}
+    Define $\Phi \DefEq \SClass{k'}{\Naturals}{\text{ if }k' \Greater \One\text{ then }\Exp{n}{k'} \Less \Exp{m}{k'}}$.
 
-    (1) $\Phi$ contains $\NATzero$.
+    (1) $\Phi$ contains $\Zero$.
 
-    (2) $\Phi$ contains $\NATone$.
+    (2) $\Phi$ contains $\One$.
 
-    (3) $\Phi$ contains $\NATtwo$.
+    (3) $\Phi$ contains $\Two$.
     \begin{proof}
-      \begin{case}{$n \Eq \NATzero$ or $m \Eq \NATzero$.} \end{case}
+      \begin{case}{$n \Eq \Zero$ or $m \Eq \Zero$.} \end{case}
 
-      \begin{case}{$n, m \NotEq \NATzero$.}
-        Then $n \NATmul n
-          \NATless n \NATmul m
-          \NATless m \NATmul m$.
-        Hence $\NATexp{n}{\NATtwo}
-          \Eq n \NATmul n
-          \NATless n \NATmul m
-          \NATless m \NATmul m
-          \Eq \NATexp{m}{\NATtwo}$.
+      \begin{case}{$n, m \NotEq \Zero$.}
+        Then $n \Mul n
+          \Less n \Mul m
+          \Less m \Mul m$.
+        Hence $\Exp{n}{\Two}
+          \Eq n \Mul n
+          \Less n \Mul m
+          \Less m \Mul m
+          \Eq \Exp{m}{\Two}$.
       \end{case}
     \end{proof}
 
-    (4) For all $k' \Elem \Phi$ we have $k' \NATplus \NATone \Elem \Phi$.
+    (4) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $k' \Elem \Phi$.
 
-      Let us show that if $k' \NATplus \NATone \NATgtr \NATone$ then $\NATexp{n}{k' \NATplus \NATone} \NATless \NATexp{m}{k' \NATplus \NATone}$.
-        Assume $k' \NATplus \NATone \NATgtr \NATone$.
-        Then $\NATexp{n}{k'} \NATless \NATexp{m}{k'}$.
-        Indeed $k' \NotEq \NATzero$ and $if k' \Eq \NATone$ then $\NATexp{n}{k'} \NATless \NATexp{m}{k'}$.
+      Let us show that if $k' \Plus \One \Greater \One$ then $\Exp{n}{k' \Plus \One} \Less \Exp{m}{k' \Plus \One}$.
+        Assume $k' \Plus \One \Greater \One$.
+        Then $\Exp{n}{k'} \Less \Exp{m}{k'}$.
+        Indeed $k' \NotEq \Zero$ and $if k' \Eq \One$ then $\Exp{n}{k'} \Less \Exp{m}{k'}$.
 
-        \begin{case}{$k' \NATleq \NATone$.}
-          Then $k' \Eq \NATzero$ or $k' \Eq \NATone$.
-          Hence $k' \NATplus \NATone \Eq \NATone$ or $k' \NATplus \NATone \Eq \NATtwo$.
-          Thus $k' \NATplus \NATone \Elem \Phi$.
-          Therefore $\NATexp{n}{k' \NATplus \NATone} \NATless \NATexp{m}{k' \NATplus \NATone}$.
+        \begin{case}{$k' \Leq \One$.}
+          Then $k' \Eq \Zero$ or $k' \Eq \One$.
+          Hence $k' \Plus \One \Eq \One$ or $k' \Plus \One \Eq \Two$.
+          Thus $k' \Plus \One \Elem \Phi$.
+          Therefore $\Exp{n}{k' \Plus \One} \Less \Exp{m}{k' \Plus \One}$.
         \end{case}
 
-        \begin{case}{$k' \NATgtr \NATone$.}
-          \begin{case}{$n \Eq \NATzero$.}
-            Then $m \NotEq \NATzero$.
-            Hence $\NATexp{n}{k' \NATplus \NATone}
-              \Eq \NATzero
-              \NATless \NATexp{m}{k'} \NATmul m
-              \Eq \NATexp{m}{k' \NATplus \NATone}$.
-            Thus $\NATexp{n}{k' \NATplus \NATone} \NATless \NATexp{m}{k' \NATplus \NATone}$.
+        \begin{case}{$k' \Greater \One$.}
+          \begin{case}{$n \Eq \Zero$.}
+            Then $m \NotEq \Zero$.
+            Hence $\Exp{n}{k' \Plus \One}
+              \Eq \Zero
+              \Less \Exp{m}{k'} \Mul m
+              \Eq \Exp{m}{k' \Plus \One}$.
+            Thus $\Exp{n}{k' \Plus \One} \Less \Exp{m}{k' \Plus \One}$.
           \end{case}
 
-          \begin{case}{$n \NotEq \NATzero$.}
-            Then $\NATexp{n}{k'} \NATmul n
-              \NATless \NATexp{m}{k'} \NATmul n
-              \NATless \NATexp{m}{k'} \NATmul m$.
-            Indeed $\NATexp{n}{k'} \NATless \NATexp{m}{k'} \NotEq \NATzero$.
-            Take $A \Eq \NATexp{n}{k' \NATplus \NATone}$ and $B \Eq \NATexp{m}{k' \NATplus \NATone}$. %!
+          \begin{case}{$n \NotEq \Zero$.}
+            Then $\Exp{n}{k'} \Mul n
+              \Less \Exp{m}{k'} \Mul n
+              \Less \Exp{m}{k'} \Mul m$.
+            Indeed $\Exp{n}{k'} \Less \Exp{m}{k'} \NotEq \Zero$.
+            Take $A \Eq \Exp{n}{k' \Plus \One}$ and $B \Eq \Exp{m}{k' \Plus \One}$. %!
             Then $A
-              \Eq \NATexp{n}{k' \NATplus \NATone}
-              \Eq \NATexp{n}{k'} \NATmul n
-              \NATless \NATexp{m}{k'} \NATmul n
-              \NATless \NATexp{m}{k'} \NATmul m
-              \Eq \NATexp{m}{k' \NATplus \NATone}
+              \Eq \Exp{n}{k' \Plus \One}
+              \Eq \Exp{n}{k'} \Mul n
+              \Less \Exp{m}{k'} \Mul n
+              \Less \Exp{m}{k'} \Mul m
+              \Eq \Exp{m}{k' \Plus \One}
               \Eq B$.
-            Take $X \Eq \NATexp{m}{k'} \NATmul n$ and $Y \Eq \NATexp{m}{k'} \NATmul m$.
-            Then $A \NATless X \NATless Y \Eq B$.
-            Hence $A \NATless B$.
-            Thus $\NATexp{n}{k' \NATplus \NATone} \NATless \NATexp{m}{k' \NATplus \NATone}$.
+            Take $X \Eq \Exp{m}{k'} \Mul n$ and $Y \Eq \Exp{m}{k'} \Mul m$.
+            Then $A \Less X \Less Y \Eq B$.
+            Hence $A \Less B$.
+            Thus $\Exp{n}{k' \Plus \One} \Less \Exp{m}{k' \Plus \One}$.
           \end{case}
         \end{case}
 
-        Hence $\NATexp{n}{k' \NATplus \NATone} \NATless \NATexp{m}{k' \NATplus \NATone}$.
-        Indeed $k' \NATleq \NATone$ or $k' \NATgtr \NATone$.
+        Hence $\Exp{n}{k' \Plus \One} \Less \Exp{m}{k' \Plus \One}$.
+        Indeed $k' \Leq \One$ or $k' \Greater \One$.
       End.
 
-      Thus $k' \NATplus \NATone \Elem \Phi$.
+      Thus $k' \Plus \One \Elem \Phi$.
     \end{proof}
 
     Therefore every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-    Consequently $\NATexp{n}{k} \NATless \NATexp{m}{k}$.
+    Consequently $\Exp{n}{k} \Less \Exp{m}{k}$.
   \end{case}
 
-  \begin{case}{$\NATexp{n}{k} \NATless \NATexp{m}{k}$.}
-    Define $\Psi \DefEq \SClass{k'}{\Nat}{\text{ if }n \NATgeq m\text{ then }\NATexp{n}{k'} \NATgeq \NATexp{m}{k'}}$.
+  \begin{case}{$\Exp{n}{k} \Less \Exp{m}{k}$.}
+    Define $\Psi \DefEq \SClass{k'}{\Naturals}{\text{ if }n \Geq m\text{ then }\Exp{n}{k'} \Geq \Exp{m}{k'}}$.
 
-    (1) $\Psi$ contains $\NATzero$.
+    (1) $\Psi$ contains $\Zero$.
 
-    (2) For all $k' \Elem \Psi$ we have $k' \NATplus \NATone \Elem \Psi$.
+    (2) For all $k' \Elem \Psi$ we have $k' \Plus \One \Elem \Psi$.
     \begin{proof}
       Let $k' \Elem \Psi$.
 
-      Let us show that if $n \NATgeq m$ then $\NATexp{n}{k' \NATplus \NATone} \NATgeq \NATexp{m}{k' \NATplus \NATone}$.
-        Assume $n \NATgeq m$.
-        Then $\NATexp{n}{k'} \NATgeq \NATexp{m}{k'}$.
-        Hence $\NATexp{n}{k'} \NATmul n \NATgeq \NATexp{m}{k'} \NATmul n \NATgeq \NATexp{m}{k'} \NATmul m$.
-        Take $A \Eq \NATexp{n}{k' \NATplus \NATone}$ and $B \Eq \NATexp{m}{k' \NATplus \NATone}$. %!
+      Let us show that if $n \Geq m$ then $\Exp{n}{k' \Plus \One} \Geq \Exp{m}{k' \Plus \One}$.
+        Assume $n \Geq m$.
+        Then $\Exp{n}{k'} \Geq \Exp{m}{k'}$.
+        Hence $\Exp{n}{k'} \Mul n \Geq \Exp{m}{k'} \Mul n \Geq \Exp{m}{k'} \Mul m$.
+        Take $A \Eq \Exp{n}{k' \Plus \One}$ and $B \Eq \Exp{m}{k' \Plus \One}$. %!
         Thus $A
-          \Eq \NATexp{n}{k' \NATplus \NATone}
-          \Eq \NATexp{n}{k'} \NATmul n
-          \NATgeq \NATexp{m}{k'} \NATmul n
-          \NATgeq \NATexp{m}{k'} \NATmul m
-          \Eq \NATexp{m}{k' \NATplus \NATone}
+          \Eq \Exp{n}{k' \Plus \One}
+          \Eq \Exp{n}{k'} \Mul n
+          \Geq \Exp{m}{k'} \Mul n
+          \Geq \Exp{m}{k'} \Mul m
+          \Eq \Exp{m}{k' \Plus \One}
           \Eq B$.
-        Therefore $\NATexp{n}{k' \NATplus \NATone} \Eq A \NATgeq B \Eq \NATexp{m}{k' \NATplus \NATone}$.
+        Therefore $\Exp{n}{k' \Plus \One} \Eq A \Geq B \Eq \Exp{m}{k' \Plus \One}$.
       End.
 
-      Hence $k' \NATplus \NATone \Elem \Psi$.
+      Hence $k' \Plus \One \Elem \Psi$.
     \end{proof}
 
     Thus every natural number is contained in $\Psi$ (by \sr{induction I}{induction}).
-    Therefore if $n \NATgeq m$ then $\NATexp{n}{k} \NATgeq \NATexp{m}{k}$.
-    Consequently $n \NATless m$.
+    Therefore if $n \Geq m$ then $\Exp{n}{k} \Geq \Exp{m}{k}$.
+    Consequently $n \Less m$.
   \end{case}
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  Then \[ \NATexp{n}{k} \Eq \NATexp{m}{k} \Implies n \Eq m. \]
+  Assume $k \NotEq \Zero$.
+  Then \[ \Exp{n}{k} \Eq \Exp{m}{k} \Implies n \Eq m. \]
 \end{corollary}
 \begin{proof}[forthel]
-  Assume $\NATexp{n}{k} \Eq \NATexp{m}{k}$.
+  Assume $\Exp{n}{k} \Eq \Exp{m}{k}$.
   Suppose $n \NotEq m$.
-  Then $n \NATless m$ or $m \NATless n$.
-  If $n \NATless m$ then $\NATexp{n}{k} \NATless \NATexp{m}{k}$.
-  If $m \NATless n$ then $\NATexp{m}{k} \NATless \NATexp{n}{k}$.
-  Thus $\NATexp{n}{k} \NotEq \NATexp{m}{k}$.
+  Then $n \Less m$ or $m \Less n$.
+  If $n \Less m$ then $\Exp{n}{k} \Less \Exp{m}{k}$.
+  If $m \Less n$ then $\Exp{m}{k} \Less \Exp{n}{k}$.
+  Thus $\Exp{n}{k} \NotEq \Exp{m}{k}$.
   Contradiction.
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NotEq \NATzero$.
-  Then \[ \NATexp{n}{k} \NATleq \NATexp{m}{k} \Iff n \NATleq m. \]
+  Assume $k \NotEq \Zero$.
+  Then \[ \Exp{n}{k} \Leq \Exp{m}{k} \Iff n \Leq m. \]
 \end{corollary}
 \begin{proof}[forthel]
-  If $\NATexp{n}{k} \NATless \NATexp{m}{k}$ then $n \NATless m$.
-  If $\NATexp{n}{k} \Eq \NATexp{m}{k}$ then $n \Eq m$.
+  If $\Exp{n}{k} \Less \Exp{m}{k}$ then $n \Less m$.
+  If $\Exp{n}{k} \Eq \Exp{m}{k}$ then $n \Eq m$.
 
-  If $n \NATless m$ then $\NATexp{n}{k} \NATless \NATexp{m}{k}$.
-  If $n \Eq m$ then $\NATexp{n}{k} \Eq \NATexp{m}{k}$.
+  If $n \Less m$ then $\Exp{n}{k} \Less \Exp{m}{k}$.
+  If $n \Eq m$ then $\Exp{n}{k} \Eq \Exp{m}{k}$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NATgtr \NATone$.
-  Then \[ n \NATless m \Iff \NATexp{k}{n} \NATless \NATexp{k}{m}. \]
+  Assume $k \Greater \One$.
+  Then \[ n \Less m \Iff \Exp{k}{n} \Less \Exp{k}{m}. \]
 \end{proposition}
 \begin{proof}[forthel]
-  \begin{case}{$n \NATless m$.}
-    Define $\Phi \DefEq \SClass{m'}{\Nat}{\text{ if }n \NATless m'\text{ then }\NATexp{k}{n} \NATless \NATexp{k}{m'}}$.
+  \begin{case}{$n \Less m$.}
+    Define $\Phi \DefEq \SClass{m'}{\Naturals}{\text{ if }n \Less m'\text{ then }\Exp{k}{n} \Less \Exp{k}{m'}}$.
 
-    (1) $\Phi$ contains $\NATzero$.
+    (1) $\Phi$ contains $\Zero$.
 
-    (2) For all $m' \Elem \Phi$ we have $m' \NATplus \NATone \Elem \Phi$.
+    (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
     \begin{proof}
       Let $m' \Elem \Phi$.
 
-      Let us show that if $n \NATless m' \NATplus \NATone$ then $\NATexp{k}{n} \NATless \NATexp{k}{m' \NATplus \NATone}$.
-        Assume $n \NATless m' \NATplus \NATone$.
-        Then $n \NATleq m'$.
-        We have $\NATexp{k}{m'} \NATmul \NATone \NATless \NATexp{k}{m'} \NATmul k$.
-        Indeed $\NATexp{k}{m'} \NotEq \NATzero$.
+      Let us show that if $n \Less m' \Plus \One$ then $\Exp{k}{n} \Less \Exp{k}{m' \Plus \One}$.
+        Assume $n \Less m' \Plus \One$.
+        Then $n \Leq m'$.
+        We have $\Exp{k}{m'} \Mul \One \Less \Exp{k}{m'} \Mul k$.
+        Indeed $\Exp{k}{m'} \NotEq \Zero$.
 
         \begin{case}{$n \Eq m'$.}
-          Take $A \Eq \NATexp{k}{n}$ and $B \Eq \NATexp{k}{m' \NATplus \NATone}$. %!
+          Take $A \Eq \Exp{k}{n}$ and $B \Eq \Exp{k}{m' \Plus \One}$. %!
           Then $A
-            \Eq \NATexp{k}{n}
-            \Eq \NATexp{k}{m'}
-            \NATless \NATexp{k}{m'} \NATmul k
-            \Eq \NATexp{k}{m' \NATplus \NATone}
+            \Eq \Exp{k}{n}
+            \Eq \Exp{k}{m'}
+            \Less \Exp{k}{m'} \Mul k
+            \Eq \Exp{k}{m' \Plus \One}
             \Eq B$.
-          Hence $\NATexp{k}{n} \Eq A \NATless B \Eq \NATexp{k}{m' \NATplus \NATone}$.
+          Hence $\Exp{k}{n} \Eq A \Less B \Eq \Exp{k}{m' \Plus \One}$.
         \end{case}
 
-        \begin{case}{$n \NATless m'$.}
-          Take $A \Eq \NATexp{k}{n}$ and $B \Eq \NATexp{k}{m' \NATplus \NATone}$. %!
+        \begin{case}{$n \Less m'$.}
+          Take $A \Eq \Exp{k}{n}$ and $B \Eq \Exp{k}{m' \Plus \One}$. %!
           Then $A
-            \Eq \NATexp{k}{n}
-            \NATless \NATexp{k}{m'}
-            \NATless \NATexp{k}{m'} \NATmul k
-            \Eq \NATexp{k}{m' \NATplus \NATone}
+            \Eq \Exp{k}{n}
+            \Less \Exp{k}{m'}
+            \Less \Exp{k}{m'} \Mul k
+            \Eq \Exp{k}{m' \Plus \One}
             \Eq B$.
-          Hence $\NATexp{k}{n} \Eq A \NATless B \Eq \NATexp{k}{m' \NATplus \NATone}$.
+          Hence $\Exp{k}{n} \Eq A \Less B \Eq \Exp{k}{m' \Plus \One}$.
         \end{case}
       End.
     \end{proof}
 
     Hence every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-    Thus $\NATexp{k}{n} \NATless \NATexp{k}{m}$.
+    Thus $\Exp{k}{n} \Less \Exp{k}{m}$.
   \end{case}
 
-  \begin{case}{$\NATexp{k}{n} \NATless \NATexp{k}{m}$.}
-    Define $\Psi \DefEq \SClass{n'}{\Nat}{\text{ if }n' \NATgeq m\text{ then }
-    \NATexp{k}{n'} \NATgeq \NATexp{k}{m}}$.
+  \begin{case}{$\Exp{k}{n} \Less \Exp{k}{m}$.}
+    Define $\Psi \DefEq \SClass{n'}{\Naturals}{\text{ if }n' \Geq m\text{ then }
+    \Exp{k}{n'} \Geq \Exp{k}{m}}$.
 
-    (1) $\NATzero$ is contained in $\Psi$.
+    (1) $\Zero$ is contained in $\Psi$.
 
-    (2) For all $n' \Elem \Psi$ we have $n' \NATplus \NATone \Elem \Psi$.
+    (2) For all $n' \Elem \Psi$ we have $n' \Plus \One \Elem \Psi$.
     \begin{proof}
       Let $n' \Elem \Psi$.
 
-      Let us show that if $n' \NATplus \NATone \NATgeq m$ then $\NATexp{k}{n' \NATplus \NATone} \NATgeq \NATexp{k}{m}$.
-        Assume $n' \NATplus \NATone \NATgeq m$.
+      Let us show that if $n' \Plus \One \Geq m$ then $\Exp{k}{n' \Plus \One} \Geq \Exp{k}{m}$.
+        Assume $n' \Plus \One \Geq m$.
 
-        \begin{case}{$n' \NATplus \NATone \Eq m$.} \end{case}
+        \begin{case}{$n' \Plus \One \Eq m$.} \end{case}
 
-        \begin{case}{$n' \NATplus \NATone \NATgtr m$.}
-          Then $n' \NATgeq m$.
-          Hence $\NATexp{k}{n'} \NATgeq \NATexp{k}{m}$.
-          We have $\NATexp{k}{n'} \NATmul \NATone \NATleq \NATexp{k}{n'} \NATmul k$.
-          Indeed $\NATone \NATleq k$ and $\NATexp{k}{n'} \NotEq \NATzero$.
-          Take $A \Eq \NATexp{k}{m}$ and $B \Eq \NATexp{k}{n' \NATplus \NATone}$. %!
+        \begin{case}{$n' \Plus \One \Greater m$.}
+          Then $n' \Geq m$.
+          Hence $\Exp{k}{n'} \Geq \Exp{k}{m}$.
+          We have $\Exp{k}{n'} \Mul \One \Leq \Exp{k}{n'} \Mul k$.
+          Indeed $\One \Leq k$ and $\Exp{k}{n'} \NotEq \Zero$.
+          Take $A \Eq \Exp{k}{m}$ and $B \Eq \Exp{k}{n' \Plus \One}$. %!
           Then $A
-            \Eq \NATexp{k}{m}
-            \NATleq \NATexp{k}{n'}
-            \Eq \NATexp{k}{n'} \NATmul \NATone
-            \NATleq \NATexp{k}{n'} \NATmul k
-            \Eq \NATexp{k}{n' \NATplus \NATone}
+            \Eq \Exp{k}{m}
+            \Leq \Exp{k}{n'}
+            \Eq \Exp{k}{n'} \Mul \One
+            \Leq \Exp{k}{n'} \Mul k
+            \Eq \Exp{k}{n' \Plus \One}
             \Eq B$.
-          Hence $\NATexp{k}{m} \Eq A \NATleq B \Eq \NATexp{k}{n' \NATplus \NATone}$.
+          Hence $\Exp{k}{m} \Eq A \Leq B \Eq \Exp{k}{n' \Plus \One}$.
         \end{case}
       End.
     \end{proof}
 
     Thus every natural number is contained in $\Psi$ (by \sr{induction I}{induction}).
-    Therefore if $n \NATgeq m$ then $\NATexp{k}{n} \NATgeq \NATexp{k}{m}$.
-    Consequently $n \NATless m$.
+    Therefore if $n \Geq m$ then $\Exp{k}{n} \Geq \Exp{k}{m}$.
+    Consequently $n \Less m$.
   \end{case}
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NATgtr \NATone$.
-  If $\NATexp{k}{n} \Eq \NATexp{k}{m}$ then $n \Eq m$.
+  Assume $k \Greater \One$.
+  If $\Exp{k}{n} \Eq \Exp{k}{m}$ then $n \Eq m$.
 \end{corollary}
 \begin{proof}[forthel]
-  Assume $\NATexp{k}{n} \Eq \NATexp{k}{m}$.
+  Assume $\Exp{k}{n} \Eq \Exp{k}{m}$.
   Suppose $n \NotEq m$.
-  Then $n \NATless m$ or $m \NATless n$.
-  If $n \NATless m$ then $\NATexp{k}{n} \NATless \NATexp{k}{m}$.
-  If $m \NATless n$ then $\NATexp{k}{m} \NATless \NATexp{k}{n}$.
-  Thus $\NATexp{k}{n} \NotEq \NATexp{k}{m}$.
+  Then $n \Less m$ or $m \Less n$.
+  If $n \Less m$ then $\Exp{k}{n} \Less \Exp{k}{m}$.
+  If $m \Less n$ then $\Exp{k}{m} \Less \Exp{k}{n}$.
+  Thus $\Exp{k}{n} \NotEq \Exp{k}{m}$.
   Contradiction.
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n, m, k$ be natural numbers.
-  Assume $k \NATgtr \NATone$.
-  Then $n \NATleq m$ iff $\NATexp{k}{n} \NATleq \NATexp{k}{m}$.
+  Assume $k \Greater \One$.
+  Then $n \Leq m$ iff $\Exp{k}{n} \Leq \Exp{k}{m}$.
 \end{corollary}
 \begin{proof}[forthel]
-  If $n \NATleq m$ then $\NATexp{k}{n} \NATleq \NATexp{k}{m}$.
+  If $n \Leq m$ then $\Exp{k}{n} \Leq \Exp{k}{m}$.
 
-  If $\NATexp{k}{n} \Eq \NATexp{k}{m}$ then $n \Eq m$.
-  If $\NATexp{k}{n} \NATless \NATexp{k}{m}$ then $n \NATless m$.
+  If $\Exp{k}{n} \Eq \Exp{k}{m}$ then $n \Eq m$.
+  If $\Exp{k}{n} \Less \Exp{k}{m}$ then $n \Less m$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Then $\NATexp{n \NATplus \NATone}{\NATtwo} \Eq (\NATexp{n}{\NATtwo} \NATplus (\NATtwo \NATmul n)) \NATplus \NATone$.
+  Then $\Exp{n \Plus \One}{\Two} \Eq (\Exp{n}{\Two} \Plus (\Two \Mul n)) \Plus \One$.
 \end{proposition}
 \begin{proof}[forthel]
   We have
-  \[  \NATexp{n \NATplus \NATone}{\NATtwo}                       \]
-  \[    \Eq (n \NATplus \NATone) \NATmul (n \NATplus \NATone)         \]
-  \[    \Eq ((n \NATplus \NATone) \NATmul n) \NATplus (n \NATplus \NATone)   \]
-  \[    \Eq ((n \NATmul n) \NATplus n) \NATplus (n \NATplus \NATone)   \]
-  \[    \Eq (\NATexp{n}{\NATtwo} \NATplus n) \NATplus (n \NATplus \NATone)         \]
-  \[    \Eq ((\NATexp{n}{\NATtwo} \NATplus n) \NATplus n) \NATplus \NATone         \]
-  \[    \Eq (\NATexp{n}{\NATtwo} \NATplus (n \NATplus n)) \NATplus \NATone         \]
-  \[    \Eq (\NATexp{n}{\NATtwo} \NATplus (\NATtwo \NATmul n)) \NATplus \NATone.    \]
+  \[  \Exp{n \Plus \One}{\Two}                       \]
+  \[    \Eq (n \Plus \One) \Mul (n \Plus \One)         \]
+  \[    \Eq ((n \Plus \One) \Mul n) \Plus (n \Plus \One)   \]
+  \[    \Eq ((n \Mul n) \Plus n) \Plus (n \Plus \One)   \]
+  \[    \Eq (\Exp{n}{\Two} \Plus n) \Plus (n \Plus \One)         \]
+  \[    \Eq ((\Exp{n}{\Two} \Plus n) \Plus n) \Plus \One         \]
+  \[    \Eq (\Exp{n}{\Two} \Plus (n \Plus n)) \Plus \One         \]
+  \[    \Eq (\Exp{n}{\Two} \Plus (\Two \Mul n)) \Plus \One.    \]
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Assume $n \NATgeq \NATthree$.
-  Then $\NATexp{n}{\NATtwo} \NATgtr (\NATtwo \NATmul n) \NATplus \NATone$.
+  Assume $n \Geq \Three$.
+  Then $\Exp{n}{\Two} \Greater (\Two \Mul n) \Plus \One$.
 \end{proposition}
 \begin{proof}[forthel]
-  (a) Define $\Phi \DefEq \SClass{n'}{\Natgeqthan{\NATthree}}{\NATexp{n'}{\NATtwo} \NATgtr (\NATtwo \NATmul n') \NATplus \NATone}$.
+  (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Three}}{\Exp{n'}{\Two} \Greater (\Two \Mul n') \Plus \One}$.
 
-  (1) $\Phi$ contains $\NATthree$.
-  Indeed $\NATexp{\NATthree}{\NATtwo} \NATgtr (\NATtwo \NATmul \NATthree) \NATplus \NATone$.
+  (1) $\Phi$ contains $\Three$.
+  Indeed $\Exp{\Three}{\Two} \Greater (\Two \Mul \Three) \Plus \One$.
 
-  (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
   \begin{proof}
     Let $n' \Elem \Phi$.
-    Then $n' \NATgeq \NATthree$.
+    Then $n' \Geq \Three$.
 
-    Take $V \Eq (\NATexp{n'}{\NATtwo} \NATplus (\NATtwo \NATmul n')) \NATplus \NATone$ and $W \Eq (((\NATtwo \NATmul n') \NATplus \NATone) \NATplus (\NATtwo \NATmul n')) \NATplus \NATone$.
-    Then $V \NATgtr W$.
+    Take $V \Eq (\Exp{n'}{\Two} \Plus (\Two \Mul n')) \Plus \One$ and $W \Eq (((\Two \Mul n') \Plus \One) \Plus (\Two \Mul n')) \Plus \One$.
+    Then $V \Greater W$.
     \begin{proof}
-      We have $\NATexp{n'}{\NATtwo} \NATgtr (\NATtwo \NATmul n') \NATplus \NATone$.
-      Hence $\NATexp{n'}{\NATtwo} \NATplus (\NATtwo \NATmul n') \NATgtr ((\NATtwo \NATmul n') \NATplus \NATone) \NATplus (\NATtwo \NATmul n')$ (by \sn{preservation of ordering under right-addition}).
+      We have $\Exp{n'}{\Two} \Greater (\Two \Mul n') \Plus \One$.
+      Hence $\Exp{n'}{\Two} \Plus (\Two \Mul n') \Greater ((\Two \Mul n') \Plus \One) \Plus (\Two \Mul n')$ (by \sn{preservation of ordering under right-addition}).
     \end{proof}
 
-    Take $X \Eq ((\NATtwo \NATmul n') \NATplus (\NATtwo \NATmul n')) \NATplus \NATone$.
-    Then $W \NATgtr X$.
+    Take $X \Eq ((\Two \Mul n') \Plus (\Two \Mul n')) \Plus \One$.
+    Then $W \Greater X$.
     \begin{proof}
-      We have $((\NATtwo \NATmul n') \NATplus \NATone) \NATplus (\NATtwo \NATmul n') \NATgtr (\NATtwo \NATmul n') \NATplus (\NATtwo \NATmul n')$.
-      Indeed $(\NATtwo \NATmul n') \NATplus \NATone \NATgtr \NATtwo \NATmul n'$.
+      We have $((\Two \Mul n') \Plus \One) \Plus (\Two \Mul n') \Greater (\Two \Mul n') \Plus (\Two \Mul n')$.
+      Indeed $(\Two \Mul n') \Plus \One \Greater \Two \Mul n'$.
     \end{proof}
 
-    Take $Y \Eq (\NATtwo \NATmul (n' \NATplus n')) \NATplus \NATone$ and $Z \Eq (\NATtwo \NATmul (n' \NATplus \NATone)) \NATplus \NATone$.
-    Then $Y \NATgtr Z$.
+    Take $Y \Eq (\Two \Mul (n' \Plus n')) \Plus \One$ and $Z \Eq (\Two \Mul (n' \Plus \One)) \Plus \One$.
+    Then $Y \Greater Z$.
     \begin{proof}
-      We have $n' \NATplus n' \NATgtr n' \NATplus \NATone$ and $\NATtwo \NotEq \NATzero$.
-      Thus $\NATtwo \NATmul (n' \NATplus n') \NATgtr \NATtwo \NATmul (n' \NATplus \NATone)$ (by \sn{preservation of ordering under left-multiplication}).
-      Indeed $n' \NATplus n'$ and $n' \NATplus \NATone$ are natural numbers.
+      We have $n' \Plus n' \Greater n' \Plus \One$ and $\Two \NotEq \Zero$.
+      Thus $\Two \Mul (n' \Plus n') \Greater \Two \Mul (n' \Plus \One)$ (by \sn{preservation of ordering under left-multiplication}).
+      Indeed $n' \Plus n'$ and $n' \Plus \One$ are natural numbers.
     \end{proof}
 
-    Then $\NATexp{n' \NATplus \NATone}{\NATtwo} \Eq V \NATgtr W \NATgtr X \Eq Y \NATgtr Z \Eq (\NATtwo \NATmul (n' \NATplus \NATone)) \NATplus \NATone$.
-    Hence $\NATexp{n' \NATplus \NATone}{\NATtwo} \NATgtr (\NATtwo \NATmul (n' \NATplus \NATone)) \NATplus \NATone$.
+    Then $\Exp{n' \Plus \One}{\Two} \Eq V \Greater W \Greater X \Eq Y \Greater Z \Eq (\Two \Mul (n' \Plus \One)) \Plus \One$.
+    Hence $\Exp{n' \Plus \One}{\Two} \Greater (\Two \Mul (n' \Plus \One)) \Plus \One$.
   \end{proof}
 
-  Therefore $\Phi$ contains every element of $\Natgeqthan{\NATthree}$ (by \sr{induction III}{induction}, 1, 2).
-  Consequently $\NATexp{n}{\NATtwo} \NATgtr (\NATtwo \NATmul n) \NATplus \NATone$ (by a).
+  Therefore $\Phi$ contains every element of $\NatGeq{\Three}$ (by \sr{induction III}{induction}, 1, 2).
+  Consequently $\Exp{n}{\Two} \Greater (\Two \Mul n) \Plus \One$ (by a).
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Assume $n \NATgeq \NATfive$.
-  Then $\NATexp{\NATtwo}{n} \NATgtr \NATexp{n}{\NATtwo}$.
+  Assume $n \Geq \Five$.
+  Then $\Exp{\Two}{n} \Greater \Exp{n}{\Two}$.
 \end{proposition}
 \begin{proof}[forthel]
-  (a) Define $\Phi \DefEq \SClass{n'}{\Natgeqthan{\NATfive}}{\NATexp{\NATtwo}{n'} \NATgtr \NATexp{n'}{\NATtwo}}$.
+  (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Five}}{\Exp{\Two}{n'} \Greater \Exp{n'}{\Two}}$.
 
-  (1) $\Phi$ contains $\NATfive$.
-  Indeed we can show that $\NATexp{\NATtwo}{\NATfive} \NATgtr \NATexp{\NATfive}{\NATtwo}$.
-    We have $\NATexp{\NATtwo}{\NATfive}
-      \Eq \NATtwo \NATmul (\NATtwo \NATmul (\NATtwo \NATmul (\NATtwo \NATmul \NATtwo)))
-      \Eq \NATeight \NATmul \NATfour
-      \Eq (\NATfive \NATplus \NATthree) \NATmul \NATfour
-      \Eq (\NATfive \NATmul \NATfour) \NATplus (\NATthree \NATmul \NATfour)
-      \Eq (\NATfive \NATmul \NATfour) \NATplus ((\NATfive \NATmul \NATtwo) \NATplus \NATtwo)
-      \Eq (\NATfive \NATmul (\NATfour \NATplus \NATtwo)) \NATplus \NATtwo
-      \Eq (\NATfive \NATmul \NATsix) \NATplus \NATtwo
-      \NATgtr \NATfive \NATmul \NATsix
-      \NATgtr \NATfive \NATmul \NATfive
-      \Eq \NATexp{\NATfive}{\NATtwo}$.
-    Indeed $((\NATfive \NATmul \NATfour) \NATplus ((\NATfive \NATmul \NATtwo) \NATplus \NATtwo)) \Eq (\NATfive \NATmul (\NATfour \NATplus \NATtwo)) \NATplus \NATtwo$. %!
+  (1) $\Phi$ contains $\Five$.
+  Indeed we can show that $\Exp{\Two}{\Five} \Greater \Exp{\Five}{\Two}$.
+    We have $\Exp{\Two}{\Five}
+      \Eq \Two \Mul (\Two \Mul (\Two \Mul (\Two \Mul \Two)))
+      \Eq \Eight \Mul \Four
+      \Eq (\Five \Plus \Three) \Mul \Four
+      \Eq (\Five \Mul \Four) \Plus (\Three \Mul \Four)
+      \Eq (\Five \Mul \Four) \Plus ((\Five \Mul \Two) \Plus \Two)
+      \Eq (\Five \Mul (\Four \Plus \Two)) \Plus \Two
+      \Eq (\Five \Mul \Six) \Plus \Two
+      \Greater \Five \Mul \Six
+      \Greater \Five \Mul \Five
+      \Eq \Exp{\Five}{\Two}$.
+    Indeed $((\Five \Mul \Four) \Plus ((\Five \Mul \Two) \Plus \Two)) \Eq (\Five \Mul (\Four \Plus \Two)) \Plus \Two$. %!
   End.
 
-  (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
   \begin{proof}
     Let $n' \Elem \Phi$.
-    Then $n' \NATgeq \NATfive$ and $\NATexp{\NATtwo}{n'} \NATgtr \NATexp{n'}{\NATtwo}$.
+    Then $n' \Geq \Five$ and $\Exp{\Two}{n'} \Greater \Exp{n'}{\Two}$.
 
-    Take $V \Eq \NATexp{\NATtwo}{n'} \NATmul \NATtwo$ and $W \Eq \NATexp{n'}{\NATtwo} \NATmul \NATtwo$.
-    Then $V \NATgtr W$.
-    Indeed $\NATtwo \NotEq \NATzero$.
+    Take $V \Eq \Exp{\Two}{n'} \Mul \Two$ and $W \Eq \Exp{n'}{\Two} \Mul \Two$.
+    Then $V \Greater W$.
+    Indeed $\Two \NotEq \Zero$.
 
-    Take $X \Eq \NATexp{n'}{\NATtwo} \NATplus \NATexp{n'}{\NATtwo}$.
+    Take $X \Eq \Exp{n'}{\Two} \Plus \Exp{n'}{\Two}$.
     Then $W \Eq X$.
 
-    Take $Y \Eq \NATexp{n'}{\NATtwo} \NATplus ((\NATtwo \NATmul n') \NATplus \NATone)$.
-    Then $X \NATgtr Y$.
-    Indeed $\NATexp{n'}{\NATtwo} \NATgtr (\NATtwo \NATmul n') \NATplus \NATone$.
+    Take $Y \Eq \Exp{n'}{\Two} \Plus ((\Two \Mul n') \Plus \One)$.
+    Then $X \Greater Y$.
+    Indeed $\Exp{n'}{\Two} \Greater (\Two \Mul n') \Plus \One$.
 
-    Take $Z \Eq \NATexp{n' \NATplus \NATone}{\NATtwo}$.
+    Take $Z \Eq \Exp{n' \Plus \One}{\Two}$.
     Then $Y \Eq Z$.
 
-    Then $\NATexp{\NATtwo}{n' \NATplus \NATone} \Eq V \NATgtr W \Eq X \NATgtr Y \Eq Z \Eq \NATexp{n' \NATplus \NATone}{\NATtwo}$.
-    Hence $\NATexp{\NATtwo}{n' \NATplus \NATone} \NATgtr \NATexp{n' \NATplus \NATone}{\NATtwo}$.
+    Then $\Exp{\Two}{n' \Plus \One} \Eq V \Greater W \Eq X \Greater Y \Eq Z \Eq \Exp{n' \Plus \One}{\Two}$.
+    Hence $\Exp{\Two}{n' \Plus \One} \Greater \Exp{n' \Plus \One}{\Two}$.
   \end{proof}
 
-  Therefore $\Phi$ contains every element of $\Natgeqthan{\NATfive}$ (by \sr{induction III}{induction}).
-  Consequently $\NATexp{\NATtwo}{n} \NATgtr \NATexp{n}{\NATtwo}$ (by a).
+  Therefore $\Phi$ contains every element of $\NatGeq{\Five}$ (by \sr{induction III}{induction}).
+  Consequently $\Exp{\Two}{n} \Greater \Exp{n}{\Two}$ (by a).
 \end{proof}
 \end{smodule}
 \end{document}

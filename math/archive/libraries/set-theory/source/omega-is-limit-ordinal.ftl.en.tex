@@ -7,39 +7,39 @@
 \importmodule[libraries/set-theory]{limit-ordinals.ftl}
 
 \begin{proposition}[forthel]
-  $\ORDomega$ is a limit ordinal.
+  $\Infinity$ is a limit ordinal.
 \end{proposition}
 \begin{proof}[forthel]
-  $\ORDomega$ is transitive.
+  $\Infinity$ is transitive.
   \begin{proof}
-    Define $\Phi \DefEq \SClass{n}{\ORDomega}{\text{ for all }m \Elem n\text{ we have }m \Elem \ORDomega}$.
+    Define $\Phi \DefEq \SClass{n}{\Infinity}{\text{ for all }m \Elem n\text{ we have }m \Elem \Infinity}$.
 
-    (1) $\ORDzero \Elem \Phi$.
+    (1) $\Zero \Elem \Phi$.
 
-    (2) For all $n \Elem \Phi$ we have $\ORDsucc(n) \Elem \Phi$.
+    (2) For all $n \Elem \Phi$ we have $\Succ(n) \Elem \Phi$.
     \begin{proof}
       Let $n \Elem \Phi$.
-      Then every element of $n$ is contained in $\ORDomega$.
-      Hence every element of $\ORDsucc(n)$ is contained in $\ORDomega$.
-      Thus $\ORDsucc(n) \Elem \Phi$.
+      Then every element of $n$ is contained in $\Infinity$.
+      Hence every element of $\Succ(n)$ is contained in $\Infinity$.
+      Thus $\Succ(n) \Elem \Phi$.
     \end{proof}
 
-    Therefore $\ORDomega \SETinclude \Phi$.
-    Consequently $\ORDomega$ is transitive.
+    Therefore $\Infinity \Subclass \Phi$.
+    Consequently $\Infinity$ is transitive.
   \end{proof}
 
-  Every element of $\ORDomega$ is an ordinal.
-  Hence every element of $\ORDomega$ is transitive.
-  Thus $\ORDomega$ is an ordinal.
+  Every element of $\Infinity$ is an ordinal.
+  Hence every element of $\Infinity$ is transitive.
+  Thus $\Infinity$ is an ordinal.
 
-  $\ORDomega$ is a limit ordinal.
+  $\Infinity$ is a limit ordinal.
   \begin{proof}
     Assume the contrary.
-    We have $\ORDomega \NotEq \ORDzero$.
-    Hence $\ORDomega$ is a successor ordinal.
-    Take an ordinal $\alpha$ such that $\ORDsucc(\alpha) \Eq \ORDomega$.
-    Then $\alpha \Elem \ORDomega$.
-    Thus $\ORDomega \Eq \ORDsucc(\alpha) \Elem \ORDomega$.
+    We have $\Infinity \NotEq \Zero$.
+    Hence $\Infinity$ is a successor ordinal.
+    Take an ordinal $\alpha$ such that $\Succ(\alpha) \Eq \Infinity$.
+    Then $\alpha \Elem \Infinity$.
+    Thus $\Infinity \Eq \Succ(\alpha) \Elem \Infinity$.
     Contradiction.
   \end{proof}
 \end{proof}

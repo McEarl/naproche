@@ -27,22 +27,22 @@
 
 \begin{proposition}[forthel]
   Let $X$ be a system of sets.
-  Then $X$ is transitive iff $\SETunionover X \SETinclude X$.
+  Then $X$ is transitive iff $\UnionOver X \Subclass X$.
 \end{proposition}
 \begin{proof}[forthel]
   \begin{case}{$X$ is transitive.}
-    Let $x \Elem \SETunionover X$.
+    Let $x \Elem \UnionOver X$.
     Take a member $y$ of $X$ such that $x \Elem y$.
     Then $y$ is a subset of $X$.
     Hence $x$ is an element of $X$.
   \end{case}
 
-  \begin{case}{$\SETunionover X \SETinclude X$.}
+  \begin{case}{$\UnionOver X \Subclass X$.}
     Let $x \Elem X$.
 
-    Let us show that $x \SETinclude X$.
+    Let us show that $x \Subclass X$.
       Let $y \Elem x$.
-      Then $y \Elem \SETunionover X$.
+      Then $y \Elem \UnionOver X$.
       Hence $y \Elem X$.
     End.
   \end{case}
@@ -50,83 +50,83 @@
 
 \begin{proposition}[forthel]
   Let $A$ be a transitive class.
-  Then $\SETunionover A$ is transitive.
+  Then $\UnionOver A$ is transitive.
 \end{proposition}
 \begin{proof}[forthel]
-  Let $x \Elem \SETunionover A$.
+  Let $x \Elem \UnionOver A$.
 
-  Let us show that $x \SETinclude \SETunionover A$.
+  Let us show that $x \Subclass \UnionOver A$.
     Let $y \Elem x$.
     Take a member $z$ of $A$ such that $x \Elem z$.
-    Then $z \SETinclude A$.
+    Then $z \Subclass A$.
     Hence $x \Elem A$.
     Thus $y$ is an element of some member of $A$.
-    Therefore $y \Elem \SETunionover A$.
+    Therefore $y \Elem \UnionOver A$.
   End.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $X$ be a system of transitive sets.
-  Then $\SETunionover X$ is transitive.
+  Then $\UnionOver X$ is transitive.
 \end{proposition}
 \begin{proof}[forthel]
-  Let $x \Elem \SETunionover X$ and $y \Elem x$.
+  Let $x \Elem \UnionOver X$ and $y \Elem x$.
   Take $z \Elem X$ such that $x \Elem z$.
   Then $z$ is transitive.
-  Hence $x \SETinclude z$.
+  Hence $x \Subclass z$.
   Thus $y \Elem z$.
-  Therefore $y \Elem \SETunionover X$.
+  Therefore $y \Elem \UnionOver X$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $X$ be a system of transitive sets.
-  Then $X \SETunion \SETunionover X$ is transitive.
+  Then $X \Union \UnionOver X$ is transitive.
 \end{proposition}
 \begin{proof}[forthel]
-  Let $x \Elem X \SETunion \SETunionover X$.
+  Let $x \Elem X \Union \UnionOver X$.
 
-  Let us show that $x \SETinclude X \SETunion \SETunionover X$.
+  Let us show that $x \Subclass X \Union \UnionOver X$.
     Let $u \Elem x$.
-    We have $x \Elem X$ or $x \Elem \SETunionover X$.
-    If $x \Elem X$then $u \Elem \SETunionover X$.
-    If $x \Elem \SETunionover X$ then $u \Elem \SETunionover X$.
-    Indeed $\SETunionover X$ is transitive.
-    Hence $u \Elem \SETunionover X$.
-    Thus $u \Elem X \SETunion \SETunionover X$.
+    We have $x \Elem X$ or $x \Elem \UnionOver X$.
+    If $x \Elem X$then $u \Elem \UnionOver X$.
+    If $x \Elem \UnionOver X$ then $u \Elem \UnionOver X$.
+    Indeed $\UnionOver X$ is transitive.
+    Hence $u \Elem \UnionOver X$.
+    Thus $u \Elem X \Union \UnionOver X$.
   End.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $X$ be a system of sets.
-  Then $X$ is transitive iff $X \SETinclude \SETpow(X)$.
+  Then $X$ is transitive iff $X \Subclass \Pow(X)$.
 \end{proposition}
 \begin{proof}[forthel]
   \begin{case}{$X$ is transitive.}
     Let $x \Elem X$.
-    Then $x \SETinclude X$.
-    Hence $x \Elem \SETpow(X)$.
+    Then $x \Subclass X$.
+    Hence $x \Elem \Pow(X)$.
   \end{case}
 
-  \begin{case}{$X \SETinclude \SETpow(X)$.}
+  \begin{case}{$X \Subclass \Pow(X)$.}
     Let $x \Elem X$.
-    Then $x \Elem \SETpow(X)$.
-    Hence $x \SETinclude X$.
+    Then $x \Elem \Pow(X)$.
+    Hence $x \Subclass X$.
   \end{case}
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $A$ be a transitive class.
-  Then $\SETpow(A)$ is transitive.
+  Then $\Pow(A)$ is transitive.
 \end{proposition}
 \begin{proof}[forthel]
-  Let $x \Elem \SETpow(A)$.
-  Then $x \SETinclude A$.
+  Let $x \Elem \Pow(A)$.
+  Then $x \Subclass A$.
 
-  Let us show that $x \SETinclude \SETpow(A)$.
+  Let us show that $x \Subclass \Pow(A)$.
     Let $y \Elem x$.
     Then $y \Elem A$.
-    Hence $y \SETinclude A$.
-    Thus $y \Elem \SETpow(A)$.
+    Hence $y \Subclass A$.
+    Thus $y \Elem \Pow(A)$.
   End.
 \end{proof}
 \end{smodule}

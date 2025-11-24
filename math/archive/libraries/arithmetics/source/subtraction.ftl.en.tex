@@ -4,109 +4,109 @@
 \begin{document}
 \begin{smodule}{subtraction.ftl}
 \importmodule[libraries/arithmetics]{ordering.ftl}
-\symdef{NATsub}[name=difference]{\,-\,}
+\symdef{Minus}[name=difference]{\,-\,}
 
 \begin{definition}[forthel,for=difference]
-  Let $n, m$ be natural numbers such that $n \NATgeq m$.
-  $\emph{n \NATsub m}$ is the natural number $k$ such that $n \Eq m \NATplus k$.
-  Let the \emph{difference of $n$ and $m$} stand for $n \NATsub m$.
+  Let $n, m$ be natural numbers such that $n \Geq m$.
+  $\emph{n \Minus m}$ is the natural number $k$ such that $n \Eq m \Plus k$.
+  Let the \emph{difference of $n$ and $m$} stand for $n \Minus m$.
 \end{definition}
 
 \begin{proposition}[forthel]
-  Let $n, m$ be natural numbers such that $n \NATgeq m$.
-  Then $n \NATsub m \Eq \NATzero$ iff $n \Eq m$.
+  Let $n, m$ be natural numbers such that $n \Geq m$.
+  Then $n \Minus m \Eq \Zero$ iff $n \Eq m$.
 \end{proposition}
 \begin{proof}[forthel]
-  \begin{case}{$n \NATsub m \Eq \NATzero$.}
+  \begin{case}{$n \Minus m \Eq \Zero$.}
     Then $n
-      \Eq (n \NATsub m) \NATplus m
-      \Eq \NATzero \NATplus m
+      \Eq (n \Minus m) \Plus m
+      \Eq \Zero \Plus m
       \Eq m$.
   \end{case}
 
   \begin{case}{$n \Eq m$.}
-    We have $(n \NATsub m) \NATplus m
+    We have $(n \Minus m) \Plus m
       \Eq n
       \Eq m
-      \Eq \NATzero \NATplus m$.
-    Hence $n \NATsub m \Eq \NATzero$.
+      \Eq \Zero \Plus m$.
+    Hence $n \Minus m \Eq \Zero$.
   \end{case}
 \end{proof}
 
 \begin{corollary}[forthel]
   Let $n$ be a natural number.
-  Then $n \NATsub n \Eq \NATzero$.
+  Then $n \Minus n \Eq \Zero$.
 \end{corollary}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Then $n \NATsub \NATzero \Eq n$.
+  Then $n \Minus \Zero \Eq n$.
 \end{proposition}
 \begin{proof}[forthel]
   We have $n
-    \Eq (n \NATsub \NATzero) \NATplus \NATzero
-    \Eq n \NATsub \NATzero$.
+    \Eq (n \Minus \Zero) \Plus \Zero
+    \Eq n \Minus \Zero$.
 \end{proof}
 
 \begin{proposition}[forthel]
-  Let $n, m$ be natural numbers such that $n \NATgeq m$.
-  Then $n \NATsub m \NATleq n$.
+  Let $n, m$ be natural numbers such that $n \Geq m$.
+  Then $n \Minus m \Leq n$.
 \end{proposition}
 \begin{proof}[forthel]
-  We have $(n \NATsub m) \NATplus m \Eq n$.
-  Hence $n \NATsub m \NATleq n$.
+  We have $(n \Minus m) \Plus m \Eq n$.
+  Hence $n \Minus m \Leq n$.
 \end{proof}
 
 \begin{proposition}[forthel]
-  Let $n, m$ be natural numbers such that $n \NATgeq m$.
-  If $\NATzero \NotEq m \NATless n$ then $n \NATsub m \NATless n$.
+  Let $n, m$ be natural numbers such that $n \Geq m$.
+  If $\Zero \NotEq m \Less n$ then $n \Minus m \Less n$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $\NATzero \NotEq m \NATless n$.
-  Suppose $n \NATsub m \NATgeq n$.
-  We have $(n \NATsub m) \NATplus m \Eq n$.
-  Then $n \NATplus m
-    \Eq (n \NATsub m) \NATplus m
+  Assume $\Zero \NotEq m \Less n$.
+  Suppose $n \Minus m \Geq n$.
+  We have $(n \Minus m) \Plus m \Eq n$.
+  Then $n \Plus m
+    \Eq (n \Minus m) \Plus m
     \Eq n
-    \Eq n \NATplus \NATzero$.
-  Hence $m \Eq \NATzero$.
+    \Eq n \Plus \Zero$.
+  Hence $m \Eq \Zero$.
   Contradiction.
 \end{proof}
 
 \begin{proposition}[forthel]
-  Let $n, m, k$ be natural numbers such that $n \NATgeq m$.
-  Then $(n \NATsub m) \NATplus k \Eq (n \NATplus k) \NATsub m$.
+  Let $n, m, k$ be natural numbers such that $n \Geq m$.
+  Then $(n \Minus m) \Plus k \Eq (n \Plus k) \Minus m$.
 \end{proposition}
 \begin{proof}[forthel]
   We have
-  \[  ((n \NATsub m) \NATplus k) \NATplus m       \]
-  \[    \Eq ((n \NATsub m) \NATplus m) \NATplus k   \]
-  \[    \Eq n \NATplus k               \]
-  \[    \Eq ((n \NATplus k) \NATsub m) \NATplus m.  \]
+  \[  ((n \Minus m) \Plus k) \Plus m       \]
+  \[    \Eq ((n \Minus m) \Plus m) \Plus k   \]
+  \[    \Eq n \Plus k               \]
+  \[    \Eq ((n \Plus k) \Minus m) \Plus m.  \]
 
-  Hence $(n \NATsub m) \NATplus k \Eq (n \NATplus k) \NATsub m$.
+  Hence $(n \Minus m) \Plus k \Eq (n \Plus k) \Minus m$.
 \end{proof}
 
 \symdecl*{associativity of addition and subtraction}
 
 \begin{corollary}[forthel,name=associativity of addition and subtraction]
-  Let $n, m, k$ be natural numbers such that $n \NATgeq m$.
-  Then $k \NATplus (n \NATsub m) \Eq (k \NATplus n) \NATsub m$.
+  Let $n, m, k$ be natural numbers such that $n \Geq m$.
+  Then $k \Plus (n \Minus m) \Eq (k \Plus n) \Minus m$.
 \end{corollary}
 
 \begin{proposition}[forthel]
-  Let $n, m, k$ be natural numbers such that $n \NATgeq  m \NATplus k$.
-  Then $(n \NATsub m) \NATsub k \Eq n \NATsub (m \NATplus k)$.
+  Let $n, m, k$ be natural numbers such that $n \Geq  m \Plus k$.
+  Then $(n \Minus m) \Minus k \Eq n \Minus (m \Plus k)$.
 \end{proposition}
 \begin{proof}[forthel]
   We have
-  \[  ((n \NATsub m) \NATsub k) \NATplus (m \NATplus k)       \]
-  \[    \Eq (((n \NATsub m) \NATsub k) \NATplus k) \NATplus m   \]
-  \[    \Eq (n \NATsub m) \NATplus m               \]
+  \[  ((n \Minus m) \Minus k) \Plus (m \Plus k)       \]
+  \[    \Eq (((n \Minus m) \Minus k) \Plus k) \Plus m   \]
+  \[    \Eq (n \Minus m) \Plus m               \]
   \[    \Eq n                         \]
-  \[    \Eq (n \NATsub (m \NATplus k)) \NATplus (m \NATplus k).  \]
+  \[    \Eq (n \Minus (m \Plus k)) \Plus (m \Plus k).  \]
 
-  Hence $(n \NATsub m) \NATsub k \Eq n \NATsub (m \NATplus k)$.
+  Hence $(n \Minus m) \Minus k \Eq n \Minus (m \Plus k)$.
 \end{proof}
 \end{smodule}
 \end{document}

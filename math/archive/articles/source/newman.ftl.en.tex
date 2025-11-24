@@ -13,9 +13,9 @@
   
 \importmodule[libraries/meta]{preliminaries.ftl}
 
-\symdef{reduces}[args=1]{\mathbin{\comp\to_{#1}}}
-\symdef{reducesTC}[args=1]{\mathbin{\comp\to_{#1}^{\comp+}}}
-\symdef{reducesTCR}[args=1]{\mathbin{\comp\to_{#1}^{\comp*}}}
+\symdef{Reduces}[args=1]{\mathbin{\comp\to_{#1}}}
+\symdef{ReducesTC}[args=1]{\mathbin{\comp\to_{#1}^{\comp+}}}
+\symdef{ReducesTCR}[args=1]{\mathbin{\comp\to_{#1}^{\comp*}}}
 
 \symdecl*{Newman}
 
@@ -33,43 +33,43 @@
 
   \begin{signature}[title=Reduct]
     A reduct of $x$ in $R$ is a term.
-    Let $x \reduces{R} y$ stand for $y$ is a reduct of $x$ in $R$.
+    Let $x \Reduces{R} y$ stand for $y$ is a reduct of $x$ in $R$.
   \end{signature}
 
   \begin{signature}
-    $x \reducesTC{R} y$ is a relation.
+    $x \ReducesTC{R} y$ is a relation.
   \end{signature}
 
   \begin{axiom}
-    $x \reducesTC{R} y$ iff $x \reduces{R} y$ or there exists a term $z$ such that $x \reduces{R} z \reducesTC{R} y$.
+    $x \ReducesTC{R} y$ iff $x \Reduces{R} y$ or there exists a term $z$ such that $x \Reduces{R} z \ReducesTC{R} y$.
   \end{axiom}
 
   \begin{axiom}
-    If $x \reducesTC{R} y \reducesTC{R} z$ then $x \reducesTC{R} z$.
+    If $x \ReducesTC{R} y \ReducesTC{R} z$ then $x \ReducesTC{R} z$.
   \end{axiom}
 
   \begin{definition}
-    $x \reducesTCR{R} y$ iff $x \Eq y$ or $x \reducesTC{R} y$.
+    $x \ReducesTCR{R} y$ iff $x \Eq y$ or $x \ReducesTC{R} y$.
   \end{definition}
 
   \begin{lemma}
-    If $x \reducesTCR{R} y \reducesTCR{R} z$ then $x \reducesTCR{R} z$.
+    If $x \ReducesTCR{R} y \ReducesTCR{R} z$ then $x \ReducesTCR{R} z$.
   \end{lemma}
 
   \begin{definition}[title=Confluency]
-    $R$ is confluent iff for all $a,b,c$ such that $a \reducesTCR{R} b,c$ there exists $d$ such that $b,c \reducesTCR{R} d$.
+    $R$ is confluent iff for all $a,b,c$ such that $a \ReducesTCR{R} b,c$ there exists $d$ such that $b,c \ReducesTCR{R} d$.
   \end{definition}
 
   \begin{definition}[title=Local Confluency]
-    $R$ is locally confluent iff for all $a, b, c$ such that $a \reduces{R} b, c$   there exists $d$ such that $b, c \reducesTCR{R} d$.
+    $R$ is locally confluent iff for all $a, b, c$ such that $a \Reduces{R} b, c$   there exists $d$ such that $b, c \ReducesTCR{R} d$.
   \end{definition}
 
   \begin{definition}[title=Termination]
-    $R$ is terminating iff for all $a, b$ such that $a \reducesTC{R} b$ we have $b \ILess a$.
+    $R$ is terminating iff for all $a, b$ such that $a \ReducesTC{R} b$ we have $b \ILess a$.
   \end{definition}
 
   \begin{definition}[title=Normal Form]
-    A normal form of $x$ in $R$ is a term $y$ such that $x \reducesTCR{R} y$ and $y$ has no reducts in $R$.
+    A normal form of $x$ in $R$ is a term $y$ such that $x \ReducesTCR{R} y$ and $y$ has no reducts in $R$.
   \end{definition}
 
   \begin{lemma}
@@ -86,21 +86,21 @@
     Let $R$ be a rewriting system.
     Assume $R$ is locally confluent and terminating.
 
-    Let us demonstrate by induction that for all $a,b,c$ such that $a \reducesTCR{R} b,c$ there exists $d$ such that $b,c \reducesTCR{R} d$.
+    Let us demonstrate by induction that for all $a,b,c$ such that $a \ReducesTCR{R} b,c$ there exists $d$ such that $b,c \ReducesTCR{R} d$.
       Let $a,b,c$ be terms.
 
-      Let us show that if$ a \reducesTC{R} b,c$ then we have the thesis.
-        Assume $a \reducesTC{R} b,c$.
+      Let us show that if$ a \ReducesTC{R} b,c$ then we have the thesis.
+        Assume $a \ReducesTC{R} b,c$.
   
-        Take $u$ such that $a \reduces{R} u \reducesTCR{R} b$.
-        Take $v$ such that $a \reduces{R} v \reducesTCR{R} c$.
-        Take $w$ such that $u,v \reducesTCR{R} w$.
+        Take $u$ such that $a \Reduces{R} u \ReducesTCR{R} b$.
+        Take $v$ such that $a \Reduces{R} v \ReducesTCR{R} c$.
+        Take $w$ such that $u,v \ReducesTCR{R} w$.
         Take a normal form $d$ of $w$ in $R$.
   
-        $b \reducesTCR{R} d$.
-        Indeed take $x$ such that $b,d \reducesTCR{R} x$. 
-        $c \reducesTCR{R} d$.
-        Indeed take $y$ such that $c,d \reducesTCR{R} y$.
+        $b \ReducesTCR{R} d$.
+        Indeed take $x$ such that $b,d \ReducesTCR{R} x$. 
+        $c \ReducesTCR{R} d$.
+        Indeed take $y$ such that $c,d \ReducesTCR{R} y$.
       End.
     End.
   \end{proof}

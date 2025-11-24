@@ -28,21 +28,21 @@ under unions of arbitrary subsets \cite{PeckhausKahl2002}.
 \begin{proof}[forthel]
   Assume the contrary.
   Consider a system of sets $S$ that is closed under powersets and closed under unions.
-  We have $S \SETinclude S$.
-  Hence $\SETunionover S \Elem S$.
-  Thus $\SETpow(\SETunionover S) \Elem S$.
+  We have $S \Subclass S$.
+  Hence $\UnionOver S \Elem S$.
+  Thus $\Pow(\UnionOver S) \Elem S$.
   Contradiction.
 \end{proof}
 
 \noindent Using Hilbert's Paradox it can further be shown that there exists 
-no universal set, i.e. that the class $\Set$ of all sets is a proper class:
+no universal set, i.e. that the class $\Sets$ of all sets is a proper class:
 
 \begin{corollary}[forthel]
-  $\Set$ is not a set.
+  $\Sets$ is not a set.
 \end{corollary}
 \begin{proof}[forthel]
   Assume the contrary.
-  Then $\Set$ is closed under powersets and closed under unions.
+  Then $\Sets$ is closed under powersets and closed under unions.
   Contradiction (by \sr{Hilbert Paradox}{Hilbert's Paradox}).
 \end{proof}
 

@@ -5,7 +5,7 @@
 \begin{smodule}{successor-cardinals.ftl}
 \importmodule[libraries/set-theory]{cardinals.ftl}
 \importmodule[articles]{cantor.ftl}
-\symdef{CARDsucc}[args=1]{#1^{\comp+}}
+\symdef{SuccCard}[args=1]{#1^{\comp+}}
 \symdecl*{successor cardinal}
 
 \begin{lemma}[forthel]
@@ -13,34 +13,34 @@
 \end{lemma}
 \begin{proof}[forthel]
   Let $\alpha$ be an ordinal.
-  Take $\kappa \Eq \SETcard{\SETpow(\alpha)}$.
-  Then $\kappa \ORDgtr \SETcard{\alpha}$.
+  Take $\kappa \Eq \Card{\Pow(\alpha)}$.
+  Then $\kappa \Greater \Card{\alpha}$.
 
-  Let us show that $\kappa \ORDgtr \alpha$.
+  Let us show that $\kappa \Greater \alpha$.
     Assume the contrary.
-    Then $\SETcard{\SETpow(\alpha)}
+    Then $\Card{\Pow(\alpha)}
       \Eq \kappa
-      \ORDleq \alpha$.
+      \Leq \alpha$.
     Hence $\kappa
-      \Eq \SETcard{\SETpow(\alpha)}
-      \Eq \SETcard{\SETcard{\SETpow(\alpha)}}
-      \ORDleq \SETcard{\alpha}$.
+      \Eq \Card{\Pow(\alpha)}
+      \Eq \Card{\Card{\Pow(\alpha)}}
+      \Leq \Card{\alpha}$.
     Contradiction.
   End.
 \end{proof}
 
-\begin{definition}[forthel,for=CARDsucc]
+\begin{definition}[forthel,for=SuccCard]
   Let $\kappa$ be a cardinal.
-  $\emph{\CARDsucc{\kappa}}$ is the cardinal such that $\kappa \ORDless \CARDsucc{\kappa}$ and there is no cardinal $\nu$ such that $\kappa \ORDless \nu \ORDless \CARDsucc{\kappa}$.
+  $\emph{\SuccCard{\kappa}}$ is the cardinal such that $\kappa \Less \SuccCard{\kappa}$ and there is no cardinal $\nu$ such that $\kappa \Less \nu \Less \SuccCard{\kappa}$.
 \end{definition}
 
 \begin{definition}[forthel,for=successor cardinal]
-  A \emph{successor cardinal} is a cardinal number $\kappa$ such that $\kappa \Eq \CARDsucc{\nu}$ for some cardinal number $\nu$.
+  A \emph{successor cardinal} is a cardinal number $\kappa$ such that $\kappa \Eq \SuccCard{\nu}$ for some cardinal number $\nu$.
 \end{definition}
 
 \begin{proposition}[forthel]
   Let $\kappa$ be a cardinal.
-  Then $\SETcard{\alpha} \ORDleq \kappa$ for every $\alpha \Elem \CARDsucc{\kappa}$.
+  Then $\Card{\alpha} \Leq \kappa$ for every $\alpha \Elem \SuccCard{\kappa}$.
 \end{proposition}
 \end{smodule}
 \end{document}

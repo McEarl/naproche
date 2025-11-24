@@ -18,14 +18,14 @@
 
 \importmodule[libraries/foundations]{classes.ftl}
 
-\symdef{Nat}{\mathbb N}
-\symdef{one}{\comp1}
-\symdef{two}{\comp2}
-\symdef{three}{\comp3}
-\symdef{four}{\comp4}
-\symdef{succ}[args=1]{\comp{\textsf{succ}}\dobrackets{#1}}
-\symdef{plus}{\,\comp+\,}
-\symdef{triplus}[args=3]{#1\,\comp+\,#2\,\comp+\,#3}
+\symdef{Naturals}{\mathbb N}
+\symdef{One}{\comp1}
+\symdef{Two}{\comp2}
+\symdef{Three}{\comp3}
+\symdef{Four}{\comp4}
+\symdef{Succ}[args=1]{\comp{\textsf{succ}}\dobrackets{#1}}
+\symdef{Plus}{\,\comp+\,}
+\symdef{TriPlus}[args=3]{#1\,\comp+\,#2\,\comp+\,#3}
 \symdecl*{number}
 
 % (An approximation to) Peano's original notation:
@@ -36,9 +36,9 @@
 \notation*{Iff}[peano]{\;\comp{.{=}.}\;}
 \notation*{Not}[peano]{\;\comp{-{=}}\;}
 \notation*{Elem}[peano]{\;\comp\epsilon\;}
-\notation*{SETinclude}[peano]{\;\comp{\reflectbox c}\;}
-\notation*{Nat}[peano]{\comp{\mathrm N}}
-\notation*{succ}[peano]{#1\,\comp+\,\comp1}
+\notation*{Subclass}[peano]{\;\comp{\reflectbox c}\;}
+\notation*{Naturals}[peano]{\comp{\mathrm N}}
+\notation*{Succ}[peano]{#1\,\comp+\,\comp1}
 
 \maketitle
 
@@ -61,16 +61,16 @@ number of theorems about addition of natural numbers.
     A \emph{number} is a mathematical object.
   \end{signature*}
 
-  \begin{definition*}[for=Nat]
-    $\emph{\Nat}$ is the class of all numbers.
+  \begin{definition*}[for=Naturals]
+    $\emph{\Naturals}$ is the class of all numbers.
   \end{definition*}
 
-  \begin{signature*}[for=one]
-    $\emph{\one}$ is a mathematical object.
+  \begin{signature*}[for=One]
+    $\emph{\One}$ is a mathematical object.
   \end{signature*}
 
-  \begin{signature*}[for=succ]
-    $\emph{\succ{a}}$ is a mathematical object.
+  \begin{signature*}[for=Succ]
+    $\emph{\Succ{a}}$ is a mathematical object.
   \end{signature*}
 \end{forthel}
 
@@ -89,41 +89,41 @@ number of theorems about addition of natural numbers.
 
 \begin{forthel}
   \begin{axiom*}[title=1,name=P1]
-    $\one \Elem \Nat$.
+    $\One \Elem \Naturals$.
   \end{axiom*}
 
   \begin{axiom*}[title=2,name=P2]
-    $a \Elem \Nat \Implies a \Eq a$.
+    $a \Elem \Naturals \Implies a \Eq a$.
   \end{axiom*}
   
   \begin{axiom*}[title=3,name=P3]
-    $a,b,c \Elem \Nat \Implies (a \Eq b \Iff b \Eq a)$.
+    $a,b,c \Elem \Naturals \Implies (a \Eq b \Iff b \Eq a)$.
   \end{axiom*}
   
   \begin{axiom*}[title=4,name=P4]
-    $a,b \Elem \Nat \Implies ((a \Eq b \And b \Eq c) \Implies a \Eq c)$.
+    $a,b \Elem \Naturals \Implies ((a \Eq b \And b \Eq c) \Implies a \Eq c)$.
   \end{axiom*}
   
   \begin{axiom*}[title=5,name=P5]
-    $((a \Eq b \And b \Elem \Nat) \Implies a \Elem \Nat)$.
+    $((a \Eq b \And b \Elem \Naturals) \Implies a \Elem \Naturals)$.
     % Without the outer parentheses Naproche complains about the "\Implies"
   \end{axiom*}
   
   \begin{axiom*}[title=6,name=P6]
-    $a \Elem \Nat \Implies \succ{a} \Elem \Nat$.
+    $a \Elem \Naturals \Implies \Succ{a} \Elem \Naturals$.
   \end{axiom*}
   
   \begin{axiom*}[title=7,name=P7]
-    $a,b \Elem \Nat \Implies (a \Eq b \Iff \succ{a} \Eq \succ{b})$.
+    $a,b \Elem \Naturals \Implies (a \Eq b \Iff \Succ{a} \Eq \Succ{b})$.
   \end{axiom*}
   
   \begin{axiom*}[title=8,name=P8]
-    $a \Elem \Nat \Implies \succ{a} \NotEq \one$.
+    $a \Elem \Naturals \Implies \Succ{a} \NotEq \One$.
   \end{axiom*}
   
   \begin{axiom*}[title=9,name=P9]
     Let $k$ be a class.
-    Then $(\one \Elem k \And \Forall x \Elem \Nat: x \Elem k \Implies \succ{x} \Elem k) \Implies\linebreak \Nat \SETinclude k$.
+    Then $(\One \Elem k \And \Forall x \Elem \Naturals: x \Elem k \Implies \Succ{x} \Elem k) \Implies\linebreak \Naturals \Subclass k$.
   \end{axiom*}
 \end{forthel}
 
@@ -131,16 +131,16 @@ number of theorems about addition of natural numbers.
 \subsection{Definitions.}
 
 \begin{forthel}
-  \begin{definition*}[title=10.i,for=two]
-    $\emph{\two} \DefEq \succ{\one}$.
+  \begin{definition*}[title=10.i,for=Two]
+    $\emph{\Two} \DefEq \Succ{\One}$.
   \end{definition*}
 
-  \begin{definition*}[title=10.ii,for=three]
-    $\emph{\three} \DefEq \succ{\two}$.
+  \begin{definition*}[title=10.ii,for=Three]
+    $\emph{\Three} \DefEq \Succ{\Two}$.
   \end{definition*}
   
-  \begin{definition*}[title=10.iii,for=four]
-    $\emph{\four} \DefEq \succ{\three}$.
+  \begin{definition*}[title=10.iii,for=Four]
+    $\emph{\Four} \DefEq \Succ{\Three}$.
   \end{definition*}
 \end{forthel}
 
@@ -157,42 +157,42 @@ number of theorems about addition of natural numbers.
 
 \begin{forthel}
   \begin{theorem*}[title=11,name=P11]
-    $\two \Elem \Nat$.
+    $\Two \Elem \Naturals$.
   \end{theorem*}
   \begin{proof}
-    (1) $\one \Elem \Nat$ (by \sn{P1}).
+    (1) $\One \Elem \Naturals$ (by \sn{P1}).
 
-    (2) $\one \Elem \Nat \Implies \succ{\one} \Elem \Nat$ (by \sn{P6}).
+    (2) $\One \Elem \Naturals \Implies \Succ{\One} \Elem \Naturals$ (by \sn{P6}).
 
-    (3) $\succ{\one} \Elem \Nat$ (by 1, 2).
+    (3) $\Succ{\One} \Elem \Naturals$ (by 1, 2).
 
-    (4) $\two \Eq \succ{\one}$.
+    (4) $\Two \Eq \Succ{\One}$.
 
-    Therefore $\two \Elem \Nat$.
+    Therefore $\Two \Elem \Naturals$.
   \end{proof}
 
   \begin{theorem*}[title=12,name=P12]
-    $\three,\four \Elem \Nat$.
+    $\Three,\Four \Elem \Naturals$.
   \end{theorem*}
 
   \begin{theorem*}[title=13,name=P13]
-    $(a,b,c,d \Elem \Nat \And a \Eq b \And b \Eq c \And c \Eq d) \Implies a \Eq d$.
+    $(a,b,c,d \Elem \Naturals \And a \Eq b \And b \Eq c \And c \Eq d) \Implies a \Eq d$.
   \end{theorem*}
 
   \begin{theorem*}[title=14,name=P14]
-    $(a,b,c \Elem \Nat \And a \Eq b \And b \Eq c \And a \NotEq c) \Iff \False$.
+    $(a,b,c \Elem \Naturals \And a \Eq b \And b \Eq c \And a \NotEq c) \Iff \False$.
   \end{theorem*}
 
   \begin{theorem*}[title=15,name=P15]
-    $(a,b,c \Elem \Nat \And a \Eq b \And b \NotEq c) \Implies a \NotEq c$.
+    $(a,b,c \Elem \Naturals \And a \Eq b \And b \NotEq c) \Implies a \NotEq c$.
   \end{theorem*}
 
   \begin{theorem*}[title=16,name=P16]
-    $(a,b \Elem \Nat \And \succ{a} \Eq \succ{b}) \Implies a \Eq b$.
+    $(a,b \Elem \Naturals \And \Succ{a} \Eq \Succ{b}) \Implies a \Eq b$.
   \end{theorem*}
 
   \begin{theorem*}[title=17,name=P17]
-    $a,b \Elem \Nat \Implies (a \NotEq b \Iff \succ{a} \NotEq \succ{b})$.
+    $a,b \Elem \Naturals \Implies (a \NotEq b \Iff \Succ{a} \NotEq \Succ{b})$.
   \end{theorem*}
 \end{forthel}
 
@@ -202,16 +202,16 @@ number of theorems about addition of natural numbers.
 \symdecl*{P18}
 
 \begin{forthel}
-  \begin{signature*}[for=plus]
-    $\emph{a \plus b}$ is a mathematical object.
+  \begin{signature*}[for=Plus]
+    $\emph{a \Plus b}$ is a mathematical object.
   \end{signature*}
 
   \begin{axiom*}
-    $a \Elem \Nat \Implies a \plus \one \Eq \succ{a}$.
+    $a \Elem \Naturals \Implies a \Plus \One \Eq \Succ{a}$.
   \end{axiom*}
 
   \begin{axiom*}[title=18,name=P18]
-    $a,b \Elem \Nat \Implies a \plus (\succ{b}) \Eq \succ{a \plus b}$.
+    $a,b \Elem \Naturals \Implies a \Plus (\Succ{b}) \Eq \Succ{a \Plus b}$.
   \end{axiom*}
 \end{forthel}
 
@@ -232,72 +232,72 @@ number of theorems about addition of natural numbers.
 
 \begin{forthel}
   \begin{theorem*}[title=19,name=P19]
-    $a,b \Elem \Nat \Implies a \plus b \Elem \Nat$.
+    $a,b \Elem \Naturals \Implies a \Plus b \Elem \Naturals$.
   \end{theorem*}
   \begin{proof}
-    Let $a,b \Elem \Nat$.
-    Define $T \DefEq \CClass{b'}{a \plus b' \Elem \Nat}$.
+    Let $a,b \Elem \Naturals$.
+    Define $T \DefEq \CClass{b'}{a \Plus b' \Elem \Naturals}$.
     
-    We have $a \Elem \Nat$.
-    Hence $\succ{a} \Elem \Nat$ (by \sn{P6}).
+    We have $a \Elem \Naturals$.
+    Hence $\Succ{a} \Elem \Naturals$ (by \sn{P6}).
     
-    (1) Thus $\one \Elem T$.
+    (1) Thus $\One \Elem T$.
 
-    (2) For all $b' \Elem \Nat$ if $b' \Elem T$ then $\succ{b'} \Elem T$.
+    (2) For all $b' \Elem \Naturals$ if $b' \Elem T$ then $\Succ{b'} \Elem T$.
     \begin{proof}
-      Let $b' \Elem \Nat$.
+      Let $b' \Elem \Naturals$.
       Assume $b' \Elem T$.
-      Then $a \plus b' \Elem \Nat$.
-      Hence $\succ{a \plus b'} \Elem \Nat$ (by \sn{P6}).
-      Thus $a \plus \succ{b'} \Elem \Nat$ (by \sn{P18}).
-      Consequently $\succ{b'} \Elem T$.
+      Then $a \Plus b' \Elem \Naturals$.
+      Hence $\Succ{a \Plus b'} \Elem \Naturals$ (by \sn{P6}).
+      Thus $a \Plus \Succ{b'} \Elem \Naturals$ (by \sn{P18}).
+      Consequently $\Succ{b'} \Elem T$.
     \end{proof}
 
-    (3) Therefore $\Nat \SETinclude T$ (by 1, 2, \sn{P9}).
+    (3) Therefore $\Naturals \Subclass T$ (by 1, 2, \sn{P9}).
 
-    We have $b \Elem \Nat$.
+    We have $b \Elem \Naturals$.
     Hence $b \Elem T$.
-    Thus $a \plus b \Elem \Nat$.
+    Thus $a \Plus b \Elem \Naturals$.
   \end{proof}
 
-  \begin{definition*}[title=20,for=triplus]
-    $\emph{\triplus{a}{b}{c}} \DefEq (a \plus b) \plus c$.
+  \begin{definition*}[title=20,for=TriPlus]
+    $\emph{\TriPlus{a}{b}{c}} \DefEq (a \Plus b) \Plus c$.
   \end{definition*}
 
   \begin{theorem*}[title=21,name=P21]
-    $a,b,c \Elem \Nat \Implies \triplus{a}{b}{c} \Elem \Nat$.
+    $a,b,c \Elem \Naturals \Implies \TriPlus{a}{b}{c} \Elem \Naturals$.
   \end{theorem*}
 
   %\begin{theorem*}[title=22,name=P22]
-  %  $a,b,c \Elem \Nat \Implies (a \Eq b \Iff a \plus c \Eq b \plus c)$.
+  %  $a,b,c \Elem \Naturals \Implies (a \Eq b \Iff a \Plus c \Eq b \Plus c)$.
   %\end{theorem*}
 
   %\begin{theorem*}[title=23,name=P23]
-  %  $a,b,c \Elem \Nat \Implies (a \plus (b \plus c) \Eq \triplus{a}{b}{c})$.
+  %  $a,b,c \Elem \Naturals \Implies (a \Plus (b \Plus c) \Eq \TriPlus{a}{b}{c})$.
   %\end{theorem*}
 
   %\begin{theorem*}[title=24,name=P24]
-  %  $a \Elem \Nat \Implies \one \plus a \Eq a \plus \one$.
+  %  $a \Elem \Naturals \Implies \One \Plus a \Eq a \Plus \One$.
   %\end{theorem*}
 
   %\begin{theorem*}[title=24',name=P24prime]
-  %  $a,b \Elem \Nat \Implies \triplus{\one}{a}{b} \Eq \triplus{a}{\one}{b}$.
+  %  $a,b \Elem \Naturals \Implies \TriPlus{\One}{a}{b} \Eq \TriPlus{a}{\One}{b}$.
   %\end{theorem*}
 
   %\begin{theorem*}[title=25,name=P25]
-  %  $a,b \Elem \Nat \And a \plus b \Eq b \plus a$.
+  %  $a,b \Elem \Naturals \And a \Plus b \Eq b \Plus a$.
   %\end{theorem*}
 
   %\begin{theorem*}[title=26,name=P26]
-  %  $a,b,c \Elem \Nat \Implies (a \Eq b \Iff c \plus a \Eq c \plus b)$.
+  %  $a,b,c \Elem \Naturals \Implies (a \Eq b \Iff c \Plus a \Eq c \Plus b)$.
   %\end{theorem*}
 
   %\begin{theorem*}[title=27,name=P27]
-  %  $a,b,c \Elem \Nat \Implies \triplus{a}{b}{c} \Eq \triplus{a}{c}{b}$.
+  %  $a,b,c \Elem \Naturals \Implies \TriPlus{a}{b}{c} \Eq \TriPlus{a}{c}{b}$.
   %\end{theorem*}
 
   %\begin{theorem*}[title=28,name=P28]
-  %  $(a,b,c,d \Elem \Nat \And a \Eq b \And c \Eq d) \Implies a \plus c \Eq b \plus d$.
+  %  $(a,b,c,d \Elem \Naturals \And a \Eq b \And c \Eq d) \Implies a \Plus c \Eq b \Plus d$.
   %\end{theorem*}
 \end{forthel}
 

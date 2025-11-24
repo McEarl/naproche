@@ -30,45 +30,45 @@ Its proof of is based on the Knaster-Tarski Fixed Point Theorem.
 \begin{proof}[forthel]
   \begin{case}{$x$ and $y$ are equinumerous.}
     Take a bijection $f$ between $x$ and $y$.
-    Then $\FUNinv{f}$ is a bijection between $y$ and $x$.
-    Hence $f$ is an injective map from $x$ to $y$ and $\FUNinv{f}$ is an
+    Then $\Inv{f}$ is a bijection between $y$ and $x$.
+    Hence $f$ is an injective map from $x$ to $y$ and $\Inv{f}$ is an
     injective map from $y$ to $x$.
   \end{case}
 
   \begin{case}{there exists an injective map from $x$ to $y$ and there exists an injective map from $y$ to $x$.}
     Take an injective map $f$ from $x$ to $y$.
     Take an injective map $g$ from $y$ to $x$.
-    We have $y \SETdiff \FUNim{f}{a} \SETinclude y$ for any $a \Elem \SETpow(x)$.
+    We have $y \Diff \Im{f}{a} \Subclass y$ for any $a \Elem \Pow(x)$.
 
-    (1) Define $h(a) \DefEq x \SETdiff \FUNim{g}{y \SETdiff \FUNim{f}{a}}$ for $a \Elem \SETpow(x)$.
+    (1) Define $h(a) \DefEq x \Diff \Im{g}{y \Diff \Im{f}{a}}$ for $a \Elem \Pow(x)$.
 
-    $h$ is a map from $\SETpow(x)$ to $\SETpow(x)$.
+    $h$ is a map from $\Pow(x)$ to $\Pow(x)$.
     Indeed $h(a)$ is a subset of $x$ for each subset $a$ of $x$.
 
     Let us show that $h$ preserves subsets.
       Let $u, v$ be subsets of $x$.
-      Assume $u \SETinclude v$.
-      Then $\FUNim{f}{u} \SETinclude \FUNim{f}{v}$.
-      Hence $y \SETdiff \FUNim{f}{v} \SETinclude y \SETdiff \FUNim{f}{u}$.
-      Thus $\FUNim{g}{y \SETdiff \FUNim{f}{v}} \SETinclude\linebreak \FUNim{g}{y \SETdiff \FUNim{f}{u}}$.
-      Indeed $y \SETdiff \FUNim{f}{v}$ and $y \SETdiff \FUNim{f}{u}$ are subsets of $y$.
-      Therefore\linebreak $x \SETdiff \FUNim{g}{y \SETdiff \FUNim{f}{u}} \SETinclude x \SETdiff \FUNim{g}{y \SETdiff \FUNim{f}{v}}$.
-      Consequently $\FUNim{h}{u} \SETinclude \FUNim{h}{v}$.
+      Assume $u \Subclass v$.
+      Then $\Im{f}{u} \Subclass \Im{f}{v}$.
+      Hence $y \Diff \Im{f}{v} \Subclass y \Diff \Im{f}{u}$.
+      Thus $\Im{g}{y \Diff \Im{f}{v}} \Subclass\linebreak \Im{g}{y \Diff \Im{f}{u}}$.
+      Indeed $y \Diff \Im{f}{v}$ and $y \Diff \Im{f}{u}$ are subsets of $y$.
+      Therefore\linebreak $x \Diff \Im{g}{y \Diff \Im{f}{u}} \Subclass x \Diff \Im{g}{y \Diff \Im{f}{v}}$.
+      Consequently $\Im{h}{u} \Subclass \Im{h}{v}$.
     End.
 
     Hence we can take a fixed point $c$ of $h$ (by \sn{Knaster-Tarski}).
 
     (2) Define $F(u) \DefEq f(u)$ for $u \Elem c$.
 
-    We have $c \Eq h(c)$ iff $x \SETdiff c \Eq \FUNim{g}{y \SETdiff \FUNim{f}{c}}$.
-    $\FUNinv{g}$ is a bijection between $\FUNrange(g)$ and $y$.
-    Thus $x \SETdiff c \Eq \FUNim{g}{y \SETdiff \FUNim{f}{c}} \SETinclude \FUNrange(g)$.
-    Therefore $x \SETdiff c$ is a subset of $\Dom(\FUNinv{g})$.
+    We have $c \Eq h(c)$ iff $x \Diff c \Eq \Im{g}{y \Diff \Im{f}{c}}$.
+    $\Inv{g}$ is a bijection between $\Range(g)$ and $y$.
+    Thus $x \Diff c \Eq \Im{g}{y \Diff \Im{f}{c}} \Subclass \Range(g)$.
+    Therefore $x \Diff c$ is a subset of $\Dom(\Inv{g})$.
 
-    (3) Define $G(u) \DefEq \FUNinv{g}(u)$ for $u \Elem x \SETdiff c$.
+    (3) Define $G(u) \DefEq \Inv{g}(u)$ for $u \Elem x \Diff c$.
 
-    $F$ is a bijection between $c$ and $\FUNrange(F)$.
-    $G$ is a bijection between $x \SETdiff c$ and $\FUNrange(G)$.
+    $F$ is a bijection between $c$ and $\Range(F)$.
+    $G$ is a bijection between $x \Diff c$ and $\Range(G)$.
 
     Define \[ H(u) \DefEq
       \begin{cases}
@@ -85,7 +85,7 @@ Its proof of is based on the Knaster-Tarski Fixed Point Theorem.
         Let $v$ be a value of $H$.
         Take $u \Elem x$ such that $H(u) \Eq v$.
         If $u \Elem c$ then $v \Eq H(u) \Eq F(u) \Eq f(u) \Elem y$.
-        If $u \NotElem c$ then $v \Eq H(u) \Eq G(u) \Eq \FUNinv{g}(u) \Elem y$.
+        If $u \NotElem c$ then $v \Eq H(u) \Eq G(u) \Eq \Inv{g}(u) \Elem y$.
       End.
     End.
 
@@ -93,17 +93,17 @@ Its proof of is based on the Knaster-Tarski Fixed Point Theorem.
     Indeed we can show that every element of $y$ is a value of $H$.
       Let $v \Elem y$.
 
-      \begin{case}{$v \Elem \FUNim{f}{c}$.}
+      \begin{case}{$v \Elem \Im{f}{c}$.}
         Take $u \Elem c$ such that $f(u) \Eq v$.
         Then $F(u) \Eq v$.
       \end{case}
 
-      \begin{case}{$v \NotElem \FUNim{f}{c}$.}
-        Then $v \Elem y \SETdiff \FUNim{f}{c}$.
-        Hence $g(v) \Elem \FUNim{g}{y \SETdiff \FUNim{f}{c}}$.
-        Thus $g(v) \Elem\linebreak x \SETdiff h(c)$.
-        We have $g(v) \Elem x \SETdiff c$.
-        Therefore we can take $u \Elem x \SETdiff c$ such that $G(u) \Eq v$.
+      \begin{case}{$v \NotElem \Im{f}{c}$.}
+        Then $v \Elem y \Diff \Im{f}{c}$.
+        Hence $g(v) \Elem \Im{g}{y \Diff \Im{f}{c}}$.
+        Thus $g(v) \Elem\linebreak x \Diff h(c)$.
+        We have $g(v) \Elem x \Diff c$.
+        Therefore we can take $u \Elem x \Diff c$ such that $G(u) \Eq v$.
         Then $v \Eq H(u)$.
       \end{case}
     End.
@@ -127,17 +127,17 @@ Its proof of is based on the Knaster-Tarski Fixed Point Theorem.
 
       \begin{case}{$u \Elem c$ and $v \NotElem c$.}
         Then $H(u) \Eq F(u)$ and $H(v) \Eq G(v)$.
-        Hence $v \Elem \FUNim{g}{y \SETdiff \FUNim{F}{c}}$.
-        We have $G(v) \Eq \FUNinv{g}(v) \Elem y \SETdiff \FUNim{F}{c}$.
-        Indeed $v \Eq g(v')$ for some $v' \Elem y \SETdiff \FUNim{F}{c}$.
+        Hence $v \Elem \Im{g}{y \Diff \Im{F}{c}}$.
+        We have $G(v) \Eq \Inv{g}(v) \Elem y \Diff \Im{F}{c}$.
+        Indeed $v \Eq g(v')$ for some $v' \Elem y \Diff \Im{F}{c}$.
         Thus $G(v) \NotEq F(u)$.
       \end{case}
 
       \begin{case}{$u \NotElem c$ and $v \Elem c$.}
         Then $H(u) \Eq G(u)$ and $H(v) \Eq F(v)$.
-        Hence $u \Elem \FUNim{g}{y \SETdiff \FUNim{F}{c}}$.
-        We have $G(u) \Eq \FUNinv{g}(u) \Elem y \SETdiff \FUNim{F}{c}$.
-        Indeed $u \Eq g(u')$ for some $u' \Elem y \SETdiff \FUNim{F}{c}$.
+        Hence $u \Elem \Im{g}{y \Diff \Im{F}{c}}$.
+        We have $G(u) \Eq \Inv{g}(u) \Elem y \Diff \Im{F}{c}$.
+        Indeed $u \Eq g(u')$ for some $u' \Elem y \Diff \Im{F}{c}$.
         Thus $G(u) \NotEq F(v)$.
       \end{case}
     End.

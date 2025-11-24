@@ -7,22 +7,22 @@
 \importmodule[libraries/arithmetics]{subtraction.ftl}
 
 \begin{proposition}[forthel]
-  Let $n, m, k$ be natural numbers such that $n \NATgeq m$.
-  Then $(n \NATsub m) \NATmul k \Eq (n \NATmul k) \NATsub (m \NATmul k)$.
+  Let $n, m, k$ be natural numbers such that $n \Geq m$.
+  Then $(n \Minus m) \Mul k \Eq (n \Mul k) \Minus (m \Mul k)$.
 \end{proposition}
 \begin{proof}[forthel]
   We have
-  \[  ((n \NATsub m) \NATmul k) \NATplus (m \NATmul k)                 \]
-  \[    \Eq ((n \NATsub m) \NATplus m) \NATmul k                       \]
-  \[    \Eq n \NATmul k                                   \]
-  \[    \Eq ((n \NATmul k) \NATsub (m \NATmul k)) \NATplus (m \NATmul k).  \]
+  \[  ((n \Minus m) \Mul k) \Plus (m \Mul k)                 \]
+  \[    \Eq ((n \Minus m) \Plus m) \Mul k                       \]
+  \[    \Eq n \Mul k                                   \]
+  \[    \Eq ((n \Mul k) \Minus (m \Mul k)) \Plus (m \Mul k).  \]
 
-  Hence $(n \NATsub m) \NATmul k \Eq (n \NATmul k) \NATsub (m \NATmul k)$.
+  Hence $(n \Minus m) \Mul k \Eq (n \Mul k) \Minus (m \Mul k)$.
 \end{proof}
 
 \begin{corollary}[forthel]
-  Let $n, m, k$ be natural numbers such that $n \NATgeq m$.
-  Then $k \NATmul (n \NATsub m) \Eq (k \NATmul n) \NATsub (k \NATmul m)$.
+  Let $n, m, k$ be natural numbers such that $n \Geq m$.
+  Then $k \Mul (n \Minus m) \Eq (k \Mul n) \Minus (k \Mul m)$.
 \end{corollary}
 \end{smodule}
 \end{document}

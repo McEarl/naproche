@@ -18,40 +18,40 @@
 
 \noindent This is a formalization of the \emph{Transfinite Recursion Theorem}
 (cf. \cite{Koepke2018}).
-It states that for any map $G \FUNfromto{\ORDfunspace{A}}{A}$, where
-$\ORDfunspace{A}$ denotes the class of all maps $\alpha \to A$ for some
-ordinal $\alpha$, there exists a unique map $F \FUNfromto{\Ord}{A}$ that is
-\emph{recursive regarding} $G$, i.e. \[F(\alpha) \Eq G(F \FUNrest \alpha)\] for
+It states that for any map $G \FromTo{\OrdFunSpace{A}}{A}$, where
+$\OrdFunSpace{A}$ denotes the class of all maps $\alpha \to A$ for some
+ordinal $\alpha$, there exists a unique map $F \FromTo{\Ordinals}{A}$ that is
+\emph{recursive regarding} $G$, i.e. \[F(\alpha) \Eq G(F \Rest \alpha)\] for
 all ordinals $\alpha$.
 
 \begin{lemma}[forthel,title=Coincidence Lemma,name=coincidence lemma]
-  Let $A$ be a class and $G$ be a map from $\ORDfunspace{A}$ to $A$.
+  Let $A$ be a class and $G$ be a map from $\OrdFunSpace{A}$ to $A$.
   Let $H, H'$ be maps to $A$ that are recursive regarding $G$.
-  Then \[ H(\alpha) \Eq H'(\alpha) \] for all $\alpha \Elem \Dom(H) \SETintersect \Dom(H')$.
+  Then \[ H(\alpha) \Eq H'(\alpha) \] for all $\alpha \Elem \Dom(H) \Intersect \Dom(H')$.
 \end{lemma}
 \begin{proof}[forthel]
-  Define $\Phi \DefEq \SClass{\alpha}{\Ord}{\text{ if }
-  \alpha \Elem \Dom(H) \SETintersect \Dom(H')\text{ then }H(\alpha) \Eq H'(\alpha)}$.
+  Define $\Phi \DefEq \SClass{\alpha}{\Ordinals}{\text{ if }
+  \alpha \Elem \Dom(H) \Intersect \Dom(H')\text{ then }H(\alpha) \Eq H'(\alpha)}$.
 
   For all ordinals $\alpha$ if every ordinal less than $\alpha$ lies in $\Phi$ then $\alpha \Elem \Phi$.
   \begin{proof}
-    Let $\alpha \Elem \Ord$.
+    Let $\alpha \Elem \Ordinals$.
     Assume that every $y \Elem \alpha$ lies in $\Phi$.
 
-    Let us show that if $\alpha \Elem \Dom(H) \SETintersect \Dom(H')$ then
+    Let us show that if $\alpha \Elem \Dom(H) \Intersect \Dom(H')$ then
     $H(\alpha) \Eq H'(\alpha)$.
-      Suppose $\alpha \Elem \Dom(H) \SETintersect \Dom(H')$.
-      Then $\alpha \SETinclude \Dom(H), \Dom(H')$.
+      Suppose $\alpha \Elem \Dom(H) \Intersect \Dom(H')$.
+      Then $\alpha \Subclass \Dom(H), \Dom(H')$.
       Indeed $\Dom(H)$ and $\Dom(H')$ are transitive classes.
-      Hence for all $y \Elem \alpha$ we have $y \Elem\linebreak \Dom(H) \SETintersect \Dom(H')$.
+      Hence for all $y \Elem \alpha$ we have $y \Elem\linebreak \Dom(H) \Intersect \Dom(H')$.
       Thus $H(y) \Eq H'(y)$ for all $y \Elem \alpha$.
-      Therefore $H \FUNrest \alpha \Eq\linebreak H' \FUNrest \alpha$.
+      Therefore $H \Rest \alpha \Eq\linebreak H' \Rest \alpha$.
       $H$ and $H'$ are recursive regarding $G$.
       [prover vampire]
-      We have $H \FUNrest \alpha, H' \FUNrest \alpha \Elem \ORDfunspace{A}$.
+      We have $H \Rest \alpha, H' \Rest \alpha \Elem \OrdFunSpace{A}$.
       Hence $H(\alpha)
-        \Eq G(H \FUNrest \alpha)
-        \Eq G(H' \FUNrest \alpha)
+        \Eq G(H \Rest \alpha)
+        \Eq G(H' \Rest \alpha)
         \Eq H'(\alpha)$.
     End.
 
@@ -60,17 +60,17 @@ all ordinals $\alpha$.
 
   [prover vampire]
   Then $\Phi$ contains every ordinal (by \sr{transfinite induction I}{transfinite induction}).
-  Therefore we have $H(\alpha) \Eq H'(\alpha)$ for all $\alpha \Elem \Dom(H) \SETintersect \Dom(H')$.
+  Therefore we have $H(\alpha) \Eq H'(\alpha)$ for all $\alpha \Elem \Dom(H) \Intersect \Dom(H')$.
 \end{proof}
 
 \begin{theorem}[forthel,title=Transfinite Recursion: Existence]
-  Let $A$ be a class and $G$ be a map from $\ORDfunspace{A}$ to $A$.
-  Then there exists a map $F$ from $\Ord$ to $A$ that is recursive regarding $G$.
+  Let $A$ be a class and $G$ be a map from $\OrdFunSpace{A}$ to $A$.
+  Then there exists a map $F$ from $\Ordinals$ to $A$ that is recursive regarding $G$.
 \end{theorem}
 \begin{proof}[forthel]
   Every ordinal is contained in the domain of some map $H$ to $A$ such that $H$ is recursive regarding $G$.
   \begin{proof}
-    Define \[ \Phi \DefEq \SClass{\alpha}{\Ord}{\classtext{$\alpha$ is contained in the domain of some map to $A$ that is recursive regarding $G$}}. \]
+    Define \[ \Phi \DefEq \SClass{\alpha}{\Ordinals}{\classtext{$\alpha$ is contained in the domain of some map to $A$ that is recursive regarding $G$}}. \]
 
     Let us show that for every ordinal $\alpha$ if every ordinal less than $\alpha$ lies in $\Phi$ then $\alpha \Elem \Phi$.
       Let $\alpha$ be an ordinal.
@@ -78,39 +78,39 @@ all ordinals $\alpha$.
       Then for all $y \Elem \alpha$ there exists a map $h$ to $A$ such that $h$ is recursive regarding $G$ and $y \Elem \Dom(h)$.
       Define $H'(y) \DefEq$ ``choose a map $h$ to $A$ such that $h$ is recursive regarding $G$ and $y \Elem \Dom(h)$ in $h(y)$'' for $y \Elem \alpha$.
       Then $H'$ is a map from $\alpha$ to $A$.
-      We have $H' \Eq H' \FUNrest \alpha$.
+      We have $H' \Eq H' \Rest \alpha$.
 
-      We can show that $H' \FUNrest \beta \Elem \Dom(G)$ for every $\beta \Elem \ORDsucc(\alpha)$.
-        Let $\beta \Elem \ORDsucc(\alpha)$.
-        $H' \FUNrest \beta$ is a function.
-        Indeed $H' \FUNrest \beta$ is a map and $\Dom(H' \FUNrest \beta)$ is a set.
-        Hence $H' \FUNrest \beta$ is a function from $\beta$ to $A$.
-        Thus $H' \FUNrest \beta \Elem \ORDfunspace{A}$.
-        Therefore  $H' \FUNrest \beta \Elem \Dom(G)$.
+      We can show that $H' \Rest \beta \Elem \Dom(G)$ for every $\beta \Elem \Succ(\alpha)$.
+        Let $\beta \Elem \Succ(\alpha)$.
+        $H' \Rest \beta$ is a function.
+        Indeed $H' \Rest \beta$ is a map and $\Dom(H' \Rest \beta)$ is a set.
+        Hence $H' \Rest \beta$ is a function from $\beta$ to $A$.
+        Thus $H' \Rest \beta \Elem \OrdFunSpace{A}$.
+        Therefore  $H' \Rest \beta \Elem \Dom(G)$.
       End.
 
       Define \[ H(\beta) \DefEq
         \begin{cases}
-          H'(\beta)             & : \beta \ORDless \alpha \\
-          G(H' \FUNrest \beta)  & : \beta \Eq \alpha
+          H'(\beta)             & : \beta \Less \alpha \\
+          G(H' \Rest \beta)  & : \beta \Eq \alpha
         \end{cases} \]
-      for $\beta \Elem \ORDsucc(\alpha)$.
+      for $\beta \Elem \Succ(\alpha)$.
       
-      Let us show that $H \FUNrest \beta \Elem \ORDfunspace{A}$ for all $\beta \Elem \Dom(H)$.
+      Let us show that $H \Rest \beta \Elem \OrdFunSpace{A}$ for all $\beta \Elem \Dom(H)$.
         Let $\beta \Elem \Dom(H)$.
-        $\Dom(H \FUNrest \beta) \Eq \beta$ and $(H \FUNrest \beta)(b) \Eq H(b)$ for all $b \Elem \beta$.
+        $\Dom(H \Rest \beta) \Eq \beta$ and $(H \Rest \beta)(b) \Eq H(b)$ for all $b \Elem \beta$.
         $H(b) \Elem A$ for all $b \Elem \beta$.
-        Hence $H \FUNrest \beta$ is a map from $\beta$ to $A$.
+        Hence $H \Rest \beta$ is a map from $\beta$ to $A$.
       End.
 
-      (a) $\Dom(H)$ is a transitive subclass of $\Ord$.
+      (a) $\Dom(H)$ is a transitive subclass of $\Ordinals$.
 
-      (b) For all $\beta \Elem \Dom(H)$ we have $H(\beta) \Eq G(H \FUNrest \beta)$.
+      (b) For all $\beta \Elem \Dom(H)$ we have $H(\beta) \Eq G(H \Rest \beta)$.
       \begin{proof}
         Let $\beta \Elem \Dom(H)$.
-        Then $\beta \ORDless \alpha$ or $\beta \Eq \alpha$.
+        Then $\beta \Less \alpha$ or $\beta \Eq \alpha$.
 
-        \begin{case}{$\beta \ORDless \alpha$.}
+        \begin{case}{$\beta \Less \alpha$.}
           Choose a map $h$ to $A$ such that $h$ is recursive regarding $G$ and $\beta \Elem \Dom(h)$ and $H'(\beta) \Eq h(\beta)$.
 
           Let us show that for all $y \Elem \beta$ we have $h(y) \Eq H(y)$.
@@ -119,19 +119,19 @@ all ordinals $\alpha$.
             Choose a map $h'$ to $A$ such that $h'$ is recursive regarding $G$ and $y \Elem \Dom(h')$ and $H'(y) \Eq h'(y)$.
             [prover vampire]
             Then $h'(y) \Eq h(y)$ (by \sn{coincidence lemma}).
-            Indeed $y \Elem \Dom(h) \SETintersect \Dom(h')$.
+            Indeed $y \Elem \Dom(h) \Intersect \Dom(h')$.
           End.
 
-          Hence $h \FUNrest \beta \Eq H \FUNrest \beta$.
+          Hence $h \Rest \beta \Eq H \Rest \beta$.
           Thus $H(\beta)
             \Eq H'(\beta)
             \Eq h(\beta)
-            \Eq G(h \FUNrest \beta)
-            \Eq G(H \FUNrest \beta)$.
+            \Eq G(h \Rest \beta)
+            \Eq G(H \Rest \beta)$.
         \end{case}
 
         \begin{case}{$\beta \Eq \alpha$.}
-          We have $H \FUNrest \alpha \Eq H' \FUNrest \alpha$.
+          We have $H \Rest \alpha \Eq H' \Rest \alpha$.
         \end{case}
       \end{proof}
 
@@ -144,16 +144,16 @@ all ordinals $\alpha$.
     Consequently every ordinal is contained in the domain of some map $H$ to $A$ such that $H$ is recursive regarding $G$.
   \end{proof}
 
-  Define $F(\alpha) \DefEq$ ``choose a map $H$ to $A$ such that $H$ is recursive regarding $G$ and $\alpha \Elem \Dom(H)$ in $H(\alpha)$'' for $\alpha \Elem \Ord$.
-  Then $F$ is a map from $\Ord$ to $A$.
+  Define $F(\alpha) \DefEq$ ``choose a map $H$ to $A$ such that $H$ is recursive regarding $G$ and $\alpha \Elem \Dom(H)$ in $H(\alpha)$'' for $\alpha \Elem \Ordinals$.
+  Then $F$ is a map from $\Ordinals$ to $A$.
 
   $F$ is recursive regarding $G$.
   \begin{proof}
-    (a) $\Dom(F)$ is a transitive subclass of $\Ord$.
+    (a) $\Dom(F)$ is a transitive subclass of $\Ordinals$.
 
-    (b) For all $\alpha \Elem \Ord$ we have $F(\alpha) \Eq G(F \FUNrest \alpha)$.
+    (b) For all $\alpha \Elem \Ordinals$ we have $F(\alpha) \Eq G(F \Rest \alpha)$.
     \begin{proof}
-      Let $\alpha \Elem \Ord$.
+      Let $\alpha \Elem \Ordinals$.
       Choose a map $H$ to $A$ such that $H$ is recursive regarding $G$ and $\alpha \Elem \Dom(H)$ and $F(\alpha) \Eq H(\alpha)$.
 
       Let us show that $F(\beta) \Eq H(\beta)$ for all $\beta \Elem \alpha$.
@@ -161,117 +161,117 @@ all ordinals $\alpha$.
         Choose a map $H'$ to $A$ such that $H'$ is recursive regarding $G$ and $\beta \Elem \Dom(H')$ and $F(\beta) \Eq H'(\beta)$.
         [prover vampire]
         Then $H(\beta) \Eq H'(\beta)$ (by \sn{coincidence lemma}).
-        Indeed $\beta \Elem \Dom(H) \SETintersect \Dom(H')$.
+        Indeed $\beta \Elem \Dom(H) \Intersect \Dom(H')$.
         Therefore $F(\beta) \Eq H'(\beta)$.
       End.
 
-      Hence $H \FUNrest \alpha \Eq F \FUNrest \alpha$.
+      Hence $H \Rest \alpha \Eq F \Rest \alpha$.
       Thus $F(\alpha)
         \Eq H(\alpha)
-        \Eq G(H \FUNrest \alpha)
-        \Eq G(F \FUNrest \alpha)$.
+        \Eq G(H \Rest \alpha)
+        \Eq G(F \Rest \alpha)$.
     \end{proof}
   \end{proof}
 \end{proof}
 
 \begin{theorem}[forthel,title=Transfinite Recursion: Uniqueness]
-  Let $A$ be a class and $G$ be a map from $\ORDfunspace{A}$ to $A$.
-  Let $F, F'$ be maps from $\Ord$ to $A$ that are recursive regarding $G$.
+  Let $A$ be a class and $G$ be a map from $\OrdFunSpace{A}$ to $A$.
+  Let $F, F'$ be maps from $\Ordinals$ to $A$ that are recursive regarding $G$.
   Then $F \Eq F'$.
 \end{theorem}
 \begin{proof}[forthel]
   [prover vampire]
   $F$ and $F'$ are recursive regarding $G$.
-  Then $F(\alpha) \Eq F'(\alpha)$ for all $\alpha \Elem \Dom(F) \SETintersect \Dom(F')$ (by \sn{coincidence lemma}).
-  We have $\Dom(F) \Eq \Ord \Eq \Dom(F')$.
-  Hence $F(\alpha) \Eq F'(\alpha)$ for all $\alpha \Elem \Ord$.
+  Then $F(\alpha) \Eq F'(\alpha)$ for all $\alpha \Elem \Dom(F) \Intersect \Dom(F')$ (by \sn{coincidence lemma}).
+  We have $\Dom(F) \Eq \Ordinals \Eq \Dom(F')$.
+  Hence $F(\alpha) \Eq F'(\alpha)$ for all $\alpha \Elem \Ordinals$.
   Thus $F \Eq F'$.
 \end{proof}
 
 As a corollary of the transfinite recursion theorem we get that we can
 define maps recursively on the ordinals by case distinction:
-For given maps $G \FUNfromto{\Ord \SETprod A}{A}$ and
-$H \FUNfromto{\Ord \SETprod \ORDfunspace{A}}{A}$ and an element $a \Elem A$ we
-can define a map $F \FUNfromto{\Ord}{A}$ by
+For given maps $G \FromTo{\Ordinals \Prod A}{A}$ and
+$H \FromTo{\Ordinals \Prod \OrdFunSpace{A}}{A}$ and an element $a \Elem A$ we
+can define a map $F \FromTo{\Ordinals}{A}$ by
 \begin{itemize}
-  \item $F(\ORDzero) \DefEq a$,
-  \item $F(\ORDsucc(\alpha)) \DefEq G(\alpha, F(\alpha))$, and
-  \item $F(\lambda) \DefEq H(\lambda, F \FUNrest \lambda)$
+  \item $F(\Zero) \DefEq a$,
+  \item $F(\Succ(\alpha)) \DefEq G(\alpha, F(\alpha))$, and
+  \item $F(\lambda) \DefEq H(\lambda, F \Rest \lambda)$
     for any limit ordinal $\lambda$.
 \end{itemize}
 
 \begin{lemma}[forthel]
-  Let $A$ be a class and $\alpha$ be an ordinal and $F \FUNfromto{\Ord}{A}$.
-  Then $(\alpha, F(\alpha)) \Elem \Ord \SETprod A$.
+  Let $A$ be a class and $\alpha$ be an ordinal and $F \FromTo{\Ordinals}{A}$.
+  Then $(\alpha, F(\alpha)) \Elem \Ordinals \Prod A$.
 \end{lemma}
 
 \begin{lemma}[forthel]
-  Let $A$ be a class and $\lambda$ be a limit ordinal and $F \FUNfromto{\Ord}{A}$.
-  Then $(\lambda, F \FUNrest \lambda) \Elem \Ord \SETprod \ORDfunspace{A}$.
+  Let $A$ be a class and $\lambda$ be a limit ordinal and $F \FromTo{\Ordinals}{A}$.
+  Then $(\lambda, F \Rest \lambda) \Elem \Ordinals \Prod \OrdFunSpace{A}$.
 \end{lemma}
 
 \begin{corollary}[forthel]
   Let $A$ be a class.
-  Let $a \Elem A$ and $G \FUNfromto{\Ord \SETprod A}{A}$ and\linebreak $H \FUNfromto{\Ord \SETprod \ORDfunspace{A}}{A}$.
-  Then there exists a map $F$ from $\Ord$ to $A$ such that
-  \[ F(\ORDzero) \Eq a \]
+  Let $a \Elem A$ and $G \FromTo{\Ordinals \Prod A}{A}$ and\linebreak $H \FromTo{\Ordinals \Prod \OrdFunSpace{A}}{A}$.
+  Then there exists a map $F$ from $\Ordinals$ to $A$ such that
+  \[ F(\Zero) \Eq a \]
   and for all ordinals $\alpha$ we have
-  \[ F(\ORDsucc(\alpha)) \Eq G(\alpha, F(\alpha)) \]
+  \[ F(\Succ(\alpha)) \Eq G(\alpha, F(\alpha)) \]
   and for all limit ordinals $\lambda$ we have
-  \[ F(\lambda) \Eq H(\lambda, F \FUNrest \lambda). \]
+  \[ F(\lambda) \Eq H(\lambda, F \Rest \lambda). \]
 \end{corollary}
 \begin{proof}[forthel]
-  $(\ORDpred(\Dom(f)), f(\ORDpred(\Dom(f)))) \Elem \Ord \SETprod A$ for all $f \Elem \ORDfunspace{A}$ such that $\Dom(f)$ is a successor ordinal.
+  $(\Pred(\Dom(f)), f(\Pred(\Dom(f)))) \Elem \Ordinals \Prod A$ for all $f \Elem \OrdFunSpace{A}$ such that $\Dom(f)$ is a successor ordinal.
 
   Define  \[ J(f) \DefEq
     \begin{cases}
       a
-      & : \Dom(f) \Eq \ORDzero
+      & : \Dom(f) \Eq \Zero
       \\
-      G(\ORDpred(\Dom(f)), f(\ORDpred(\Dom(f))))
+      G(\Pred(\Dom(f)), f(\Pred(\Dom(f))))
       & : \text{$\Dom(f)$ is a successor ordinal}
       \\
       H(\Dom(f), f)
       & : \text{$\Dom(f)$ is a limit ordinal}
     \end{cases} \]
-  for $f \Elem \ORDfunspace{A}$.
+  for $f \Elem \OrdFunSpace{A}$.
 
-  Then $J$ is a map from $\ORDfunspace{A}$ to $A$.
-  Indeed we can show that for any $f \Elem \ORDfunspace{A}$ we have $J(f) \Elem A$.
-    Let $f \Elem \ORDfunspace{A}$.
-    Take $\alpha \Elem \Ord$ such that $f \FUNfromto{\alpha}{A}$.
-    If $\alpha \Eq \ORDzero$ then $J(f) \Eq a \Elem A$.
-    If $\alpha$ is a successor ordinal then $J(f) \Eq\linebreak G(\ORDpred(\alpha), f(\ORDpred(\alpha))) \Elem A$.
+  Then $J$ is a map from $\OrdFunSpace{A}$ to $A$.
+  Indeed we can show that for any $f \Elem \OrdFunSpace{A}$ we have $J(f) \Elem A$.
+    Let $f \Elem \OrdFunSpace{A}$.
+    Take $\alpha \Elem \Ordinals$ such that $f \FromTo{\alpha}{A}$.
+    If $\alpha \Eq \Zero$ then $J(f) \Eq a \Elem A$.
+    If $\alpha$ is a successor ordinal then $J(f) \Eq\linebreak G(\Pred(\alpha), f(\Pred(\alpha))) \Elem A$.
     [prover vampire]
     If $\alpha$ is a limit ordinal then $J(f) \Eq H(\alpha, f) \Elem A$.
   End.
 
-  Hence we can take a map $F$ from $\Ord$ to $A$ that is recursive regarding $J$.
-  Then $F \FUNrest \alpha \Elem \ORDfunspace{A}$ for any ordinal $\alpha$.
+  Hence we can take a map $F$ from $\Ordinals$ to $A$ that is recursive regarding $J$.
+  Then $F \Rest \alpha \Elem \OrdFunSpace{A}$ for any ordinal $\alpha$.
 
-  (1) $F(\ORDzero) \Eq a$.
+  (1) $F(\Zero) \Eq a$.
   \begin{proof}
-    $F(\ORDzero)
-      \Eq J(F \FUNrest \ORDzero)
+    $F(\Zero)
+      \Eq J(F \Rest \Zero)
       \Eq a$.
   \end{proof}
 
-  (2) $F(\ORDsucc(\alpha)) \Eq G(\alpha, F(\alpha))$ for all ordinals $\alpha$.
+  (2) $F(\Succ(\alpha)) \Eq G(\alpha, F(\alpha))$ for all ordinals $\alpha$.
   \begin{proof}
     Let $\alpha$ be an ordinal.
-    Then $F(\ORDsucc(\alpha))
-      \Eq J(F \FUNrest \ORDsucc(\alpha))
-      \Eq\linebreak G(\ORDpred(\ORDsucc(\alpha)), (F \FUNrest \ORDsucc(\alpha))(\ORDpred(\ORDsucc(\alpha))))
-      \Eq G(\alpha, (F \FUNrest \ORDsucc(\alpha))(\alpha))
+    Then $F(\Succ(\alpha))
+      \Eq J(F \Rest \Succ(\alpha))
+      \Eq\linebreak G(\Pred(\Succ(\alpha)), (F \Rest \Succ(\alpha))(\Pred(\Succ(\alpha))))
+      \Eq G(\alpha, (F \Rest \Succ(\alpha))(\alpha))
       \Eq\linebreak G(\alpha, F(\alpha))$.
   \end{proof}
 
-  (3) $F(\lambda) \Eq H(\lambda, F \FUNrest \lambda)$ for all limit ordinals $\lambda$.
+  (3) $F(\lambda) \Eq H(\lambda, F \Rest \lambda)$ for all limit ordinals $\lambda$.
   \begin{proof}
     Let $\lambda$ be a limit ordinal.
     Then $F(\lambda)
-      \Eq J(F \FUNrest \lambda)
-      \Eq H(\lambda, F \FUNrest \lambda)$.
+      \Eq J(F \Rest \lambda)
+      \Eq H(\lambda, F \Rest \lambda)$.
   \end{proof}
 
   Hence the thesis (by 1, 2, 3).

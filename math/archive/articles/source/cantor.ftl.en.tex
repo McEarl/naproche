@@ -18,20 +18,20 @@
 
 \noindent This is a formalization of \emph{Cantor's Theorem}
 \cite{Cantor1891}, i.e. of the assertion that any set $x$ is strictly smaller
-than its powerset $\SETpow(x)$:
+than its powerset $\Pow(x)$:
 
 \begin{theorem}[forthel,title=Cantor's Theorem,name=Cantor II]
   Let $x$ be a set.
-  Then $\SETcard{x} \ORDless \SETcard{\SETpow(x)}$.
+  Then $\Card{x} \Less \Card{\Pow(x)}$.
 \end{theorem}
 \begin{proof}[forthel]
   \begin{case}{$x$ is empty.} \end{case}
 
   \begin{case}{$x$ is nonempty.}
     Assume the contrary.
-    Then $\SETcard{x} \ORDgeq \SETcard{\SETpow(x)}$.
-    Hence there exists a surjective map from $x$ onto $\SETpow(x)$ (by \sn{existence condition for surjections}).
-    Indeed $\SETpow(x)$ is a nonempty set.
+    Then $\Card{x} \Geq \Card{\Pow(x)}$.
+    Hence there exists a surjective map from $x$ onto $\Pow(x)$ (by \sn{existence condition for surjections}).
+    Indeed $\Pow(x)$ is a nonempty set.
     Contradiction (by \sr{Cantor I}{Cantor (elementary version)}).
   \end{case}
 \end{proof}

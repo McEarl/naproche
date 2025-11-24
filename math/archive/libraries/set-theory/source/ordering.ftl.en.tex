@@ -4,104 +4,104 @@
 \begin{document}
 \begin{smodule}{ordering.ftl}
 \importmodule[libraries/set-theory]{limit-ordinals.ftl}
-\symdef{ORDless}[name=less]{\;<\;}
-\symdef{ORDnless}{\;\not<\;}
-\symdef{ORDleq}{\;\leq\;}
-\symdef{ORDnleq}{\;\not\leq\;}
-\symdef{ORDgtr}[name=greater]{\;>\;}
-\symdef{ORDngtr}{\;\not>\;}
-\symdef{ORDgeq}{\;\geq\;}
-\symdef{ORDngeq}{\;\not\geq\;}
+\symdef{Less}[name=less]{\;<\;}
+\symdef{NotLess}{\;\not<\;}
+\symdef{Leq}{\;\leq\;}
+\symdef{NotLeq}{\;\not\leq\;}
+\symdef{Greater}[name=greater]{\;>\;}
+\symdef{NotGreater}{\;\not>\;}
+\symdef{Geq}{\;\geq\;}
+\symdef{NotGeq}{\;\not\geq\;}
 
-\begin{definition}[forthel,for={less,ORDnless,greater,ORDngtr}]
+\begin{definition}[forthel,for={less,NotLess,greater,NotGreater}]
   Let $\alpha, \beta$ be ordinals.
-  $\emph{\alpha \ORDless \beta}$ iff $\alpha \Elem \beta$.
-  Let $\alpha$ is \emph{less than $\beta$} stand for $\alpha \ORDless \beta$.
-  Let $\emph{\alpha \ORDnless \beta}$ stand for $\Not \alpha \ORDless \beta$.
-  Let $\emph{\alpha \ORDgtr \beta}$ stand for $\beta \ORDless \alpha$.
-  Let $\alpha$ is \emph{greater than $\beta$} stand for $\beta \ORDless \alpha$.
-  Let $\emph{\alpha \ORDngtr \beta}$ stand for $\Not \alpha \ORDgtr \beta$.
+  $\emph{\alpha \Less \beta}$ iff $\alpha \Elem \beta$.
+  Let $\alpha$ is \emph{less than $\beta$} stand for $\alpha \Less \beta$.
+  Let $\emph{\alpha \NotLess \beta}$ stand for $\Not \alpha \Less \beta$.
+  Let $\emph{\alpha \Greater \beta}$ stand for $\beta \Less \alpha$.
+  Let $\alpha$ is \emph{greater than $\beta$} stand for $\beta \Less \alpha$.
+  Let $\emph{\alpha \NotGreater \beta}$ stand for $\Not \alpha \Greater \beta$.
 \end{definition}
 
-\begin{definition}[forthel,for={ORDleq,ORDnleq,ORDgeq,ORDngeq}]
+\begin{definition}[forthel,for={Leq,NotLeq,Geq,NotGeq}]
   Let $\alpha, \beta$ be ordinals.
-  $\emph{\alpha \ORDleq \beta}$ iff $\alpha \ORDless \beta$ or $\alpha \Eq \beta$.
-  Let $\alpha$ is \emph{less than or equal to $\beta$} stand for $\alpha \ORDleq \beta$.
-  Let $\emph{\alpha \ORDnleq \beta}$ stand for $\Not \alpha \ORDleq \beta$.
-  Let $\emph{\alpha \ORDgeq \beta}$ stand for $\beta \ORDleq \alpha$.
-  Let $\alpha$ is \emph{greater than or equal to $\beta$} stand for $\beta \ORDleq \alpha$.
-  Let $\emph{\alpha \ORDngeq \beta}$ stand for $\Not \alpha \ORDgeq \beta$.
+  $\emph{\alpha \Leq \beta}$ iff $\alpha \Less \beta$ or $\alpha \Eq \beta$.
+  Let $\alpha$ is \emph{less than or equal to $\beta$} stand for $\alpha \Leq \beta$.
+  Let $\emph{\alpha \NotLeq \beta}$ stand for $\Not \alpha \Leq \beta$.
+  Let $\emph{\alpha \Geq \beta}$ stand for $\beta \Leq \alpha$.
+  Let $\alpha$ is \emph{greater than or equal to $\beta$} stand for $\beta \Leq \alpha$.
+  Let $\emph{\alpha \NotGeq \beta}$ stand for $\Not \alpha \Geq \beta$.
 \end{definition}
 
 \begin{proposition}[forthel]
   Let $\alpha, \beta$ be ordinals.
-  If $\alpha \ORDleq \beta$ then $\alpha \SETinclude \beta$.
+  If $\alpha \Leq \beta$ then $\alpha \Subclass \beta$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $\alpha \ORDleq \beta$.
-  Then $\alpha \ORDless \beta$ or $\alpha \Eq \beta$.
+  Assume $\alpha \Leq \beta$.
+  Then $\alpha \Less \beta$ or $\alpha \Eq \beta$.
   Let $x \Elem \alpha$.
-  If $\alpha \ORDless \beta$ then $x \Elem \alpha \Elem \beta$.
-  Hence if $\alpha \ORDless \beta$ then $x \Elem \beta$.
+  If $\alpha \Less \beta$ then $x \Elem \alpha \Elem \beta$.
+  Hence if $\alpha \Less \beta$ then $x \Elem \beta$.
   If $\alpha \Eq \beta$ then $x \Elem \beta$.
   Thus $x \Elem \beta$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $\alpha$ be an ordinal.
-  Then $\alpha \ORDnless \alpha$.
+  Then $\alpha \NotLess \alpha$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $\alpha \ORDless \alpha$.
+  Assume $\alpha \Less \alpha$.
   Then $\alpha \Elem \alpha$.
   Contradiction.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $\alpha, \beta, \gamma$ be ordinals.
-  If $\alpha \ORDless \beta$ and $\beta \ORDless \gamma$ then $\alpha \ORDless \gamma$.
+  If $\alpha \Less \beta$ and $\beta \Less \gamma$ then $\alpha \Less \gamma$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $\alpha \ORDless \beta$ and $\beta \ORDless \gamma$.
+  Assume $\alpha \Less \beta$ and $\beta \Less \gamma$.
   Then $\alpha \Elem \beta \Elem \gamma$.
   Hence $\alpha \Elem \gamma$.
-  Thus $\alpha \ORDless \gamma$.
+  Thus $\alpha \Less \gamma$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $\alpha, \beta$ be ordinals.
-  Then $\alpha \ORDless \beta$ or $\alpha \Eq \beta$ or $\alpha \ORDgtr \beta$.
+  Then $\alpha \Less \beta$ or $\alpha \Eq \beta$ or $\alpha \Greater \beta$.
 \end{proposition}
 \begin{proof}[forthel]
   Assume the contrary.
   
-  Define $A \DefEq \SClass{\alpha'}{\Ord}{\text{ there exists an ordinal }\beta'\text{ such that neither }\alpha' \ORDless \beta'\text{ nor }\alpha' \Eq \beta'\text{ nor }\alpha' \ORDgtr \beta'}$.
+  Define $A \DefEq \SClass{\alpha'}{\Ordinals}{\text{ there exists an ordinal }\beta'\text{ such that neither }\alpha' \Less \beta'\text{ nor }\alpha' \Eq \beta'\text{ nor }\alpha' \Greater \beta'}$.
   
   $A$ is nonempty.
-  Hence we can take a $\alpha' \Elem A$ such that for no $\gamma \Elem A$ we have $\gamma \ORDless \alpha'$.
+  Hence we can take a $\alpha' \Elem A$ such that for no $\gamma \Elem A$ we have $\gamma \Less \alpha'$.
   
-  Define $B \DefEq \SClass{\beta'}{\Ord}{\text{ neither }\alpha' \ORDless \beta'\text{ nor }\alpha' \Eq \beta'\text{ nor }\alpha' \ORDgtr \beta'}$.
+  Define $B \DefEq \SClass{\beta'}{\Ordinals}{\text{ neither }\alpha' \Less \beta'\text{ nor }\alpha' \Eq \beta'\text{ nor }\alpha' \Greater \beta'}$.
   
   $B$ is nonempty.
-  Hence we can take a $\beta' \Elem B$ such that for no $\gamma \Elem B$ we have $\gamma \ORDless \beta'$.
+  Hence we can take a $\beta' \Elem B$ such that for no $\gamma \Elem B$ we have $\gamma \Less \beta'$.
 
-  Let us show that $\alpha' \SETinclude \beta'$.
+  Let us show that $\alpha' \Subclass \beta'$.
     Let $a \Elem \alpha'$.
-    Then $a \ORDless \beta'$ or $a \Eq \beta'$ or $a \ORDgtr \beta'$.
-    Indeed if neither $a \ORDless \beta'$ nor $a \Eq \beta'$ nor $a \ORDgtr \beta'$ then
+    Then $a \Less \beta'$ or $a \Eq \beta'$ or $a \Greater \beta'$.
+    Indeed if neither $a \Less \beta'$ nor $a \Eq \beta'$ nor $a \Greater \beta'$ then
     $a \Elem A$.
-    If $a \Eq \beta'$ then $\beta' \ORDless \alpha'$.
-    If $a \ORDgtr \beta'$ then $\beta' \ORDless \alpha'$.
-    Hence $a \ORDless \beta'$.
+    If $a \Eq \beta'$ then $\beta' \Less \alpha'$.
+    If $a \Greater \beta'$ then $\beta' \Less \alpha'$.
+    Hence $a \Less \beta'$.
     Thus $a \Elem \beta'$.
   End.
 
-  Let us show that $\beta' \SETinclude \alpha'$.
+  Let us show that $\beta' \Subclass \alpha'$.
     Let $b \Elem \beta'$.
-    Then $b \ORDless \alpha'$ or $b \Eq \alpha'$ or $b \ORDgtr \alpha'$.
-    If $b \Eq \alpha'$ then $\alpha' \ORDless \beta'$.
-    If $b \ORDgtr \alpha'$ then $\alpha' \ORDless \beta'$.
-    Hence $b \ORDless \alpha'$.
+    Then $b \Less \alpha'$ or $b \Eq \alpha'$ or $b \Greater \alpha'$.
+    If $b \Eq \alpha'$ then $\alpha' \Less \beta'$.
+    If $b \Greater \alpha'$ then $\alpha' \Less \beta'$.
+    Hence $b \Less \alpha'$.
     Thus $b \Elem \alpha'$.
   End.
 
@@ -111,16 +111,16 @@
 
 \begin{proposition}[forthel]
   Let $\alpha, \beta$ be ordinals.
-  If $\alpha \SETinclude \beta$ then $\alpha \ORDleq \beta$.
+  If $\alpha \Subclass \beta$ then $\alpha \Leq \beta$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $\alpha \SETinclude \beta$.
+  Assume $\alpha \Subclass \beta$.
 
   \begin{case}{$\alpha \Eq \beta$.} \end{case}
 
   \begin{case}{$\alpha \NotEq \beta$.}
-    Then $\alpha \ORDless \beta$ or $\alpha \ORDgtr \beta$.
-    Assume $\alpha \ORDgtr \beta$.
+    Then $\alpha \Less \beta$ or $\alpha \Greater \beta$.
+    Assume $\alpha \Greater \beta$.
     Then $\beta \Elem \alpha$.
     Hence $\beta \Elem \beta$.
     Contradiction.
@@ -129,41 +129,41 @@
 
 \begin{proposition}[forthel]
   Let $\alpha$ be an ordinal.
-  Then $\alpha \ORDless \ORDsucc(\alpha)$.
+  Then $\alpha \Less \Succ(\alpha)$.
 \end{proposition}
 
 \begin{proposition}[forthel]
   Let $\alpha, \beta$ be ordinals.
-  If $\beta \ORDless \ORDsucc(\alpha)$ then $\beta \ORDleq \alpha$.
+  If $\beta \Less \Succ(\alpha)$ then $\beta \Leq \alpha$.
 \end{proposition}
 \begin{proof}[forthel]
-  Assume $\beta \ORDless \ORDsucc(\alpha)$.
-  Then $\beta \Elem \ORDsucc(\alpha) \Eq \alpha \SETunion \SETsingleton{\alpha}$.
-  Hence $\beta \Elem \alpha$ or $\beta \Elem \SETsingleton{\alpha}$.
-  Thus $\beta \ORDless \alpha$ or $\beta \Eq \alpha$.
-  Therefore $\beta \ORDleq \alpha$.
+  Assume $\beta \Less \Succ(\alpha)$.
+  Then $\beta \Elem \Succ(\alpha) \Eq \alpha \Union \Singleton{\alpha}$.
+  Hence $\beta \Elem \alpha$ or $\beta \Elem \Singleton{\alpha}$.
+  Thus $\beta \Less \alpha$ or $\beta \Eq \alpha$.
+  Therefore $\beta \Leq \alpha$.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $\alpha$ be an ordinal.
-  There exists no ordinal $\beta$ such that $\alpha \ORDless \beta \ORDless \ORDsucc(\alpha)$.
+  There exists no ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
 \end{proposition}
 \begin{proof}[forthel]
   Assume the contrary.
-  Consider an ordinal $\beta$ such that $\alpha \ORDless \beta \ORDless \ORDsucc(\alpha)$.
-  Then $\beta \ORDless \alpha$ or $\beta \Eq \alpha$.
-  Hence $\alpha \ORDless \alpha$.
+  Consider an ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
+  Then $\beta \Less \alpha$ or $\beta \Eq \alpha$.
+  Hence $\alpha \Less \alpha$.
   Contradiction.
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $\alpha$ be an ordinal.
-  There exists no ordinal $\beta$ such that $\alpha \ORDless \beta \ORDless \ORDsucc(\alpha)$.
+  There exists no ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
 \end{proposition}
 \begin{proof}[forthel]
   Assume the contrary.
-  Choose an ordinal $\beta$ such that $\alpha \ORDless \beta \ORDless \ORDsucc(\alpha)$.
-  Then $\alpha \Elem \beta \Elem \alpha \SETunion \SETsingleton{\alpha}$.
+  Choose an ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
+  Then $\alpha \Elem \beta \Elem \alpha \Union \Singleton{\alpha}$.
   Hence $\beta \Elem \alpha$ or $\beta \Eq \alpha$.
   Then $\alpha \Elem \alpha$.
   Contradiction.
@@ -171,10 +171,10 @@
 
 \begin{proposition}[forthel]
   Let $\lambda$ be a limit ordinal and $\alpha \Elem \lambda$.
-  Then $\lambda$ contains $\ORDsucc(\alpha)$.
+  Then $\lambda$ contains $\Succ(\alpha)$.
 \end{proposition}
 \begin{proof}[forthel]
-  If $\ORDsucc(\alpha) \NotElem \lambda$ then $\alpha \ORDless \lambda \ORDless \ORDsucc(\alpha)$.
+  If $\Succ(\alpha) \NotElem \lambda$ then $\alpha \Less \lambda \Less \Succ(\alpha)$.
 \end{proof}
 \end{smodule}
 \end{document}

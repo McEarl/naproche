@@ -8,76 +8,76 @@
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Assume $n \NATgeq \NATtwo$.
-  Then $\NATexp{n}{n} \NATgtr \NATfac{n}$.
+  Assume $n \Geq \Two$.
+  Then $\Exp{n}{n} \Greater \Factorial{n}$.
 \end{proposition}
 \begin{proof}[forthel]
-  (a) Define $\Phi \DefEq \SClass{n'}{\Natgeqthan{\NATtwo}}{\NATexp{n'}{n'} \NATgtr \NATfac{n'}}$.
+  (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Two}}{\Exp{n'}{n'} \Greater \Factorial{n'}}$.
 
-  (1) $\Phi$ contains $\NATtwo$.
+  (1) $\Phi$ contains $\Two$.
 
-  (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
   \begin{proof}
     Let $n' \Elem \Phi$.
-    Then $n' \NATgeq \NATtwo$.
+    Then $n' \Geq \Two$.
 
-    Take $X \Eq \NATexp{n' \NATplus \NATone}{n'} \NATmul (n' \NATplus \NATone)$ and $Y \Eq \NATexp{n'}{n'} \NATmul (n' \NATplus \NATone)$.
-    Then $X \NATgtr Y$.
+    Take $X \Eq \Exp{n' \Plus \One}{n'} \Mul (n' \Plus \One)$ and $Y \Eq \Exp{n'}{n'} \Mul (n' \Plus \One)$.
+    Then $X \Greater Y$.
     \begin{proof}
-      We have $n' \NATplus \NATone \NATgtr n'$ and $n' \NotEq \NATzero$.
-      Thus $\NATexp{n' \NATplus \NATone}{n'} \NATgtr \NATexp{n'}{n'}$.
-      $n' \NATplus \NATone$ is nonzero.
-      Hence $\NATexp{n' \NATplus \NATone}{n'} \NATmul (n' \NATplus \NATone) \NATgtr \NATexp{n'}{n'} \NATmul (n' \NATplus \NATone)$.
+      We have $n' \Plus \One \Greater n'$ and $n' \NotEq \Zero$.
+      Thus $\Exp{n' \Plus \One}{n'} \Greater \Exp{n'}{n'}$.
+      $n' \Plus \One$ is nonzero.
+      Hence $\Exp{n' \Plus \One}{n'} \Mul (n' \Plus \One) \Greater \Exp{n'}{n'} \Mul (n' \Plus \One)$.
     \end{proof}
 
-    Take $Z \Eq \NATfac{n'} \NATmul (n' \NATplus \NATone)$.
-    Then $Y \NATgtr Z$.
-    Indeed $\NATexp{n'}{n'} \NATgtr \NATfac{n'}$ and $n' \NATplus \NATone \NotEq \NATzero$.
+    Take $Z \Eq \Factorial{n'} \Mul (n' \Plus \One)$.
+    Then $Y \Greater Z$.
+    Indeed $\Exp{n'}{n'} \Greater \Factorial{n'}$ and $n' \Plus \One \NotEq \Zero$.
 
-    Hence $\NATexp{n' \NATplus \NATone}{n' \NATplus \NATone} \Eq X \NATgtr Y \NATgtr Z \Eq \NATfac{n' \NATplus \NATone}$.
-    Thus $\NATexp{n' \NATplus \NATone}{n' \NATplus \NATone} \NATgtr \NATfac{n' \NATplus \NATone}$.
+    Hence $\Exp{n' \Plus \One}{n' \Plus \One} \Eq X \Greater Y \Greater Z \Eq \Factorial{n' \Plus \One}$.
+    Thus $\Exp{n' \Plus \One}{n' \Plus \One} \Greater \Factorial{n' \Plus \One}$.
   \end{proof}
 
-  Therefore $\Phi$ contains every element of $\Natgeqthan{\NATtwo}$ (by \sr{induction III}{induction}).
-  Consequently $\NATexp{n}{n} \NATgtr \NATfac{n}$ (by a).
+  Therefore $\Phi$ contains every element of $\NatGeq{\Two}$ (by \sr{induction III}{induction}).
+  Consequently $\Exp{n}{n} \Greater \Factorial{n}$ (by a).
 \end{proof}
 
 \begin{proposition}[forthel]
   Let $n$ be a natural number.
-  Assume $n \NATgeq \NATfour$.
-  Then $\NATfac{n} \NATgtr \NATexp{\NATtwo}{n}$.
+  Assume $n \Geq \Four$.
+  Then $\Factorial{n} \Greater \Exp{\Two}{n}$.
 \end{proposition}
 \begin{proof}[forthel]
-  (a) Define $\Phi \DefEq \SClass{n'}{\Natgeqthan{\NATfour}}{\NATfac{n'} \NATgtr \NATexp{\NATtwo}{n'}}$.
+  (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Four}}{\Factorial{n'} \Greater \Exp{\Two}{n'}}$.
 
-  (1) $\Phi$ contains $\NATfour$.
+  (1) $\Phi$ contains $\Four$.
   \begin{proof}
-    \[  \NATfac{\NATfour}                                  \]
-    \[    \Eq \NATfour \NATmul (\NATthree \NATmul \NATtwo)             \]
-    \[    \Eq \NATtwo \NATmul (\NATtwo \NATmul (\NATthree \NATmul \NATtwo))   \]
-    \[    \Eq \NATthree \NATmul (\NATtwo \NATmul (\NATtwo \NATmul \NATtwo))   \]
-    \[    \NATgtr \NATtwo \NATmul (\NATtwo \NATmul (\NATtwo \NATmul \NATtwo))   \]
-    \[    \Eq \NATexp{\NATtwo}{\NATfour}.                          \]
+    \[  \Factorial{\Four}                                  \]
+    \[    \Eq \Four \Mul (\Three \Mul \Two)             \]
+    \[    \Eq \Two \Mul (\Two \Mul (\Three \Mul \Two))   \]
+    \[    \Eq \Three \Mul (\Two \Mul (\Two \Mul \Two))   \]
+    \[    \Greater \Two \Mul (\Two \Mul (\Two \Mul \Two))   \]
+    \[    \Eq \Exp{\Two}{\Four}.                          \]
   \end{proof}
 
-  (2) For all $n' \Elem \Phi$ we have $n' \NATplus \NATone \Elem \Phi$.
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
   \begin{proof}
     Let $n' \Elem \Phi$.
-    Then $n' \NATgeq \NATfour$ and $\NATfac{n'} \NATgtr \NATexp{\NATtwo}{n'}$.
+    Then $n' \Geq \Four$ and $\Factorial{n'} \Greater \Exp{\Two}{n'}$.
 
-    Take $X \Eq \NATfac{n'} \NATmul (n' \NATplus \NATone)$ and $Y \Eq \NATexp{\NATtwo}{n'} \NATmul (n' \NATplus \NATone)$.
-    Then $X \NATgtr Y$.
+    Take $X \Eq \Factorial{n'} \Mul (n' \Plus \One)$ and $Y \Eq \Exp{\Two}{n'} \Mul (n' \Plus \One)$.
+    Then $X \Greater Y$.
 
-    Take $Z \Eq \NATexp{\NATtwo}{n'} \NATmul \NATtwo$.
-    Then $Y \NATgtr Z$ (by \sn{preservation of ordering under left-multiplication}).
-    Indeed $n' \NATplus \NATone \NATgtr \NATtwo$ and $\NATexp{\NATtwo}{n'} \NotEq \NATzero$.
+    Take $Z \Eq \Exp{\Two}{n'} \Mul \Two$.
+    Then $Y \Greater Z$ (by \sn{preservation of ordering under left-multiplication}).
+    Indeed $n' \Plus \One \Greater \Two$ and $\Exp{\Two}{n'} \NotEq \Zero$.
 
-    Hence $\NATfac{n' \NATplus \NATone} \Eq X \NATgtr Y \NATgtr Z \Eq \NATexp{\NATtwo}{n' \NATplus \NATone}$.
-    Thus $\NATfac{n' \NATplus \NATone} \NATgtr \NATexp{\NATtwo}{n' \NATplus \NATone}$.
+    Hence $\Factorial{n' \Plus \One} \Eq X \Greater Y \Greater Z \Eq \Exp{\Two}{n' \Plus \One}$.
+    Thus $\Factorial{n' \Plus \One} \Greater \Exp{\Two}{n' \Plus \One}$.
   \end{proof}
 
-  Therefore $\Phi$ contains every element of $\Natgeqthan{\NATfour}$ (by \sr{induction III}{induction}).
-  Consequently $\NATfac{n} \NATgtr \NATexp{\NATtwo}{n}$ (by a).
+  Therefore $\Phi$ contains every element of $\NatGeq{\Four}$ (by \sr{induction III}{induction}).
+  Consequently $\Factorial{n} \Greater \Exp{\Two}{n}$ (by a).
 \end{proof}
 \end{smodule}
 \end{document}
