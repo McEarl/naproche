@@ -86,6 +86,9 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
   were simplified. E.g. `\NATplus` became `\Plus`. This makes them less
   ambiguous but easier to type and read.
 
+* **New:** A new library `math/archive/libraries/permutations` about
+  permutations.
+
 
 ### Changes on the Parser
 
