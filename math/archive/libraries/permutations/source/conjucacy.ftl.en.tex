@@ -1,0 +1,81 @@
+\documentclass{stex}
+\libusepackage{naproche}
+\libinput{preamble}
+\begin{document}
+\begin{smodule}{conjugacy.ftl}
+  \importmodule[libraries/permutations]{permutations.ftl}
+  \symdef{ConjClass}[name=conjugacy class]{\textrm{Cl}}
+  \symdecl*{conjugate}
+
+  \begin{definition}[forthel,for=conjugate]
+    Let $f, g$ be permutations.
+    $f$ and $g$ are conjugate iff $\Dom(f) \Eq \Dom(g)$ and there exists a permutation $h$ on $\Dom(f)$ such that $(\Inv{h} \Comp f) \Comp h \Eq g$.
+    Let a \emph{conjugate of $f$} stand for a permutation $g$ such that $f$ and $g$ are conjugate.
+  \end{definition}
+
+  \begin{proposition}[forthel]
+    Let $p$ be a permutation.
+    Then $p$ is a conjugate of $p$.
+  \end{proposition}
+
+  \begin{proposition}[forthel]
+    Let $p, q$ be permutations.
+    If $p$ and $q$ are conjugate then $q$ and $p$ are conjugate.
+  \end{proposition}
+  \begin{proof}[forthel]
+    Assume that $p$ and $q$ are conjugate.
+    Take $X \Eq \Dom(p)$.
+    Choose a permutation $h$ on $X$ such that $(\Inv{h} \Comp p) \Comp h \Eq q$.
+    Then $q \Comp \Inv{h} \Eq \Inv{h} \Comp p$.
+    Take $k \Eq \Inv{h}$.
+    Then $k$ is a permutation on $X$.
+
+    [prover vampire]
+    [timelimit 5]
+
+    \begin{align*}
+            (\Inv{k} \Comp q) \Comp k
+      &\Eq  \Inv{k} \Comp (q \Comp k) \\
+      &\Eq  h \Comp (q \Comp k) \\
+      &\Eq  h \Comp (q \Comp \Inv{h}) \\
+      &\Eq  h \Comp (\Inv{h} \Comp p) \\
+      &\Eq  (h \Comp \Inv{h}) \Comp p \\
+      &\Eq  p
+    \end{align*}.
+  \end{proof}
+
+  \begin{proposition}[forthel]
+    Let $p, q, r$ are permutations.
+    If $p$ and $q$ are conjugate and $q$ and $r$ are conjugate then $p$ and $r$ are conjugate.
+  \end{proposition}
+  \begin{proof}[forthel]
+    Assume that $p$ and $q$ are conjugate and $q$ and $r$ are conjugate.
+    Take $X \Eq \Dom(p)$.
+    Take permutations $h, k$ on $X$ such that $(\Inv{h} \Comp p) \Comp h \Eq q$ and $(\Inv{k} \Comp q) \Comp k \Eq r$.
+    Take $l \Eq h \Comp k$.
+    Then $l$ is a permutation on $X$.
+
+    [prover vampire]
+    [timelimit 10]
+
+    \begin{align*}
+            (\Inv{l} \Comp p) \Comp l
+      &\Eq  ((\Inv{h \Comp k}) \Comp p) \Comp (h \Comp k) \\
+      &\Eq  ((\Inv{k} \Comp \Inv{h}) \Comp p) \Comp (h \Comp k) \\
+      &\Eq  (\Inv{k} \Comp (\Inv{h} \Comp p)) \Comp (h \Comp k) \\
+      &\Eq  \Inv{k} \Comp ((\Inv{h} \Comp p) \Comp (h \Comp k)) \\
+      &\Eq  \Inv{k} \Comp (q \Comp k) \\
+      &\Eq  (\Inv{k} \Comp q) \Comp k \\
+      &\Eq  r
+    \end{align*}.
+    Indeed $\Inv{h \Comp k} \Eq \Inv{k} \Comp \Inv{h}$ and $(\Inv{h} \Comp p) \Comp (h \Comp k) \Eq q \Comp k$.
+  \end{proof}
+
+
+  \begin{definition}[forthel,for=conjugacy class]
+    Let $p$ be a permutation.
+    $\ConjClass(p) \DefEq \CClass{q}{\text{$q$ is a conjugate of $p$}}$.
+    Let the \emph{conjugacy class of $p$} stand for $\ConjClass(p)$.
+  \end{definition}
+\end{smodule}
+\end{document}

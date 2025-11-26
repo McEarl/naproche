@@ -1,0 +1,40 @@
+\documentclass{stex}
+\libusepackage{naproche}
+\libinput{preamble}
+\begin{document}
+\begin{smodule}{permutations.ftl}
+  \importmodule[libraries/foundations]{invertible-maps.ftl}
+  \symdef{Permutations}[args=1,name=permutation]{\comp{\mathfrak{S}}_{#1}}
+
+  \begin{convention}[forthel]
+    Let $X$ denote a class.
+  \end{convention}
+
+  \begin{definition}[forthel,for=permutation]
+    A \emph{permutation on $X$} is a bijection between $X$ and $X$.
+  \end{definition}
+
+  \begin{definition}[forthel]
+    A \emph{permutation} is a map $p$ that is a permutation on $\Dom(p)$.
+  \end{definition}
+
+  \begin{lemma}[forthel]
+    Let $p$ and $q$ be permutations on $X$.
+    Then $\Range(p) \Subclass \Dom(q)$.
+  \end{lemma}
+
+  \begin{proposition}[forthel]
+    $\Id{X}$ is a permutation on $X$.
+  \end{proposition}
+
+  \begin{proposition}[forthel]
+    Let $p, q$ be permutations on $X$.
+    Then $p \Comp q$ is a permutation on $X$.
+  \end{proposition}
+
+  \begin{proposition}[forthel]
+    Let $p$ be a permutation on $X$.
+    Then $p$ is invertible and $\Inv{p}$ is a permutation on $X$.
+  \end{proposition}
+\end{smodule}
+\end{document}

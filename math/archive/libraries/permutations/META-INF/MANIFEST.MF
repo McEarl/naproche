@@ -1,0 +1,5 @@
+id: libraries/permutations
+ns: https://naproche.github.io/math/archive/libraries/permutations
+narration-base: https://naproche.github.io/math/archive/libraries/permutations
+url-base: http://localhost
+format:stex

@@ -1,0 +1,62 @@
+\documentclass{stex}
+\libusepackage{naproche}
+\libinput{preamble}
+\begin{document}
+\begin{smodule}{permutations.ftl}
+  \importmodule[libraries/permutations]{permutations.ftl}
+  \importmodule[libraries/foundations]{segments-of-natural-numbers.ftl}
+  \importmodule[libraries/set-theory]{zfc.ftl}
+  \symdef{IdPerm}[args=1]{\comp{\textrm{id}}_{#1}}
+
+  \begin{convention}[forthel]
+    Let $n$ denote a natural number.
+  \end{convention}
+
+  \begin{definition}[forthel,for=Permutations]
+    $\emph{\Permutations{n}}$ is the class of all permutations on $\NatSegment{\One}{n}$.
+  \end{definition}
+
+  \begin{lemma}[forthel]
+    Let $\pi \Elem \Permutations{n}$.
+    Then $\pi$ is a function.
+  \end{lemma}
+
+  \begin{lemma}[forthel]
+    Let $\pi, \tau \Elem \Permutations{n}$.
+    Then $\Range(\pi) \Subclass \Dom(\tau)$.
+  \end{lemma}
+
+  \begin{proposition}[forthel]
+    $\Permutations{n}$ is a set.
+  \end{proposition}
+  \begin{proof}[forthel]
+    Take $X \Eq \FunSpace{\NatSegment{\One}{n}}{\NatSegment{\One}{n}}$.
+    $\Permutations{n} \Subclass X$ and $X$ is a set.
+    Hence $\Permutations{n}$ is a set.
+  \end{proof}
+
+  \begin{definition}[forthel,for=IdPerm]
+    $\emph{\IdPerm{n}} \DefEq \Id{\NatSegment{\One}{n}}$.
+  \end{definition}
+
+  \begin{proposition}[forthel]
+    $\IdPerm{n} \Elem \Permutations{n}$.
+  \end{proposition}
+  
+  \begin{proposition}[forthel]
+    Let $\pi,\tau \Elem \Permutations{n}$.
+    Then $\pi \Comp \tau \Elem \Permutations{n}$.
+  \end{proposition}
+  \begin{proof}[forthel]
+    $\pi \Comp \tau$ is a permutation of $\NatSegment{\One}{n}$.
+  \end{proof}
+
+  \begin{proposition}[forthel]
+    Let $\pi \Elem \Permutations{n}$.
+    Then $\Inv{\pi} \Elem \Permutations{n}$.
+  \end{proposition}
+  \begin{proof}[forthel]
+    $\Inv{\pi}$ is a permutation of $\NatSegment{\One}{n}$.
+  \end{proof}
+\end{smodule}
+\end{document}
