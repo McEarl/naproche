@@ -1,10 +1,15 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{recursive-maps.ftl}
+
 \importmodule[libraries/set-theory]{ordering.ftl}
+
 \symdef{OrdFunSpace}[args=1]{#1^{\comp{<\infty}}}
+
 \symdecl*{recursive}
 
 \begin{definition}[forthel,for=OrdFunSpace]
@@ -25,5 +30,6 @@
 \end{definition}
 
 \inlineforthel{[prover eprover]}
+
 \end{smodule}
 \end{document}

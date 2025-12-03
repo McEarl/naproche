@@ -1,8 +1,11 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{classes.ftl}
+
 \importmodule[libraries/meta]{preliminaries.ftl}
 
 \symdef{Subclass}{\;\subseteq\;}
@@ -17,6 +20,7 @@
 \symdef{Union}{\,\cup\,}
 \symdef{Intersect}{\,\cap\,}
 \symdef{Diff}{\,\setminus\,}
+
 \symdecl*{subclass}
 \symdecl*{superclass}
 \symdecl*{proper subclass}
@@ -197,5 +201,6 @@
     Then $A$ and $B$ are disjoint iff $A \Intersect B$ is empty.
   \end{proposition}
 \end{sfragment}
+
 \end{smodule}
 \end{document}

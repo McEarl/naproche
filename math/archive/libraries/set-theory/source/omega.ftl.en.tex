@@ -1,11 +1,16 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{omega.ftl}
+
 \importmodule[libraries/set-theory]{zero.ftl}
 \importmodule[libraries/set-theory]{successor-ordinals.ftl}
+
 \symdef{Infinity}{\omega}
+
 \symdecl*{natural number}
 
 \begin{definition}[forthel,for={Infinity,natural number}]
@@ -101,5 +106,6 @@
 \begin{proposition}[forthel]
   Every element of $\Infinity$ is an ordinal.
 \end{proposition}
+
 \end{smodule}
 \end{document}

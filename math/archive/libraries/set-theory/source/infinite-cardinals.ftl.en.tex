@@ -1,11 +1,15 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{infinite-cardinals.ftl}
+
 \importmodule[libraries/foundations]{proper-classes.ftl}
 \importmodule[libraries/set-theory]{finite-and-infinite-sets.ftl}
 \importmodule[articles]{cantor.ftl}
+
 \symdef{Cardinals}{\mathbb C}
 
 \begin{definition}[forthel,for=Cardinals]
@@ -148,5 +152,6 @@
   Thus $\alpha \Less \Card{\kappa}$ and $\kappa$ is equinumerous to $\kappa$.
   Contradiction.
 \end{proof}
+
 \end{smodule}
 \end{document}

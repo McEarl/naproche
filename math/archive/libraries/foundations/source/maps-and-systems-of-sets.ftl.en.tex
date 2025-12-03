@@ -1,10 +1,14 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{maps-and-systems-of-sets.ftl}
+
 \importmodule[libraries/foundations]{maps.ftl}
 \importmodule[libraries/foundations]{systems-of-sets.ftl}
+
 \symdecl*{map between systems of sets}
 \symdecl*{subset preserving}
 \symdecl*{preserve subsets}
@@ -18,5 +22,6 @@
   $f$ is \emph{subset preserving} iff $x \Subclass y \Implies f(x) \Subclass f(y)$ for all $x, y \Elem \Dom(f)$.
   Let $f$ \emph{preserves subsets} stand for $f$ is subset preserving.
 \end{definition}
+
 \end{smodule}
 \end{document}

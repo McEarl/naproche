@@ -1,12 +1,17 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{primes.ftl}
+
 \importmodule[libraries/arithmetics]{divisibility.ftl}
 \importmodule[libraries/arithmetics]{modular-arithmetics.ftl}
 \importmodule[libraries/arithmetics]{euclid-division-theorem.ftl}
+
 \symdef{Primes}{\mathbb P}
+
 \symdecl*{prime}
 \symdecl*{compound}
 \symdecl*{prime number}
@@ -154,5 +159,6 @@
     Therefore $p \Divides \One \Mul m \Eq m$.
   \end{case}
 \end{proof}
+
 \end{smodule}
 \end{document}

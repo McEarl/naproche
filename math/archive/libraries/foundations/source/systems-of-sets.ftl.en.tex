@@ -1,11 +1,16 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{systems-of-sets.ftl}
+
 \importmodule[libraries/foundations]{sub-and-supersets.ftl}
+
 \symdef{UnionOver}[name=union over]{\bigcup\,}
 \symdef{IntersectOver}[name=intersection over]{\bigcap\,}
+
 \symdecl*{system of sets}
 \symdecl*{system of nonempty sets}
 \symdecl*{system of subsets}
@@ -140,5 +145,6 @@
     Then $\IntersectOver \Singleton{x} \Eq x$.
   \end{corollary}
 \end{sfragment}
+
 \end{smodule}
 \end{document}

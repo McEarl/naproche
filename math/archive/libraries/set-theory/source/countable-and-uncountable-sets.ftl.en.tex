@@ -1,10 +1,14 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{countable-and-uncountable-sets.ftl}
+
 \importmodule[libraries/set-theory]{omega-is-limit-ordinal.ftl}
 \importmodule[libraries/set-theory]{cardinals.ftl}
+
 \symdecl*{countable}
 \symdecl*{uncountable}
 \symdecl*{countably infinite}
@@ -28,5 +32,6 @@
   Let $x$ be a set.
   Then $x$ is uncountable iff $\Card{x} \Greater \Infinity$.
 \end{proposition}
+
 \end{smodule}
 \end{document}

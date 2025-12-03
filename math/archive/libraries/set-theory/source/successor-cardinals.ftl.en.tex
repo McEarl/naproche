@@ -1,11 +1,16 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{successor-cardinals.ftl}
+
 \importmodule[libraries/set-theory]{cardinals.ftl}
 \importmodule[articles]{cantor.ftl}
+
 \symdef{SuccCard}[args=1]{#1^{\comp+}}
+
 \symdecl*{successor cardinal}
 
 \begin{lemma}[forthel]
@@ -42,5 +47,6 @@
   Let $\kappa$ be a cardinal.
   Then $\Card{\alpha} \Leq \kappa$ for every $\alpha \Elem \SuccCard{\kappa}$.
 \end{proposition}
+
 \end{smodule}
 \end{document}

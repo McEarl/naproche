@@ -1,11 +1,16 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{divisibility.ftl}
+
 \importmodule[libraries/arithmetics]{multiplication-and-ordering.ftl}
+
 \symdef{Divides}{\,\mid\,}
 \symdef{NotDivides}{\,\nmid\,}
+
 \symdecl*{divisible}
 \symdecl*{divide}
 \symdecl*{factor}
@@ -280,5 +285,6 @@
   Hence $n \Greater n$.
   Contradiction.
 \end{proof}
+
 \end{smodule}
 \end{document}

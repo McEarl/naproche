@@ -1,4 +1,5 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libusepackage{copyright}
 \usepackage{mathtools} % for \bigtimes
@@ -7,7 +8,6 @@
 \title{Kőnig's Theorem in \Naproche}
 \author{Steffen Frerix, Peter Koepke, Marcel Schütz}
 \date{2025}
-
 
 \begin{document}
 \begin{smodule}{koenig.ftl}
@@ -21,6 +21,7 @@
 \symdef{Sum}[args=2]{\comp\sum_{i\;\comp\in\;#2}#1_{\comp i}}
 \symdef{ProdSet}[args=2]{\comp\bigtimes_{\comp i\;\comp\in;#2}#1_{\comp i}}
 \symdef{Prod}[args=2]{\comp\prod_{\comp i\;\comp\in\;#2}#1_{\comp i}}
+
 \symdecl*{sequence of cardinals}
 \symdecl*{Koenig}
 
@@ -148,5 +149,6 @@ are themselves non-empty:
 
 \printbibliography
 \printcopyright{Steffen Frerix (2018--2019), Peter Koepke (2018--2021), Marcel Schütz (2024--2025)}
+
 \end{smodule}
 \end{document}

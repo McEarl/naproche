@@ -1,9 +1,13 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{lists.ftl}
+
 \importmodule[libraries/foundations]{classes.ftl}
+
 \symdef{List}[name=list,args=a,op=[\,]]{\comp[\argsep{#1}{\comp,}\comp]}
 \symdef{Cons}[op=::]{\,{::}\,}
 
@@ -32,5 +36,6 @@
   Let $a$ be an object and $L$ be a list.
   Then $L \ILess a \Cons L$.
 \end{axiom}
+
 \end{smodule}
 \end{document}

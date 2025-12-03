@@ -1,8 +1,11 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{exponentiation-and-ordering.ftl}
+
 \importmodule[libraries/arithmetics]{multiplication-and-ordering.ftl}
 \importmodule[libraries/arithmetics]{exponentiation.ftl}
 
@@ -380,5 +383,6 @@
   Therefore $\Phi$ contains every element of $\NatGeq{\Five}$ (by \sr{induction III}{induction}).
   Consequently $\Exp{\Two}{n} \Greater \Exp{n}{\Two}$ (by a).
 \end{proof}
+
 \end{smodule}
 \end{document}

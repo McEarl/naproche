@@ -1,9 +1,13 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{two.ftl}
+
 \importmodule[libraries/set-theory]{one.ftl}
+
 \symdef{Two}{2}
 
 \begin{definition}[forthel,for=Two]
@@ -13,5 +17,6 @@
 \begin{proposition}[forthel]
   $\Two \Eq \Pair{\Zero}{\One}$.
 \end{proposition}
+
 \end{smodule}
 \end{document}

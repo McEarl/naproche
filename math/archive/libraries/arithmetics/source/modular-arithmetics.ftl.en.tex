@@ -1,12 +1,17 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{modular-arithmetics.ftl}
+
 \importmodule[libraries/arithmetics]{multiplication-and-ordering.ftl}
+
 \symdef{Div}{\,\textrm{div}\,}
 \symdef{Mod}{\,\textrm{mod}\,}
 \symdef{Cong}[args=3]{#1\;\comp\equiv\;#2\;\comp{(\textrm{mod}}\,#3\comp)}
+
 \symdecl*{quotient}
 \symdecl*{remainder}
 \symdecl*{congruent}
@@ -171,5 +176,6 @@
     Thus $\Cong{n \Plus k}{n}{k}$.
   \end{proof}
 \end{sfragment}
+
 \end{smodule}
 \end{document}

@@ -1,4 +1,5 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libusepackage{copyright}
 \libinput{preamble}
@@ -9,11 +10,13 @@
 
 \begin{document}
 \begin{smodule}{little-Gauss.ftl}
+
 \maketitle
 
 \importmodule[libraries/arithmetics]{multiplication.ftl}
 
 \symdef{Gauss}{\mathcal{G}}
+
 \symdecl*{Little Gauss}
 
 \noindent This is a formalization of ``Little Gauß''' Theorem, i.e. of
@@ -72,5 +75,6 @@ $\Gauss(n \Plus \One) \Eq \Gauss(n) \Plus (n \Plus \One)$:
 
 \printbibliography
 \printlicense[CcByNcSa]{Christian Schöner (2024), Marcel Schütz (2024--2025)}
+
 \end{smodule}
 \end{document}

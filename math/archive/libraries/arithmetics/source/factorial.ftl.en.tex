@@ -1,9 +1,13 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{factorial.ftl}
+
 \importmodule[libraries/arithmetics]{multiplication.ftl}
+
 \symdef{Factorial}[args=1]{#1\comp!}
 
 \begin{signature}[forthel,for=Factorial]
@@ -41,5 +45,6 @@
   Thus $\Phi$ contains every natural number (by \sr{induction I}{induction}).
   Therefore $\Factorial{n} \NotEq \Zero$.
 \end{proof}
+
 \end{smodule}
 \end{document}

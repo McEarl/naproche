@@ -1,11 +1,16 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{injections-surjections-bijections.ftl}
+
 \importmodule[libraries/foundations]{maps.ftl}
+
 \symdef{FromOnto}[args=2]{\,\comp:\,#1\,\comp\twoheadrightarrow\,#2}
 \symdef{FromInto}[args=2]{\,\comp:\,#1\,\comp\hookrightarrow\,#2}
+
 \symdecl*{surjective}
 \symdecl*{injective}
 \symdecl*{bijection}
@@ -178,5 +183,6 @@
     Then $f$ is a bijection between $A$ and $\Im{f}{A}$.
   \end{corollary}
 \end{sfragment}
+
 \end{smodule}
 \end{document}

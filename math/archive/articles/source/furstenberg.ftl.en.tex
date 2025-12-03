@@ -1,4 +1,5 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libusepackage{copyright}
 \libinput{preamble}
@@ -9,6 +10,7 @@
 
 \begin{document}
 \begin{smodule}{furstenberg.ftl}
+
 \maketitle
 
 \importmodule[libraries/arithmetics]{primes.ftl}
@@ -20,6 +22,7 @@
 \symdef{ArithSeq}[args=2]{\comp{\mathrm{N}}_{#1\comp,#2}}
 \symdef{Int}{\mathbb{Z}}
 \symdef{PrimesSeq}{\mathrm{P}}
+
 \symdecl*{open}
 \symdecl*{system of open sets}
 \symdecl*{closed}
@@ -298,5 +301,6 @@ $\PrimesSeq$ is infinite.
 
 \printbibliography
 \printcopyright{Andrei Paskevich (2008), Marcel Schütz (2021--2025)}
+
 \end{smodule}
 \end{document}

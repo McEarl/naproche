@@ -1,8 +1,11 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{dedekind-recursion-theorem.ftl}
+
 \importmodule[libraries/arithmetics]{nat-is-a-set.ftl}
 \importmodule[libraries/set-theory]{zfc.ftl}
 
@@ -311,5 +314,6 @@
   Thus $\Phi$ contains every natural number (by \sr{induction I}{induction}).
   Consequently $\varphi(n) \Eq \varphi'(n)$ for each $n \Elem \Naturals$.
 \end{proof}
+
 \end{smodule}
 \end{document}

@@ -1,8 +1,11 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{exponentiation-and-division.ftl}
+
 \importmodule[libraries/arithmetics]{division.ftl}
 \importmodule[libraries/arithmetics]{exponentiation.ftl}
 \importmodule[libraries/arithmetics]{subtraction.ftl}
@@ -20,5 +23,6 @@
       \Eq \Frac{\Exp{k}{n \Minus m}}{\One}
       \Eq \Exp{k}{n \Minus m}. \]
 \end{proof}
+
 \end{smodule}
 \end{document}

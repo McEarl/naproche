@@ -1,10 +1,14 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{even-and-odd-numbers.ftl}
+
 \importmodule[libraries/arithmetics]{divisibility.ftl}
 \importmodule[libraries/arithmetics]{subtraction.ftl}
+
 \symdecl*{even}
 \symdecl*{odd}
 
@@ -294,5 +298,6 @@
     Therefore $n \Mul m$ is odd.
   \end{proof}
 \end{sfragment}
+
 \end{smodule}
 \end{document}

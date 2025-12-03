@@ -1,8 +1,11 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{exponentiation-and-divisibility.ftl}
+
 \importmodule[libraries/arithmetics]{exponentiation-and-ordering.ftl}
 \importmodule[libraries/arithmetics]{divisibility.ftl}
 
@@ -45,5 +48,6 @@
   Hence $\Exp{m}{\Two} \Eq m \Mul m \Leq m \Mul k \Eq n$.
   Therefore $\Exp{m}{\Two} \Leq n$.
 \end{proof}
+
 \end{smodule}
 \end{document}

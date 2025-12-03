@@ -1,11 +1,16 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{successor-ordinals.ftl}
+
 \importmodule[libraries/set-theory]{ordinals.ftl}
+
 \symdef{Succ}{\textrm{succ}}
 \symdef{Pred}{\textrm{pred}}
+
 \symdecl*{successor ordinal}
 
 \begin{definition}[forthel,for=Succ]
@@ -89,5 +94,6 @@
   Let $\alpha$ be a successor ordinal.
   $\emph{\Pred(\alpha)}$ is the ordinal $\beta$ such that $\alpha \Eq \Succ(\beta)$.
 \end{definition}
+
 \end{smodule}
 \end{document}

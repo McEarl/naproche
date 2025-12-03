@@ -1,9 +1,13 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{exponentiation.ftl}
+
 \importmodule[libraries/arithmetics]{multiplication.ftl}
+
 \symdef{Exp}[args=2]{{#1}^{#2}}
 
 \begin{sfragment}{Definition}
@@ -227,5 +231,6 @@
     \end{proof}
   \end{sfragment}
 \end{sfragment}
+
 \end{smodule}
 \end{document}

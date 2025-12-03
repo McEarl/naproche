@@ -1,8 +1,11 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{factorial-and-exponentiation.ftl}
+
 \importmodule[libraries/arithmetics]{factorial.ftl}
 \importmodule[libraries/arithmetics]{exponentiation-and-ordering.ftl}
 
@@ -79,5 +82,6 @@
   Therefore $\Phi$ contains every element of $\NatGeq{\Four}$ (by \sr{induction III}{induction}).
   Consequently $\Factorial{n} \Greater \Exp{\Two}{n}$ (by a).
 \end{proof}
+
 \end{smodule}
 \end{document}

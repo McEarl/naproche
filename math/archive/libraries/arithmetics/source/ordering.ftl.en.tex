@@ -1,9 +1,13 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{ordering.ftl}
+
 \importmodule[libraries/arithmetics]{natural-numbers.ftl}
+
 \symdef{Less}[name=less]{\;<\;}
 \symdef{NotLess}{\;\not<\;}
 \symdef{Greater}[name=greater]{\;>\;}
@@ -16,6 +20,7 @@
 \symdef{NatGreater}[args=1]{\comp[\mathbb{N}]_{\comp>#1}}
 \symdef{NatLeq}[args=1]{\comp{\mathbb{N}}_{\comp\leq#1}}
 \symdef{NatGeq}[args=1]{\comp{\mathbb{N}}_{\comp\geq#1}}
+
 \symdecl*{positive}
 \symdecl*{predecessor}
 \symdecl*{successor}
@@ -527,5 +532,6 @@
     Consequently for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
   \end{proof}
 \end{sfragment}
+
 \end{smodule}
 \end{document}

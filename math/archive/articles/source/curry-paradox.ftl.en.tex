@@ -1,9 +1,8 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libusepackage{copyright}
 \libinput{preamble}
-
-
 
 \title{Curry's Paradox in \Naproche}
 \author{Marcel Schütz}
@@ -19,6 +18,7 @@
 \symdef{App}[args=2]{\comp(#1\comp)\comp(#2\comp)}
 \symdef{Fix}{\texttt{fix}}
 \symdef{Impl}{\,\comp\rightarrow\,}
+
 \symdecl*{beta reduction}
 \symdecl*{reflexivity}
 \symdecl*{modus ponens}
@@ -138,5 +138,6 @@ we can then derive that any expression $E$ is true.
 
 \printbibliography
 \printlicense[CcByNcSa]{Marcel Schütz (2024--2025)}
+
 \end{smodule}
 \end{document}

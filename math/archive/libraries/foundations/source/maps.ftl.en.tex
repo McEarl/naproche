@@ -1,9 +1,13 @@
 \documentclass{stex}
+
 \libusepackage{naproche}
 \libinput{preamble}
+
 \begin{document}
 \begin{smodule}{maps.ftl}
+
 \importmodule[libraries/foundations]{classes.ftl}
+
 \symdef{Id}[name=identity map,args=1]{\comp{\textrm{id}}_{#1}}
 \symdef{Range}[name=range]{\textrm{range}}
 \symdef{Comp}[name=composition]{\,\circ\,}
@@ -16,6 +20,7 @@
 \notation{PreIm}[star]{#1^{\comp*}\dobrackets{#2}}
 \symdef{FromTo}[args=2]{\,\comp:\,#1\,\comp\rightarrow\,#2}
 \symdef{FunSpace}[args=2]{\comp[#1\,\comp\rightarrow\,#2\comp]}
+
 \symdecl*{value}
 \symdecl*{direct image}
 \symdecl*{inverse image}
@@ -216,5 +221,6 @@
     A \emph{fixed point of $f$} is an element $x$ of $\Dom(f)$ such that $f(x) \Eq x$.
   \end{definition}
 \end{sfragment}
+
 \end{smodule}
 \end{document}
