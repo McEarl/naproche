@@ -29,297 +29,279 @@
 \symdecl*{right-cancellability of addition}
 \symdecl*{left-cancellability of addition}
 
-\begin{sfragment}{The Language of Natural Number Arithmetic}
-  \begin{signature}[forthel,for=natural number]
-    A \emph{natural number} is an object.
-  \end{signature}
+\begin{signature}[forthel,for=natural number]
+  A \emph{natural number} is an object.
+\end{signature}
 
-  \begin{definition}[forthel,for=Naturals]
-    $\emph{\Naturals}$ is the class of natural numbers.
-  \end{definition}
+\begin{definition}[forthel,for=Naturals]
+  $\emph{\Naturals}$ is the class of natural numbers.
+\end{definition}
 
-  \begin{signature}[forthel,for=sum]
-    Let $n, m$ be natural numbers.
-    $\emph{n \Plus m}$ is a natural number.
-    Let the \emph{sum of $n$ and $m$} stand for $n \Plus m$.
-  \end{signature}
+\begin{signature}[forthel,for=sum]
+  Let $n, m$ be natural numbers.
+  $\emph{n \Plus m}$ is a natural number.
+  Let the \emph{sum of $n$ and $m$} stand for $n \Plus m$.
+\end{signature}
 
-  \begin{signature}[forthel,for={zero,nonzero}]
-    $\emph{\Zero}$ is a natural number.
-    Let \emph{zero} stand for $\Zero$.
-    Let $n$ is \emph{nonzero} stand for $n \NotEq \Zero$.
-  \end{signature}
+\begin{signature}[forthel,for={zero,nonzero}]
+  $\emph{\Zero}$ is a natural number.
+  Let \emph{zero} stand for $\Zero$.
+  Let $n$ is \emph{nonzero} stand for $n \NotEq \Zero$.
+\end{signature}
 
-  \begin{signature}[forthel,for={one,direct successor}]
-    $\emph{\One}$ is a natural number.
-    Let \emph{one} stand for $\One$.
-    Let the \emph{direct successor of $n$} stand for $n \Plus \One$.
-  \end{signature}
+\begin{signature}[forthel,for={one,direct successor}]
+  $\emph{\One}$ is a natural number.
+  Let \emph{one} stand for $\One$.
+  Let the \emph{direct successor of $n$} stand for $n \Plus \One$.
+\end{signature}
 
-  \begin{definition}[forthel,for=two]
-    $\emph{\Two} \DefEq \One \Plus \One$.
-    Let \emph{two} stand for $\Two$.
-  \end{definition}
+\begin{definition}[forthel,for=two]
+  $\emph{\Two} \DefEq \One \Plus \One$.
+  Let \emph{two} stand for $\Two$.
+\end{definition}
 
-  \begin{definition}[forthel,for=three]
-    $\emph{\Three} \DefEq \Two \Plus \One$.
-    Let \emph{three} stand for $\Three$.
-  \end{definition}
+\begin{definition}[forthel,for=three]
+  $\emph{\Three} \DefEq \Two \Plus \One$.
+  Let \emph{three} stand for $\Three$.
+\end{definition}
 
-  \begin{definition}[forthel,for=four]
-    $\emph{\Four} \DefEq \Three \Plus \One$.
-    Let \emph{four} stand for $\Four$.
-  \end{definition}
+\begin{definition}[forthel,for=four]
+  $\emph{\Four} \DefEq \Three \Plus \One$.
+  Let \emph{four} stand for $\Four$.
+\end{definition}
 
-  \begin{definition}[forthel,for=five]
-    $\emph{\Five} \DefEq \Four \Plus \One$.
-    Let \emph{five} stand for $\Five$.
-  \end{definition}
+\begin{definition}[forthel,for=five]
+  $\emph{\Five} \DefEq \Four \Plus \One$.
+  Let \emph{five} stand for $\Five$.
+\end{definition}
 
-  \begin{definition}[forthel,for=six]
-    $\emph{\Six} \DefEq \Five \Plus \One$.
-    Let \emph{six} stand for $\Six$.
-  \end{definition}
+\begin{definition}[forthel,for=six]
+  $\emph{\Six} \DefEq \Five \Plus \One$.
+  Let \emph{six} stand for $\Six$.
+\end{definition}
 
-  \begin{definition}[forthel,for=seven]
-    $\emph{\Seven} \DefEq \Six \Plus \One$.
-    Let \emph{seven} stand for $\Seven$.
-  \end{definition}
+\begin{definition}[forthel,for=seven]
+  $\emph{\Seven} \DefEq \Six \Plus \One$.
+  Let \emph{seven} stand for $\Seven$.
+\end{definition}
 
-  \begin{definition}[forthel,for=eight]
-    $\emph{\Eight} \DefEq \Seven \Plus \One$.
-    Let \emph{eight} stand for $\Eight$.
-  \end{definition}
+\begin{definition}[forthel,for=eight]
+  $\emph{\Eight} \DefEq \Seven \Plus \One$.
+  Let \emph{eight} stand for $\Eight$.
+\end{definition}
 
-  \begin{definition}[forthel,for=nine]
-    $\emph{\Nine} \DefEq \Eight \Plus \One$.
-    Let \emph{nine} stand for $\Nine$.
-  \end{definition}
-\end{sfragment}
+\begin{definition}[forthel,for=nine]
+  $\emph{\Nine} \DefEq \Eight \Plus \One$.
+  Let \emph{nine} stand for $\Nine$.
+\end{definition}
 
-\begin{sfragment}{The Axioms of Natural Number Arithmetic}
+\begin{axiom}[forthel,name=injectivity of successor function]
+  Let $n, m$ be natural numbers.
+  If $n \Plus \One \Eq m \Plus \One$ then $n \Eq m$.
+\end{axiom}
 
-  \begin{axiom}[forthel,name=injectivity of successor function]
-    Let $n, m$ be natural numbers.
-    If $n \Plus \One \Eq m \Plus \One$ then $n \Eq m$.
-  \end{axiom}
+\begin{axiom}[forthel]
+  There exists no natural number $n$ such that $n \Plus \One \Eq \Zero$.
+\end{axiom}
 
-  \begin{axiom}[forthel]
-    There exists no natural number $n$ such that $n \Plus \One \Eq \Zero$.
-  \end{axiom}
+\begin{axiom}[forthel,title=Induction,name=induction I]
+  Let $\Phi$ be a class.
+  Assume $\Zero \Elem \Phi$ and for all natural numbers $n$ if $n \Elem \Phi$ then
+  $n \Plus \One \Elem \Phi$.
+  Then $\Phi$ contains every natural number.
+\end{axiom}
 
-  \begin{axiom}[forthel,title=Induction,name=induction I]
-    Let $\Phi$ be a class.
-    Assume $\Zero \Elem \Phi$ and for all natural numbers $n$ if $n \Elem \Phi$ then
-    $n \Plus \One \Elem \Phi$.
-    Then $\Phi$ contains every natural number.
-  \end{axiom}
+\begin{axiom}[forthel]
+  Then $\One \Eq \Zero \Plus \One$.
+\end{axiom}
 
-  \begin{axiom}[forthel]
-    Then $\One \Eq \Zero \Plus \One$.
-  \end{axiom}
+\begin{axiom}[forthel]
+  Let $n$ be a natural number.
+  Then $n \Plus \Zero \Eq n$.
+\end{axiom}
 
-  \begin{axiom}[forthel]
-    Let $n$ be a natural number.
-    Then $n \Plus \Zero \Eq n$.
-  \end{axiom}
+\begin{axiom}[forthel]
+  Let $n, m$ be natural numbers.
+  Then $n \Plus (m \Plus \One) \Eq (n \Plus m) \Plus \One$.
+\end{axiom}
 
-  \begin{axiom}[forthel]
-    Let $n, m$ be natural numbers.
-    Then $n \Plus (m \Plus \One) \Eq (n \Plus m) \Plus \One$.
-  \end{axiom}
-\end{sfragment}
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \Eq \Zero\text{ or }n' \Eq m' \Plus \One\text{ for some natural number }m'}$.
+  $\Zero \Elem \Phi$ and for all $n' \Elem  \Phi$ we have $n' \Plus \One \Elem \Phi$.
+  Hence every natural number is contained in $\Phi$.
+  Thus $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
+\end{proof}
 
-\begin{sfragment}{Immediate Consequences of the Axioms}
-  \begin{proposition}[forthel]
-    Let $n$ be a natural number.
-    Then $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \Eq \Zero\text{ or }n' \Eq m' \Plus \One\text{ for some natural number }m'}$.
-    $\Zero \Elem \Phi$ and for all $n' \Elem  \Phi$ we have $n' \Plus \One \Elem \Phi$.
-    Hence every natural number is contained in $\Phi$.
-    Thus $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then $n \NotEq n \Plus \One$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \NotEq n' \Plus \One}$.
+
+  (1) $\Zero$ belongs to $\Phi$.
+
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $n' \Elem \Phi$.
+    Then $n' \NotEq n' \Plus \One$.
+    If $n' \Plus \One \Eq (n' \Plus \One) \Plus \One$ then $n' \Eq n' \Plus \One$.
+    Thus it is wrong that $n' \Plus \One \Eq (n' \Plus \One) \Plus \One$.
+    Hence $n' \Plus \One \Elem \Phi$.
   \end{proof}
 
-  \begin{proposition}[forthel]
-    Let $n$ be a natural number.
-    Then $n \NotEq n \Plus \One$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \NotEq n' \Plus \One}$.
+  Therefore every natural number is an element of $\Phi$.
+  Consequently $n \NotEq n \Plus \One$.
+\end{proof}
 
-    (1) $\Zero$ belongs to $\Phi$.
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  Then $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{k'}{\Naturals}{n \Plus (m \Plus k') \Eq (n \Plus m) \Plus k'}$.
 
-    (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
+  (1) $\Zero$ is contained in $\Phi$.
+  Indeed $n \Plus (m \Plus \Zero) \Eq n \Plus m \Eq (n \Plus m) \Plus \Zero$.
+
+  (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $k' \Elem \Phi$.
+    Then $n \Plus (m \Plus k') \Eq (n \Plus m) \Plus k'$.
+    Hence
+    \[  n \Plus (m \Plus (k' \Plus \One))        \]
+    \[    \Eq n \Plus ((m \Plus k') \Plus \One)    \]
+    \[    \Eq (n \Plus (m \Plus k')) \Plus \One    \]
+    \[    \Eq ((n \Plus m) \Plus k') \Plus \One    \]
+    \[    \Eq (n \Plus m) \Plus (k' \Plus \One).   \]
+    Thus $k' \Plus \One \Elem \Phi$.
+  \end{proof}
+
+  Thus every natural number is an element of $\Phi$.
+  Therefore $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  Then $n \Plus m \Eq m \Plus n$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Plus m' \Eq m' \Plus n}$.
+
+  (1) $\Zero$ is an element of $\Phi$.
+  \begin{proof}
+    Define $\Psi \DefEq \SClass{n'}{\Naturals}{n' \Plus \Zero \Eq \Zero \Plus n'}$.
+
+    (1a) $\Zero$ belongs to $\Psi$.
+
+    (1b) For all $n' \Elem \Psi$ we have $n' \Plus \One \Elem \Psi$.
     \begin{proof}
-      Let $n' \Elem \Phi$.
-      Then $n' \NotEq n' \Plus \One$.
-      If $n' \Plus \One \Eq (n' \Plus \One) \Plus \One$ then $n' \Eq n' \Plus \One$.
-      Thus it is wrong that $n' \Plus \One \Eq (n' \Plus \One) \Plus \One$.
-      Hence $n' \Plus \One \Elem \Phi$.
+      Let $n' \Elem \Psi$.
+      Then $n' \Plus \Zero \Eq \Zero \Plus n'$.
+      Hence
+      \[  (n' \Plus \One) \Plus \Zero        \]
+      \[    \Eq n' \Plus \One          \]
+      \[    \Eq (n' \Plus \Zero) \Plus \One    \]
+      \[    \Eq (\Zero \Plus n') \Plus \One    \]
+      \[    \Eq \Zero \Plus (n' \Plus \One).   \]
     \end{proof}
 
-    Therefore every natural number is an element of $\Phi$.
-    Consequently $n \NotEq n \Plus \One$.
+    Hence every natural number belongs to $\Psi$.
+    Thus $n \Plus \Zero \Eq \Zero \Plus n$.
+    Therefore $\Zero$ is an element of $\Phi$.
   \end{proof}
-\end{sfragment}
 
-\begin{sfragment}{Computation Laws for Addition}
-  \begin{sfragment}{Associativity}
-    \begin{proposition}[forthel]
-      Let $n, m, k$ be natural numbers.
-      Then $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{k'}{\Naturals}{n \Plus (m \Plus k') \Eq (n \Plus m) \Plus k'}$.
+  Let us show that (2) $n \Plus \One \Eq \One \Plus n$.
+  \begin{proof}
+    Define $\Theta \DefEq \SClass{n'}{\Naturals}{n' \Plus \One \Eq \One \Plus n'}$.
 
-      (1) $\Zero$ is contained in $\Phi$.
-      Indeed $n \Plus (m \Plus \Zero) \Eq n \Plus m \Eq (n \Plus m) \Plus \Zero$.
+    (2a) $\Zero$ is an element of $\Theta$.
 
-      (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
-      \begin{proof}
-        Let $k' \Elem \Phi$.
-        Then $n \Plus (m \Plus k') \Eq (n \Plus m) \Plus k'$.
-        Hence
-        \[  n \Plus (m \Plus (k' \Plus \One))        \]
-        \[    \Eq n \Plus ((m \Plus k') \Plus \One)    \]
-        \[    \Eq (n \Plus (m \Plus k')) \Plus \One    \]
-        \[    \Eq ((n \Plus m) \Plus k') \Plus \One    \]
-        \[    \Eq (n \Plus m) \Plus (k' \Plus \One).   \]
-        Thus $k' \Plus \One \Elem \Phi$.
-      \end{proof}
-
-      Thus every natural number is an element of $\Phi$.
-      Therefore $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Commutativity}
-    \begin{proposition}[forthel]
-      Let $n, m$ be natural numbers.
-      Then $n \Plus m \Eq m \Plus n$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Plus m' \Eq m' \Plus n}$.
-
-      (1) $\Zero$ is an element of $\Phi$.
-      \begin{proof}
-        Define $\Psi \DefEq \SClass{n'}{\Naturals}{n' \Plus \Zero \Eq \Zero \Plus n'}$.
-
-        (1a) $\Zero$ belongs to $\Psi$.
-
-        (1b) For all $n' \Elem \Psi$ we have $n' \Plus \One \Elem \Psi$.
-        \begin{proof}
-          Let $n' \Elem \Psi$.
-          Then $n' \Plus \Zero \Eq \Zero \Plus n'$.
-          Hence
-          \[  (n' \Plus \One) \Plus \Zero        \]
-          \[    \Eq n' \Plus \One          \]
-          \[    \Eq (n' \Plus \Zero) \Plus \One    \]
-          \[    \Eq (\Zero \Plus n') \Plus \One    \]
-          \[    \Eq \Zero \Plus (n' \Plus \One).   \]
-        \end{proof}
-
-        Hence every natural number belongs to $\Psi$.
-        Thus $n \Plus \Zero \Eq \Zero \Plus n$.
-        Therefore $\Zero$ is an element of $\Phi$.
-      \end{proof}
-
-      Let us show that (2) $n \Plus \One \Eq \One \Plus n$.
-      \begin{proof}
-        Define $\Theta \DefEq \SClass{n'}{\Naturals}{n' \Plus \One \Eq \One \Plus n'}$.
-
-        (2a) $\Zero$ is an element of $\Theta$.
-
-        (2b) For all $n' \Elem \Theta$ we have $n' \Plus \One \Elem \Theta$.
-        \begin{proof}
-          Let $n' \Elem \Theta$.
-          Then $n' \Plus \One \Eq \One \Plus n'$.
-          Hence
-          \[  (n' \Plus \One) \Plus \One        \]
-          \[    \Eq (\One \Plus n') \Plus \One    \]
-          \[    \Eq \One \Plus (n' \Plus \One).   \]
-          Thus $n' \Plus \One \Elem \Theta$.
-        \end{proof}
-
-        Thus every natural number belongs to $\Theta$.
-        Therefore $n \Plus \One \Eq \One \Plus n$.
-      \end{proof}
-
-      (3) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
-      \begin{proof}
-        Let $m' \Elem \Phi$.
-        Then $n \Plus m' \Eq m' \Plus n$.
-        Hence
-        \[  n \Plus (m'  \Plus \One)       \]
-        \[    \Eq (n \Plus m') \Plus \One    \]
-        \[    \Eq (m' \Plus n) \Plus \One    \]
-        \[    \Eq m' \Plus (n \Plus \One)    \]
-        \[    \Eq m' \Plus (\One \Plus n)    \]
-        \[    \Eq (m' \Plus \One) \Plus n.   \]
-        Thus $m' \Plus \One \Elem \Phi$.
-      \end{proof}
-
-      Thus every natural number is an element of $\Phi$.
-      Therefore $n \Plus m \Eq m \Plus n$.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Cancellation}
-
-    \begin{proposition}[forthel,name=right-cancellability of addition]
-      Let $n, m, k$ be natural numbers.
-      If $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{k'}{\Naturals}{\text{ if }n \Plus k' \Eq m \Plus k'\text{ then }n \Eq m}$.
-
-      (1) $\Zero$ is an element of $\Phi$.
-
-      (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
-      \begin{proof}
-        Let $k' \Elem \Phi$.
-        Suppose $n \Plus (k' \Plus \One) \Eq m \Plus (k' \Plus \One)$.
-        Then $(n \Plus k') \Plus \One \Eq (m \Plus k') \Plus \One$.
-        Hence $n \Plus k' \Eq m \Plus k'$.
-        Thus $n \Eq m$.
-      \end{proof}
-
-      Therefore every natural number is an element of $\Phi$.
-      Consequently if $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
+    (2b) For all $n' \Elem \Theta$ we have $n' \Plus \One \Elem \Theta$.
+    \begin{proof}
+      Let $n' \Elem \Theta$.
+      Then $n' \Plus \One \Eq \One \Plus n'$.
+      Hence
+      \[  (n' \Plus \One) \Plus \One        \]
+      \[    \Eq (\One \Plus n') \Plus \One    \]
+      \[    \Eq \One \Plus (n' \Plus \One).   \]
+      Thus $n' \Plus \One \Elem \Theta$.
     \end{proof}
 
-    \begin{corollary}[forthel,name=left-cancellability of addition]
-      Let $n, m, k$ be natural numbers.
-      If $k \Plus n \Eq k \Plus m$ then $n \Eq m$.
-    \end{corollary}
-    \begin{proof}[forthel]
-      Assume $k \Plus n \Eq k \Plus m$.
-      We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
-      Hence $n \Plus k \Eq m \Plus k$.
-      Thus $n \Eq m$.
-    \end{proof}
-  \end{sfragment}
+    Thus every natural number belongs to $\Theta$.
+    Therefore $n \Plus \One \Eq \One \Plus n$.
+  \end{proof}
 
-  \begin{sfragment}{Zero Sums}
-    \begin{proposition}[forthel]
-      Let $n, m$ be natural numbers.
-      If $n \Plus m \Eq \Zero$ then $n \Eq \Zero$ and $m \Eq \Zero$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Assume $n \Plus m \Eq \Zero$.
-      Suppose $n \NotEq \Zero$ or $m \NotEq \Zero$.
-      Then we can take a $k \Elem \Naturals$ such that $n \Eq k \Plus \One$ or $m \Eq k \Plus \One$.
-      Hence there exists a natural number $l$ such that
-      $n \Plus m
-        \Eq l \Plus (k \Plus \One)
-        \Eq (l \Plus k) \Plus \One
-        \NotEq \Zero$.
-      Contradiction.
-    \end{proof}
-  \end{sfragment}
-\end{sfragment}
+  (3) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $m' \Elem \Phi$.
+    Then $n \Plus m' \Eq m' \Plus n$.
+    Hence
+    \[  n \Plus (m'  \Plus \One)       \]
+    \[    \Eq (n \Plus m') \Plus \One    \]
+    \[    \Eq (m' \Plus n) \Plus \One    \]
+    \[    \Eq m' \Plus (n \Plus \One)    \]
+    \[    \Eq m' \Plus (\One \Plus n)    \]
+    \[    \Eq (m' \Plus \One) \Plus n.   \]
+    Thus $m' \Plus \One \Elem \Phi$.
+  \end{proof}
+
+  Thus every natural number is an element of $\Phi$.
+  Therefore $n \Plus m \Eq m \Plus n$.
+\end{proof}
+
+\begin{proposition}[forthel,name=right-cancellability of addition]
+  Let $n, m, k$ be natural numbers.
+  If $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{k'}{\Naturals}{\text{ if }n \Plus k' \Eq m \Plus k'\text{ then }n \Eq m}$.
+
+  (1) $\Zero$ is an element of $\Phi$.
+
+  (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $k' \Elem \Phi$.
+    Suppose $n \Plus (k' \Plus \One) \Eq m \Plus (k' \Plus \One)$.
+    Then $(n \Plus k') \Plus \One \Eq (m \Plus k') \Plus \One$.
+    Hence $n \Plus k' \Eq m \Plus k'$.
+    Thus $n \Eq m$.
+  \end{proof}
+
+  Therefore every natural number is an element of $\Phi$.
+  Consequently if $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
+\end{proof}
+
+\begin{corollary}[forthel,name=left-cancellability of addition]
+  Let $n, m, k$ be natural numbers.
+  If $k \Plus n \Eq k \Plus m$ then $n \Eq m$.
+\end{corollary}
+\begin{proof}[forthel]
+  Assume $k \Plus n \Eq k \Plus m$.
+  We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
+  Hence $n \Plus k \Eq m \Plus k$.
+  Thus $n \Eq m$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  If $n \Plus m \Eq \Zero$ then $n \Eq \Zero$ and $m \Eq \Zero$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Plus m \Eq \Zero$.
+  Suppose $n \NotEq \Zero$ or $m \NotEq \Zero$.
+  Then we can take a $k \Elem \Naturals$ such that $n \Eq k \Plus \One$ or $m \Eq k \Plus \One$.
+  Hence there exists a natural number $l$ such that
+  $n \Plus m
+    \Eq l \Plus (k \Plus \One)
+    \Eq (l \Plus k) \Plus \One
+    \NotEq \Zero$.
+  Contradiction.
+\end{proof}
 
 \end{smodule}
 \end{document}

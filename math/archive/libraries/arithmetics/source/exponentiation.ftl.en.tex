@@ -10,227 +10,213 @@
 
 \symdef{Exp}[args=2]{{#1}^{#2}}
 
-\begin{sfragment}{Definition}
-  \begin{signature}[forthel,for=Exp]
-    Let $n, m$ be natural numbers.
-    $\emph{\Exp{n}{m}}$ is a natural number.
-  \end{signature}
+\begin{signature}[forthel,for=Exp]
+  Let $n, m$ be natural numbers.
+  $\emph{\Exp{n}{m}}$ is a natural number.
+\end{signature}
 
-  \begin{axiom}[forthel,for=Exp]
-    Let $n$ be a natural number.
-    Then $\Exp{n}{\Zero} \Eq \One$.
-  \end{axiom}
+\begin{axiom}[forthel,for=Exp]
+  Let $n$ be a natural number.
+  Then $\Exp{n}{\Zero} \Eq \One$.
+\end{axiom}
 
-  \begin{axiom}[forthel,for=Exp]
-    Let $n, m$ be natural numbers.
-    Then $\Exp{n}{m \Plus \One} \Eq \Exp{n}{m} \Mul n$.
-  \end{axiom}
-\end{sfragment}
+\begin{axiom}[forthel,for=Exp]
+  Let $n, m$ be natural numbers.
+  Then $\Exp{n}{m \Plus \One} \Eq \Exp{n}{m} \Mul n$.
+\end{axiom}
 
-\begin{sfragment}{Computation Laws}
-  \begin{sfragment}{Exponentiation with $0$, $1$ and $2$}
-    \begin{proposition}[forthel]
-      Let $n$ be a natural number.
-      Assume $n \NotEq \Zero$.
-      Then $\Exp{\Zero}{n} \Eq \Zero$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Take a natural number $m$ such that $n \Eq m \Plus \One$.
-      Then $\Exp{\Zero}{n}
-        \Eq \Exp{\Zero}{m \Plus \One}
-        \Eq \Exp{\Zero}{m} \Mul \Zero
-        \Eq \Zero$.
-      Indeed $\Exp{\Zero}{m \Plus \One} \Eq \Exp{\Zero}{m} \Mul \Zero$.
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Assume $n \NotEq \Zero$.
+  Then $\Exp{\Zero}{n} \Eq \Zero$.
+\end{proposition}
+\begin{proof}[forthel]
+  Take a natural number $m$ such that $n \Eq m \Plus \One$.
+  Then $\Exp{\Zero}{n}
+    \Eq \Exp{\Zero}{m \Plus \One}
+    \Eq \Exp{\Zero}{m} \Mul \Zero
+    \Eq \Zero$.
+  Indeed $\Exp{\Zero}{m \Plus \One} \Eq \Exp{\Zero}{m} \Mul \Zero$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then $\Exp{\One}{n} \Eq \One$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{n'}{\Naturals}{\Exp{\One}{n'} \Eq \One}$.
+
+  (1) $\Phi$ contains $\Zero$.
+
+  (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $n' \Elem \Phi$.
+    Then $\Exp{\One}{n' \Plus \One}
+      \Eq \Exp{\One}{n'} \Mul \One
+      \Eq \One \Mul \One
+      \Eq \One$.
+  \end{proof}
+
+  Hence every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
+  Thus $\Exp{\One}{n} \Eq \One$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then $\Exp{n}{\One} \Eq n$.
+\end{proposition}
+\begin{proof}[forthel]
+  We have $\Exp{n}{\One}
+    \Eq \Exp{n}{\Zero \Plus \One}
+    \Eq \Exp{n}{\Zero} \Mul n
+    \Eq \One \Mul n
+    \Eq n$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then $\Exp{n}{\Two} \Eq n \Mul n$.
+\end{proposition}
+\begin{proof}[forthel]
+  We have $\Exp{n}{\Two}
+    \Eq \Exp{n}{\One \Plus \One}
+    \Eq \Exp{n}{\One} \Mul n
+    \Eq n \Mul n$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  Then $\Exp{k}{n \Plus m} \Eq \Exp{k}{n} \Mul \Exp{k}{m}$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{m'}{\Naturals}{\Exp{k}{n \Plus m'} \Eq \Exp{k}{n} \Mul \Exp{k}{m'}}$.
+
+  (1) $\Phi$ contains $\Zero$.
+  Indeed $\Exp{k}{n \Plus \Zero}
+    \Eq \Exp{k}{n}
+    \Eq \Exp{k}{n} \Mul \One
+    \Eq \Exp{k}{n} \Mul \Exp{k}{\Zero}$.
+
+  (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $m' \Elem \Phi$.
+    Then
+    \[  \Exp{k}{n \Plus (m' \Plus \One)}                  \]
+    \[    \Eq \Exp{k}{(n \Plus m') \Plus \One}              \]
+    \[    \Eq \Exp{k}{n \Plus m'} \Mul k            \]
+    \[    \Eq (\Exp{k}{n} \Mul \Exp{k}{m'}) \Mul k  \]
+    \[    \Eq \Exp{k}{n} \Mul (\Exp{k}{m'} \Mul k)  \]
+    \[    \Eq \Exp{k}{n} \Mul \Exp{k}{m' \Plus \One}.       \]
+  \end{proof}
+
+  Hence every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
+  Thus $\Exp{k}{n \Plus m} \Eq \Exp{k}{n} \Mul \Exp{k}{m}$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  Then $\Exp{n}{m \Mul k} \Eq \Exp{\Exp{n}{m}}{k}$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{k'}{\Naturals}{\Exp{n}{m \Mul k'} \Eq \Exp{\Exp{n}{m}}{k'}}$.
+
+  (1) $\Phi$ contains $\Zero$.
+  Indeed $\Exp{\Exp{n}{m}}{\Zero}
+    \Eq \One
+    \Eq \Exp{n}{\Zero}
+    \Eq \Exp{n}{m \Mul \Zero}$.
+
+  (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $k' \Elem \Phi$.
+    Then
+    \[  \Exp{\Exp{n}{m}}{k' \Plus \One}                \]
+    \[    \Eq \Exp{\Exp{n}{m}}{k'} \Mul \Exp{n}{m}    \]
+    \[    \Eq \Exp{n}{m \Mul k'} \Mul \Exp{n}{m}  \]
+    \[    \Eq \Exp{n}{(m \Mul k') \Plus m}        \]
+    \[    \Eq \Exp{n}{m \Mul (k' \Plus \One)}.       \]
+  \end{proof}
+
+  Therefore every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
+  Consequently $\Exp{n}{m \Mul k} \Eq \Exp{\Exp{n}{m}}{k}$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  Then $\Exp{n \Mul m}{k} \Eq \Exp{n}{k} \Mul \Exp{m}{k}$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{k'}{\Naturals}{\Exp{n \Mul m}{k'} \Eq \Exp{n}{k'} \Mul \Exp{m}{k'}}$.
+
+  (1) $\Phi$ contains $\Zero$.
+  Indeed $(\Exp{n \Mul m}{\Zero})
+    \Eq \One
+    \Eq \One \Mul \One
+    \Eq \Exp{n}{\Zero} \Mul \Exp{m}{\Zero}$. %!
+
+  (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $k' \Elem \Phi$.
+
+    Let us show that $(\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul (n \Mul m) \Eq (\Exp{n}{k'} \Mul n) \Mul (\Exp{m}{k'} \Mul m)$.
+      \[  (\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul (n \Mul m)       \]
+      \[    \Eq ((\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul n) \Mul m   \]
+      \[    \Eq (\Exp{n}{k'} \Mul (\Exp{m}{k'} \Mul n)) \Mul m   \]
+      \[    \Eq (\Exp{n}{k'} \Mul (n \Mul \Exp{m}{k'})) \Mul m   \]
+      \[    \Eq ((\Exp{n}{k'} \Mul n) \Mul \Exp{m}{k'}) \Mul m   \]
+      \[    \Eq (\Exp{n}{k'} \Mul n) \Mul (\Exp{m}{k'} \Mul m).  \]
+    End.
+
+    Hence
+    \[  \Exp{n \Mul m}{k' \Plus \One}                          \]
+    \[    \Eq \Exp{n \Mul m}{k'} \Mul (n \Mul m)        \]
+    \[    \Eq (\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul (n \Mul m)   \]
+    \[    \Eq (\Exp{n}{k'} \Mul n) \Mul (\Exp{m}{k'} \Mul m)   \]
+    \[    \Eq \Exp{n}{k' \Plus \One} \Mul \Exp{m}{k' \Plus \One}.              \]
+  \end{proof}
+
+  Therefore every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
+  Consequently $\Exp{n \Mul m}{k} \Eq \Exp{n}{k} \Mul \Exp{m}{k}$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  Then $\Exp{n}{m} \Eq \Zero$ iff $n \Eq \Zero$ and $m \NotEq \Zero$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$\Exp{n}{m} \Eq \Zero$.}
+    Define $\Phi \DefEq \SClass{m'}{\Naturals}{\text{ if }\Exp{n}{m'} \Eq \Zero\text{ then }n \Eq \Zero\text{ and }m' \NotEq \Zero}$.
+
+    (1) $\Phi$ contains $\Zero$.
+    Indeed if $\Exp{n}{\Zero} \Eq \Zero$ then we have a contradiction.
+
+    (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
+    \begin{proof}
+      Let $m' \Elem \Phi$.
+
+      Let us show that if $\Exp{n}{m' \Plus \One} \Eq \Zero$ then $n \Eq \Zero$ and $m' \Plus \One \NotEq \Zero$.
+        Assume $\Exp{n}{m' \Plus \One} \Eq \Zero$.
+        Then $\Zero \Eq \Exp{n}{m' \Plus \One} \Eq \Exp{n}{m'} \Mul n$.
+        Hence $\Exp{n}{m'} \Eq \Zero$ or $n \Eq \Zero$.
+        We have $m' \Plus \One \NotEq \Zero$ and if $\Exp{n}{m'} \Eq \Zero$ then $n \Eq \Zero$.
+        Hence $n \Eq \Zero$ and $m' \Plus \One \NotEq \Zero$.
+      End.
     \end{proof}
 
-    \begin{proposition}[forthel]
-      Let $n$ be a natural number.
-      Then $\Exp{\One}{n} \Eq \One$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{n'}{\Naturals}{\Exp{\One}{n'} \Eq \One}$.
+    Thus every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
+    Consequently $m \Elem \Phi$.
+    Therefore $n \Eq \Zero$ and $m \NotEq \Zero$.
+  \end{case}
 
-      (1) $\Phi$ contains $\Zero$.
-
-      (2) For all $n' \Elem \Phi$ we have $n' \Plus \One \Elem \Phi$.
-      \begin{proof}
-        Let $n' \Elem \Phi$.
-        Then $\Exp{\One}{n' \Plus \One}
-          \Eq \Exp{\One}{n'} \Mul \One
-          \Eq \One \Mul \One
-          \Eq \One$.
-      \end{proof}
-
-      Hence every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-      Thus $\Exp{\One}{n} \Eq \One$.
-    \end{proof}
-
-    \begin{proposition}[forthel]
-      Let $n$ be a natural number.
-      Then $\Exp{n}{\One} \Eq n$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      We have $\Exp{n}{\One}
-        \Eq \Exp{n}{\Zero \Plus \One}
-        \Eq \Exp{n}{\Zero} \Mul n
-        \Eq \One \Mul n
-        \Eq n$.
-    \end{proof}
-
-    \begin{proposition}[forthel]
-      Let $n$ be a natural number.
-      Then $\Exp{n}{\Two} \Eq n \Mul n$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      We have $\Exp{n}{\Two}
-        \Eq \Exp{n}{\One \Plus \One}
-        \Eq \Exp{n}{\One} \Mul n
-        \Eq n \Mul n$.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Sums as Exponents}
-    \begin{proposition}[forthel]
-      Let $n, m, k$ be natural numbers.
-      Then $\Exp{k}{n \Plus m} \Eq \Exp{k}{n} \Mul \Exp{k}{m}$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{m'}{\Naturals}{\Exp{k}{n \Plus m'} \Eq \Exp{k}{n} \Mul \Exp{k}{m'}}$.
-
-      (1) $\Phi$ contains $\Zero$.
-      Indeed $\Exp{k}{n \Plus \Zero}
-        \Eq \Exp{k}{n}
-        \Eq \Exp{k}{n} \Mul \One
-        \Eq \Exp{k}{n} \Mul \Exp{k}{\Zero}$.
-
-      (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
-      \begin{proof}
-        Let $m' \Elem \Phi$.
-        Then
-        \[  \Exp{k}{n \Plus (m' \Plus \One)}                  \]
-        \[    \Eq \Exp{k}{(n \Plus m') \Plus \One}              \]
-        \[    \Eq \Exp{k}{n \Plus m'} \Mul k            \]
-        \[    \Eq (\Exp{k}{n} \Mul \Exp{k}{m'}) \Mul k  \]
-        \[    \Eq \Exp{k}{n} \Mul (\Exp{k}{m'} \Mul k)  \]
-        \[    \Eq \Exp{k}{n} \Mul \Exp{k}{m' \Plus \One}.       \]
-      \end{proof}
-
-      Hence every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-      Thus $\Exp{k}{n \Plus m} \Eq \Exp{k}{n} \Mul \Exp{k}{m}$.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Products as Exponents}
-    \begin{proposition}[forthel]
-      Let $n, m, k$ be natural numbers.
-      Then $\Exp{n}{m \Mul k} \Eq \Exp{\Exp{n}{m}}{k}$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{k'}{\Naturals}{\Exp{n}{m \Mul k'} \Eq \Exp{\Exp{n}{m}}{k'}}$.
-
-      (1) $\Phi$ contains $\Zero$.
-      Indeed $\Exp{\Exp{n}{m}}{\Zero}
-        \Eq \One
-        \Eq \Exp{n}{\Zero}
-        \Eq \Exp{n}{m \Mul \Zero}$.
-
-      (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
-      \begin{proof}
-        Let $k' \Elem \Phi$.
-        Then
-        \[  \Exp{\Exp{n}{m}}{k' \Plus \One}                \]
-        \[    \Eq \Exp{\Exp{n}{m}}{k'} \Mul \Exp{n}{m}    \]
-        \[    \Eq \Exp{n}{m \Mul k'} \Mul \Exp{n}{m}  \]
-        \[    \Eq \Exp{n}{(m \Mul k') \Plus m}        \]
-        \[    \Eq \Exp{n}{m \Mul (k' \Plus \One)}.       \]
-      \end{proof}
-
-      Therefore every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-      Consequently $\Exp{n}{m \Mul k} \Eq \Exp{\Exp{n}{m}}{k}$.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Products as Base}
-    \begin{proposition}[forthel]
-      Let $n, m, k$ be natural numbers.
-      Then $\Exp{n \Mul m}{k} \Eq \Exp{n}{k} \Mul \Exp{m}{k}$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Define $\Phi \DefEq \SClass{k'}{\Naturals}{\Exp{n \Mul m}{k'} \Eq \Exp{n}{k'} \Mul \Exp{m}{k'}}$.
-
-      (1) $\Phi$ contains $\Zero$.
-      Indeed $(\Exp{n \Mul m}{\Zero})
-        \Eq \One
-        \Eq \One \Mul \One
-        \Eq \Exp{n}{\Zero} \Mul \Exp{m}{\Zero}$. %!
-
-      (2) For all $k' \Elem \Phi$ we have $k' \Plus \One \Elem \Phi$.
-      \begin{proof}
-        Let $k' \Elem \Phi$.
-
-        Let us show that $(\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul (n \Mul m) \Eq (\Exp{n}{k'} \Mul n) \Mul (\Exp{m}{k'} \Mul m)$.
-          \[  (\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul (n \Mul m)       \]
-          \[    \Eq ((\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul n) \Mul m   \]
-          \[    \Eq (\Exp{n}{k'} \Mul (\Exp{m}{k'} \Mul n)) \Mul m   \]
-          \[    \Eq (\Exp{n}{k'} \Mul (n \Mul \Exp{m}{k'})) \Mul m   \]
-          \[    \Eq ((\Exp{n}{k'} \Mul n) \Mul \Exp{m}{k'}) \Mul m   \]
-          \[    \Eq (\Exp{n}{k'} \Mul n) \Mul (\Exp{m}{k'} \Mul m).  \]
-        End.
-
-        Hence
-        \[  \Exp{n \Mul m}{k' \Plus \One}                          \]
-        \[    \Eq \Exp{n \Mul m}{k'} \Mul (n \Mul m)        \]
-        \[    \Eq (\Exp{n}{k'} \Mul \Exp{m}{k'}) \Mul (n \Mul m)   \]
-        \[    \Eq (\Exp{n}{k'} \Mul n) \Mul (\Exp{m}{k'} \Mul m)   \]
-        \[    \Eq \Exp{n}{k' \Plus \One} \Mul \Exp{m}{k' \Plus \One}.              \]
-      \end{proof}
-
-      Therefore every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-      Consequently $\Exp{n \Mul m}{k} \Eq \Exp{n}{k} \Mul \Exp{m}{k}$.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Zeroes of Exponentiation}
-    \begin{proposition}[forthel]
-      Let $n, m$ be natural numbers.
-      Then $\Exp{n}{m} \Eq \Zero$ iff $n \Eq \Zero$ and $m \NotEq \Zero$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      \begin{case}{$\Exp{n}{m} \Eq \Zero$.}
-        Define $\Phi \DefEq \SClass{m'}{\Naturals}{\text{ if }\Exp{n}{m'} \Eq \Zero\text{ then }n \Eq \Zero\text{ and }m' \NotEq \Zero}$.
-
-        (1) $\Phi$ contains $\Zero$.
-        Indeed if $\Exp{n}{\Zero} \Eq \Zero$ then we have a contradiction.
-
-        (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
-        \begin{proof}
-          Let $m' \Elem \Phi$.
-
-          Let us show that if $\Exp{n}{m' \Plus \One} \Eq \Zero$ then $n \Eq \Zero$ and $m' \Plus \One \NotEq \Zero$.
-            Assume $\Exp{n}{m' \Plus \One} \Eq \Zero$.
-            Then $\Zero \Eq \Exp{n}{m' \Plus \One} \Eq \Exp{n}{m'} \Mul n$.
-            Hence $\Exp{n}{m'} \Eq \Zero$ or $n \Eq \Zero$.
-            We have $m' \Plus \One \NotEq \Zero$ and if $\Exp{n}{m'} \Eq \Zero$ then $n \Eq \Zero$.
-            Hence $n \Eq \Zero$ and $m' \Plus \One \NotEq \Zero$.
-          End.
-        \end{proof}
-
-        Thus every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-        Consequently $m \Elem \Phi$.
-        Therefore $n \Eq \Zero$ and $m \NotEq \Zero$.
-      \end{case}
-
-      \begin{case}{$n \Eq \Zero$ and $m \NotEq \Zero$.}
-        Take a natural number $k$ such that $m \Eq k \Plus \One$.
-        Then $\Exp{n}{m}
-          \Eq \Exp{n}{k \Plus \One}
-          \Eq \Exp{n}{k} \Mul n
-          \Eq \Exp{\Zero}{k} \Mul \Zero
-          \Eq \Zero$.
-      \end{case}
-    \end{proof}
-  \end{sfragment}
-\end{sfragment}
+  \begin{case}{$n \Eq \Zero$ and $m \NotEq \Zero$.}
+    Take a natural number $k$ such that $m \Eq k \Plus \One$.
+    Then $\Exp{n}{m}
+      \Eq \Exp{n}{k \Plus \One}
+      \Eq \Exp{n}{k} \Mul n
+      \Eq \Exp{\Zero}{k} \Mul \Zero
+      \Eq \Zero$.
+  \end{case}
+\end{proof}
 
 \end{smodule}
 \end{document}

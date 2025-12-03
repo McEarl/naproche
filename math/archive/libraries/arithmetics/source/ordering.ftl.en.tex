@@ -29,505 +29,493 @@
 \symdecl*{induction II}
 \symdecl*{induction III}
 
-\begin{sfragment}{Definitions and Immediate Consequences}
-  \begin{definition}[forthel,for={less,NotLess,greater,NotGreater}]
-    Let $n, m$ be natural numbers.
-    $\emph{n \Less m}$ iff there exists a nonzero natural number $k$ such that $m \Eq n \Plus k$.
-    Let $n$ is \emph{less than $m$} stand for $n \Less m$.
-    Let $\emph{n \Greater m}$ stand for $m \Less n$.
-    Let $n$ is \emph{greater than $m$} stand for $n \Greater m$.
-    Let $\emph{n \NotLess m}$ stand for $n$ is not less than $m$.
-    Let $\emph{n \NotGreater m}$ stand for $n$ is not greater than $m$.
-  \end{definition}
-
-  \begin{definition}[forthel,for=NatLess]
-    Let $n$ be a natural number.
-    $\emph{\NatLess{n}} \DefEq \SClass{k}{\Naturals}{k \Less n}$.
-  \end{definition}
-
-  \begin{definition}[forthel,for=NatGreater]
-    Let $n$ be a natural number.
-    $\emph{\NatGreater{n}} \DefEq \SClass{k}{\Naturals}{k \Greater n}$.
-  \end{definition}
-
-  \begin{definition}[forthel,for=positive]
-    Let $n$ be a natural number.
-    $n$ is \emph{positive} iff $n \Greater \Zero$.
+\begin{definition}[forthel,for={less,NotLess,greater,NotGreater}]
+  Let $n, m$ be natural numbers.
+  $\emph{n \Less m}$ iff there exists a nonzero natural number $k$ such that $m \Eq n \Plus k$.
+  Let $n$ is \emph{less than $m$} stand for $n \Less m$.
+  Let $\emph{n \Greater m}$ stand for $m \Less n$.
+  Let $n$ is \emph{greater than $m$} stand for $n \Greater m$.
+  Let $\emph{n \NotLess m}$ stand for $n$ is not less than $m$.
+  Let $\emph{n \NotGreater m}$ stand for $n$ is not greater than $m$.
 \end{definition}
 
-  \begin{definition}[forthel,for={Leq,Geq,NotLeq,NotGeq}]
-    Let $n, m$ be natural numbers.
-    $\emph{n \Leq m}$ iff there exists a natural number $k$ such that $m \Eq n \Plus k$.
-    Let $n$ is \emph{less than or equal to $m$} stand for $n \Leq m$.
-    Let $\emph{n \Geq m}$ stand for $m \Leq n$.
-    Let $n$ is \emph{greater than or equal to $m$} stand for $n \Geq m$.
-    Let $\emph{n \NotLeq m}$ stand for $n$ is not less than or equal to $m$.
-    Let $\emph{n \NotGeq m}$ stand for $n$ is not greater than or equal to $m$.
-  \end{definition}
+\begin{definition}[forthel,for=NatLess]
+  Let $n$ be a natural number.
+  $\emph{\NatLess{n}} \DefEq \SClass{k}{\Naturals}{k \Less n}$.
+\end{definition}
 
-  \begin{definition}[forthel,for=NatLeq]
-    Let $n$ be a natural number.
-    $\emph{\NatLeq{n}} \DefEq \SClass{k}{\Naturals}{k \Leq n}$.
-  \end{definition}
+\begin{definition}[forthel,for=NatGreater]
+  Let $n$ be a natural number.
+  $\emph{\NatGreater{n}} \DefEq \SClass{k}{\Naturals}{k \Greater n}$.
+\end{definition}
 
-  \begin{definition}[forthel,for=NatGeq]
-    Let $n$ be a natural number.
-    $\emph{\NatGeq{n}} \DefEq \SClass{k}{\Naturals}{k \Geq n }$.
-  \end{definition}
+\begin{definition}[forthel,for=positive]
+  Let $n$ be a natural number.
+  $n$ is \emph{positive} iff $n \Greater \Zero$.
+\end{definition}
 
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    $n \Leq m$ iff $n \Less m$ or $n \Eq m$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$n \Leq m$.}
-      Take a natural number $k$ such that $m \Eq n \Plus k$.
-      If $k \Eq \Zero$ then $n \Eq m$. If $k \NotEq \Zero$ then $n \Less m$.
-    \end{case}
+\begin{definition}[forthel,for={Leq,Geq,NotLeq,NotGeq}]
+  Let $n, m$ be natural numbers.
+  $\emph{n \Leq m}$ iff there exists a natural number $k$ such that $m \Eq n \Plus k$.
+  Let $n$ is \emph{less than or equal to $m$} stand for $n \Leq m$.
+  Let $\emph{n \Geq m}$ stand for $m \Leq n$.
+  Let $n$ is \emph{greater than or equal to $m$} stand for $n \Geq m$.
+  Let $\emph{n \NotLeq m}$ stand for $n$ is not less than or equal to $m$.
+  Let $\emph{n \NotGeq m}$ stand for $n$ is not greater than or equal to $m$.
+\end{definition}
 
-    \begin{case}{$n \Less m$ or $n \Eq m$.}
-      If $n \Less m$ then there is a positive natural number $k$ such that $m \Eq n \Plus k$.
-      If $n \Eq m$ then $m \Eq n \Plus \Zero$.
-      Thus if $n \Less m$ then there is a natural number $k$ such that $m \Eq n \Plus k$.
-    \end{case}
-  \end{proof}
+\begin{definition}[forthel,for=NatLeq]
+  Let $n$ be a natural number.
+  $\emph{\NatLeq{n}} \DefEq \SClass{k}{\Naturals}{k \Leq n}$.
+\end{definition}
 
-  \begin{definition}[forthel,for=predecessor]
-    Let $n$ be a natural number.
-    A \emph{predecessor of $n$} is a natural number that is less than $n$.
-  \end{definition}
+\begin{definition}[forthel,for=NatGeq]
+  Let $n$ be a natural number.
+  $\emph{\NatGeq{n}} \DefEq \SClass{k}{\Naturals}{k \Geq n }$.
+\end{definition}
 
-  \begin{definition}[forthel,for=successor]
-    Let $n$ be a natural number.
-    A \emph{successor of $n$} is a natural number that is greater than $n$.
-  \end{definition}
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  $n \Leq m$ iff $n \Less m$ or $n \Eq m$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$n \Leq m$.}
+    Take a natural number $k$ such that $m \Eq n \Plus k$.
+    If $k \Eq \Zero$ then $n \Eq m$. If $k \NotEq \Zero$ then $n \Less m$.
+  \end{case}
 
-  \begin{proposition}[forthel]
-    Let $n$ be a natural number.
-    Then $n$ is positive iff $n$ is nonzero.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$n$ is positive.}
-      Take a positive natural number $k$ such that $n \Eq \Zero \Plus k \Eq k$.
-      Then we have $n \NotEq \Zero$.
-    \end{case}
+  \begin{case}{$n \Less m$ or $n \Eq m$.}
+    If $n \Less m$ then there is a positive natural number $k$ such that $m \Eq n \Plus k$.
+    If $n \Eq m$ then $m \Eq n \Plus \Zero$.
+    Thus if $n \Less m$ then there is a natural number $k$ such that $m \Eq n \Plus k$.
+  \end{case}
+\end{proof}
 
-    \begin{case}{$n$ is nonzero.}
-      Take a natural number $k$ such that $n \Eq k \Plus \One$.
-      Then $n \Eq \Zero \Plus (k \Plus \One)$.
-      $k \Plus \One$ is positive.
-      Hence $\Zero \Less n$.
-    \end{case}
-  \end{proof}
-\end{sfragment}
+\begin{definition}[forthel,for=predecessor]
+  Let $n$ be a natural number.
+  A \emph{predecessor of $n$} is a natural number that is less than $n$.
+\end{definition}
 
-\begin{sfragment}{Basic Properties}
-  \begin{proposition}[forthel]
-    Let $n$ be a natural number.
-    Then \[ n \NotLess n. \]
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume the contrary.
-    Then we can take a positive natural number $k$ such that $n \Eq n \Plus k$.
-    Then we have $\Zero \Eq k$.
-    Contradiction.
-  \end{proof}
+\begin{definition}[forthel,for=successor]
+  Let $n$ be a natural number.
+  A \emph{successor of $n$} is a natural number that is greater than $n$.
+\end{definition}
 
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    Then \[ n \Less m \Implies n \NotEq m. \]
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Less m$.
-    Take a positive natural number $k$ such that $m \Eq n \Plus k$.
-    If $n \Eq m$ then $k \Eq \Zero$.
-    Hence $n \NotEq m$.
-  \end{proof}
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then $n$ is positive iff $n$ is nonzero.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$n$ is positive.}
+    Take a positive natural number $k$ such that $n \Eq \Zero \Plus k \Eq k$.
+    Then we have $n \NotEq \Zero$.
+  \end{case}
 
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    If $n \Leq m$ and $m \Leq n$ then $n \Eq m$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Leq m$ and $m \Leq n$.
-    Take natural numbers $k, l$ such that $m \Eq n \Plus k$ and $n \Eq m \Plus l$.
+  \begin{case}{$n$ is nonzero.}
+    Take a natural number $k$ such that $n \Eq k \Plus \One$.
+    Then $n \Eq \Zero \Plus (k \Plus \One)$.
+    $k \Plus \One$ is positive.
+    Hence $\Zero \Less n$.
+  \end{case}
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then \[ n \NotLess n. \]
+\end{proposition}
+\begin{proof}[forthel]
+  Assume the contrary.
+  Then we can take a positive natural number $k$ such that $n \Eq n \Plus k$.
+  Then we have $\Zero \Eq k$.
+  Contradiction.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  Then \[ n \Less m \Implies n \NotEq m. \]
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Less m$.
+  Take a positive natural number $k$ such that $m \Eq n \Plus k$.
+  If $n \Eq m$ then $k \Eq \Zero$.
+  Hence $n \NotEq m$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  If $n \Leq m$ and $m \Leq n$ then $n \Eq m$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Leq m$ and $m \Leq n$.
+  Take natural numbers $k, l$ such that $m \Eq n \Plus k$ and $n \Eq m \Plus l$.
+  Then $m
+    \Eq n \Plus k
+    \Eq (m \Plus l) \Plus k
+    \Eq m \Plus (l \Plus k)$.
+  Hence $l \Plus k \Eq \Zero$.
+  Thus $l \Eq \Zero \Eq k$.
+  Indeed if $l \NotEq \Zero$ or $k \NotEq \Zero$ then $l \Plus k$ is the direct successor of
+  some natural number.
+  Therefore $m \Eq n$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  If $n \Less m \Less k$ then $n \Less k$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Less m \Less k$.
+  Take a positive natural number $a$ such that $m \Eq n \Plus a$.
+  Take a positive natural number $b$ such that $k \Eq m \Plus b$.
+  Then $k
+    \Eq m \Plus b
+    \Eq (n \Plus a) \Plus b
+    \Eq n \Plus (a \Plus b)$.
+  $a \Plus b$ is positive.
+  Hence $n \Less k$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  If $n \Leq m \Leq k$ then $n \Leq k$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Leq m \Leq k$.
+  \begin{case}{$n \Eq m \Eq k$.} \end{case}
+  \begin{case}{$n \Eq m \Less k$.} \end{case}
+  \begin{case}{$n \Less m \Eq k$.} \end{case}
+  \begin{case}{$n \Less m \Less k$.} \end{case}
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  If $n \Leq m \Less k$ then $n \Less k$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Leq m \Less k$.
+  If $n \Eq m$ then $n \Less k$.
+  If $n \Less m$ then $n \Less k$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m, k$ be natural numbers.
+  If $n \Less m \Leq k$ then $n \Less k$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Less m \Leq k$.
+  If $m \Eq k$ then $n \Less k$.
+  If $m \Less k$ then $n \Less k$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  If $n \Less m$ then $n \Plus \One \Leq m$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Less m$.
+  Take a positive natural number $k$ such that $m \Eq n \Plus k$.
+
+  \begin{case}{$k \Eq \One$.}
+    Then $m \Eq n \Plus \One$.
+    Hence $n \Plus \One \Leq m$.
+  \end{case}
+
+  \begin{case}{$k \NotEq \One$.}
+    Then we can take a natural number $l$ such that $k \Eq l \Plus \One$.
     Then $m
-      \Eq n \Plus k
-      \Eq (m \Plus l) \Plus k
-      \Eq m \Plus (l \Plus k)$.
-    Hence $l \Plus k \Eq \Zero$.
-    Thus $l \Eq \Zero \Eq k$.
-    Indeed if $l \NotEq \Zero$ or $k \NotEq \Zero$ then $l \Plus k$ is the direct successor of
-    some natural number.
-    Therefore $m \Eq n$.
-  \end{proof}
+      \Eq n \Plus (l \Plus \One)
+      \Eq (n \Plus l) \Plus \One
+      \Eq (n \Plus \One) \Plus l$.
+    $l$ is positive.
+    Thus $n \Plus \One \Less m$.
+  \end{case}
+\end{proof}
 
-  \begin{proposition}[forthel]
-    Let $n, m, k$ be natural numbers.
-    If $n \Less m \Less k$ then $n \Less k$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Less m \Less k$.
-    Take a positive natural number $a$ such that $m \Eq n \Plus a$.
-    Take a positive natural number $b$ such that $k \Eq m \Plus b$.
-    Then $k
-      \Eq m \Plus b
-      \Eq (n \Plus a) \Plus b
-      \Eq n \Plus (a \Plus b)$.
-    $a \Plus b$ is positive.
-    Hence $n \Less k$.
-  \end{proof}
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  Then $n \Less m$ or $n \Eq m$ or $n \Greater m$.
+\end{proposition}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Less m'\text{ or }n \Eq m'\text{ or }n \Greater m'}$.
 
-  \begin{proposition}[forthel]
-    Let $n, m, k$ be natural numbers.
-    If $n \Leq m \Leq k$ then $n \Leq k$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Leq m \Leq k$.
-    \begin{case}{$n \Eq m \Eq k$.} \end{case}
-    \begin{case}{$n \Eq m \Less k$.} \end{case}
-    \begin{case}{$n \Less m \Eq k$.} \end{case}
-    \begin{case}{$n \Less m \Less k$.} \end{case}
-  \end{proof}
+  (1) $\Phi$ contains $\Zero$.
 
-  \begin{proposition}[forthel]
-    Let $n, m, k$ be natural numbers.
-    If $n \Leq m \Less k$ then $n \Less k$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Leq m \Less k$.
-    If $n \Eq m$ then $n \Less k$.
-    If $n \Less m$ then $n \Less k$.
-  \end{proof}
+  (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $m' \Elem \Phi$.
 
-  \begin{proposition}[forthel]
-    Let $n, m, k$ be natural numbers.
-    If $n \Less m \Leq k$ then $n \Less k$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Less m \Leq k$.
-    If $m \Eq k$ then $n \Less k$.
-    If $m \Less k$ then $n \Less k$.
-  \end{proof}
+    \begin{case}{$n \Less m'$.} \end{case}
 
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    If $n \Less m$ then $n \Plus \One \Leq m$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Less m$.
-    Take a positive natural number $k$ such that $m \Eq n \Plus k$.
+    \begin{case}{$n \Eq m'$.} \end{case}
 
-    \begin{case}{$k \Eq \One$.}
-      Then $m \Eq n \Plus \One$.
-      Hence $n \Plus \One \Leq m$.
-    \end{case}
+    \begin{case}{$n \Greater m'$.}
+      Take a positive natural number $k$ such that $n \Eq m' \Plus k$.
 
-    \begin{case}{$k \NotEq \One$.}
-      Then we can take a natural number $l$ such that $k \Eq l \Plus \One$.
-      Then $m
-        \Eq n \Plus (l \Plus \One)
-        \Eq (n \Plus l) \Plus \One
-        \Eq (n \Plus \One) \Plus l$.
-      $l$ is positive.
-      Thus $n \Plus \One \Less m$.
-    \end{case}
-  \end{proof}
+      \begin{case}{$k \Eq \One$.} \end{case}
 
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    Then $n \Less m$ or $n \Eq m$ or $n \Greater m$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Less m'\text{ or }n \Eq m'\text{ or }n \Greater m'}$.
-
-    (1) $\Phi$ contains $\Zero$.
-
-    (2) For all $m' \Elem \Phi$ we have $m' \Plus \One \Elem \Phi$.
-    \begin{proof}
-      Let $m' \Elem \Phi$.
-
-      \begin{case}{$n \Less m'$.} \end{case}
-
-      \begin{case}{$n \Eq m'$.} \end{case}
-
-      \begin{case}{$n \Greater m'$.}
-        Take a positive natural number $k$ such that $n \Eq m' \Plus k$.
-
-        \begin{case}{$k \Eq \One$.} \end{case}
-
-        \begin{case}{$k \NotEq \One$.}
-          Take a natural number $l$ such that $n \Eq (m' \Plus \One) \Plus l$.
-          Hence $n \Greater m' \Plus \One$.
-          Indeed $l$ is positive.
-        \end{case}
+      \begin{case}{$k \NotEq \One$.}
+        Take a natural number $l$ such that $n \Eq (m' \Plus \One) \Plus l$.
+        Hence $n \Greater m' \Plus \One$.
+        Indeed $l$ is positive.
       \end{case}
-    \end{proof}
-
-    Thus every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
-    Therefore $n \Less m$ or $n \Eq m$ or $n \Greater m$.
+    \end{case}
   \end{proof}
 
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    Then $n \NotLess m$ iff $n \Geq m$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$n \NotLess m$.}
-      Then $n \Eq m$ or $n \Greater m$.
-      Hence $n \Geq m$.
-    \end{case}
+  Thus every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
+  Therefore $n \Less m$ or $n \Eq m$ or $n \Greater m$.
+\end{proof}
 
-    \begin{case}{$n \Geq m$.}
-      Assume $n \Less m$.
-      Then $n \Leq m$.
-      Hence $n \Eq m$.
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  Then $n \NotLess m$ iff $n \Geq m$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$n \NotLess m$.}
+    Then $n \Eq m$ or $n \Greater m$.
+    Hence $n \Geq m$.
+  \end{case}
+
+  \begin{case}{$n \Geq m$.}
+    Assume $n \Less m$.
+    Then $n \Leq m$.
+    Hence $n \Eq m$.
+    Contradiction.
+  \end{case}
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  If $n \Less m \Leq n \Plus \One$ then $m \Eq n \Plus \One$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Less m \Leq n \Plus \One$.
+  Take a positive natural number $k$ such that $m \Eq n \Plus k$.
+  Take a natural number $l$ such that $n \Plus \One \Eq m \Plus l$.
+  Then $n \Plus \One
+    \Eq m \Plus l
+    \Eq (n \Plus k) \Plus l
+    \Eq n \Plus (k \Plus l)$.
+  Hence $k \Plus l \Eq \One$.
+
+  We have $l \Eq \Zero$.
+  \begin{proof}
+    Assume the contrary.
+    Then $k,l \Greater \Zero$.
+
+    \begin{case}{$k,l \Eq \One$.}
+      Then $k \Plus l
+        \Eq \Two
+        \NotEq \One$.
       Contradiction.
     \end{case}
-  \end{proof}
-\end{sfragment}
 
-\begin{sfragment}{Ordering and Successors}
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    If $n \Less m \Leq n \Plus \One$ then $m \Eq n \Plus \One$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Less m \Leq n \Plus \One$.
-    Take a positive natural number $k$ such that $m \Eq n \Plus k$.
-    Take a natural number $l$ such that $n \Plus \One \Eq m \Plus l$.
-    Then $n \Plus \One
-      \Eq m \Plus l
-      \Eq (n \Plus k) \Plus l
-      \Eq n \Plus (k \Plus l)$.
-    Hence $k \Plus l \Eq \One$.
+    \begin{case}{$k \Eq \One and l \NotEq \One$.}
+      Then $l \Greater \One$.
+      Hence $k \Plus l
+        \Greater \One \Plus l
+        \Greater \One$.
+      Contradiction.
+    \end{case}
 
-    We have $l \Eq \Zero$.
-    \begin{proof}
-      Assume the contrary.
-      Then $k,l \Greater \Zero$.
+    \begin{case}{$k \NotEq \One and l \Eq \One$.}
+      Then $k \Greater \One$.
+      Hence $k \Plus l
+        \Greater k \Plus \One
+        \Greater \One$.
+      Contradiction.
+    \end{case}
 
-      \begin{case}{$k,l \Eq \One$.}
-        Then $k \Plus l
-          \Eq \Two
-          \NotEq \One$.
-        Contradiction.
-      \end{case}
-
-      \begin{case}{$k \Eq \One and l \NotEq \One$.}
-        Then $l \Greater \One$.
-        Hence $k \Plus l
-          \Greater \One \Plus l
-          \Greater \One$.
-        Contradiction.
-      \end{case}
-
-      \begin{case}{$k \NotEq \One and l \Eq \One$.}
-        Then $k \Greater \One$.
-        Hence $k \Plus l
-          \Greater k \Plus \One
-          \Greater \One$.
-        Contradiction.
-      \end{case}
-
-      \begin{case}{$k, l \NotEq \One$.}
-        Take natural numbers $a, b$ such that $k \Eq a \Plus \One$ and $l \Eq b \Plus \One$.
-        Indeed $k, l \NotEq \Zero$.
-        Hence $k \Eq a \Plus \One$ and $l \Eq b \Plus \One$.
-        Thus $k, l \Greater \One$. Indeed $a, b$ are positive.
-      \end{case}
-    \end{proof}
-
-    Then we have $n \Plus \One
-      \Eq m \Plus l
-      \Eq m \Plus \Zero
-      \Eq m$.
-  \end{proof}
-
-  \begin{proposition}[forthel]
-    Let $n, m$ be natural numbers.
-    If $n \Leq m \Less n \Plus \One$ then $n \Eq m$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume $n \Leq m \Less n \Plus \One$.
-
-    \begin{case}{$n \Eq m$.} \end{case}
-
-    \begin{case}{$n \Less m$.}
-      Then $n \Less m \Leq n \Plus \One$.
-      Hence $n \Eq m$.
+    \begin{case}{$k, l \NotEq \One$.}
+      Take natural numbers $a, b$ such that $k \Eq a \Plus \One$ and $l \Eq b \Plus \One$.
+      Indeed $k, l \NotEq \Zero$.
+      Hence $k \Eq a \Plus \One$ and $l \Eq b \Plus \One$.
+      Thus $k, l \Greater \One$. Indeed $a, b$ are positive.
     \end{case}
   \end{proof}
 
-  \begin{corollary}[forthel]
-    Let $n$ be a natural number.
-    There is no natural number $m$ such that $n \Less m \Less n \Plus \One$.
-  \end{corollary}
-  \begin{proof}[forthel]
-    Assume the contrary.
-    Take a natural number $m$ such that $n \Less m \Less n \Plus \One$.
-    Then $n \Less m \Leq n \Plus \One$ and $n \Leq m \Less n \Plus \One$.
-    Hence $m \Eq n \Plus \One$ and $m \Eq n$.
-    Hence $n \Eq n \Plus \One$.
+  Then we have $n \Plus \One
+    \Eq m \Plus l
+    \Eq m \Plus \Zero
+    \Eq m$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n, m$ be natural numbers.
+  If $n \Leq m \Less n \Plus \One$ then $n \Eq m$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume $n \Leq m \Less n \Plus \One$.
+
+  \begin{case}{$n \Eq m$.} \end{case}
+
+  \begin{case}{$n \Less m$.}
+    Then $n \Less m \Leq n \Plus \One$.
+    Hence $n \Eq m$.
+  \end{case}
+\end{proof}
+
+\begin{corollary}[forthel]
+  Let $n$ be a natural number.
+  There is no natural number $m$ such that $n \Less m \Less n \Plus \One$.
+\end{corollary}
+\begin{proof}[forthel]
+  Assume the contrary.
+  Take a natural number $m$ such that $n \Less m \Less n \Plus \One$.
+  Then $n \Less m \Leq n \Plus \One$ and $n \Leq m \Less n \Plus \One$.
+  Hence $m \Eq n \Plus \One$ and $m \Eq n$.
+  Hence $n \Eq n \Plus \One$.
+  Contradiction.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $n$ be a natural number.
+  Then $n \Plus \One \Geq \One$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$n \Eq \Zero$.} \end{case}
+
+  \begin{case}{$n \NotEq \Zero$.}
+    Then $n \Greater \Zero$.
+    Hence $n \Plus \One \Greater \Zero \Plus \One \Eq \One$.
+  \end{case}
+\end{proof}
+
+\begin{proposition}[forthel,name=preservation of ordering under right-addition]
+  Let $n, m, k$ be natural numbers.
+  Then $n \Less m$ iff $n \Plus k \Less m \Plus k$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$n \Less m$.}
+    Take a positive natural number $l$ such that $m \Eq n \Plus l$.
+    Then $m \Plus k
+      \Eq (n \Plus l) \Plus k
+      \Eq (n \Plus k) \Plus l$.
+    Hence $n \Plus k \Less m \Plus k$.
+  \end{case}
+
+  \begin{case}{$n \Plus k \Less m \Plus k$.}
+    Take a positive natural number $l$ such that $m \Plus k \Eq (n \Plus k) \Plus l$.
+    $((n \Plus k) \Plus l)
+      \Eq n \Plus (k \Plus l)
+      \Eq n \Plus (l \Plus k)
+      \Eq (n \Plus l) \Plus k$.
+    Hence $m \Plus k \Eq (n \Plus l) \Plus k$.
+    Thus $m \Eq n \Plus l$ (by \sn{right-cancellability of addition}).
+    Therefore $n \Less m$.
+  \end{case}
+\end{proof}
+
+\begin{corollary}[forthel]
+  Let $n, m, k$ be natural numbers.
+  Then $n \Less m$ iff $k \Plus n \Less k \Plus m$.
+\end{corollary}
+\begin{proof}[forthel]
+  We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
+  Hence $k \Plus n \Less k \Plus m$ iff $n \Plus k \Less m \Plus k$.
+\end{proof}
+
+\begin{corollary}[forthel]
+  Let $n, m, k$ be natural numbers.
+  Then $n \Leq m$ iff $k \Plus n \Leq k \Plus m$.
+\end{corollary}
+
+\begin{corollary}[forthel]
+  Let $n, m, k$ be natural numbers.
+  Then $n \Leq m$ iff $n \Plus k \Leq m \Plus k$.
+\end{corollary}
+
+\begin{proposition}[forthel,name=wellfoundedness of ordering]
+  Let $A$ be a nonempty subclass of $\Naturals$.
+  Then there exists a $m \Elem A$ such that $m \Leq n$ for all $n \Elem A$.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume the contrary.
+
+  Let us show that for each $n \Elem A$ there exists a $m \Elem A$ such that $m \Less n$.
+    Let $n \Elem A$.
+    Assume that there exists no $m \Elem A$ such that $m \Less n$.
+    Then $n \Leq m$ for all $m \Elem A$.
+    Contradiction.
+  End.
+
+  (a) Define $\Phi \DefEq \SClass{n}{\Naturals}{n\text{ is less than any element of }A}$.
+
+  (1) $\Phi$ contains $\Zero$.
+  \begin{proof}
+    $\Zero \NotElem A$.
+    Hence $\Zero$ is less than every element of $A$.
+    Thus $\Zero \Elem \Phi$.
+  \end{proof}
+
+  (2) For all $n \Elem \Phi$ we have $n \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $n \Elem \Phi$.
+    Then $n$ is less than any element of $A$.
+    Assume that $\Phi$ does not contain $n \Plus \One$.
+    Then we can take an $m \Elem A$ such that $n \Plus \One \NotLess m$ (by a).
+    Then $n \Less m \Leq n \Plus \One$.
+    Hence $m \Eq n \Plus \One$.
     Contradiction.
   \end{proof}
 
-  \begin{proposition}[forthel]
-    Let $n$ be a natural number.
-    Then $n \Plus \One \Geq \One$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$n \Eq \Zero$.} \end{case}
+  Then $\Phi$ contains every natural number (by \sr{induction I}{induction}).
+  Therefore every natural number is less than any element of $A$.
+  Consequently $A$ has no elements.
+  Contradiction.
+\end{proof}
 
-    \begin{case}{$n \NotEq \Zero$.}
-      Then $n \Greater \Zero$.
-      Hence $n \Plus \One \Greater \Zero \Plus \One \Eq \One$.
-    \end{case}
-  \end{proof}
-\end{sfragment}
+\begin{theorem}[forthel,name=induction II]
+  Let $A$ be a class.
+  Assume for all $n \Elem \Naturals$ if $A$ contains all predecessors of $n$ then $A$ contains $n$.
+  Then $A$ contains every natural number.
+\end{theorem}
+\begin{proof}[forthel]
+  Assume the contrary.
+  Take a natural number $n$ that is not contained in $A$.
+  Then $n$ is contained in $\Naturals \Diff A$.
+  Hence we can take a $m \Elem \Naturals \Diff A$ such that $m \Leq k$ for all $k \Elem \Naturals \Diff A$.
+  Then $\Naturals \Diff A$ does not contain any predecessor of $m$.
+  Therefore $A$ contains all predecessors of $m$.
+  Consequently $A$ contains $m$.
+  Contradiction.
+\end{proof}
 
-\begin{sfragment}{Ordering and Addition}
+\begin{theorem}[forthel,name=induction III]
+  Let $A$ be a class.
+  Let $k$ be a natural number such that $k \Elem A$.
+  Assume that for all $n \Elem \NatGeq{k}$ if $n \Elem A$ then $n \Plus \One \Elem A$.
+  Then for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
+\end{theorem}
+\begin{proof}[forthel]
+  Define $\Phi \DefEq \SClass{n}{\Naturals}{\text{ if }n \Geq k\text{ then }n \Elem A}$.
 
-  \begin{proposition}[forthel,name=preservation of ordering under right-addition]
-    Let $n, m, k$ be natural numbers.
-    Then $n \Less m$ iff $n \Plus k \Less m \Plus k$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$n \Less m$.}
-      Take a positive natural number $l$ such that $m \Eq n \Plus l$.
-      Then $m \Plus k
-        \Eq (n \Plus l) \Plus k
-        \Eq (n \Plus k) \Plus l$.
-      Hence $n \Plus k \Less m \Plus k$.
-    \end{case}
+  (1) $\Phi$ contains $\Zero$.
+  Indeed if $\Zero \Geq k$ then $\Zero \Eq k \Elem A$.
 
-    \begin{case}{$n \Plus k \Less m \Plus k$.}
-      Take a positive natural number $l$ such that $m \Plus k \Eq (n \Plus k) \Plus l$.
-      $((n \Plus k) \Plus l)
-        \Eq n \Plus (k \Plus l)
-        \Eq n \Plus (l \Plus k)
-        \Eq (n \Plus l) \Plus k$.
-      Hence $m \Plus k \Eq (n \Plus l) \Plus k$.
-      Thus $m \Eq n \Plus l$ (by \sn{right-cancellability of addition}).
-      Therefore $n \Less m$.
-    \end{case}
-  \end{proof}
+  (2) For all $n \Elem \Phi$ we have $n \Plus \One \Elem \Phi$.
+  \begin{proof}
+    Let $n \Elem \Phi$.
 
-  \begin{corollary}[forthel]
-    Let $n, m, k$ be natural numbers.
-    Then $n \Less m$ iff $k \Plus n \Less k \Plus m$.
-  \end{corollary}
-  \begin{proof}[forthel]
-    We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
-    Hence $k \Plus n \Less k \Plus m$ iff $n \Plus k \Less m \Plus k$.
-  \end{proof}
+    Let us show that if $n \Plus \One \Geq k$ then $n \Plus \One \Elem A$.
+      Assume $n \Plus \One \Geq k$.
 
-  \begin{corollary}[forthel]
-    Let $n, m, k$ be natural numbers.
-    Then $n \Leq m$ iff $k \Plus n \Leq k \Plus m$.
-  \end{corollary}
+      \begin{case}{$n \Less k$.}
+        Then $n \Plus \One \Eq k$.
+        Hence $n \Plus \One \Elem A$.
+      \end{case}
 
-  \begin{corollary}[forthel]
-    Let $n, m, k$ be natural numbers.
-    Then $n \Leq m$ iff $n \Plus k \Leq m \Plus k$.
-  \end{corollary}
-\end{sfragment}
-
-\begin{sfragment}{Induction Revisited}
-
-  \begin{proposition}[forthel,name=wellfoundedness of ordering]
-    Let $A$ be a nonempty subclass of $\Naturals$.
-    Then there exists a $m \Elem A$ such that $m \Leq n$ for all $n \Elem A$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume the contrary.
-
-    Let us show that for each $n \Elem A$ there exists a $m \Elem A$ such that $m \Less n$.
-      Let $n \Elem A$.
-      Assume that there exists no $m \Elem A$ such that $m \Less n$.
-      Then $n \Leq m$ for all $m \Elem A$.
-      Contradiction.
+      \begin{case}{$n \Geq k$.}
+        Then $n \Elem A$.
+        Hence $n \Plus \One \Elem A$.
+      \end{case}
     End.
 
-    (a) Define $\Phi \DefEq \SClass{n}{\Naturals}{n\text{ is less than any element of }A}$.
-
-    (1) $\Phi$ contains $\Zero$.
-    \begin{proof}
-      $\Zero \NotElem A$.
-      Hence $\Zero$ is less than every element of $A$.
-      Thus $\Zero \Elem \Phi$.
-    \end{proof}
-
-    (2) For all $n \Elem \Phi$ we have $n \Plus \One \Elem \Phi$.
-    \begin{proof}
-      Let $n \Elem \Phi$.
-      Then $n$ is less than any element of $A$.
-      Assume that $\Phi$ does not contain $n \Plus \One$.
-      Then we can take an $m \Elem A$ such that $n \Plus \One \NotLess m$ (by a).
-      Then $n \Less m \Leq n \Plus \One$.
-      Hence $m \Eq n \Plus \One$.
-      Contradiction.
-    \end{proof}
-
-    Then $\Phi$ contains every natural number (by \sr{induction I}{induction}).
-    Therefore every natural number is less than any element of $A$.
-    Consequently $A$ has no elements.
-    Contradiction.
+    Therefore $n \Plus \One \Elem \Phi$.
   \end{proof}
 
-  \begin{theorem}[forthel,name=induction II]
-    Let $A$ be a class.
-    Assume for all $n \Elem \Naturals$ if $A$ contains all predecessors of $n$ then $A$ contains $n$.
-    Then $A$ contains every natural number.
-  \end{theorem}
-  \begin{proof}[forthel]
-    Assume the contrary.
-    Take a natural number $n$ that is not contained in $A$.
-    Then $n$ is contained in $\Naturals \Diff A$.
-    Hence we can take a $m \Elem \Naturals \Diff A$ such that $m \Leq k$ for all $k \Elem \Naturals \Diff A$.
-    Then $\Naturals \Diff A$ does not contain any predecessor of $m$.
-    Therefore $A$ contains all predecessors of $m$.
-    Consequently $A$ contains $m$.
-    Contradiction.
-  \end{proof}
-
-  \begin{theorem}[forthel,name=induction III]
-    Let $A$ be a class.
-    Let $k$ be a natural number such that $k \Elem A$.
-    Assume that for all $n \Elem \NatGeq{k}$ if $n \Elem A$ then $n \Plus \One \Elem A$.
-    Then for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
-  \end{theorem}
-  \begin{proof}[forthel]
-    Define $\Phi \DefEq \SClass{n}{\Naturals}{\text{ if }n \Geq k\text{ then }n \Elem A}$.
-
-    (1) $\Phi$ contains $\Zero$.
-    Indeed if $\Zero \Geq k$ then $\Zero \Eq k \Elem A$.
-
-    (2) For all $n \Elem \Phi$ we have $n \Plus \One \Elem \Phi$.
-    \begin{proof}
-      Let $n \Elem \Phi$.
-
-      Let us show that if $n \Plus \One \Geq k$ then $n \Plus \One \Elem A$.
-        Assume $n \Plus \One \Geq k$.
-
-        \begin{case}{$n \Less k$.}
-          Then $n \Plus \One \Eq k$.
-          Hence $n \Plus \One \Elem A$.
-        \end{case}
-
-        \begin{case}{$n \Geq k$.}
-          Then $n \Elem A$.
-          Hence $n \Plus \One \Elem A$.
-        \end{case}
-      End.
-
-      Therefore $n \Plus \One \Elem \Phi$.
-    \end{proof}
-
-    Thus $\Phi$ contains every natural number (by \sr{induction I}{induction}).
-    Consequently for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
-  \end{proof}
-\end{sfragment}
+  Thus $\Phi$ contains every natural number (by \sr{induction I}{induction}).
+  Consequently for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
+\end{proof}
 
 \end{smodule}
 \end{document}

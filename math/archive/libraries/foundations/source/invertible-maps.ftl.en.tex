@@ -17,372 +17,366 @@
 \symdecl*{involution}
 \symdecl*{invertibility of composition of invertible maps}
 
-\begin{sfragment}{Definitions}
-  \begin{definition}[forthel,for=inverse]
-    Let $f$ be a map.
-    An \emph{inverse of $f$} is a map $g$ from $\Range(f)$ to $\Dom(f)$ such that $f(a) \Eq b \Iff g(b) \Eq a$ for all $a \Elem \Dom(f)$ and all $b \Elem \Dom(g)$.
-  \end{definition}
+\begin{definition}[forthel,for=inverse]
+  Let $f$ be a map.
+  An \emph{inverse of $f$} is a map $g$ from $\Range(f)$ to $\Dom(f)$ such that $f(a) \Eq b \Iff g(b) \Eq a$ for all $a \Elem \Dom(f)$ and all $b \Elem \Dom(g)$.
+\end{definition}
 
-  \begin{definition}[forthel,for=invertible]
-    Let $f$ be a map.
-    $f$ is \emph{invertible} iff $f$ has an inverse.
-  \end{definition}
+\begin{definition}[forthel,for=invertible]
+  Let $f$ be a map.
+  $f$ is \emph{invertible} iff $f$ has an inverse.
+\end{definition}
 
-  \begin{lemma}[forthel]
-    Let $f$ be a map and $g, g'$ be inverses of $f$.
-    Then $g \Eq g'$.
-  \end{lemma}
-  \begin{proof}[forthel]
-    We have $\Dom(g) \Eq \Range(f) \Eq \Dom(g')$.
+\begin{lemma}[forthel]
+  Let $f$ be a map and $g, g'$ be inverses of $f$.
+  Then $g \Eq g'$.
+\end{lemma}
+\begin{proof}[forthel]
+  We have $\Dom(g) \Eq \Range(f) \Eq \Dom(g')$.
 
-    Let us show that $g(b) \Eq g'(b)$ for all $b \Elem \Range(f)$.
-      Let $b \Elem \Range(f)$.
-      Take $a \Eq g'(b)$.
-      Then $g(b) \Eq a$ iff $f(a) \Eq b$.
-      We have $f(a) \Eq b$ iff $g'(b) \Eq a$.
-      Thus $g(b) \Eq g'(b)$.
-    End.
-  \end{proof}
+  Let us show that $g(b) \Eq g'(b)$ for all $b \Elem \Range(f)$.
+    Let $b \Elem \Range(f)$.
+    Take $a \Eq g'(b)$.
+    Then $g(b) \Eq a$ iff $f(a) \Eq b$.
+    We have $f(a) \Eq b$ iff $g'(b) \Eq a$.
+    Thus $g(b) \Eq g'(b)$.
+  End.
+\end{proof}
 
-  \begin{definition}[forthel,for={Inv,involutory,selfinverse}]
-    Let $f$ be an invertible map.
-    $\emph{\Inv{f}}$ is the inverse of $f$.
-    Let $f$ is \emph{involutory} stand for $f$ is the inverse of $f$.
-    Let $f$ is \emph{selfinverse} stand for $f$ is the inverse of $f$.
-  \end{definition}
-\end{sfragment}
+\begin{definition}[forthel,for={Inv,involutory,selfinverse}]
+  Let $f$ be an invertible map.
+  $\emph{\Inv{f}}$ is the inverse of $f$.
+  Let $f$ is \emph{involutory} stand for $f$ is the inverse of $f$.
+  Let $f$ is \emph{selfinverse} stand for $f$ is the inverse of $f$.
+\end{definition}
 
-\begin{sfragment}{Basic Properties}
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{A}$.
-    Then $g$ is the inverse of $f$ iff $g \Comp f \Eq \Id{A}$ and $f \Comp g \Eq \Id{B}$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$g$ is the inverse of $f$.}
-      We have
-      $\Dom(g \Comp f)
-        \Eq \Dom(f)
-        \Eq A
-        \Eq \Dom(\Id{A})$.
-      For all $a \Elem A$ we have
-      $(g \Comp f)(a)
-        \Eq g(f(a))
-        \Eq a$.
-      Hence $g \Comp f \Eq \Id{A}$.
-
-      We have
-      $\Dom(f \Comp g)
-        \Eq \Dom(g)
-        \Eq B
-        \Eq \Dom(\Id{B})$.
-      For all $b \Elem B$ we have
-      $(f \Comp g)(b)
-        \Eq f(g(b))
-        \Eq b$.
-      Hence $f \Comp g \Eq \Id{B}$.
-    \end{case}
-
-    \begin{case}{$g \Comp f \Eq \Id{A}$ and $f \Comp g \Eq \Id{B}$.}
-      Then $\Dom(g)
-        \Eq B
-        \Eq \Range(f)$
-      and $\Range(g)
-        \Eq A
-        \Eq \Dom(f)$.
-      Let $a \Elem \Dom(f)$ and $b \Elem \Dom(g)$.
-      If $f(a) \Eq b$ then
-      $g(b)
-        \Eq g(f(a))
-        \Eq (g \Comp f)(a)
-        \Eq \Id{A}(a)
-        \Eq a$.
-      If $g(b) \Eq a$ then
-      $f(a)
-        \Eq f(g(b))
-        \Eq (f \Comp g)(b)
-        \Eq \Id{B}(b)
-        \Eq b$.
-      Hence $f(a) \Eq b$ iff $g(b) \Eq a$.
-    \end{case}
-  \end{proof}
-
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
-    Assume that $f$ is invertible.
-    Then $\Inv{f}$ is an invertible surjective map from $B$ onto $A$ such that $\Inv{(\Inv{f})} \Eq f$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    $\Inv{f}$ is a map from $B$ to $A$.
-    Indeed $\Range(f) \Eq B$ and $\Dom(f) \Eq A$.
-    $\Inv{f}$ is surjective onto $A$.
-    Indeed for any $a \Elem A$ we have $\Inv{f}(f(a)) \Eq a$.
-    $\Inv{f}$ is the inverse of $f$.
-    Thus $f \Comp \Inv{f} \Eq \Id{B}$ and $\Inv{f} \Comp f \Eq \Id{A}$.
-    Therefore $f$ is the inverse of $\Inv{f}$.
-  \end{proof}
-
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
-    Assume that $f$ is invertible.
-    Then $f \Comp \Inv{f} \Eq \Id{B}$ and $\Inv{f} \Comp f \Eq \Id{A}$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    $\Inv{f}$ is a surjective map from $B$ onto $A$ .
-    $\Inv{f}$ is the inverse of $f$.
-  \end{proof}
-
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $a \Elem A$.
-    Assume that $f$ is invertible.
-    Then $\Inv{f}(f(a)) \Eq a$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    We have $\Inv{f}(f(a)) \Eq (\Inv{f} \Comp f)(a) \Eq \Id{A}(a) \Eq a$.
-  \end{proof}
-
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
-    Assume that $f$ is invertible.
-    Then $f(\Inv{f}(b)) \Eq b$.
-  \end{proposition}
-  \begin{proof}[forthel]
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{A}$.
+  Then $g$ is the inverse of $f$ iff $g \Comp f \Eq \Id{A}$ and $f \Comp g \Eq \Id{B}$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$g$ is the inverse of $f$.}
     We have
-    $f(\Inv{f}(b))
-      \Eq (f \Comp \Inv{f})(b)
+    $\Dom(g \Comp f)
+      \Eq \Dom(f)
+      \Eq A
+      \Eq \Dom(\Id{A})$.
+    For all $a \Elem A$ we have
+    $(g \Comp f)(a)
+      \Eq g(f(a))
+      \Eq a$.
+    Hence $g \Comp f \Eq \Id{A}$.
+
+    We have
+    $\Dom(f \Comp g)
+      \Eq \Dom(g)
+      \Eq B
+      \Eq \Dom(\Id{B})$.
+    For all $b \Elem B$ we have
+    $(f \Comp g)(b)
+      \Eq f(g(b))
+      \Eq b$.
+    Hence $f \Comp g \Eq \Id{B}$.
+  \end{case}
+
+  \begin{case}{$g \Comp f \Eq \Id{A}$ and $f \Comp g \Eq \Id{B}$.}
+    Then $\Dom(g)
+      \Eq B
+      \Eq \Range(f)$
+    and $\Range(g)
+      \Eq A
+      \Eq \Dom(f)$.
+    Let $a \Elem \Dom(f)$ and $b \Elem \Dom(g)$.
+    If $f(a) \Eq b$ then
+    $g(b)
+      \Eq g(f(a))
+      \Eq (g \Comp f)(a)
+      \Eq \Id{A}(a)
+      \Eq a$.
+    If $g(b) \Eq a$ then
+    $f(a)
+      \Eq f(g(b))
+      \Eq (f \Comp g)(b)
       \Eq \Id{B}(b)
       \Eq b$.
-  \end{proof}
+    Hence $f(a) \Eq b$ iff $g(b) \Eq a$.
+  \end{case}
+\end{proof}
 
-  \begin{proposition}[forthel,name=invertibility of composition of invertible maps]
-    Let $A, B, C$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{C}$.
-    Assume that $f$ and $g$ are invertible.
-    Then $g \Comp f$ is invertible and $\Inv{g \Comp f} \Eq \Inv{f} \Comp \Inv{g}$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    $\Inv{f}$ is a surjective map from $B$ onto $A$.
-    $\Inv{g}$ is a surjective map from $C$ onto $B$.
-    Take $h \Eq \Inv{f} \Comp \Inv{g}$.
-    Then $h$ is a surjective map from $C$ onto $A$ (by \sn{surjectivity of composition of surjections}).
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$.
+  Assume that $f$ is invertible.
+  Then $\Inv{f}$ is an invertible surjective map from $B$ onto $A$ such that $\Inv{(\Inv{f})} \Eq f$.
+\end{proposition}
+\begin{proof}[forthel]
+  $\Inv{f}$ is a map from $B$ to $A$.
+  Indeed $\Range(f) \Eq B$ and $\Dom(f) \Eq A$.
+  $\Inv{f}$ is surjective onto $A$.
+  Indeed for any $a \Elem A$ we have $\Inv{f}(f(a)) \Eq a$.
+  $\Inv{f}$ is the inverse of $f$.
+  Thus $f \Comp \Inv{f} \Eq \Id{B}$ and $\Inv{f} \Comp f \Eq \Id{A}$.
+  Therefore $f$ is the inverse of $\Inv{f}$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$.
+  Assume that $f$ is invertible.
+  Then $f \Comp \Inv{f} \Eq \Id{B}$ and $\Inv{f} \Comp f \Eq \Id{A}$.
+\end{proposition}
+\begin{proof}[forthel]
+  $\Inv{f}$ is a surjective map from $B$ onto $A$ .
+  $\Inv{f}$ is the inverse of $f$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $a \Elem A$.
+  Assume that $f$ is invertible.
+  Then $\Inv{f}(f(a)) \Eq a$.
+\end{proposition}
+\begin{proof}[forthel]
+  We have $\Inv{f}(f(a)) \Eq (\Inv{f} \Comp f)(a) \Eq \Id{A}(a) \Eq a$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
+  Assume that $f$ is invertible.
+  Then $f(\Inv{f}(b)) \Eq b$.
+\end{proposition}
+\begin{proof}[forthel]
+  We have
+  $f(\Inv{f}(b))
+    \Eq (f \Comp \Inv{f})(b)
+    \Eq \Id{B}(b)
+    \Eq b$.
+\end{proof}
+
+\begin{proposition}[forthel,name=invertibility of composition of invertible maps]
+  Let $A, B, C$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{C}$.
+  Assume that $f$ and $g$ are invertible.
+  Then $g \Comp f$ is invertible and $\Inv{g \Comp f} \Eq \Inv{f} \Comp \Inv{g}$.
+\end{proposition}
+\begin{proof}[forthel]
+  $\Inv{f}$ is a surjective map from $B$ onto $A$.
+  $\Inv{g}$ is a surjective map from $C$ onto $B$.
+  Take $h \Eq \Inv{f} \Comp \Inv{g}$.
+  Then $h$ is a surjective map from $C$ onto $A$ (by \sn{surjectivity of composition of surjections}).
+  $g \Comp f$ is a map from $A$ to $C$.
+
+  Let us show that $((g \Comp f) \Comp h) \Eq \Id{C}$.
+    We have $f \Comp (\Inv{f} \Comp \Inv{g}) \Eq (f \Comp \Inv{f}) \Comp \Inv{g}$.
+    Indeed $f \Comp (\Inv{f} \Comp \Inv{g})$ and $(f \Comp \Inv{f}) \Comp \Inv{g}$ are maps of $C$.
+    $f \Comp h$ is a map from $C$ to $B$.
+    Hence
+    \[  (g \Comp f) \Comp h                           \]
+    \[    \Eq g \Comp (f \Comp h)                       \]
+    \[    \Eq g \Comp (f \Comp (\Inv{f} \Comp \Inv{g}))   \]
+    \[    \Eq g \Comp ((f \Comp \Inv{f}) \Comp \Inv{g})   \]
+    \[    \Eq g \Comp (\Id{B} \Comp \Inv{g})            \]
+    \[    \Eq g \Comp \Inv{g}                            \]
+    \[    \Eq \Id{C}.                                  \]
+  End.
+
+  Let us show that $h \Comp (g \Comp f) \Eq \Id{A}$.
+    We have $(\Inv{f} \Comp \Inv{g}) \Comp g \Eq \Inv{f} \Comp (\Inv{g} \Comp g)$.
     $g \Comp f$ is a map from $A$ to $C$.
+    Hence
+    \[  h \Comp (g \Comp f)                           \]
+    \[    \Eq (h \Comp g) \Comp f                       \]
+    \[    \Eq ((\Inv{f} \Comp \Inv{g}) \Comp g) \Comp f   \]
+    \[    \Eq (\Inv{f} \Comp (\Inv{g} \Comp g)) \Comp f   \]
+    \[    \Eq (\Inv{f} \Comp \Id{B}) \Comp f            \]
+    \[    \Eq \Inv{f} \Comp f                            \]
+    \[    \Eq \Id{A}.                                  \]
+  End.
 
-    Let us show that $((g \Comp f) \Comp h) \Eq \Id{C}$.
-      We have $f \Comp (\Inv{f} \Comp \Inv{g}) \Eq (f \Comp \Inv{f}) \Comp \Inv{g}$.
-      Indeed $f \Comp (\Inv{f} \Comp \Inv{g})$ and $(f \Comp \Inv{f}) \Comp \Inv{g}$ are maps of $C$.
-      $f \Comp h$ is a map from $C$ to $B$.
-      Hence
-      \[  (g \Comp f) \Comp h                           \]
-      \[    \Eq g \Comp (f \Comp h)                       \]
-      \[    \Eq g \Comp (f \Comp (\Inv{f} \Comp \Inv{g}))   \]
-      \[    \Eq g \Comp ((f \Comp \Inv{f}) \Comp \Inv{g})   \]
-      \[    \Eq g \Comp (\Id{B} \Comp \Inv{g})            \]
-      \[    \Eq g \Comp \Inv{g}                            \]
-      \[    \Eq \Id{C}.                                  \]
-    End.
+  Thus $h$ is the inverse of $g \Comp f$.
+  Indeed $g \Comp f$ is a surjective map from $A$ onto $C$ and $h$ is a surjective map from $C$ onto $A$.
+\end{proof}
 
-    Let us show that $h \Comp (g \Comp f) \Eq \Id{A}$.
-      We have $(\Inv{f} \Comp \Inv{g}) \Comp g \Eq \Inv{f} \Comp (\Inv{g} \Comp g)$.
-      $g \Comp f$ is a map from $A$ to $C$.
-      Hence
-      \[  h \Comp (g \Comp f)                           \]
-      \[    \Eq (h \Comp g) \Comp f                       \]
-      \[    \Eq ((\Inv{f} \Comp \Inv{g}) \Comp g) \Comp f   \]
-      \[    \Eq (\Inv{f} \Comp (\Inv{g} \Comp g)) \Comp f   \]
-      \[    \Eq (\Inv{f} \Comp \Id{B}) \Comp f            \]
-      \[    \Eq \Inv{f} \Comp f                            \]
-      \[    \Eq \Id{A}.                                  \]
-    End.
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $X \Subclass A$.
+  Assume that $f$ is invertible.
+  Then $f \Rest X$ is invertible and $\Inv{f\Rest X} \Eq \Inv{f} \Rest (\Im{f}{X})$.
+\end{proposition}
+\begin{proof}[forthel]
+  $f \Rest X$ is a surjective map from $X$ onto $\Im{f}{X}$.
+  Take $g \Eq \Inv{f} \Rest (\Im{f}{X})$.
+  Then $g$ is a map of $\Im{f}{X}$.
 
-    Thus $h$ is the inverse of $g \Comp f$.
-    Indeed $g \Comp f$ is a surjective map from $A$ onto $C$ and $h$ is a surjective map from $C$ onto $A$.
-  \end{proof}
+  Let us show that $X \Subclass \Range(g)$.
+    Let $a \Elem X$.
+    Then $f(a) \Elem \Im{f}{X}$.
+    Hence $g(f(a)) \Eq \Inv{f}(f(a)) \Eq a$.
+    Thus $a$ is a value of $g$.
+  End.
 
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $X \Subclass A$.
-    Assume that $f$ is invertible.
-    Then $f \Rest X$ is invertible and $\Inv{f\Rest X} \Eq \Inv{f} \Rest (\Im{f}{X})$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    $f \Rest X$ is a surjective map from $X$ onto $\Im{f}{X}$.
-    Take $g \Eq \Inv{f} \Rest (\Im{f}{X})$.
-    Then $g$ is a map of $\Im{f}{X}$.
+  Let us show that $\Range(g) \Subclass X$.
+    Let $a \Elem \Range(g)$.
+    Take $b \Elem \Im{f}{X}$ such that $a \Eq g(b)$.
+    Take $c \Elem X$ such that $b \Eq f(c)$.
+    Then $a
+      \Eq (\Inv{f} \Rest (\Im{f}{X}))(b)
+      \Eq \Inv{f}(b)
+      \Eq \Inv{f}(f(c))
+      \Eq c$.
+    Hence $a \Elem X$.
+  End.
 
-    Let us show that $X \Subclass \Range(g)$.
-      Let $a \Elem X$.
-      Then $f(a) \Elem \Im{f}{X}$.
-      Hence $g(f(a)) \Eq \Inv{f}(f(a)) \Eq a$.
-      Thus $a$ is a value of $g$.
-    End.
+  Hence $\Range(g) \Eq X$.
+  Thus $g$ is a surjective map onto $X$.
 
-    Let us show that $\Range(g) \Subclass X$.
-      Let $a \Elem \Range(g)$.
-      Take $b \Elem \Im{f}{X}$ such that $a \Eq g(b)$.
-      Take $c \Elem X$ such that $b \Eq f(c)$.
-      Then $a
-        \Eq (\Inv{f} \Rest (\Im{f}{X}))(b)
-        \Eq \Inv{f}(b)
-        \Eq \Inv{f}(f(c))
-        \Eq c$.
-      Hence $a \Elem X$.
-    End.
+  Let us show that $g((f \Rest X)(a)) \Eq a$ for all $a \Elem X$.
+    Let $a \Elem X$.
+    Then $g((f \Rest X)(a))
+      \Eq g(f(a))
+      \Eq (\Inv{f} \Rest (\Im{f}{X}))(f(a))
+      \Eq \Inv{f}(f(a))
+      \Eq a$.
+  End.
 
-    Hence $\Range(g) \Eq X$.
-    Thus $g$ is a surjective map onto $X$.
+  Let us show that $((f \Rest X)(g(b))) \Eq b$ for all $b \Elem \Im{f}{X}$.
+    Let $b \Elem \Im{f}{X}$.
+    Take $a \Elem X$ such that $b \Eq f(a)$.
+    We have $g(b)
+      \Eq g(f(a))
+      \Eq (\Inv{f} \Rest (\Im{f}{X}))(f(a))
+      \Eq \Inv{f}(f(a))
+      \Eq a$.
+    Hence $(f \Rest X)(g(b))
+      \Eq (f \Rest X)(a)
+      \Eq f(a)
+      \Eq b$.
+  End.
 
-    Let us show that $g((f \Rest X)(a)) \Eq a$ for all $a \Elem X$.
-      Let $a \Elem X$.
-      Then $g((f \Rest X)(a))
-        \Eq g(f(a))
-        \Eq (\Inv{f} \Rest (\Im{f}{X}))(f(a))
-        \Eq \Inv{f}(f(a))
-        \Eq a$.
-    End.
+  Thus $g \Comp (f \Rest X) \Eq \Id{X}$ and $(f \Rest X) \Comp g \Eq \Id{\Im{f}{X}}$.
+  Therefore $g$ is the inverse of $f \Rest X$.
+\end{proof}
 
-    Let us show that $((f \Rest X)(g(b))) \Eq b$ for all $b \Elem \Im{f}{X}$.
-      Let $b \Elem \Im{f}{X}$.
-      Take $a \Elem X$ such that $b \Eq f(a)$.
-      We have $g(b)
-        \Eq g(f(a))
-        \Eq (\Inv{f} \Rest (\Im{f}{X}))(f(a))
-        \Eq \Inv{f}(f(a))
-        \Eq a$.
-      Hence $(f \Rest X)(g(b))
-        \Eq (f \Rest X)(a)
-        \Eq f(a)
-        \Eq b$.
-    End.
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $Y \Subclass B$.
+  Assume that $f$ is invertible.
+  Then \[ \PreIm{f}{Y} \Eq \Im{\Inv{f}}{Y}. \]
+\end{proposition}
+\begin{proof}[forthel]
+  We have $\Im{\Inv{f}}{Y} \Eq \CClass{\Inv{f}(b)}{b \Elem Y}$ and $\PreIm{f}{Y} \Eq \SClass{a}{A}{f(a) \Elem Y}$.
 
-    Thus $g \Comp (f \Rest X) \Eq \Id{X}$ and $(f \Rest X) \Comp g \Eq \Id{\Im{f}{X}}$.
-    Therefore $g$ is the inverse of $f \Rest X$.
-  \end{proof}
+  Let us show that $\PreIm{f}{Y} \Subclass \Im{\Inv{f}}{Y}$.
+    Let $a \Elem \PreIm{f}{Y}$.
+    Take $b \Elem Y$ such that $b \Eq f(a)$.
+    Then $\Inv{f}(b) \Eq \Inv{f}(f(a)) \Eq a$.
+    Hence $a \Elem \Im{\Inv{f}}{Y}$.
+  End.
 
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $Y \Subclass B$.
-    Assume that $f$ is invertible.
-    Then \[ \PreIm{f}{Y} \Eq \Im{\Inv{f}}{Y}. \]
-  \end{proposition}
-  \begin{proof}[forthel]
-    We have $\Im{\Inv{f}}{Y} \Eq \CClass{\Inv{f}(b)}{b \Elem Y}$ and $\PreIm{f}{Y} \Eq \SClass{a}{A}{f(a) \Elem Y}$.
+  Let us show that $\Im{\Inv{f}}{Y} \Subclass \PreIm{f}{Y}$.
+    Let $a \Elem \Im{\Inv{f}}{Y}$.
+    Take $b \Elem Y$ such that $a \Eq \Inv{f}(b)$.
+    Then $f(a) \Eq f(\Inv{f}(b)) \Eq b$.
+    Hence $a \Elem \PreIm{f}{Y}$.
+  End.
+\end{proof}
 
-    Let us show that $\PreIm{f}{Y} \Subclass \Im{\Inv{f}}{Y}$.
-      Let $a \Elem \PreIm{f}{Y}$.
-      Take $b \Elem Y$ such that $b \Eq f(a)$.
-      Then $\Inv{f}(b) \Eq \Inv{f}(f(a)) \Eq a$.
-      Hence $a \Elem \Im{\Inv{f}}{Y}$.
-    End.
+\begin{corollary}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
+  Assume that $f$ is invertible.
+  Then \[ \PreIm{f}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}. \]
+\end{corollary}
+\begin{proof}[forthel]
+  $\PreIm{f}{\Singleton{b}} \Eq \Im{\Inv{f}}{\Singleton{b}}$.
+  We have $\Im{\Inv{f}}{\Singleton{b}} \Eq \CClass{\Inv{f}(c)}{c \Elem \Singleton{b}}$.
+  Hence $\Im{\Inv{f}}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}$.
+\end{proof}
 
-    Let us show that $\Im{\Inv{f}}{Y} \Subclass \PreIm{f}{Y}$.
-      Let $a \Elem \Im{\Inv{f}}{Y}$.
-      Take $b \Elem Y$ such that $a \Eq \Inv{f}(b)$.
-      Then $f(a) \Eq f(\Inv{f}(b)) \Eq b$.
-      Hence $a \Elem \PreIm{f}{Y}$.
-    End.
-  \end{proof}
+\begin{proposition}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$.
+  Then $f$ is invertible iff $f$ is injective.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$f$ is invertible.}
+    Let $a, b \Elem A$.
+    Assume $f(a) \Eq f(b)$.
+    Then $a \Eq \Inv{f}(f(a)) \Eq \Inv{f}(f(b)) \Eq b$.
+  \end{case}
 
-  \begin{corollary}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
-    Assume that $f$ is invertible.
-    Then \[ \PreIm{f}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}. \]
-  \end{corollary}
-  \begin{proof}[forthel]
-    $\PreIm{f}{\Singleton{b}} \Eq \Im{\Inv{f}}{\Singleton{b}}$.
-    We have $\Im{\Inv{f}}{\Singleton{b}} \Eq \CClass{\Inv{f}(c)}{c \Elem \Singleton{b}}$.
-    Hence $\Im{\Inv{f}}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}$.
-  \end{proof}
+  \begin{case}{$f$ is injective.}
+    Define $g(b) \DefEq$ ``choose $a \Elem A$ such that $f(a) \Eq b$ in $a$'' for
+    $b \Elem B$.
+    Then $g$ is a map from $B$ to $A$.
+    For all $a \Elem A$ we have $a \Eq g(f(a))$.
+    Hence $g$ is a surjective map from $B$ onto $A$.
+    For all $a \Elem A$ we have $g(f(a)) \Eq a$.
+    For all $b \Elem B$ we have $f(g(b)) \Eq b$.
+    Hence $g$ is the inverse of $f$.
+  \end{case}
+\end{proof}
 
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
-    Then $f$ is invertible iff $f$ is injective.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$f$ is invertible.}
-      Let $a, b \Elem A$.
-      Assume $f(a) \Eq f(b)$.
-      Then $a \Eq \Inv{f}(f(a)) \Eq \Inv{f}(f(b)) \Eq b$.
-    \end{case}
+\begin{corollary}[forthel]
+  Let $A, B$ be classes and $f \FromOnto{A}{B}$.
+  Assume that $f$ is invertible.
+  Then $\Inv{f}$ is a bijection between $B$ and $A$.
+\end{corollary}
+\begin{proof}[forthel]
+  $\Inv{f}$ is a surjective map from $B$ onto $A$.
+  $\Inv{f}$ is invertible.
+  Hence $\Inv{f}$ is injective.
+  Therefore $\Inv{f}$ is a bijection between $B$ and $A$.
+\end{proof}
 
-    \begin{case}{$f$ is injective.}
-      Define $g(b) \DefEq$ ``choose $a \Elem A$ such that $f(a) \Eq b$ in $a$'' for
-      $b \Elem B$.
-      Then $g$ is a map from $B$ to $A$.
-      For all $a \Elem A$ we have $a \Eq g(f(a))$.
-      Hence $g$ is a surjective map from $B$ onto $A$.
-      For all $a \Elem A$ we have $g(f(a)) \Eq a$.
-      For all $b \Elem B$ we have $f(g(b)) \Eq b$.
-      Hence $g$ is the inverse of $f$.
-    \end{case}
-  \end{proof}
+\begin{definition}[forthel,for=involution]
+  Let $A$ be a class.
+  An \emph{involution on $A$} is a selfinverse map $f$ on $A$.
+\end{definition}
 
-  \begin{corollary}[forthel]
-    Let $A, B$ be classes and $f \FromOnto{A}{B}$.
-    Assume that $f$ is invertible.
-    Then $\Inv{f}$ is a bijection between $B$ and $A$.
-  \end{corollary}
-  \begin{proof}[forthel]
-    $\Inv{f}$ is a surjective map from $B$ onto $A$.
-    $\Inv{f}$ is invertible.
-    Hence $\Inv{f}$ is injective.
-    Therefore $\Inv{f}$ is a bijection between $B$ and $A$.
-  \end{proof}
-\end{sfragment}
+\begin{proposition}[forthel]
+  Let $A$ be a class.
+  $\Id{A}$ is an involution on $A$.
+\end{proposition}
+\begin{proof}[forthel]
+  We have $\Id{A} \Comp \Id{A} \Eq \Id{A}$.
+  Hence $\Id{A}$ is selfinverse.
+\end{proof}
 
-\begin{sfragment}{Involutions}
-  \begin{definition}[forthel,for=involution]
-    Let $A$ be a class.
-    An \emph{involution on $A$} is a selfinverse map $f$ on $A$.
-  \end{definition}
+\begin{proposition}[forthel]
+  Let $A$ be a class and $f, g$ be involutions on $A$.
+  Then $g \Comp f$ is an involution on $A$ iff $g \Comp f \Eq f \Comp g$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$g \Comp f$ is an involution on $A$.}
+    Then $\Inv{g \Comp f}
+      \Eq \Inv{f} \Comp \Inv{g}
+      \Eq f \Comp g$
+    (by \sn{invertibility of composition of invertible maps}).
+    Indeed $f$ and $g$ are invertible and surjective onto $A$.
+  \end{case}
 
-  \begin{proposition}[forthel]
-    Let $A$ be a class.
-    $\Id{A}$ is an involution on $A$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    We have $\Id{A} \Comp \Id{A} \Eq \Id{A}$.
-    Hence $\Id{A}$ is selfinverse.
-  \end{proof}
+  \begin{case}{$g \Comp f \Eq f \Comp g$.}
+    [prover vampire]
+    $f \Comp f$, $f \Comp g$ and $f \Comp g$ are maps on $A$.
+    Hence
+    \[  (g \Comp f) \Comp (g \Comp f)       \]
+    \[    \Eq (g \Comp f) \Comp (f \Comp g)   \]
+    \[    \Eq ((g \Comp f) \Comp f) \Comp g   \]
+    \[    \Eq (g \Comp (f \Comp f)) \Comp g   \]
+    \[    \Eq (g \Comp \Id{A}) \Comp g       \]
+    \[    \Eq g \Comp g                       \]
+    \[    \Eq \Id{A}.                        \]
+    Thus $g \Comp f$ is selfinverse.
+  \end{case}
+\end{proof}
 
-  \begin{proposition}[forthel]
-    Let $A$ be a class and $f, g$ be involutions on $A$.
-    Then $g \Comp f$ is an involution on $A$ iff $g \Comp f \Eq f \Comp g$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$g \Comp f$ is an involution on $A$.}
-      Then $\Inv{g \Comp f}
-        \Eq \Inv{f} \Comp \Inv{g}
-        \Eq f \Comp g$
-      (by \sn{invertibility of composition of invertible maps}).
-      Indeed $f$ and $g$ are invertible and surjective onto $A$.
-    \end{case}
+\begin{corollary}[forthel]
+  Let $A$ be a class and $f$ be an involutions on $A$.
+  Then $f \Comp f$ is an involution on $A$.
+\end{corollary}
 
-    \begin{case}{$g \Comp f \Eq f \Comp g$.}
-      [prover vampire]
-      $f \Comp f$, $f \Comp g$ and $f \Comp g$ are maps on $A$.
-      Hence
-      \[  (g \Comp f) \Comp (g \Comp f)       \]
-      \[    \Eq (g \Comp f) \Comp (f \Comp g)   \]
-      \[    \Eq ((g \Comp f) \Comp f) \Comp g   \]
-      \[    \Eq (g \Comp (f \Comp f)) \Comp g   \]
-      \[    \Eq (g \Comp \Id{A}) \Comp g       \]
-      \[    \Eq g \Comp g                       \]
-      \[    \Eq \Id{A}.                        \]
-      Thus $g \Comp f$ is selfinverse.
-    \end{case}
-  \end{proof}
-
-  \begin{corollary}[forthel]
-    Let $A$ be a class and $f$ be an involutions on $A$.
-    Then $f \Comp f$ is an involution on $A$.
-  \end{corollary}
-
-  \begin{proposition}[forthel]
-    Let $A$ be a class and $f$ be an involution on $A$.
-    Then $f$ is a permutation of $A$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    $f$ is an invertible map of $A$ that surjects onto $A$.
-    Hence $f$ is a bijection between $A$ and $A$.
-    Thus $f$ is a permutation of $A$.
-  \end{proof}
-\end{sfragment}
+\begin{proposition}[forthel]
+  Let $A$ be a class and $f$ be an involution on $A$.
+  Then $f$ is a permutation of $A$.
+\end{proposition}
+\begin{proof}[forthel]
+  $f$ is an invertible map of $A$ that surjects onto $A$.
+  Hence $f$ is a bijection between $A$ and $A$.
+  Thus $f$ is a permutation of $A$.
+\end{proof}
 
 \end{smodule}
 \end{document}

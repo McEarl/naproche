@@ -12,154 +12,150 @@
 \symdecl*{finite}
 \symdecl*{infinite}
 
-\begin{sfragment}{Finite Classes}
-  \begin{definition}[forthel]
-    Let $X$ be a class and $n$ be a natural number.
-    $X$ \emph{has $n$ elements} iff $X$ is equinumerous to $\NatSegment{\One}{n}$.
-  \end{definition}
+\begin{definition}[forthel]
+  Let $X$ be a class and $n$ be a natural number.
+  $X$ \emph{has $n$ elements} iff $X$ is equinumerous to $\NatSegment{\One}{n}$.
+\end{definition}
 
-  \begin{definition}[forthel,for=finite]
-    Let $X$ be a class.
-    $X$ is \emph{finite} iff there exists a natural number $n$ such that $X$ has $n$ elements.
-  \end{definition}
+\begin{definition}[forthel,for=finite]
+  Let $X$ be a class.
+  $X$ is \emph{finite} iff there exists a natural number $n$ such that $X$ has $n$ elements.
+\end{definition}
 
-  \begin{proposition}[forthel]
-    Let $X, Y$ be classes.
-    If $X$ is finite and $Y$ is equinumerous to $X$ then $Y$ is finite.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume that $X$ is finite and $Y$ is equinumerous to $X$.
-    Take a natural number $n$ and a bijection $f$ between $\NatSegment{\One}{n}$ and $X$ and a bijection $g$ between $X$ and $Y$.
-    Then $g \Comp f$ is a bijection between $\NatSegment{\One}{n}$ and $Y$ (by \sn{bijectivity of composition of bijections}).
-    Indeed $X, Y$ are classes.
-    Hence $Y$ is finite.
-  \end{proof}
+\begin{proposition}[forthel]
+  Let $X, Y$ be classes.
+  If $X$ is finite and $Y$ is equinumerous to $X$ then $Y$ is finite.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume that $X$ is finite and $Y$ is equinumerous to $X$.
+  Take a natural number $n$ and a bijection $f$ between $\NatSegment{\One}{n}$ and $X$ and a bijection $g$ between $X$ and $Y$.
+  Then $g \Comp f$ is a bijection between $\NatSegment{\One}{n}$ and $Y$ (by \sn{bijectivity of composition of bijections}).
+  Indeed $X, Y$ are classes.
+  Hence $Y$ is finite.
+\end{proof}
 
-  \begin{proposition}[forthel]
-    Let $X$ be a class.
-    $X$ has zero elements iff $X \Eq \EmptyClass$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$X$ has zero elements.}
-      Then $X$ does not contain any element.
-    \end{case}
+\begin{proposition}[forthel]
+  Let $X$ be a class.
+  $X$ has zero elements iff $X \Eq \EmptyClass$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$X$ has zero elements.}
+    Then $X$ does not contain any element.
+  \end{case}
 
-    \begin{case}{$X \Eq \EmptyClass$.}
-      Then $X$ does not contain any element.
-      Hence $X \Eq \NatSegment{\One}{\Zero}$.
-    \end{case}
-  \end{proof}
+  \begin{case}{$X \Eq \EmptyClass$.}
+    Then $X$ does not contain any element.
+    Hence $X \Eq \NatSegment{\One}{\Zero}$.
+  \end{case}
+\end{proof}
 
-  \begin{proposition}[forthel]
-    Let $X$ be a class.
-    $X$ has one element iff $X \Eq \Singleton{a}$ for some object $a$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$X$ has one element.}
-      Take a bijection $f$ between $\NatSegment{\One}{\One}$ and $X$.
-      We have $\NatSegment{\One}{\One} \Eq \Singleton{\One}$.
-      Hence $X \Eq \Singleton{f(\One)}$.
-    \end{case}
+\begin{proposition}[forthel]
+  Let $X$ be a class.
+  $X$ has one element iff $X \Eq \Singleton{a}$ for some object $a$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$X$ has one element.}
+    Take a bijection $f$ between $\NatSegment{\One}{\One}$ and $X$.
+    We have $\NatSegment{\One}{\One} \Eq \Singleton{\One}$.
+    Hence $X \Eq \Singleton{f(\One)}$.
+  \end{case}
 
-    \begin{case}{$X \Eq \Singleton{a}$ for some object $a$.}
-      Consider an object $a$ such that $X \Eq \Singleton{a}$.
-      Define $f(x) \DefEq \One$ for $x \Elem \Singleton{a}$.
-      Then $f$ is a bijection between $\Singleton{a}$ and $\NatSegment{\One}{\One}$.
-    \end{case}
-  \end{proof}
+  \begin{case}{$X \Eq \Singleton{a}$ for some object $a$.}
+    Consider an object $a$ such that $X \Eq \Singleton{a}$.
+    Define $f(x) \DefEq \One$ for $x \Elem \Singleton{a}$.
+    Then $f$ is a bijection between $\Singleton{a}$ and $\NatSegment{\One}{\One}$.
+  \end{case}
+\end{proof}
 
-  \begin{proposition}[forthel]
-    Let $X$ be a class.
-    $X$ has two elements iff $X \Eq \Pair{a}{b}$ for some distinct objects $a, b$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    \begin{case}{$X$ has two elements.}
-      Take a bijection $f$ between $\NatSegment{\One}{\Two}$ and $X$.
-      We have $\NatSegment{\One}{\Two} \Eq \Pair{\One}{\Two}$.
-      Hence $X \Eq \Pair{f(\One)}{f(\Two)}$.
-      We have $f(\One) \NotEq f(\Two)$.
-    \end{case}
+\begin{proposition}[forthel]
+  Let $X$ be a class.
+  $X$ has two elements iff $X \Eq \Pair{a}{b}$ for some distinct objects $a, b$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$X$ has two elements.}
+    Take a bijection $f$ between $\NatSegment{\One}{\Two}$ and $X$.
+    We have $\NatSegment{\One}{\Two} \Eq \Pair{\One}{\Two}$.
+    Hence $X \Eq \Pair{f(\One)}{f(\Two)}$.
+    We have $f(\One) \NotEq f(\Two)$.
+  \end{case}
 
-    \begin{case}{$X \Eq \Pair{a}{b}$ for some distinct objects $a, b$.}
-      Consider distinct objects $a, b$ such that $X \Eq \Pair{a}{b}$.
-      Define \[f(x) \DefEq
-        \begin{cases}
-          \One & : x \Eq a \\
-          \Two & : x \Eq b
-        \end{cases}\]
-      for $x \Elem \Pair{a}{b}$.
-      Then $f$ is a bijection between $\Pair{a}{b}$ and $\NatSegment{\One}{\Two}$.
-      Indeed $f$ is injective and surjective onto $\NatSegment{\One}{\Two}$.
-    \end{case}
-  \end{proof}
-
-  \begin{proposition}[forthel]
-    Let $n$ be a natural number and $X$ be a class that has $n$ elements and $a$ be an object such that $a \NotElem X$.
-    Then $X \Union \Singleton{a}$ has $n \Plus \One$ elements.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Take a bijection $f$ between $X$ and $\NatSegment{\One}{n}$.
-    Define \[g(x) \DefEq
+  \begin{case}{$X \Eq \Pair{a}{b}$ for some distinct objects $a, b$.}
+    Consider distinct objects $a, b$ such that $X \Eq \Pair{a}{b}$.
+    Define \[f(x) \DefEq
       \begin{cases}
-        f(x)  & : x \Elem X \\
-        n \Plus \One & : x \Eq a
+        \One & : x \Eq a \\
+        \Two & : x \Eq b
       \end{cases}\]
-    for $x \Elem X \Union \Singleton{a}$.
+    for $x \Elem \Pair{a}{b}$.
+    Then $f$ is a bijection between $\Pair{a}{b}$ and $\NatSegment{\One}{\Two}$.
+    Indeed $f$ is injective and surjective onto $\NatSegment{\One}{\Two}$.
+  \end{case}
+\end{proof}
 
-    (1) $g$ is a map from $X \Union \Singleton{a}$ to $\NatSegment{\One}{n \Plus \One}$.
-    Indeed we can show that $g(x) \Elem \NatSegment{\One}{n \Plus \One}$ for all $x \Elem X \Union \Singleton{a}$.
-      Let $x \Elem X \Union \Singleton{a}$.
-      If $x \Elem X$ then $g(x) \Elem \NatSegment{\One}{n}$.
-      If $x \Eq a$ then $g(x) \Eq n \Plus \One$.
-    End.
+\begin{proposition}[forthel]
+  Let $n$ be a natural number and $X$ be a class that has $n$ elements and $a$ be an object such that $a \NotElem X$.
+  Then $X \Union \Singleton{a}$ has $n \Plus \One$ elements.
+\end{proposition}
+\begin{proof}[forthel]
+  Take a bijection $f$ between $X$ and $\NatSegment{\One}{n}$.
+  Define \[g(x) \DefEq
+    \begin{cases}
+      f(x)  & : x \Elem X \\
+      n \Plus \One & : x \Eq a
+    \end{cases}\]
+  for $x \Elem X \Union \Singleton{a}$.
 
-    (2) $g$ is injective.
-    \begin{proof}
-      Let $x, y \Elem \Dom(g)$.
-      Assume $x \NotEq y$.
-      
-      \begin{case}{$x, y \Elem X$.} \end{case}
+  (1) $g$ is a map from $X \Union \Singleton{a}$ to $\NatSegment{\One}{n \Plus \One}$.
+  Indeed we can show that $g(x) \Elem \NatSegment{\One}{n \Plus \One}$ for all $x \Elem X \Union \Singleton{a}$.
+    Let $x \Elem X \Union \Singleton{a}$.
+    If $x \Elem X$ then $g(x) \Elem \NatSegment{\One}{n}$.
+    If $x \Eq a$ then $g(x) \Eq n \Plus \One$.
+  End.
 
-      \begin{case}{$x \Elem X$ and $y \Eq a$.} \end{case}
+  (2) $g$ is injective.
+  \begin{proof}
+    Let $x, y \Elem \Dom(g)$.
+    Assume $x \NotEq y$.
+    
+    \begin{case}{$x, y \Elem X$.} \end{case}
 
-      \begin{case}{$x \Eq a$ and $y \Elem X$.} \end{case}
-    \end{proof}
+    \begin{case}{$x \Elem X$ and $y \Eq a$.} \end{case}
 
-    (3) $g$ is surjective onto $\NatSegment{\One}{n \Plus \One}$.
-    Indeed we can show that for every $k \Elem \NatSegment{\One}{n \Plus \One}$ there exists an $x \Elem \Dom(g)$ such that $k \Eq g(x)$.
-    \begin{proof}
-      Let $k \Elem \NatSegment{\One}{n \Plus \One}$.
-
-      \begin{case}{$k \Leq n$.}
-        Then $k \Elem \NatSegment{\One}{n}$.
-        Hence we can take a $x \Elem X$ such that $k \Eq f(x)$.
-      \end{case}
-
-      \begin{case}{$k \Eq n \Plus \One$.}
-        Then $k \Eq g(a)$.
-      \end{case}
-    \end{proof}
-
-    Hence $g$ is a bijection between $X \Union \Singleton{a}$ and $\NatSegment{\One}{n \Plus \One}$.
+    \begin{case}{$x \Eq a$ and $y \Elem X$.} \end{case}
   \end{proof}
-\end{sfragment}
 
-\begin{sfragment}{Infinite Classes}
-  \begin{definition}[forthel,for=infinite]
-    Let $X$ be a class.
-    $X$ is \emph{infinite} iff $X$ is not finite.
-  \end{definition}
+  (3) $g$ is surjective onto $\NatSegment{\One}{n \Plus \One}$.
+  Indeed we can show that for every $k \Elem \NatSegment{\One}{n \Plus \One}$ there exists an $x \Elem \Dom(g)$ such that $k \Eq g(x)$.
+  \begin{proof}
+    Let $k \Elem \NatSegment{\One}{n \Plus \One}$.
 
-  \begin{proposition}[forthel]
-    Let $X, Y$ be classes.
-    If $X$ is infinite and $Y$ is equinumerous to $X$ then $Y$ is infinite.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Assume that $Y$ is equinumerous to $X$.
-    If $Y$ is finite then $X$ is finite.
-    Hence if $X$ is infinite then $Y$ is infinite.
+    \begin{case}{$k \Leq n$.}
+      Then $k \Elem \NatSegment{\One}{n}$.
+      Hence we can take a $x \Elem X$ such that $k \Eq f(x)$.
+    \end{case}
+
+    \begin{case}{$k \Eq n \Plus \One$.}
+      Then $k \Eq g(a)$.
+    \end{case}
   \end{proof}
-\end{sfragment}
+
+  Hence $g$ is a bijection between $X \Union \Singleton{a}$ and $\NatSegment{\One}{n \Plus \One}$.
+\end{proof}
+
+\begin{definition}[forthel,for=infinite]
+  Let $X$ be a class.
+  $X$ is \emph{infinite} iff $X$ is not finite.
+\end{definition}
+
+\begin{proposition}[forthel]
+  Let $X, Y$ be classes.
+  If $X$ is infinite and $Y$ is equinumerous to $X$ then $Y$ is infinite.
+\end{proposition}
+\begin{proof}[forthel]
+  Assume that $Y$ is equinumerous to $X$.
+  If $Y$ is finite then $X$ is finite.
+  Hence if $X$ is infinite then $Y$ is infinite.
+\end{proof}
 
 \end{smodule}
 \end{document}

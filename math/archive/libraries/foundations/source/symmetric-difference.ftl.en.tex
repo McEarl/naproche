@@ -10,300 +10,288 @@
 
 \symdef{SymDiff}[name=symmetric difference]{\,\triangle\,}
 
-\begin{sfragment}{Definitions}
-  \begin{definition}[forthel,for=symmetric difference]
-    Let $A, B$ be classes.
-    $\emph{A \SymDiff B} \DefEq (A \Union B) \Diff (A \Intersect B)$.
-    Let the \emph{symmetric difference of $A$ and $B$} stand for $A \SymDiff B$.
-  \end{definition}
+\begin{definition}[forthel,for=symmetric difference]
+  Let $A, B$ be classes.
+  $\emph{A \SymDiff B} \DefEq (A \Union B) \Diff (A \Intersect B)$.
+  Let the \emph{symmetric difference of $A$ and $B$} stand for $A \SymDiff B$.
+\end{definition}
 
-  \begin{proposition}[forthel]
-    Let $A, B$ be classes.
-    Then $A \SymDiff B \Eq (A \Diff B) \Union (B \Diff A)$.
-  \end{proposition}
-  \begin{proof}[forthel]
-    Let us show that $A \SymDiff B \Subclass (A \Diff B) \Union (B \Diff A)$.
-      Let $u \Elem A \SymDiff B$.
-      Then $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
-      Hence ($u \Elem A$ or $u \Elem B$) and $\Not(u \Elem A \And u \Elem B)$.
-      Thus ($u \Elem A$ or $u \Elem B$) and ($u \NotElem A$ or $u \NotElem B$).
-      Therefore if $u \Elem A$ then $u \NotElem B$.
-      If $u \Elem B$ then $u \NotElem A$.
-      Then we have ($u \Elem A$ and $u \NotElem B$) or ($u \Elem B$ and $u \NotElem A$).
-      Hence $u \Elem A \Diff B$ or $u \Elem B \Diff A$.
-      Thus $u \Elem (A \Diff B) \Union (B \Diff A)$.
-    End.
+\begin{proposition}[forthel]
+  Let $A, B$ be classes.
+  Then $A \SymDiff B \Eq (A \Diff B) \Union (B \Diff A)$.
+\end{proposition}
+\begin{proof}[forthel]
+  Let us show that $A \SymDiff B \Subclass (A \Diff B) \Union (B \Diff A)$.
+    Let $u \Elem A \SymDiff B$.
+    Then $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
+    Hence ($u \Elem A$ or $u \Elem B$) and $\Not(u \Elem A \And u \Elem B)$.
+    Thus ($u \Elem A$ or $u \Elem B$) and ($u \NotElem A$ or $u \NotElem B$).
+    Therefore if $u \Elem A$ then $u \NotElem B$.
+    If $u \Elem B$ then $u \NotElem A$.
+    Then we have ($u \Elem A$ and $u \NotElem B$) or ($u \Elem B$ and $u \NotElem A$).
+    Hence $u \Elem A \Diff B$ or $u \Elem B \Diff A$.
+    Thus $u \Elem (A \Diff B) \Union (B \Diff A)$.
+  End.
 
-    Let us show that $((A \Diff B) \Union (B \Diff A)) \Subclass A \SymDiff B$. %!
-      Let $u \Elem (A \Diff B) \Union (B \Diff A)$.
-      Then ($u \Elem A$ and $u \NotElem B$) or ($u \Elem B$ and $u \NotElem A$).
-      If $u \Elem A$ and $u \NotElem B$ then $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
-      If $u \Elem B$ and $u \NotElem A$ then $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
-      Hence $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
-      Thus $u \Elem (A \Union B) \Diff (A \Intersect B) \Eq A \SymDiff B$.
-    End.
-  \end{proof}
-\end{sfragment}
+  Let us show that $((A \Diff B) \Union (B \Diff A)) \Subclass A \SymDiff B$. %!
+    Let $u \Elem (A \Diff B) \Union (B \Diff A)$.
+    Then ($u \Elem A$ and $u \NotElem B$) or ($u \Elem B$ and $u \NotElem A$).
+    If $u \Elem A$ and $u \NotElem B$ then $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
+    If $u \Elem B$ and $u \NotElem A$ then $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
+    Hence $u \Elem A \Union B$ and $u \NotElem A \Intersect B$.
+    Thus $u \Elem (A \Union B) \Diff (A \Intersect B) \Eq A \SymDiff B$.
+  End.
+\end{proof}
 
-\begin{sfragment}{Computation Laws}
-  \begin{sfragment}{Commutativity}
-    \begin{proposition}[forthel]
-      Let $A, B$ be classes.
-      Then $A \SymDiff B \Eq B \SymDiff A$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      $A \SymDiff B
-        \Eq (A \Union B) \Diff (A \Intersect B)
-        \Eq (B \Union A) \Diff (B \Intersect A)
-        \Eq B \SymDiff A$.
-    \end{proof}
-  \end{sfragment}
+\begin{proposition}[forthel]
+  Let $A, B$ be classes.
+  Then $A \SymDiff B \Eq B \SymDiff A$.
+\end{proposition}
+\begin{proof}[forthel]
+  $A \SymDiff B
+    \Eq (A \Union B) \Diff (A \Intersect B)
+    \Eq (B \Union A) \Diff (B \Intersect A)
+    \Eq B \SymDiff A$.
+\end{proof}
 
-  \begin{sfragment}{Associativity}
-    \begin{proposition}[forthel]
-      Let $A, B, C$ be classes.
-      Then $(A \SymDiff B) \SymDiff C \Eq A \SymDiff (B \SymDiff C)$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      Take a class $X$ such that $X \Eq (((A \Diff B) \Union (B \Diff A)) \Diff C) \Union (C \Diff ((A \Diff B) \Union (B \Diff A)))$.
+\begin{proposition}[forthel]
+  Let $A, B, C$ be classes.
+  Then $(A \SymDiff B) \SymDiff C \Eq A \SymDiff (B \SymDiff C)$.
+\end{proposition}
+\begin{proof}[forthel]
+  Take a class $X$ such that $X \Eq (((A \Diff B) \Union (B \Diff A)) \Diff C) \Union (C \Diff ((A \Diff B) \Union (B \Diff A)))$.
 
-      Take a class $Y$ such that $Y \Eq (A \Diff ((B \Diff C) \Union (C \Diff B))) \Union (((B \Diff C) \Union (C \Diff B)) \Diff A)$.
+  Take a class $Y$ such that $Y \Eq (A \Diff ((B \Diff C) \Union (C \Diff B))) \Union (((B \Diff C) \Union (C \Diff B)) \Diff A)$.
 
-      We have $A \SymDiff B \Eq (A \Diff B) \Union (B \Diff A)$ and $B \SymDiff C \Eq (B \Diff C) \Union (C \Diff B)$.
-      Hence $(A \SymDiff B) \SymDiff C \Eq X$ and $A \SymDiff (B \SymDiff C) \Eq Y$.
+  We have $A \SymDiff B \Eq (A \Diff B) \Union (B \Diff A)$ and $B \SymDiff C \Eq (B \Diff C) \Union (C \Diff B)$.
+  Hence $(A \SymDiff B) \SymDiff C \Eq X$ and $A \SymDiff (B \SymDiff C) \Eq Y$.
 
-      Let us show that (I) $X \Subclass Y$.
-        Let $x \Elem X$.
+  Let us show that (I) $X \Subclass Y$.
+    Let $x \Elem X$.
 
-        \begin{case}{$x \Elem ((A \Diff B) \Union (B \Diff A)) \Diff C$.}
-          Then $x \NotElem C$.
+    \begin{case}{$x \Elem ((A \Diff B) \Union (B \Diff A)) \Diff C$.}
+      Then $x \NotElem C$.
 
-          \begin{case}{$x \Elem A \Diff B$.}
-            Then $x \NotElem B \Diff C$ and $x \NotElem C \Diff B$. $x \Elem A$.
-            Hence $x \Elem A \Diff ((B \Diff C) \Union (C \Diff B))$.
-            Thus $x \Elem Y$.
-          \end{case}
-
-          \begin{case}{$x \Elem B \Diff A$.}
-            Then $x \Elem B \Diff C$.
-            Hence $x \Elem (B \Diff C) \Union (C \Diff B)$. $x \NotElem A$.
-            Thus $x \Elem ((B \Diff C) \Union (C \Diff B)) \Diff A$.
-            Therefore $x \Elem Y$.
-          \end{case}
-        \end{case}
-
-        \begin{case}{$x \Elem C \Diff ((A \Diff B) \Union (B \Diff A))$.}
-          Then $x \Elem C$.
-          $x \NotElem A \Diff B$ and $x \NotElem B \Diff A$.
-          Hence $\Not(x \Elem A \Diff B \Or x \Elem B \Diff A)$.
-          Thus  $\Not((x \Elem A \And x \NotElem B) \Or (x \Elem B \And x \NotElem A))$.
-          Therefore ($x \NotElem A$ or $x \Elem B$) and ($x \NotElem B$ or $x \Elem A$).
-
-          \begin{case}{$x \Elem A$.}
-            Then $x \Elem B$.
-            Hence $x \NotElem (B \Diff C) \Union (C \Diff B)$.
-            Thus $x \Elem A \Diff ((B \Diff C) \Union (C \Diff B))$.
-            Therefore $x \Elem Y$.
-          \end{case}
-
-          \begin{case}{$x \NotElem A$.}
-            Then $x \NotElem B$.
-            Hence $x \Elem C \Diff B$.
-            Thus $x \Elem (B \Diff C) \Union (C \Diff B)$.
-            Therefore $x \Elem ((B \Diff C) \Union (C \Diff B)) \Diff A$.
-            Then we have $x \Elem Y$.
-          \end{case}
-        \end{case}
-      End.
-
-      Let us show that (II) $Y \Subclass X$.
-        Let $y \Elem Y$.
-
-        \begin{case}{$y \Elem A \Diff ((B \Diff C) \Union (C \Diff B))$.}
-          Then $y \Elem A$.
-          $y \NotElem B \Diff C$ and $y \NotElem C \Diff B$.
-          Hence $\Not(y \Elem B \Diff C \Or y \Elem C \Diff B)$.
-          Thus $\Not((y \Elem B \And y \NotElem C) \Or (y \Elem C \And y \NotElem B))$.
-          Therefore ($y \NotElem B$ or $y \Elem C$) and ($y \NotElem C$ or $y \Elem B$).
-
-          \begin{case}{$y \Elem B$.}
-            Then $y \Elem C$.
-            $y \NotElem A \Diff B$ and $y \NotElem B \Diff A$.
-            Hence $y \NotElem (A \Diff B) \Union (B \Diff A)$.
-            Thus $y \Elem C \Diff ((A \Diff B) \Union (B \Diff A))$.
-            Therefore $y \Elem X$.
-          \end{case}
-
-          \begin{case}{$y \NotElem B$.}
-            Then $y \NotElem C$.
-            $y \Elem A \Diff B$.
-            Hence $y \Elem (A \Diff B) \Union (B \Diff A)$.
-            Thus $y \Elem ((A \Diff B) \Union (B \Diff A)) \Diff C$.
-            Therefore $y \Elem X$.
-          \end{case}
-        \end{case}
-
-        \begin{case}{$y \Elem ((B \Diff C) \Union (C \Diff B)) \Diff A$.}
-          Then $y \NotElem A$.
-
-          \begin{case}{$y \Elem B \Diff C$.}
-            Then $y \Elem B \Diff A$.
-            Hence $y \Elem (A \Diff B) \Union (B \Diff A)$.
-            Thus $y \Elem ((A \Diff B) \Union (B \Diff A)) \Diff C$.
-            Therefore $y \Elem X$.
-          \end{case}
-
-          \begin{case}{$y \Elem C \Diff B$.}
-            Then $y \Elem C$.
-            $y \NotElem A \Diff B$ and $y \NotElem B \Diff A$.
-            Hence $y \NotElem (A \Diff B) \Union (B \Diff A)$.
-            Thus $y \Elem C \Diff ((A \Diff B) \Union (B \Diff A))$.
-            Therefore $y \Elem X$.
-          \end{case}
-        \end{case}
-      End.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Distributivity}
-    \begin{proposition}[forthel]
-      Let $A, B, C$ be classes.
-      Then $A \Intersect (B \SymDiff C) \Eq (A \Intersect B) \SymDiff (A \Intersect C)$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      $A \Intersect (B \SymDiff C)
-        \Eq A \Intersect ((B \Diff C) \Union (C \Diff B))
-        \Eq (A \Intersect (B \Diff C)) \Union (A \Intersect (C \Diff B))$.
-
-      $A \Intersect (B \Diff C) \Eq (A \Intersect B) \Diff (A \Intersect C)$.
-      $A \Intersect (C \Diff B) \Eq (A \Intersect C) \Diff (A \Intersect B)$.
-
-      Hence $A \Intersect (B \SymDiff C)
-        \Eq ((A \Intersect B) \Diff (A \Intersect C)) \Union ((A \Intersect C) \Diff (A \Intersect B))
-        \Eq (A \Intersect B) \SymDiff (A \Intersect C)$.
-    \end{proof}
-  \end{sfragment}
-
-  \begin{sfragment}{Miscellaneous Rules}
-    \begin{proposition}[forthel]
-      Let $A, B$ be classes.
-      Then $A \Subclass B \Iff A \SymDiff B \Eq B \Diff A$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      \begin{case}{$A \Subclass B$.}
-        Then $A \Union B \Eq B$ and $A \Intersect B \Eq A$.
-        Hence the thesis.
+      \begin{case}{$x \Elem A \Diff B$.}
+        Then $x \NotElem B \Diff C$ and $x \NotElem C \Diff B$. $x \Elem A$.
+        Hence $x \Elem A \Diff ((B \Diff C) \Union (C \Diff B))$.
+        Thus $x \Elem Y$.
       \end{case}
 
-      \begin{case}{$A \SymDiff B \Eq B \Diff A$.}
-        Let $a \Elem A$.
-        Then $a \NotElem B \Diff A$.
-        Hence $a \NotElem A \SymDiff B$.
-        Thus $a \NotElem A \Union B$ or $a \Elem A \Intersect B$.
-        Indeed $A \SymDiff B \Eq (A \Union B) \Diff (A \Intersect B)$.
-        If $a \NotElem A \Union B$ then we have a contradiction.
-        Therefore $a \Elem A \Intersect B$.
+      \begin{case}{$x \Elem B \Diff A$.}
+        Then $x \Elem B \Diff C$.
+        Hence $x \Elem (B \Diff C) \Union (C \Diff B)$. $x \NotElem A$.
+        Thus $x \Elem ((B \Diff C) \Union (C \Diff B)) \Diff A$.
+        Therefore $x \Elem Y$.
+      \end{case}
+    \end{case}
+
+    \begin{case}{$x \Elem C \Diff ((A \Diff B) \Union (B \Diff A))$.}
+      Then $x \Elem C$.
+      $x \NotElem A \Diff B$ and $x \NotElem B \Diff A$.
+      Hence $\Not(x \Elem A \Diff B \Or x \Elem B \Diff A)$.
+      Thus  $\Not((x \Elem A \And x \NotElem B) \Or (x \Elem B \And x \NotElem A))$.
+      Therefore ($x \NotElem A$ or $x \Elem B$) and ($x \NotElem B$ or $x \Elem A$).
+
+      \begin{case}{$x \Elem A$.}
+        Then $x \Elem B$.
+        Hence $x \NotElem (B \Diff C) \Union (C \Diff B)$.
+        Thus $x \Elem A \Diff ((B \Diff C) \Union (C \Diff B))$.
+        Therefore $x \Elem Y$.
+      \end{case}
+
+      \begin{case}{$x \NotElem A$.}
+        Then $x \NotElem B$.
+        Hence $x \Elem C \Diff B$.
+        Thus $x \Elem (B \Diff C) \Union (C \Diff B)$.
+        Therefore $x \Elem ((B \Diff C) \Union (C \Diff B)) \Diff A$.
+        Then we have $x \Elem Y$.
+      \end{case}
+    \end{case}
+  End.
+
+  Let us show that (II) $Y \Subclass X$.
+    Let $y \Elem Y$.
+
+    \begin{case}{$y \Elem A \Diff ((B \Diff C) \Union (C \Diff B))$.}
+      Then $y \Elem A$.
+      $y \NotElem B \Diff C$ and $y \NotElem C \Diff B$.
+      Hence $\Not(y \Elem B \Diff C \Or y \Elem C \Diff B)$.
+      Thus $\Not((y \Elem B \And y \NotElem C) \Or (y \Elem C \And y \NotElem B))$.
+      Therefore ($y \NotElem B$ or $y \Elem C$) and ($y \NotElem C$ or $y \Elem B$).
+
+      \begin{case}{$y \Elem B$.}
+        Then $y \Elem C$.
+        $y \NotElem A \Diff B$ and $y \NotElem B \Diff A$.
+        Hence $y \NotElem (A \Diff B) \Union (B \Diff A)$.
+        Thus $y \Elem C \Diff ((A \Diff B) \Union (B \Diff A))$.
+        Therefore $y \Elem X$.
+      \end{case}
+
+      \begin{case}{$y \NotElem B$.}
+        Then $y \NotElem C$.
+        $y \Elem A \Diff B$.
+        Hence $y \Elem (A \Diff B) \Union (B \Diff A)$.
+        Thus $y \Elem ((A \Diff B) \Union (B \Diff A)) \Diff C$.
+        Therefore $y \Elem X$.
+      \end{case}
+    \end{case}
+
+    \begin{case}{$y \Elem ((B \Diff C) \Union (C \Diff B)) \Diff A$.}
+      Then $y \NotElem A$.
+
+      \begin{case}{$y \Elem B \Diff C$.}
+        Then $y \Elem B \Diff A$.
+        Hence $y \Elem (A \Diff B) \Union (B \Diff A)$.
+        Thus $y \Elem ((A \Diff B) \Union (B \Diff A)) \Diff C$.
+        Therefore $y \Elem X$.
+      \end{case}
+
+      \begin{case}{$y \Elem C \Diff B$.}
+        Then $y \Elem C$.
+        $y \NotElem A \Diff B$ and $y \NotElem B \Diff A$.
+        Hence $y \NotElem (A \Diff B) \Union (B \Diff A)$.
+        Thus $y \Elem C \Diff ((A \Diff B) \Union (B \Diff A))$.
+        Therefore $y \Elem X$.
+      \end{case}
+    \end{case}
+  End.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A, B, C$ be classes.
+  Then $A \Intersect (B \SymDiff C) \Eq (A \Intersect B) \SymDiff (A \Intersect C)$.
+\end{proposition}
+\begin{proof}[forthel]
+  $A \Intersect (B \SymDiff C)
+    \Eq A \Intersect ((B \Diff C) \Union (C \Diff B))
+    \Eq (A \Intersect (B \Diff C)) \Union (A \Intersect (C \Diff B))$.
+
+  $A \Intersect (B \Diff C) \Eq (A \Intersect B) \Diff (A \Intersect C)$.
+  $A \Intersect (C \Diff B) \Eq (A \Intersect C) \Diff (A \Intersect B)$.
+
+  Hence $A \Intersect (B \SymDiff C)
+    \Eq ((A \Intersect B) \Diff (A \Intersect C)) \Union ((A \Intersect C) \Diff (A \Intersect B))
+    \Eq (A \Intersect B) \SymDiff (A \Intersect C)$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A, B$ be classes.
+  Then $A \Subclass B \Iff A \SymDiff B \Eq B \Diff A$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$A \Subclass B$.}
+    Then $A \Union B \Eq B$ and $A \Intersect B \Eq A$.
+    Hence the thesis.
+  \end{case}
+
+  \begin{case}{$A \SymDiff B \Eq B \Diff A$.}
+    Let $a \Elem A$.
+    Then $a \NotElem B \Diff A$.
+    Hence $a \NotElem A \SymDiff B$.
+    Thus $a \NotElem A \Union B$ or $a \Elem A \Intersect B$.
+    Indeed $A \SymDiff B \Eq (A \Union B) \Diff (A \Intersect B)$.
+    If $a \NotElem A \Union B$ then we have a contradiction.
+    Therefore $a \Elem A \Intersect B$.
+    Then we have the thesis.
+  \end{case}
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A, B, C$ be classes.
+  Then $A \SymDiff B \Eq A \SymDiff C \Iff B \Eq C$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$A \SymDiff B \Eq A \SymDiff C$.}
+
+    Let us show that $B \Subclass C$.
+      Let $b \Elem B$.
+
+      \begin{case}{$b \Elem A$.}
+        Then $b \NotElem A \SymDiff B$.
+        Hence $b \NotElem A \SymDiff C$.
+        Therefore $b \Elem A \Intersect C$.
+        Indeed $A \SymDiff C \Eq (A \Union C) \Diff (A \Intersect C)$.
+        Hence $b \Elem C$.
+      \end{case}
+
+      \begin{case}{$b \NotElem A$.}
+        Then $b \Elem A \SymDiff B$.
+        Indeed $b \Elem A \Union B$ and $b \NotElem A \Intersect B$.
+        Hence $b \Elem A \SymDiff C$.
+        Thus $b \Elem A \Union C$ and $b \NotElem A \Intersect C$.
+        Therefore $b \Elem A$ or $b \Elem C$.
         Then we have the thesis.
       \end{case}
-    \end{proof}
+    End.
 
-    \begin{proposition}[forthel]
-      Let $A, B, C$ be classes.
-      Then $A \SymDiff B \Eq A \SymDiff C \Iff B \Eq C$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      \begin{case}{$A \SymDiff B \Eq A \SymDiff C$.}
+    Let us show that $C \Subclass B$.
+      Let $c \Elem C$.
 
-        Let us show that $B \Subclass C$.
-          Let $b \Elem B$.
-
-          \begin{case}{$b \Elem A$.}
-            Then $b \NotElem A \SymDiff B$.
-            Hence $b \NotElem A \SymDiff C$.
-            Therefore $b \Elem A \Intersect C$.
-            Indeed $A \SymDiff C \Eq (A \Union C) \Diff (A \Intersect C)$.
-            Hence $b \Elem C$.
-          \end{case}
-
-          \begin{case}{$b \NotElem A$.}
-            Then $b \Elem A \SymDiff B$.
-            Indeed $b \Elem A \Union B$ and $b \NotElem A \Intersect B$.
-            Hence $b \Elem A \SymDiff C$.
-            Thus $b \Elem A \Union C$ and $b \NotElem A \Intersect C$.
-            Therefore $b \Elem A$ or $b \Elem C$.
-            Then we have the thesis.
-          \end{case}
-        End.
-
-        Let us show that $C \Subclass B$.
-          Let $c \Elem C$.
-
-          \begin{case}{$c \Elem A$.}
-            Then $c \NotElem A \SymDiff C$.
-            Hence $c \NotElem A \SymDiff B$.
-            Therefore $c \Elem A \Intersect B$.
-            Indeed $c \NotElem A \Union B$ or $c \Elem A \Intersect B$.
-            Hence $c \Elem B$.
-          \end{case}
-
-          \begin{case}{$c \NotElem A$.}
-            Then $c \Elem A \SymDiff C$.
-            Indeed $c \Elem A \Union C$ and $c \NotElem A \Intersect C$.
-            Hence $c \Elem A \SymDiff B$.
-            Thus $c \Elem A \Union B$ and $c \NotElem A \Intersect B$.
-            Therefore $c \Elem A$ or $c \Elem B$.
-            Then we have the thesis.
-          \end{case}
-        End.
-      \end{case}
-    \end{proof}
-
-    \begin{proposition}[forthel]
-      Let $A$ be a class.
-      Then $A \SymDiff A \Eq \EmptyClass$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      $A \SymDiff A
-        \Eq (A \Union A) \Diff (A \Intersect A)
-        \Eq A \Diff A
-        \Eq \EmptyClass$.
-    \end{proof}
-
-    \begin{proposition}[forthel]
-      Let $A$ be a class.
-      Then $A \SymDiff \EmptyClass \Eq A$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      $A \SymDiff \EmptyClass
-        \Eq (A \Union \EmptyClass) \Diff (A \Intersect \EmptyClass)
-        \Eq A \Diff \EmptyClass
-        \Eq A$.
-    \end{proof}
-
-    \begin{proposition}[forthel]
-      Let $A, B$ be classes.
-      Then $A \Eq B \Iff A \SymDiff B \Eq \EmptyClass$.
-    \end{proposition}
-    \begin{proof}[forthel]
-      \begin{case}{$A \Eq B$.}
-        Then $A \SymDiff B
-          \Eq (A \Union A) \Diff (A \Intersect A)
-          \Eq A \Diff A
-          \Eq \EmptyClass.$
-        Hence the thesis.
+      \begin{case}{$c \Elem A$.}
+        Then $c \NotElem A \SymDiff C$.
+        Hence $c \NotElem A \SymDiff B$.
+        Therefore $c \Elem A \Intersect B$.
+        Indeed $c \NotElem A \Union B$ or $c \Elem A \Intersect B$.
+        Hence $c \Elem B$.
       \end{case}
 
-      \begin{case}{$A \SymDiff B \Eq \EmptyClass$.}
-        Then $(A \Union B) \Diff (A \Intersect B)$ is empty.
-        Hence every element of $A \Union B$ is an element of $A \Intersect B$.
-        Thus for all objects $u$ if $u \Elem A$ or $u \Elem B$ then $u \Elem A$ and $u \Elem B$.
-        Therefore every element of $A$ is an element of $B$.
-        Every element of $B$ is an element of $A$.
+      \begin{case}{$c \NotElem A$.}
+        Then $c \Elem A \SymDiff C$.
+        Indeed $c \Elem A \Union C$ and $c \NotElem A \Intersect C$.
+        Hence $c \Elem A \SymDiff B$.
+        Thus $c \Elem A \Union B$ and $c \NotElem A \Intersect B$.
+        Therefore $c \Elem A$ or $c \Elem B$.
         Then we have the thesis.
       \end{case}
-    \end{proof}
-  \end{sfragment}
-\end{sfragment}
+    End.
+  \end{case}
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A$ be a class.
+  Then $A \SymDiff A \Eq \EmptyClass$.
+\end{proposition}
+\begin{proof}[forthel]
+  $A \SymDiff A
+    \Eq (A \Union A) \Diff (A \Intersect A)
+    \Eq A \Diff A
+    \Eq \EmptyClass$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A$ be a class.
+  Then $A \SymDiff \EmptyClass \Eq A$.
+\end{proposition}
+\begin{proof}[forthel]
+  $A \SymDiff \EmptyClass
+    \Eq (A \Union \EmptyClass) \Diff (A \Intersect \EmptyClass)
+    \Eq A \Diff \EmptyClass
+    \Eq A$.
+\end{proof}
+
+\begin{proposition}[forthel]
+  Let $A, B$ be classes.
+  Then $A \Eq B \Iff A \SymDiff B \Eq \EmptyClass$.
+\end{proposition}
+\begin{proof}[forthel]
+  \begin{case}{$A \Eq B$.}
+    Then $A \SymDiff B
+      \Eq (A \Union A) \Diff (A \Intersect A)
+      \Eq A \Diff A
+      \Eq \EmptyClass.$
+    Hence the thesis.
+  \end{case}
+
+  \begin{case}{$A \SymDiff B \Eq \EmptyClass$.}
+    Then $(A \Union B) \Diff (A \Intersect B)$ is empty.
+    Hence every element of $A \Union B$ is an element of $A \Intersect B$.
+    Thus for all objects $u$ if $u \Elem A$ or $u \Elem B$ then $u \Elem A$ and $u \Elem B$.
+    Therefore every element of $A$ is an element of $B$.
+    Every element of $B$ is an element of $A$.
+    Then we have the thesis.
+  \end{case}
+\end{proof}
 
 \end{smodule}
 \end{document}
