@@ -7,15 +7,15 @@
 \libusepackage{copyright}
 \libinput{preamble}
 
+\titleformat{\section}[block]{\Large}{\S\thesection.}{1em}{\centering}[\vspace{1em}---]
+\titleformat{\subsection}[block]{\vspace{2em}\large\itshape}{}{0em}{\centering}
+
 \title{Peano's \textit{Principles of Arithmetics}}
 \author{Marcel Schütz (2025)}
 \date{}
 
 \begin{document}
 \begin{smodule}{peano.ftl}
-
-\titleformat{\section}[block]{\Large}{\S\thesection.}{1em}{\centering}[\vspace{1em}---]
-\titleformat{\subsection}[block]{\vspace{2em}\large\itshape}{}{0em}{\centering}
 
 \importmodule[libraries/foundations]{classes.ftl}
 
