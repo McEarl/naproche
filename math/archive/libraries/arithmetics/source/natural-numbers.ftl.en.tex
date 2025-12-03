@@ -24,6 +24,10 @@
 \symdecl*{natural number}
 \symdecl*{nonzero}
 \symdecl*{direct successor}
+\symdecl*{injectivity of successor function}
+\symdecl*{induction I}
+\symdecl*{right-cancellability of addition}
+\symdecl*{left-cancellability of addition}
 
 \begin{sfragment}{The Language of Natural Number Arithmetic}
   \begin{signature}[forthel,for=natural number]
@@ -95,8 +99,6 @@
 
 \begin{sfragment}{The Axioms of Natural Number Arithmetic}
 
-  \symdecl*{injectivity of successor function}
-
   \begin{axiom}[forthel,name=injectivity of successor function]
     Let $n, m$ be natural numbers.
     If $n \Plus \One \Eq m \Plus \One$ then $n \Eq m$.
@@ -105,8 +107,6 @@
   \begin{axiom}[forthel]
     There exists no natural number $n$ such that $n \Plus \One \Eq \Zero$.
   \end{axiom}
-
-  \symdecl*{induction I}
 
   \begin{axiom}[forthel,title=Induction,name=induction I]
     Let $\Phi$ be a class.
@@ -267,8 +267,6 @@
   \end{sfragment}
 
   \begin{sfragment}{Cancellation}
-    
-    \symdecl*{right-cancellability of addition}
 
     \begin{proposition}[forthel,name=right-cancellability of addition]
       Let $n, m, k$ be natural numbers.
@@ -291,8 +289,6 @@
       Therefore every natural number is an element of $\Phi$.
       Consequently if $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
     \end{proof}
-
-    \symdecl*{left-cancellability of addition}
 
     \begin{corollary}[forthel,name=left-cancellability of addition]
       Let $n, m, k$ be natural numbers.

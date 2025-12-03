@@ -24,6 +24,10 @@
 \symdecl*{positive}
 \symdecl*{predecessor}
 \symdecl*{successor}
+\symdecl*{preservation of ordering under right-addition}
+\symdecl*{wellfoundedness of ordering}
+\symdecl*{induction II}
+\symdecl*{induction III}
 
 \begin{sfragment}{Definitions and Immediate Consequences}
   \begin{definition}[forthel,for={less,NotLess,greater,NotGreater}]
@@ -384,8 +388,6 @@
 
 \begin{sfragment}{Ordering and Addition}
 
-  \symdecl*{preservation of ordering under right-addition}
-
   \begin{proposition}[forthel,name=preservation of ordering under right-addition]
     Let $n, m, k$ be natural numbers.
     Then $n \Less m$ iff $n \Plus k \Less m \Plus k$.
@@ -433,8 +435,6 @@
 
 \begin{sfragment}{Induction Revisited}
 
-  \symdecl*{wellfoundedness of ordering}
-
   \begin{proposition}[forthel,name=wellfoundedness of ordering]
     Let $A$ be a nonempty subclass of $\Naturals$.
     Then there exists a $m \Elem A$ such that $m \Leq n$ for all $n \Elem A$.
@@ -475,8 +475,6 @@
     Contradiction.
   \end{proof}
 
-  \symdecl*{induction II}
-
   \begin{theorem}[forthel,name=induction II]
     Let $A$ be a class.
     Assume for all $n \Elem \Naturals$ if $A$ contains all predecessors of $n$ then $A$ contains $n$.
@@ -492,8 +490,6 @@
     Consequently $A$ contains $m$.
     Contradiction.
   \end{proof}
-
-  \symdecl*{induction III}
 
   \begin{theorem}[forthel,name=induction III]
     Let $A$ be a class.

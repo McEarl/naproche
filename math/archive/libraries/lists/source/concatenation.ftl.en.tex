@@ -10,6 +10,8 @@
 
 \symdef{Concat}[op=+\mkern-10mu+]{\,\comp+\mkern-10mu\comp+\,}
 
+\symdecl*{associativity of concatenation}
+
 \begin{signature}[forthel,for=Concat]
   Let $L, L'$ be lists.
   $\emph{L \Concat L'}$ is a list.
@@ -47,8 +49,6 @@
     \end{align*}.
   \end{case}
 \end{proof}
-
-\symdecl*{associativity of concatenation}
 
 \begin{proposition}[forthel,name=associativity of concatenation]
   $L \Concat (L' \Concat L'') \Eq (L \Concat L') \Concat L''$ for any lists $L, L', L''$.

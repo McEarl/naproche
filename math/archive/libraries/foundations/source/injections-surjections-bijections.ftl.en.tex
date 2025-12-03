@@ -15,6 +15,10 @@
 \symdecl*{injective}
 \symdecl*{bijection}
 \symdecl*{permutation}
+\symdecl*{surjectivity of composition of surjections}
+\symdecl*{injectivity of composition of injections}
+\symdecl*{bijectivity of composition of bijections}
+\symdecl*{bijectivity of restriction of injection}
 
 \begin{sfragment}{Surjective Maps}
   \begin{definition}[forthel,for=surjective]
@@ -112,8 +116,6 @@
     \end{proof}
   \end{proof}
 
-  \symdecl*{surjectivity of composition of surjections}
-
   \begin{proposition}[forthel,name=surjectivity of composition of surjections]
     Let $A, B, C$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{C}$.
     Then $g \Comp f$ is a surjective map from $A$ onto $C$.
@@ -128,8 +130,6 @@
       Then $c \Eq g(f(a)) \Eq (g \Comp f)(a)$.
     End.
   \end{proof}
-
-  \symdecl*{injectivity of composition of injections}
 
   \begin{proposition}[forthel,name=injectivity of composition of injections]
     Let $A, B, C$ be classes and $f \FromInto{A}{B}$ and $g \FromInto{B}{C}$.
@@ -147,8 +147,6 @@
       Thus $a \Eq a'$.
     End.
   \end{proof}
-
-  \symdecl*{bijectivity of composition of bijections}
 
   \begin{corollary}[forthel,name=bijectivity of composition of bijections]
     Let $A, B, C$ be classes.
@@ -170,8 +168,6 @@
     Then $f(a) \Eq f(a')$.
     Hence $a \Eq a'$.
   \end{proof}
-
-  \symdecl*{bijectivity of restriction of injection}
   
   \begin{proposition}[forthel,name=bijectivity of restriction of injection]
     Let $A, B$ be classes and $f \FromInto{A}{B}$ and $X \Subclass A$.

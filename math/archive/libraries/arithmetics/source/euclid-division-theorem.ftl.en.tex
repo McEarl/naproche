@@ -10,6 +10,7 @@
 \importmodule[libraries/arithmetics]{subtraction.ftl}
 
 \symdecl*{Euclid Division Existence}
+\symdecl*{Euclid Division Uniqueness}
 
 \begin{theorem}[forthel,title=Euclid's Division Theorem: Existence,name=Euclid Division Existence]
   Let $n, m$ be natural numbers such that $m \NotEq \Zero$.
@@ -62,8 +63,6 @@
   Then $\Phi$ contains every natural number (by \sr{induction I}{induction}).
   Thus there exist natural numbers $q, r$ such that $n \Eq (m \Mul q) \Plus r$ and $r \Less m$ (by a).
 \end{proof}
-
-\symdecl*{Euclid Division Uniqueness}
 
 \begin{theorem}[forthel,title=Euclid's Division Theorem: Uniqueness,name=Euclid Division Uniqueness]
   Let $n, m$ be natural numbers such that $m \NotEq \Zero$.

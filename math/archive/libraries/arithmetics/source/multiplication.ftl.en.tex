@@ -10,6 +10,11 @@
 
 \symdef{Mul}[name=product]{\,\cdot\,}
 
+\symdecl*{left-distributivity of multiplication over addition}
+\symdecl*{commutativity of multiplication}
+\symdecl*{right-cancellability of multiplication}
+\symdecl*{left-cancellability of multiplication}
+
 \begin{sfragment}{Definition}
   \begin{signature}[forthel,for=Mul]
     Let $n, m$ be natural numbers.
@@ -30,8 +35,6 @@
 
 \begin{sfragment}{Computation Laws}
   \begin{sfragment}{Distributivity}
-
-    \symdecl*{left-distributivity of multiplication over addition}
 
     \begin{proposition}[forthel,name=left-distributivity of multiplication over addition]
       Let $n, m, k$ be natural numbers.
@@ -156,8 +159,6 @@
 
   \begin{sfragment}{Commutativity}
 
-    \symdecl*{commutativity of multiplication}
-
     \begin{proposition}[forthel,name=commutativity of multiplication]
       Let $n, m$ be natural numbers.
       Then \[ n \Mul m \Eq m \Mul n. \]
@@ -247,8 +248,6 @@
 
   \begin{sfragment}{Cancellation}
 
-    \symdecl*{right-cancellability of multiplication}
-
     \begin{proposition}[forthel,name=right-cancellability of multiplication]
       Let $n, m, k$ be natural numbers.
       Assume $k \NotEq \Zero$.
@@ -303,8 +302,6 @@
       Thus every natural number is contained in $\Phi$ (by \sr{induction I}{induction}).
       Therefore if $n \Mul k \Eq m \Mul k$ then $n \Eq m$.
     \end{proof}
-
-    \symdecl*{left-cancellability of multiplication}
 
     \begin{corollary}[forthel,name=left-cancellability of multiplication]
       Let $n, m, k$ be natural numbers.
