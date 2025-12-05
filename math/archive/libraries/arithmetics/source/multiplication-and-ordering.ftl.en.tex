@@ -50,11 +50,11 @@
   \end{case}
 \end{proof}
 
-\begin{corollary*}[forthel,name=preservation of ordering under left-multiplication]
+\begin{proposition*}[forthel,name=preservation of ordering under left-multiplication]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   Then $n \Less m$ iff $k \Mul n \Less k \Mul m$.
-\end{corollary*}
+\end{proposition*}
 \begin{proof}[forthel]
   The thesis (by \sn{preservation of ordering under right-multiplication}, \sn{commutativity of multiplication}).
 \end{proof}
@@ -94,31 +94,31 @@
   Therefore if $n, m \Greater k$ then $n \Mul m \Greater k$.
 \end{proof}
 
-\begin{corollary*}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Leq m$ then $k \Mul n \Leq k \Mul m$.
-\end{corollary*}
+\end{proposition*}
 
-\begin{corollary*}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   If $k \Mul n \Leq k \Mul m$ then $n \Leq m$.
-\end{corollary*}
+\end{proposition*}
 \begin{proof}[forthel]
   If $k \Mul n \Eq k \Mul m$ then $n \Eq m$ (by \sn{left-cancellability of multiplication}).
   If $k \Mul n \Less k \Mul m$ then $n \Less m$ (by \sn{preservation of ordering under left-multiplication}).
 \end{proof}
 
-\begin{corollary*}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Leq m$ then $n \Mul k \Leq m \Mul k$.
-\end{corollary*}
+\end{proposition*}
 
-\begin{corollary*}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   If $n \Mul k \Leq m \Mul k$ then $n \Leq m$.
-\end{corollary*}
+\end{proposition*}
 
 \begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
