@@ -12,11 +12,11 @@
 \symdecl*{preservation of ordering under right-multiplication}
 \symdecl*{preservation of ordering under left-multiplication}
 
-\begin{proposition}[forthel,name=preservation of ordering under right-multiplication]
+\begin{proposition*}[forthel,name=preservation of ordering under right-multiplication]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   Then $n \Less m$ iff $n \Mul k \Less m \Mul k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \Mul k \Less m \Mul k$.}
     Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ if }n' \Mul k \Less m \Mul k\text{ then }n' \Less m}$.
@@ -50,19 +50,19 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel,name=preservation of ordering under left-multiplication]
+\begin{corollary*}[forthel,name=preservation of ordering under left-multiplication]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   Then $n \Less m$ iff $k \Mul n \Less k \Mul m$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   The thesis (by \sn{preservation of ordering under right-multiplication}, \sn{commutativity of multiplication}).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n, m \Greater k$ then $n \Mul m \Greater k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ if }n', m \Greater k\text{ then }n' \Mul m \Greater k}$.
 
@@ -94,37 +94,37 @@
   Therefore if $n, m \Greater k$ then $n \Mul m \Greater k$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Leq m$ then $k \Mul n \Leq k \Mul m$.
-\end{corollary}
+\end{corollary*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   If $k \Mul n \Leq k \Mul m$ then $n \Leq m$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   If $k \Mul n \Eq k \Mul m$ then $n \Eq m$ (by \sn{left-cancellability of multiplication}).
   If $k \Mul n \Less k \Mul m$ then $n \Less m$ (by \sn{preservation of ordering under left-multiplication}).
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Leq m$ then $n \Mul k \Leq m \Mul k$.
-\end{corollary}
+\end{corollary*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   If $n \Mul k \Leq m \Mul k$ then $n \Leq m$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $m \Greater \Zero$ and $k \Greater \One$.
   Then $k \Mul m \Greater m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take a natural number $l$ such that $k \Eq l \Plus \Two$.
   Then

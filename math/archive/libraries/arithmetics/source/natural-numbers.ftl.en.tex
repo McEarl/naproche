@@ -29,106 +29,106 @@
 \symdecl*{right-cancellability of addition}
 \symdecl*{left-cancellability of addition}
 
-\begin{signature}[forthel,for=natural number]
+\begin{signature*}[forthel,for=natural number]
   A \emph{natural number} is an object.
-\end{signature}
+\end{signature*}
 
-\begin{definition}[forthel,for=Naturals]
+\begin{definition*}[forthel,for=Naturals]
   $\emph{\Naturals}$ is the class of natural numbers.
-\end{definition}
+\end{definition*}
 
-\begin{signature}[forthel,for=sum]
+\begin{signature*}[forthel,for=sum]
   Let $n, m$ be natural numbers.
   $\emph{n \Plus m}$ is a natural number.
   Let the \emph{sum of $n$ and $m$} stand for $n \Plus m$.
-\end{signature}
+\end{signature*}
 
-\begin{signature}[forthel,for={zero,nonzero}]
+\begin{signature*}[forthel,for={zero,nonzero}]
   $\emph{\Zero}$ is a natural number.
   Let \emph{zero} stand for $\Zero$.
   Let $n$ is \emph{nonzero} stand for $n \NotEq \Zero$.
-\end{signature}
+\end{signature*}
 
-\begin{signature}[forthel,for={one,direct successor}]
+\begin{signature*}[forthel,for={one,direct successor}]
   $\emph{\One}$ is a natural number.
   Let \emph{one} stand for $\One$.
   Let the \emph{direct successor of $n$} stand for $n \Plus \One$.
-\end{signature}
+\end{signature*}
 
-\begin{definition}[forthel,for=two]
+\begin{definition*}[forthel,for=two]
   $\emph{\Two} \DefEq \One \Plus \One$.
   Let \emph{two} stand for $\Two$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=three]
+\begin{definition*}[forthel,for=three]
   $\emph{\Three} \DefEq \Two \Plus \One$.
   Let \emph{three} stand for $\Three$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=four]
+\begin{definition*}[forthel,for=four]
   $\emph{\Four} \DefEq \Three \Plus \One$.
   Let \emph{four} stand for $\Four$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=five]
+\begin{definition*}[forthel,for=five]
   $\emph{\Five} \DefEq \Four \Plus \One$.
   Let \emph{five} stand for $\Five$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=six]
+\begin{definition*}[forthel,for=six]
   $\emph{\Six} \DefEq \Five \Plus \One$.
   Let \emph{six} stand for $\Six$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=seven]
+\begin{definition*}[forthel,for=seven]
   $\emph{\Seven} \DefEq \Six \Plus \One$.
   Let \emph{seven} stand for $\Seven$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=eight]
+\begin{definition*}[forthel,for=eight]
   $\emph{\Eight} \DefEq \Seven \Plus \One$.
   Let \emph{eight} stand for $\Eight$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=nine]
+\begin{definition*}[forthel,for=nine]
   $\emph{\Nine} \DefEq \Eight \Plus \One$.
   Let \emph{nine} stand for $\Nine$.
-\end{definition}
+\end{definition*}
 
-\begin{axiom}[forthel,name=injectivity of successor function]
+\begin{axiom*}[forthel,name=injectivity of successor function]
   Let $n, m$ be natural numbers.
   If $n \Plus \One \Eq m \Plus \One$ then $n \Eq m$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel]
+\begin{axiom*}[forthel]
   There exists no natural number $n$ such that $n \Plus \One \Eq \Zero$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel,title=Induction,name=induction I]
+\begin{axiom*}[forthel,title=Induction,name=induction I]
   Let $\Phi$ be a class.
   Assume $\Zero \Elem \Phi$ and for all natural numbers $n$ if $n \Elem \Phi$ then
   $n \Plus \One \Elem \Phi$.
   Then $\Phi$ contains every natural number.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel]
+\begin{axiom*}[forthel]
   Then $\One \Eq \Zero \Plus \One$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel]
+\begin{axiom*}[forthel]
   Let $n$ be a natural number.
   Then $n \Plus \Zero \Eq n$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel]
+\begin{axiom*}[forthel]
   Let $n, m$ be natural numbers.
   Then $n \Plus (m \Plus \One) \Eq (n \Plus m) \Plus \One$.
-\end{axiom}
+\end{axiom*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \Eq \Zero\text{ or }n' \Eq m' \Plus \One\text{ for some natural number }m'}$.
   $\Zero \Elem \Phi$ and for all $n' \Elem  \Phi$ we have $n' \Plus \One \Elem \Phi$.
@@ -136,10 +136,10 @@
   Thus $n \Eq \Zero$ or $n \Eq m \Plus \One$ for some natural number $m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n \NotEq n \Plus \One$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n'}{\Naturals}{n' \NotEq n' \Plus \One}$.
 
@@ -158,10 +158,10 @@
   Consequently $n \NotEq n \Plus \One$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{k'}{\Naturals}{n \Plus (m \Plus k') \Eq (n \Plus m) \Plus k'}$.
 
@@ -185,10 +185,10 @@
   Therefore $n \Plus (m \Plus k) \Eq (n \Plus m) \Plus k$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Then $n \Plus m \Eq m \Plus n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Plus m' \Eq m' \Plus n}$.
 
@@ -254,10 +254,10 @@
   Therefore $n \Plus m \Eq m \Plus n$.
 \end{proof}
 
-\begin{proposition}[forthel,name=right-cancellability of addition]
+\begin{proposition*}[forthel,name=right-cancellability of addition]
   Let $n, m, k$ be natural numbers.
   If $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{k'}{\Naturals}{\text{ if }n \Plus k' \Eq m \Plus k'\text{ then }n \Eq m}$.
 
@@ -276,10 +276,10 @@
   Consequently if $n \Plus k \Eq m \Plus k$ then $n \Eq m$.
 \end{proof}
 
-\begin{corollary}[forthel,name=left-cancellability of addition]
+\begin{corollary*}[forthel,name=left-cancellability of addition]
   Let $n, m, k$ be natural numbers.
   If $k \Plus n \Eq k \Plus m$ then $n \Eq m$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume $k \Plus n \Eq k \Plus m$.
   We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
@@ -287,10 +287,10 @@
   Thus $n \Eq m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   If $n \Plus m \Eq \Zero$ then $n \Eq \Zero$ and $m \Eq \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Plus m \Eq \Zero$.
   Suppose $n \NotEq \Zero$ or $m \NotEq \Zero$.

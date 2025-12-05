@@ -12,12 +12,12 @@
 \symdecl*{Euclid Division Existence}
 \symdecl*{Euclid Division Uniqueness}
 
-\begin{theorem}[forthel,title=Euclid's Division Theorem: Existence,name=Euclid Division Existence]
+\begin{theorem*}[forthel,title=Euclid's Division Theorem: Existence,name=Euclid Division Existence]
   Let $n, m$ be natural numbers such that $m \NotEq \Zero$.
   Then there exist natural numbers $q, r$ such that
   \[n \Eq (m \Mul q) \Plus r\]
   and $r \Less m$.
-\end{theorem}
+\end{theorem*}
 \begin{proof}[forthel]
   (a) Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ there exist natural numbers }q, r\text{ such that }r \Less m\text{ and }n' \Eq (m \Mul q) \Plus r}$.
 
@@ -64,7 +64,7 @@
   Thus there exist natural numbers $q, r$ such that $n \Eq (m \Mul q) \Plus r$ and $r \Less m$ (by a).
 \end{proof}
 
-\begin{theorem}[forthel,title=Euclid's Division Theorem: Uniqueness,name=Euclid Division Uniqueness]
+\begin{theorem*}[forthel,title=Euclid's Division Theorem: Uniqueness,name=Euclid Division Uniqueness]
   Let $n, m$ be natural numbers such that $m \NotEq \Zero$.
   Let $q, r$ be natural numbers such that
   \[n \Eq (m \Mul q) \Plus r\]
@@ -73,7 +73,7 @@
   \[n \Eq (m \Mul q') \Plus r'\]
   and $r' \Less m$.
   Then $q \Eq q'$ and $r \Eq r'$.
-\end{theorem}
+\end{theorem*}
 \begin{proof}[forthel]
   We have $(m \Mul q) \Plus r \Eq (m \Mul q') \Plus r'$.
 

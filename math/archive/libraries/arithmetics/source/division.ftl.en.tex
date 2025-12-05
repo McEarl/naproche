@@ -12,26 +12,26 @@
 
 \symdecl*{quotient}
 
-\begin{definition}[forthel,for=quotient]
+\begin{definition*}[forthel,for=quotient]
   Let $n$ be a natural number and $m$ be a nonzero divisor of $n$.
   $\emph{\Frac{n}{m}}$ is the natural number $k$ such that $k \Mul m \Eq n$.
   Let the \emph{quotient of $n$ and $m$} stand for $\Frac{n}{m}$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   $\Frac{n}{\One} \Eq n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Frac{n}{\One}
     \Eq \Frac{n}{\One} \Mul \One
     \Eq n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number and $m$ be a nonzero divisor of $n$.
   Then $\Frac{n}{m} \Eq \Zero$ iff $n \Eq \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$\Frac{n}{m} \Eq \Zero$.}
     Then $n
@@ -50,11 +50,11 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers such that $k$ is nonzero.
   Assume $k \Divides n,m$.
   Then \[\Frac{n \Plus m}{k} \Eq \Frac{n}{k} \Plus \Frac{m}{k}.\]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Frac{n \Plus m}{k} \Mul k \Eq n \Plus m$ and $\Frac{n}{k} \Mul k \Eq n$ and $\Frac{m}{k} \Mul k \Eq m$.
   Hence
@@ -64,10 +64,10 @@
   Thus $\Frac{n \Plus m}{k} \Eq \Frac{n}{k} \Plus \Frac{m}{k}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $m$.
   Then \[\Frac{n \Mul m}{k} \Eq n \Mul \Frac{m}{k}.\]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Frac{n \Mul m}{k} \Mul k \Eq n \Mul m$ and $\Frac{m}{k} \Mul k \Eq m$.
   Hence
@@ -77,25 +77,25 @@
   Thus $\Frac{n \Mul m}{k} \Eq n \Mul \Frac{m}{k}$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $m$.
   Then \[\Frac{n \Mul m}{k} \Eq \Frac{m}{k} \Mul n.\]
-\end{corollary}
+\end{corollary*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $n$.
   Then \[\Frac{n \Mul m}{k} \Eq \Frac{n}{k} \Mul m.\]
-\end{corollary}
+\end{corollary*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m$ be natural numbers and $k$ be a nonzero divisor of $n$.
   Then \[\Frac{n \Mul m}{k} \Eq m \Mul \Frac{n}{k}.\]
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, k$ be natural numbers such that $k$ be nonzero and $m$ be a nonzero divisor of $n$.
   Then \[\Frac{n \Mul k}{m \Mul k} \Eq \Frac{n}{m}.\]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Frac{n \Mul k}{m \Mul k} \Mul (m \Mul k) \Eq n \Mul k$.
   Hence
@@ -106,10 +106,10 @@
   Therefore $\Frac{n}{m} \Eq \Frac{n \Mul k}{m \Mul k}$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, k$ be natural numbers such that $k$ be nonzero and $m$ be a nonzero divisor of $n$.
   Then \[\Frac{k \Mul n}{k \Mul m} \Eq \Frac{n}{m}.\]
-\end{corollary}
+\end{corollary*}
 
 \end{smodule}
 \end{document}

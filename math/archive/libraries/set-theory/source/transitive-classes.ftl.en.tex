@@ -11,28 +11,28 @@
 \symdecl*{transitive}
 \symdecl*{system of transitive sets}
 
-\begin{definition}[forthel,for=transitive]
+\begin{definition*}[forthel,for=transitive]
   Let $A$ be a class.
   $A$ is \emph{transitive} iff every element of $A$ is a subset of $A$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a system of sets.
   Then $X$ is transitive iff for every $x \Elem X$ and every $y \Elem x$ we have $y \Elem X$.
-\end{proposition}
+\end{proposition*}
 
-\begin{definition}[forthel,for=system of transitive sets]
+\begin{definition*}[forthel,for=system of transitive sets]
   A \emph{system of transitive sets} is a system of sets $X$ such that every member of $X$ is a transitive set.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Every transitive class is a system of sets.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a system of sets.
   Then $X$ is transitive iff $\UnionOver X \Subclass X$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$X$ is transitive.}
     Let $x \Elem \UnionOver X$.
@@ -52,10 +52,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a transitive class.
   Then $\UnionOver A$ is transitive.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $x \Elem \UnionOver A$.
 
@@ -69,10 +69,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a system of transitive sets.
   Then $\UnionOver X$ is transitive.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $x \Elem \UnionOver X$ and $y \Elem x$.
   Take $z \Elem X$ such that $x \Elem z$.
@@ -82,10 +82,10 @@
   Therefore $y \Elem \UnionOver X$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a system of transitive sets.
   Then $X \Union \UnionOver X$ is transitive.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $x \Elem X \Union \UnionOver X$.
 
@@ -100,10 +100,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a system of sets.
   Then $X$ is transitive iff $X \Subclass \Pow(X)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$X$ is transitive.}
     Let $x \Elem X$.
@@ -118,10 +118,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a transitive class.
   Then $\Pow(A)$ is transitive.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $x \Elem \Pow(A)$.
   Then $x \Subclass A$.

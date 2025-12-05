@@ -9,10 +9,10 @@
 \importmodule[libraries/foundations]{computation-laws-for-classes.ftl}
 \importmodule[libraries/foundations]{pairs-and-products.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   IF $A \Subclass B$ then $A \Prod C \Subclass B \Prod C$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $A \Subclass B$.
   Let $x \Elem A \Prod C$.
@@ -21,11 +21,11 @@
   Hence $(a, c) \Elem B \Prod C$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, A', B, B'$ be classes.
   Assume that $A$ and $A'$ are nonempty.
   Then $(A \Prod A') \Subclass (B \Prod B')$ iff $A \Subclass B$ and $A' \Subclass B'$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$(A \Prod A') \Subclass (B \Prod B')$.}
     Let us show that for all $a \Elem A$ and all $a' \Elem A'$ we have $a \Elem B$ and $a' \Elem B'$.
@@ -44,10 +44,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $(A \Union B) \Prod C \Eq (A \Prod C) \Union (B \Prod C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $((A \Union B) \Prod C) \Subclass (A \Prod C) \Union (B \Prod C).$ %!
     Let $x \Elem (A \Union B) \Prod C$.
@@ -68,10 +68,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Prod (B \Union C) \Eq (A \Prod B) \Union (A \Prod C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Prod (B \Union C) \Subclass (A \Prod B) \Union (A \Prod C)$.
     Let $x \Elem A \Prod (B \Union C)$.
@@ -91,10 +91,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $(A \Intersect B) \Prod C \Eq (A \Prod C) \Intersect (B \Prod C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $((A \Intersect B) \Prod C) \Subclass (A \Prod C) \Intersect (B \Prod C)$. %!
     Let $x \Elem (A \Intersect B) \Prod C$.
@@ -114,10 +114,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Prod (B \Intersect C) \Eq (A \Prod B) \Intersect (A \Prod C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Prod (B \Intersect C) \Subclass (A \Prod B) \Intersect (A \Prod C)$.
     Let $x \Elem A \Prod (B \Intersect C)$.
@@ -136,10 +136,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $(A \Diff B) \Prod C \Eq (A \Prod C) \Diff (B \Prod C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $((A \Diff B) \Prod C) \Subclass (A \Prod C) \Diff (B \Prod C).$ %!
     Let $x \Elem (A \Diff B) \Prod C$.
@@ -160,10 +160,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Prod (B \Diff C) \Eq (A \Prod B) \Diff (A \Prod C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Prod (B \Diff C) \Subclass (A \Prod B) \Diff (A \Prod C)$.
     Let $x \Elem A \Prod (B \Diff C)$.
@@ -182,11 +182,11 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, A', B, B'$ be classes.
   Assume that $A$ and $A'$ are nonempty or $B$ and $B'$ are nonempty.
   Then $(A \Prod A') \Eq (B \Prod B')$ iff $A \Eq B$ and $A' \Eq B'$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$A \Prod A' \Eq B \Prod B'$.}
     Then $A$ and $A'$ are nonempty iff $B$ and $B'$ are nonempty.
@@ -215,10 +215,10 @@
   \begin{case}{$A \Eq B$ and $A' \Eq B'$.} \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, A', B, B'$ be classes.
   Then $(A \Prod B) \Intersect (A' \Prod B') \Eq (A \Intersect A') \Prod (B \Intersect B')$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $((A \Prod B) \Intersect (A' \Prod B')) \Subclass (A \Intersect A') \Prod (B \Intersect B')$. %!
     Let $x \Elem (A \Prod B) \Intersect (A' \Prod B')$.
@@ -239,10 +239,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, A', B, B'$ be classes.
   Then $(A \Prod B) \Union (A' \Prod B') \Subclass (A \Union A') \Prod (B \Union B')$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $x \Elem (A \Prod B) \Union (A' \Prod B')$.
   Then $x \Elem A \Prod B$ or $x \Elem A' \Prod B'$.
@@ -252,10 +252,10 @@
   Thus $x \Elem (A \Union A') \Prod (B \Union B')$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, A', B, B'$ be classes.
   Then $(A \Prod B) \Diff (A' \Prod B') \Eq (A \Prod (B \Diff B')) \Union ((A \Diff A') \Prod B)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $((A \Prod B) \Diff (A' \Prod B')) \Subclass (A \Prod (B \Diff B')) \Union ((A \Diff A') \Prod B)$.
     Let $x \Elem (A \Prod B) \Diff (A' \Prod B')$.

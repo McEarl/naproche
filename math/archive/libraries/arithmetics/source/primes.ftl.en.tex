@@ -19,26 +19,26 @@
 \symdecl*{relatively prime}
 \symdecl*{mutually prime}
 
-\begin{definition}[forthel,for={prime,compound,prime number}]
+\begin{definition*}[forthel,for={prime,compound,prime number}]
   Let $n$ be a natural number.
   $n$ is \emph{prime} iff $n \Greater \One$ and $n$ has no nontrivial divisors.
   Let $n$ is \emph{compound} stand for $n$ is not prime.
   Let a \emph{prime number} stand for a natural number that is prime.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=Primes]
+\begin{definition*}[forthel,for=Primes]
   $\emph{\Primes}$ is the class of all prime numbers.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number such that $n \Greater \One$.
   Then $n$ is prime iff every divisor of $n$ is a trivial divisor of $n$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number such that $n \Greater \One$.
   Then $n$ has a prime divisor.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ if }n' \Greater \One\text{ then }n'\text{ has a prime divisor}}$.
 
@@ -66,18 +66,18 @@
   Thus every natural number belongs to $\Phi$ (by \sr{induction II}{induction}).
 \end{proof}
 
-\begin{definition}[forthel,for={coprime,relatively prime,mutually prime}]
+\begin{definition*}[forthel,for={coprime,relatively prime,mutually prime}]
   Let $n, m$ be natural numbers.
   $n$ and $m$ are \emph{coprime} iff for all nonzero natural numbers $k$ such that $k \Divides n$ and $k \Divides m$ we have $k \Eq \One$.
   Let $n$ and $m$ are \emph{relatively prime} stand for $n$ and $m$ are coprime.
   Let $n$ and $m$ are \emph{mutually prime} stand for $n$ and $m$ are coprime.
   Let $n$ is \emph{prime to $m$} stand for $n$ and $m$ are coprime.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   $n$ and $m$ are coprime iff $n$ and $m$ have no common prime divisor.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n$ and $m$ are coprime.}
     Let $p$ be a prime number such that $p \Divides n$ and $p \Divides m$.
@@ -96,10 +96,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers and $p$ be a prime number.
   If $p$ does not divide $n$ then $p$ and $n$ are coprime.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $p \NotDivides n$.
   Suppose that $p$ and $n$ are not coprime.
@@ -109,10 +109,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers and $p$ be a prime number.
   If $p \Divides n \Mul m$ then $p \Divides n$ or $p \Divides m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $p \Divides n \Mul m$.
 

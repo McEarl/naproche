@@ -15,26 +15,26 @@
 \symdecl*{right-cancellability of multiplication}
 \symdecl*{left-cancellability of multiplication}
 
-\begin{signature}[forthel,for=Mul]
+\begin{signature*}[forthel,for=Mul]
   Let $n, m$ be natural numbers.
   $\emph{n \Mul m}$ is a natural number.
   Let the \emph{product of $n$ and $m$} stand for $n \Mul m$.
-\end{signature}
+\end{signature*}
 
-\begin{axiom}[forthel,for=Mul]
+\begin{axiom*}[forthel,for=Mul]
   Let $n$ be a natural number.
   Then $n \Mul \Zero \Eq \Zero$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel,for=Mul]
+\begin{axiom*}[forthel,for=Mul]
   Let $n, m$ be natural numbers.
   Then $n \Mul (m \Plus \One) \Eq (n \Mul m) \Plus n$.
-\end{axiom}
+\end{axiom*}
 
-\begin{proposition}[forthel,name=left-distributivity of multiplication over addition]
+\begin{proposition*}[forthel,name=left-distributivity of multiplication over addition]
   Let $n, m, k$ be natural numbers.
   Then $n \Mul (m \Plus k) \Eq (n \Mul m) \Plus (n \Mul k)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{k'}{\Naturals}{n \Mul (m \Plus k') \Eq (n \Mul m) \Plus (n \Mul k')}$.
 
@@ -62,10 +62,10 @@
   Therefore $n \Mul (m \Plus k) \Eq (n \Mul m) \Plus (n \Mul k)$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $(n \Plus m) \Mul k \Eq (n \Mul k) \Plus (m \Mul k)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{k'}{\Naturals}{(n \Plus m) \Mul k' \Eq (n \Mul k') \Plus (m \Mul k')}$.
 
@@ -95,10 +95,10 @@
   Therefore $(n \Plus m) \Mul k \Eq (n \Mul k) \Plus (m \Mul k)$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n \Mul \One \Eq n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $n \Mul \One
     \Eq n \Mul (\Zero \Plus \One)
@@ -107,10 +107,10 @@
     \Eq n$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n$ be a natural number.
   Then $n \Mul \Two \Eq n \Plus n$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   $n \Mul \Two
     \Eq n \Mul (\One \Plus \One)
@@ -118,10 +118,10 @@
     \Eq n \Plus n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $n \Mul (m \Mul k) \Eq (n \Mul m) \Mul k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{k'}{\Naturals}{n \Mul (m \Mul k') \Eq (n \Mul m) \Mul k'}$.
 
@@ -147,10 +147,10 @@
   Thus $n \Mul (m \Mul k) \Eq (n \Mul m) \Mul k$.
 \end{proof}
 
-\begin{proposition}[forthel,name=commutativity of multiplication]
+\begin{proposition*}[forthel,name=commutativity of multiplication]
   Let $n, m$ be natural numbers.
   Then \[ n \Mul m \Eq m \Mul n. \]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Mul m' \Eq m' \Mul n}$.
 
@@ -213,10 +213,10 @@
   Thus $n \Mul m \Eq m \Mul n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \Mul m \Eq \Zero$.
   Then $n \Eq \Zero$ or $m \Eq \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Suppose $n, m \NotEq \Zero$.
   Take natural numbers $n', m'$ such that $n \Eq (n' \Plus \One)$ and $m \Eq (m' \Plus \One)$.
@@ -231,11 +231,11 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel,name=right-cancellability of multiplication]
+\begin{proposition*}[forthel,name=right-cancellability of multiplication]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   If $n \Mul k \Eq m \Mul k$ then $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ for all }m' \Elem \Naturals\text{ if }n' \Mul k \Eq m' \Mul k\text{ and }k \NotEq \Zero\text{ then }n' \Eq m'}$.
 
@@ -286,11 +286,11 @@
   Therefore if $n \Mul k \Eq m \Mul k$ then $n \Eq m$.
 \end{proof}
 
-\begin{corollary}[forthel,name=left-cancellability of multiplication]
+\begin{corollary*}[forthel,name=left-cancellability of multiplication]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   If $k \Mul n \Eq k \Mul m$ then $n \Eq m$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume $k \Mul n \Eq k \Mul m$.
   We have $k \Mul n \Eq n \Mul k$ and $k \Mul m \Eq m \Mul k$.

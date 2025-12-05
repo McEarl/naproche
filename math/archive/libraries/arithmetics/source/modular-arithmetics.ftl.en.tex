@@ -17,37 +17,37 @@
 \symdecl*{congruent}
 \symdecl*{congruency of sum}
 
-\begin{definition}[forthel,for={Div,quotient}]
+\begin{definition*}[forthel,for={Div,quotient}]
   Let $n, m$ be natural numbers such that $m \NotEq \Zero$.
   $\emph{n \Div m}$ is the natural number $q$ such that $n \Eq (m \Mul q) \Plus r$ for some natural number $r$ that is less than $m$.
   Let the \emph{quotient of $n$ over $m$} stand for $n \Div m$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Mod,remainder}]
+\begin{definition*}[forthel,for={Mod,remainder}]
   Let $n, m$ be natural numbers such that $m \NotEq \Zero$.
   $\emph{n \Mod m}$ is the natural number $r$ such that $r \Less m$ and there exists a natural number $q$ such that $n \Eq (m \Mul q) \Plus r$.
   Let the \emph{remainder of $n$ over $m$} stand for $n \Mod m$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Cong,congruent}]
+\begin{definition*}[forthel,for={Cong,congruent}]
   Let $n, m, k$ be natural numbers such that $k \NotEq \Zero$.
   $\emph{\Cong{n}{m}{k}}$ iff $n \Mod k \Eq m \Mod k$.
   Let $n$ and $m$ are \emph{congruent modulo $k$} stand for $\Cong{n}{m}{k}$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, k$ be natural numbers such that $k \NotEq \Zero$.
   Then $\Cong{n}{n}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $n \Mod k \Eq n \Mod k$.
   Hence $\Cong{n}{n}{k}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers such that $k \NotEq \Zero$.
   If $\Cong{n}{m}{k}$ then $\Cong{m}{n}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\Cong{n}{m}{k}$.
   Then $n \Mod k \Eq m \Mod k$.
@@ -55,10 +55,10 @@
   Thus $\Cong{m}{n}{k}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers such that $k \NotEq \Zero$.
   If $\Cong{n}{m}{k}$ and $\Cong{m}{\One}{k}$ then $\Cong{n}{\One}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\Cong{n}{m}{k}$ and $\Cong{m}{\One}{k}$.
   Then $n \Mod k \Eq m \Mod k$ and $m \Mod k \Eq \One \Mod k$.
@@ -66,11 +66,11 @@
   Thus $\Cong{n}{\One}{k}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers such that $k \NotEq \Zero$.
   Assume $n \Geq m$.
   Then $\Cong{n}{m}{k}$ iff $n \Eq (k \Mul x) \Plus m$ for some natural number $x$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$\Cong{n}{m}{k}$.}
     Then $n \Mod k \Eq m \Mod k$.
@@ -121,10 +121,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k, k'$ be natural numbers such that $k, k' \NotEq \Zero$.
   If $\Cong{n}{m}{k \Mul k'}$ then $\Cong{n}{m}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\Cong{n}{m}{k \Mul k'}$.
 
@@ -143,20 +143,20 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k, k'$ be natural numbers such that $k, k' \NotEq \Zero$.
   If $\Cong{n}{m}{k \Mul k'}$ then $\Cong{n}{m}{k'}$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume $\Cong{n}{m}{k \Mul k'}$.
   Then $\Cong{n}{m}{k' \Mul k}$.
   Hence $\Cong{n}{m}{k'}$.
 \end{proof}
 
-\begin{proposition}[forthel,name=congruency of sum]
+\begin{proposition*}[forthel,name=congruency of sum]
   Let $n, k$ be natural numbers such that $k \NotEq \Zero$.
   Then $\Cong{n \Plus k}{n}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take $r \Eq n \Mod k$ and $r' \Eq (n \Plus k) \Mod k$.
   Consider a $q \Elem \Naturals$ such that $n \Eq (k \Mul q) \Plus r$ and $r \Less k$.

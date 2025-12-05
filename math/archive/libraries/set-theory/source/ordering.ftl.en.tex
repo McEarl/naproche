@@ -17,7 +17,7 @@
 \symdef{Geq}{\;\geq\;}
 \symdef{NotGeq}{\;\not\geq\;}
 
-\begin{definition}[forthel,for={less,NotLess,greater,NotGreater}]
+\begin{definition*}[forthel,for={less,NotLess,greater,NotGreater}]
   Let $\alpha, \beta$ be ordinals.
   $\emph{\alpha \Less \beta}$ iff $\alpha \Elem \beta$.
   Let $\alpha$ is \emph{less than $\beta$} stand for $\alpha \Less \beta$.
@@ -25,9 +25,9 @@
   Let $\emph{\alpha \Greater \beta}$ stand for $\beta \Less \alpha$.
   Let $\alpha$ is \emph{greater than $\beta$} stand for $\beta \Less \alpha$.
   Let $\emph{\alpha \NotGreater \beta}$ stand for $\Not \alpha \Greater \beta$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Leq,NotLeq,Geq,NotGeq}]
+\begin{definition*}[forthel,for={Leq,NotLeq,Geq,NotGeq}]
   Let $\alpha, \beta$ be ordinals.
   $\emph{\alpha \Leq \beta}$ iff $\alpha \Less \beta$ or $\alpha \Eq \beta$.
   Let $\alpha$ is \emph{less than or equal to $\beta$} stand for $\alpha \Leq \beta$.
@@ -35,12 +35,12 @@
   Let $\emph{\alpha \Geq \beta}$ stand for $\beta \Leq \alpha$.
   Let $\alpha$ is \emph{greater than or equal to $\beta$} stand for $\beta \Leq \alpha$.
   Let $\emph{\alpha \NotGeq \beta}$ stand for $\Not \alpha \Geq \beta$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha, \beta$ be ordinals.
   If $\alpha \Leq \beta$ then $\alpha \Subclass \beta$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\alpha \Leq \beta$.
   Then $\alpha \Less \beta$ or $\alpha \Eq \beta$.
@@ -51,20 +51,20 @@
   Thus $x \Elem \beta$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha$ be an ordinal.
   Then $\alpha \NotLess \alpha$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\alpha \Less \alpha$.
   Then $\alpha \Elem \alpha$.
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha, \beta, \gamma$ be ordinals.
   If $\alpha \Less \beta$ and $\beta \Less \gamma$ then $\alpha \Less \gamma$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\alpha \Less \beta$ and $\beta \Less \gamma$.
   Then $\alpha \Elem \beta \Elem \gamma$.
@@ -72,10 +72,10 @@
   Thus $\alpha \Less \gamma$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha, \beta$ be ordinals.
   Then $\alpha \Less \beta$ or $\alpha \Eq \beta$ or $\alpha \Greater \beta$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
   
@@ -113,10 +113,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha, \beta$ be ordinals.
   If $\alpha \Subclass \beta$ then $\alpha \Leq \beta$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\alpha \Subclass \beta$.
 
@@ -131,15 +131,15 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha$ be an ordinal.
   Then $\alpha \Less \Succ(\alpha)$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha, \beta$ be ordinals.
   If $\beta \Less \Succ(\alpha)$ then $\beta \Leq \alpha$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\beta \Less \Succ(\alpha)$.
   Then $\beta \Elem \Succ(\alpha) \Eq \alpha \Union \Singleton{\alpha}$.
@@ -148,10 +148,10 @@
   Therefore $\beta \Leq \alpha$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha$ be an ordinal.
   There exists no ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
   Consider an ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
@@ -160,10 +160,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\alpha$ be an ordinal.
   There exists no ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
   Choose an ordinal $\beta$ such that $\alpha \Less \beta \Less \Succ(\alpha)$.
@@ -173,10 +173,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\lambda$ be a limit ordinal and $\alpha \Elem \lambda$.
   Then $\lambda$ contains $\Succ(\alpha)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   If $\Succ(\alpha) \NotElem \lambda$ then $\alpha \Less \lambda \Less \Succ(\alpha)$.
 \end{proof}

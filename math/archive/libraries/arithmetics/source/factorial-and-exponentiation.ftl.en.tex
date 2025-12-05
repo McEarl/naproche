@@ -9,11 +9,11 @@
 \importmodule[libraries/arithmetics]{factorial.ftl}
 \importmodule[libraries/arithmetics]{exponentiation-and-ordering.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Assume $n \Geq \Two$.
   Then $\Exp{n}{n} \Greater \Factorial{n}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Two}}{\Exp{n'}{n'} \Greater \Factorial{n'}}$.
 
@@ -45,11 +45,11 @@
   Consequently $\Exp{n}{n} \Greater \Factorial{n}$ (by a).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Assume $n \Geq \Four$.
   Then $\Factorial{n} \Greater \Exp{\Two}{n}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Four}}{\Factorial{n'} \Greater \Exp{\Two}{n'}}$.
 

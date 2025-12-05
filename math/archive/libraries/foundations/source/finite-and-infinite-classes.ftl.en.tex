@@ -12,20 +12,20 @@
 \symdecl*{finite}
 \symdecl*{infinite}
 
-\begin{definition}[forthel]
+\begin{definition*}[forthel]
   Let $X$ be a class and $n$ be a natural number.
   $X$ \emph{has $n$ elements} iff $X$ is equinumerous to $\NatSegment{\One}{n}$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=finite]
+\begin{definition*}[forthel,for=finite]
   Let $X$ be a class.
   $X$ is \emph{finite} iff there exists a natural number $n$ such that $X$ has $n$ elements.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X, Y$ be classes.
   If $X$ is finite and $Y$ is equinumerous to $X$ then $Y$ is finite.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume that $X$ is finite and $Y$ is equinumerous to $X$.
   Take a natural number $n$ and a bijection $f$ between $\NatSegment{\One}{n}$ and $X$ and a bijection $g$ between $X$ and $Y$.
@@ -34,10 +34,10 @@
   Hence $Y$ is finite.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a class.
   $X$ has zero elements iff $X \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$X$ has zero elements.}
     Then $X$ does not contain any element.
@@ -49,10 +49,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a class.
   $X$ has one element iff $X \Eq \Singleton{a}$ for some object $a$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$X$ has one element.}
     Take a bijection $f$ between $\NatSegment{\One}{\One}$ and $X$.
@@ -67,10 +67,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a class.
   $X$ has two elements iff $X \Eq \Pair{a}{b}$ for some distinct objects $a, b$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$X$ has two elements.}
     Take a bijection $f$ between $\NatSegment{\One}{\Two}$ and $X$.
@@ -92,10 +92,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number and $X$ be a class that has $n$ elements and $a$ be an object such that $a \NotElem X$.
   Then $X \Union \Singleton{a}$ has $n \Plus \One$ elements.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take a bijection $f$ between $X$ and $\NatSegment{\One}{n}$.
   Define \[g(x) \DefEq
@@ -142,15 +142,15 @@
   Hence $g$ is a bijection between $X \Union \Singleton{a}$ and $\NatSegment{\One}{n \Plus \One}$.
 \end{proof}
 
-\begin{definition}[forthel,for=infinite]
+\begin{definition*}[forthel,for=infinite]
   Let $X$ be a class.
   $X$ is \emph{infinite} iff $X$ is not finite.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X, Y$ be classes.
   If $X$ is infinite and $Y$ is equinumerous to $X$ then $Y$ is infinite.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume that $Y$ is equinumerous to $X$.
   If $Y$ is finite then $X$ is finite.

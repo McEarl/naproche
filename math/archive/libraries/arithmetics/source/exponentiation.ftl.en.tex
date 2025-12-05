@@ -10,26 +10,26 @@
 
 \symdef{Exp}[args=2]{{#1}^{#2}}
 
-\begin{signature}[forthel,for=Exp]
+\begin{signature*}[forthel,for=Exp]
   Let $n, m$ be natural numbers.
   $\emph{\Exp{n}{m}}$ is a natural number.
-\end{signature}
+\end{signature*}
 
-\begin{axiom}[forthel,for=Exp]
+\begin{axiom*}[forthel,for=Exp]
   Let $n$ be a natural number.
   Then $\Exp{n}{\Zero} \Eq \One$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel,for=Exp]
+\begin{axiom*}[forthel,for=Exp]
   Let $n, m$ be natural numbers.
   Then $\Exp{n}{m \Plus \One} \Eq \Exp{n}{m} \Mul n$.
-\end{axiom}
+\end{axiom*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Assume $n \NotEq \Zero$.
   Then $\Exp{\Zero}{n} \Eq \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take a natural number $m$ such that $n \Eq m \Plus \One$.
   Then $\Exp{\Zero}{n}
@@ -39,10 +39,10 @@
   Indeed $\Exp{\Zero}{m \Plus \One} \Eq \Exp{\Zero}{m} \Mul \Zero$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $\Exp{\One}{n} \Eq \One$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n'}{\Naturals}{\Exp{\One}{n'} \Eq \One}$.
 
@@ -61,10 +61,10 @@
   Thus $\Exp{\One}{n} \Eq \One$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $\Exp{n}{\One} \Eq n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Exp{n}{\One}
     \Eq \Exp{n}{\Zero \Plus \One}
@@ -73,10 +73,10 @@
     \Eq n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $\Exp{n}{\Two} \Eq n \Mul n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Exp{n}{\Two}
     \Eq \Exp{n}{\One \Plus \One}
@@ -84,10 +84,10 @@
     \Eq n \Mul n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $\Exp{k}{n \Plus m} \Eq \Exp{k}{n} \Mul \Exp{k}{m}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{m'}{\Naturals}{\Exp{k}{n \Plus m'} \Eq \Exp{k}{n} \Mul \Exp{k}{m'}}$.
 
@@ -113,10 +113,10 @@
   Thus $\Exp{k}{n \Plus m} \Eq \Exp{k}{n} \Mul \Exp{k}{m}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $\Exp{n}{m \Mul k} \Eq \Exp{\Exp{n}{m}}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{k'}{\Naturals}{\Exp{n}{m \Mul k'} \Eq \Exp{\Exp{n}{m}}{k'}}$.
 
@@ -141,10 +141,10 @@
   Consequently $\Exp{n}{m \Mul k} \Eq \Exp{\Exp{n}{m}}{k}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $\Exp{n \Mul m}{k} \Eq \Exp{n}{k} \Mul \Exp{m}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{k'}{\Naturals}{\Exp{n \Mul m}{k'} \Eq \Exp{n}{k'} \Mul \Exp{m}{k'}}$.
 
@@ -179,10 +179,10 @@
   Consequently $\Exp{n \Mul m}{k} \Eq \Exp{n}{k} \Mul \Exp{m}{k}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Then $\Exp{n}{m} \Eq \Zero$ iff $n \Eq \Zero$ and $m \NotEq \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$\Exp{n}{m} \Eq \Zero$.}
     Define $\Phi \DefEq \SClass{m'}{\Naturals}{\text{ if }\Exp{n}{m'} \Eq \Zero\text{ then }n \Eq \Zero\text{ and }m' \NotEq \Zero}$.

@@ -9,11 +9,11 @@
 \importmodule[libraries/arithmetics]{multiplication-and-ordering.ftl}
 \importmodule[libraries/arithmetics]{exponentiation.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   Then $n \Less m$ iff $\Exp{n}{k} \Less \Exp{m}{k}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \Less m$.}
     Define $\Phi \DefEq \SClass{k'}{\Naturals}{\text{ if }k' \Greater \One\text{ then }\Exp{n}{k'} \Less \Exp{m}{k'}}$.
@@ -128,11 +128,11 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   Then \[ \Exp{n}{k} \Eq \Exp{m}{k} \Implies n \Eq m. \]
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume $\Exp{n}{k} \Eq \Exp{m}{k}$.
   Suppose $n \NotEq m$.
@@ -143,11 +143,11 @@
   Contradiction.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   Then \[ \Exp{n}{k} \Leq \Exp{m}{k} \Iff n \Leq m. \]
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   If $\Exp{n}{k} \Less \Exp{m}{k}$ then $n \Less m$.
   If $\Exp{n}{k} \Eq \Exp{m}{k}$ then $n \Eq m$.
@@ -156,11 +156,11 @@
   If $n \Eq m$ then $\Exp{n}{k} \Eq \Exp{m}{k}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \Greater \One$.
   Then \[ n \Less m \Iff \Exp{k}{n} \Less \Exp{k}{m}. \]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \Less m$.}
     Define $\Phi \DefEq \SClass{m'}{\Naturals}{\text{ if }n \Less m'\text{ then }\Exp{k}{n} \Less \Exp{k}{m'}}$.
@@ -244,11 +244,11 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \Greater \One$.
   If $\Exp{k}{n} \Eq \Exp{k}{m}$ then $n \Eq m$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume $\Exp{k}{n} \Eq \Exp{k}{m}$.
   Suppose $n \NotEq m$.
@@ -259,11 +259,11 @@
   Contradiction.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \Greater \One$.
   Then $n \Leq m$ iff $\Exp{k}{n} \Leq \Exp{k}{m}$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   If $n \Leq m$ then $\Exp{k}{n} \Leq \Exp{k}{m}$.
 
@@ -271,10 +271,10 @@
   If $\Exp{k}{n} \Less \Exp{k}{m}$ then $n \Less m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $\Exp{n \Plus \One}{\Two} \Eq (\Exp{n}{\Two} \Plus (\Two \Mul n)) \Plus \One$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have
   \[  \Exp{n \Plus \One}{\Two}                       \]
@@ -287,11 +287,11 @@
   \[    \Eq (\Exp{n}{\Two} \Plus (\Two \Mul n)) \Plus \One.    \]
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Assume $n \Geq \Three$.
   Then $\Exp{n}{\Two} \Greater (\Two \Mul n) \Plus \One$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Three}}{\Exp{n'}{\Two} \Greater (\Two \Mul n') \Plus \One}$.
 
@@ -333,11 +333,11 @@
   Consequently $\Exp{n}{\Two} \Greater (\Two \Mul n) \Plus \One$ (by a).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Assume $n \Geq \Five$.
   Then $\Exp{\Two}{n} \Greater \Exp{n}{\Two}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   (a) Define $\Phi \DefEq \SClass{n'}{\NatGeq{\Five}}{\Exp{\Two}{n'} \Greater \Exp{n'}{\Two}}$.
 

@@ -8,10 +8,10 @@
 
 \importmodule[libraries/foundations]{classes.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Union B \Eq B \Union A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Union B \Subclass B \Union A$.
     Let $x \Elem A \Union B$.
@@ -28,10 +28,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Intersect B \Eq B \Intersect A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Intersect B \Subclass B \Intersect A$.
     Let $x \Elem A \Intersect B$.
@@ -48,10 +48,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $(A \Union B) \Union C \Eq A \Union (B \Union C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $((A \Union B) \Union C) \Subclass A \Union (B \Union C)$. %!
     Let $x \Elem (A \Union B) \Union C$.
@@ -70,10 +70,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $(A \Intersect B) \Intersect C \Eq A \Intersect (B \Intersect C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $((A \Intersect B) \Intersect C) \Subclass A \Intersect (B \Intersect C)$. %!
     Let $x \Elem (A \Intersect B) \Intersect C$.
@@ -92,10 +92,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Intersect (B \Union C) \Eq (A \Intersect B) \Union (A \Intersect C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Intersect (B \Union C) \Subclass (A \Intersect B) \Union (A \Intersect C)$.
     Let $x \Elem A \Intersect (B \Union C)$.
@@ -116,10 +116,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Union (B \Intersect C) \Eq (A \Union B) \Intersect (A \Union C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Union (B \Intersect C) \Subclass (A \Union B) \Intersect (A \Union C)$.
     Let $x \Elem A \Union (B \Intersect C)$.
@@ -140,30 +140,30 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A \Union A \Eq A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \Union A \Eq \CClass{x}{x \Elem A\text{ or }x \Elem A}$.
   Hence $A \Union A \Eq \CClass{x}{x \Elem A}$.
   Thus $A \Union A \Eq A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A \Intersect A \Eq A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \Intersect A \Eq \CClass{x}{x \Elem A\text{ and }x \Elem A}$.
   Hence $A \Intersect A \Eq \CClass{x}{x \Elem A}$.
   Thus $A \Intersect A \Eq A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Diff (B \Intersect C) \Eq (A \Diff B) \Union (A \Diff C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Diff (B \Intersect C) \Subclass (A \Diff B) \Union (A \Diff C)$.
     Let $x \Elem A \Diff (B \Intersect C)$.
@@ -187,10 +187,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Diff (B \Union C) \Eq (A \Diff B) \Intersect (A \Diff C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Diff (B \Union C) \Subclass (A \Diff B) \Intersect (A \Diff C)$.
     Let $x \Elem A \Diff (B \Union C)$.
@@ -214,30 +214,30 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Subclass A \Union B$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $x \Elem A$.
   Then $x \Elem A$ or $x \Elem B$.
   Hence $x \Elem A \Union B$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Intersect B \Subclass A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $x \Elem A \Intersect B$.
   Then $x \Elem A$ and $x \Elem B$.
   Hence $x \Elem A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Subclass B$ iff $A \Union B \Eq B$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$A \Subclass B$.}
 
@@ -262,10 +262,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Subclass B$ iff $A \Intersect B \Eq A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$A \Subclass B$.}
 
@@ -291,20 +291,20 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A \Diff A \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \Diff A$ has no elements.
   Indeed $A \Diff A \Eq \CClass{x}{x \Elem A\text{ and }x \NotElem A}$.
   Hence the thesis.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A \Diff \EmptyClass \Eq A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \Diff \EmptyClass \Eq \CClass{x}{x \Elem A\text{ and }x \NotElem \EmptyClass}$.
   No element is an element of $\EmptyClass$.
@@ -312,10 +312,10 @@
   Then we have the thesis.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Diff (A \Diff B) \Eq A \Intersect B$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Diff (A \Diff B) \Subclass A \Intersect B$.
     Let $x \Elem A \Diff (A \Diff B)$.
@@ -334,10 +334,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $B \Subclass A$ iff $A \Diff (A \Diff B) \Eq B$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$B \Subclass A$.} \end{case}
 
@@ -348,10 +348,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Intersect (B \Diff C) \Eq (A \Intersect B) \Diff (A \Intersect C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \Intersect (B \Diff C) \Subclass (A \Intersect B) \Diff (A \Intersect C)$.
     Let $x \Elem A \Intersect (B \Diff C)$.

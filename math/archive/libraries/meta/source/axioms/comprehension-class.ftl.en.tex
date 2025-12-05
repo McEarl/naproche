@@ -11,18 +11,18 @@
 \importmodule[libraries/meta]{notions?elements.ftl}
 
 \begin{fakeforthel}
-  \begin{axiom}
+  \begin{axiom*}
     Let $v_1,\dots,v_n$ be variables, $\tau[v_1,\dots,v_n]$ be a term and $\varphi[v_1,\dots,v_n]$ be a formula.
     Then $x \Elem \CClass{\tau[v_1,\dots,v_n]}{\varphi[v_1,\dots,v_n]}$ iff
     $x$ is an object and there exist $y_1,\dots,y_n$ such that $\varphi[y_1,\dots,y_n]$ and $x \Eq \tau[y_1,\dots,y_n]$.
-  \end{axiom}
+  \end{axiom*}
 \end{fakeforthel}
 
 \begin{fakeforthel}
-  \begin{corollary}
+  \begin{corollary*}
     Let $v$ be a variable and $\varphi[v]$ be a formula.
     Then $x \Elem \CClass{v}{\varphi[v]}$ iff $x$ is an object and $\varphi[x]$.
-  \end{corollary}
+  \end{corollary*}
 \end{fakeforthel}
 
 \end{smodule}

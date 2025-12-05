@@ -17,20 +17,20 @@
 \symdecl*{involution}
 \symdecl*{invertibility of composition of invertible maps}
 
-\begin{definition}[forthel,for=inverse]
+\begin{definition*}[forthel,for=inverse]
   Let $f$ be a map.
   An \emph{inverse of $f$} is a map $g$ from $\Range(f)$ to $\Dom(f)$ such that $f(a) \Eq b \Iff g(b) \Eq a$ for all $a \Elem \Dom(f)$ and all $b \Elem \Dom(g)$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=invertible]
+\begin{definition*}[forthel,for=invertible]
   Let $f$ be a map.
   $f$ is \emph{invertible} iff $f$ has an inverse.
-\end{definition}
+\end{definition*}
 
-\begin{lemma}[forthel]
+\begin{lemma*}[forthel]
   Let $f$ be a map and $g, g'$ be inverses of $f$.
   Then $g \Eq g'$.
-\end{lemma}
+\end{lemma*}
 \begin{proof}[forthel]
   We have $\Dom(g) \Eq \Range(f) \Eq \Dom(g')$.
 
@@ -43,17 +43,17 @@
   End.
 \end{proof}
 
-\begin{definition}[forthel,for={Inv,involutory,selfinverse}]
+\begin{definition*}[forthel,for={Inv,involutory,selfinverse}]
   Let $f$ be an invertible map.
   $\emph{\Inv{f}}$ is the inverse of $f$.
   Let $f$ is \emph{involutory} stand for $f$ is the inverse of $f$.
   Let $f$ is \emph{selfinverse} stand for $f$ is the inverse of $f$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{A}$.
   Then $g$ is the inverse of $f$ iff $g \Comp f \Eq \Id{A}$ and $f \Comp g \Eq \Id{B}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$g$ is the inverse of $f$.}
     We have
@@ -103,11 +103,11 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$.
   Assume that $f$ is invertible.
   Then $\Inv{f}$ is an invertible surjective map from $B$ onto $A$ such that $\Inv{(\Inv{f})} \Eq f$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\Inv{f}$ is a map from $B$ to $A$.
   Indeed $\Range(f) \Eq B$ and $\Dom(f) \Eq A$.
@@ -118,30 +118,30 @@
   Therefore $f$ is the inverse of $\Inv{f}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$.
   Assume that $f$ is invertible.
   Then $f \Comp \Inv{f} \Eq \Id{B}$ and $\Inv{f} \Comp f \Eq \Id{A}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\Inv{f}$ is a surjective map from $B$ onto $A$ .
   $\Inv{f}$ is the inverse of $f$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $a \Elem A$.
   Assume that $f$ is invertible.
   Then $\Inv{f}(f(a)) \Eq a$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Inv{f}(f(a)) \Eq (\Inv{f} \Comp f)(a) \Eq \Id{A}(a) \Eq a$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
   Assume that $f$ is invertible.
   Then $f(\Inv{f}(b)) \Eq b$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have
   $f(\Inv{f}(b))
@@ -150,11 +150,11 @@
     \Eq b$.
 \end{proof}
 
-\begin{proposition}[forthel,name=invertibility of composition of invertible maps]
+\begin{proposition*}[forthel,name=invertibility of composition of invertible maps]
   Let $A, B, C$ be classes and $f \FromOnto{A}{B}$ and $g \FromOnto{B}{C}$.
   Assume that $f$ and $g$ are invertible.
   Then $g \Comp f$ is invertible and $\Inv{g \Comp f} \Eq \Inv{f} \Comp \Inv{g}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\Inv{f}$ is a surjective map from $B$ onto $A$.
   $\Inv{g}$ is a surjective map from $C$ onto $B$.
@@ -193,11 +193,11 @@
   Indeed $g \Comp f$ is a surjective map from $A$ onto $C$ and $h$ is a surjective map from $C$ onto $A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $X \Subclass A$.
   Assume that $f$ is invertible.
   Then $f \Rest X$ is invertible and $\Inv{f\Rest X} \Eq \Inv{f} \Rest (\Im{f}{X})$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $f \Rest X$ is a surjective map from $X$ onto $\Im{f}{X}$.
   Take $g \Eq \Inv{f} \Rest (\Im{f}{X})$.
@@ -252,11 +252,11 @@
   Therefore $g$ is the inverse of $f \Rest X$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $Y \Subclass B$.
   Assume that $f$ is invertible.
   Then \[ \PreIm{f}{Y} \Eq \Im{\Inv{f}}{Y}. \]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Im{\Inv{f}}{Y} \Eq \CClass{\Inv{f}(b)}{b \Elem Y}$ and $\PreIm{f}{Y} \Eq \SClass{a}{A}{f(a) \Elem Y}$.
 
@@ -275,21 +275,21 @@
   End.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$ and $b \Elem B$.
   Assume that $f$ is invertible.
   Then \[ \PreIm{f}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}. \]
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   $\PreIm{f}{\Singleton{b}} \Eq \Im{\Inv{f}}{\Singleton{b}}$.
   We have $\Im{\Inv{f}}{\Singleton{b}} \Eq \CClass{\Inv{f}(c)}{c \Elem \Singleton{b}}$.
   Hence $\Im{\Inv{f}}{\Singleton{b}} \Eq \Singleton{\Inv{f}(b)}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$.
   Then $f$ is invertible iff $f$ is injective.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$f$ is invertible.}
     Let $a, b \Elem A$.
@@ -309,11 +309,11 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $A, B$ be classes and $f \FromOnto{A}{B}$.
   Assume that $f$ is invertible.
   Then $\Inv{f}$ is a bijection between $B$ and $A$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   $\Inv{f}$ is a surjective map from $B$ onto $A$.
   $\Inv{f}$ is invertible.
@@ -321,24 +321,24 @@
   Therefore $\Inv{f}$ is a bijection between $B$ and $A$.
 \end{proof}
 
-\begin{definition}[forthel,for=involution]
+\begin{definition*}[forthel,for=involution]
   Let $A$ be a class.
   An \emph{involution on $A$} is a selfinverse map $f$ on $A$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   $\Id{A}$ is an involution on $A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\Id{A} \Comp \Id{A} \Eq \Id{A}$.
   Hence $\Id{A}$ is selfinverse.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class and $f, g$ be involutions on $A$.
   Then $g \Comp f$ is an involution on $A$ iff $g \Comp f \Eq f \Comp g$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$g \Comp f$ is an involution on $A$.}
     Then $\Inv{g \Comp f}
@@ -363,15 +363,15 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $A$ be a class and $f$ be an involutions on $A$.
   Then $f \Comp f$ is an involution on $A$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class and $f$ be an involution on $A$.
   Then $f$ is a permutation of $A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $f$ is an invertible map of $A$ that surjects onto $A$.
   Hence $f$ is a bijection between $A$ and $A$.

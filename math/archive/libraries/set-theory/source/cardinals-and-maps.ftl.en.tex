@@ -14,20 +14,20 @@
 \symdecl*{existence condition for surjections}
 \symdecl*{cardinality of image}
 
-\begin{proposition}[forthel,name=cardinality of image under injection]
+\begin{proposition*}[forthel,name=cardinality of image under injection]
   Let $x, y$ be sets and $f \FromInto{x}{y}$ and $a \Subclass x$.
   Then $\Card{\Im{f}{a}} \Eq \Card{a}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $f \Rest a$ is a bijection between $a$ and $\Im{f}{a}$.
   $\Im{f}{a}$ is a set.
   Hence $\Card{a} \Eq \Card{\Im{f}{a}}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\kappa$ be a cardinal and $x \Subclass \kappa$.
   Then $\Card{x} \Leq \kappa$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\Card{x} \Greater \kappa$.
   Then $\kappa \Subclass \Card{x}$.
@@ -40,10 +40,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel,name=existence condition for injections]
+\begin{proposition*}[forthel,name=existence condition for injections]
   Let $x, y$ be sets.
   Then there exists an injective map from $x$ to $y$ iff $\Card{x} \Leq \Card{y}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{there exists an injective map from $x$ to $y$.}
     Consider an injective map $f$ from $x$ to $y$.
@@ -70,20 +70,20 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $x$ be a set and $y \Subclass x$.
   Then $\Card{y} \Leq \Card{x}$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Define $f(v) \DefEq v$ for $v \Elem y$.
   Then $f$ is an injective map from $y$ to $x$.
   Hence $\Card{y} \Leq \Card{x}$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $x, y$ be sets such that $\Card{y} \Less \Card{x}$.
   Then $x \Diff y$ is nonempty.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume the contrary.
   Then $x \Subclass y$.
@@ -91,10 +91,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel,name=existence condition for surjections]
+\begin{proposition*}[forthel,name=existence condition for surjections]
   Let $x, y$ be nonempty sets.
   Then there exists a surjective map from $x$ onto $y$ iff $\Card{x} \Geq \Card{y}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{there exists a surjective map from $x$ onto $y$.}
     Consider a surjective map $f$ from $x$ onto $y$.
@@ -134,20 +134,20 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be nonempty sets.
   $\Card{x} \Less \Card{y}$ iff there exists an injective map from $x$ to $y$ and there exists no surjective map from $x$ onto $y$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   There exists an injective map from $x$ to $y$ and there exists no surjective map from $x$ onto $y$ iff $\Card{x} \Leq \Card{y}$ and $\Card{x} \NotGeq \Card{y}$ (by \sn{existence condition for injections}, \sn{existence condition for surjections}).
   $\Card{x} \Leq \Card{y}$ and $\Card{x} \NotGeq \Card{y}$ iff $\Card{x} \Leq \Card{y}$ and $\Card{x} \NotEq \Card{y}$.
   $\Card{x} \Leq \Card{y}$ and $\Card{x} \NotEq \Card{y}$ iff $\Card{x} \Less \Card{y}$.
 \end{proof}
 
-\begin{proposition}[forthel,name=cardinality of image]
+\begin{proposition*}[forthel,name=cardinality of image]
   Let $x, y$ be sets and $f \FromTo{x}{y}$ and $a \Subclass x$.
   Then $\Card{\Im{f}{a}} \Leq \Card{a}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$a$ is empty.} \end{case}
 

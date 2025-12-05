@@ -10,24 +10,24 @@
 
 \symdef{Factorial}[args=1]{#1\comp!}
 
-\begin{signature}[forthel,for=Factorial]
+\begin{signature*}[forthel,for=Factorial]
   Let $n$ be a natural number.
   $\emph{\Factorial{n}}$ is a natural number.
-\end{signature}
+\end{signature*}
 
-\begin{axiom}[forthel,for=Factorial]
+\begin{axiom*}[forthel,for=Factorial]
   $\Factorial{\Zero} \Eq \One$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel,for=Factorial]
+\begin{axiom*}[forthel,for=Factorial]
   Let $n$ be a natural number.
   Then $\Factorial{n \Plus \One} \Eq \Factorial{n} \Mul (n \Plus \One)$.
-\end{axiom}
+\end{axiom*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $\Factorial{n} \NotEq \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n'}{\Naturals}{\Factorial{n'} \NotEq \Zero}$.
 

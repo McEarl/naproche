@@ -14,22 +14,22 @@
 \symdecl*{Cartesian product}
 \symdecl*{direct product}
 
-\begin{definition}[forthel,for=ordered pair]
+\begin{definition*}[forthel,for=ordered pair]
   A \emph{pair} is an object $p$ such that $p \Eq (a, b)$ for some objects $a, b$.
   Let an \emph{ordered pair} stand for a pair.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Prod,Cartesian product,direct product}]
+\begin{definition*}[forthel,for={Prod,Cartesian product,direct product}]
   Let $A, B$ be classes.
   $\emph{A \Prod B} \DefEq \CClass{(a, b)}{a \Elem A\text{ and }b \Elem B}$.
   Let the \emph{Cartesian product of $A$ and $B$} stand for $A \Prod B$.
   Let the \emph{direct product of $A$ and $B$} stand for $A \Prod B$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $a, b$ be objects.
   Then $(a, b) \Elem A \Prod B$ iff $a \Elem A$ and $b \Elem B$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$(a, b) \Elem A \Prod B$.}
     We can take $a' \Elem A$ and $b' \Elem B$ such that $(a, b) \Eq (a', b')$.
@@ -44,10 +44,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Prod B$ is empty iff $A$ is empty or $B$ is empty.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$A \Prod B$ is empty.}
     Assume that $A$ and $B$ are nonempty.
@@ -65,10 +65,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $a, b$ be objects.
   Then $\Singleton{a} \Prod \Singleton{b} \Eq \Singleton{(a, b)}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\Singleton{a} \Prod \Singleton{b} \Subclass \Singleton{(a, b)}$.
     Let $c \Elem \Singleton{a} \Prod \Singleton{b}$.
@@ -86,10 +86,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, A', B, B'$ be nonempty classes.
   If $A \Prod B \Eq A' \Prod B'$ then $A \Eq A'$ and $B \Eq B'$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $A \Prod B \Eq A' \Prod B'$.
 

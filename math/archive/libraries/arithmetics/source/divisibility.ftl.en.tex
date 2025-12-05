@@ -19,81 +19,81 @@
 \symdecl*{nontrivial divisor}
 \symdecl*{divisibility of summands}
 
-\begin{definition}[forthel,for={divisible,divide}]
+\begin{definition*}[forthel,for={divisible,divide}]
   Let $n, m$ be natural numbers.
   $\emph{n \Divides m}$ iff there exists a natural number $k$ such that $n \Mul k \Eq m$.
   Let $m$ is \emph{divisible by $n$} stand for $n \Divides m$.
   Let $n$ \emph{divides $m$} stand for $n \Divides m$.
   Let $\emph{n \NotDivides m}$ stand for $\Not n \Divides m$.
-\end{definition}
+\end{definition*}
 
-\begin{lemma}[forthel]
+\begin{lemma*}[forthel]
   Let $n, m$ be natural numbers.
   $n$ divides $m$ iff there exists a natural number $k$ such that $k \Mul n \Eq m$.
-\end{lemma}
+\end{lemma*}
 
-\begin{definition}[forthel,for={factor,divisor}]
+\begin{definition*}[forthel,for={factor,divisor}]
   Let $n$ be a natural number.
   A \emph{factor of $n$} is a natural number that divides $n$.
   Let a \emph{divisor of $n$} stand for a factor of $n$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=trivial divisor]
+\begin{definition*}[forthel,for=trivial divisor]
   Let $n$ be a natural number.
   A \emph{trivial divisor of $n$} is a divisor $m$ of $n$ such that $m \Eq \One$ or $m \Eq n$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=nontrivial divisor]
+\begin{definition*}[forthel,for=nontrivial divisor]
   Let $n$ be a natural number.
   A \emph{nontrivial divisor of $n$} is a divisor $m$ of $n$ such that $m \NotEq \One$ and $m \NotEq n$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel]
+\begin{definition*}[forthel]
   Let $n$ be a natural number.
   $n$ is \emph{composite} iff $n \Greater \One$ and $n$ has a nontrivial divisor.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n \Divides \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $n \Mul \Zero \Eq \Zero$.
   Hence $n \Divides \Zero$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   If $\Zero \Divides n$ then $n \Eq \Zero$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\Zero \Divides n$.
   Consider a natural number $k$ such that $\Zero \Mul k \Eq n$.
   Then $n \Eq \Zero$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $\One \Divides n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\One \Mul n \Eq n$.
   Hence $\One \Divides n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n \Divides n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $n \Mul \One \Eq n$.
   Hence $n \Divides n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   If $n \Divides \One$ then $n \Eq \One$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Divides \One$.
   Take a natural number $k$ such that $n \Mul k \Eq \One$.
@@ -128,10 +128,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Divides m$ then $n \Divides m \Mul k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Divides m$.
   Take $l \Elem \Naturals$ such that $n \Mul l \Eq m$.
@@ -141,15 +141,15 @@
   Hence $n \Divides m \Mul k$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Divides m$ then $n \Divides k \Mul m$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Divides m \Divides k$ then $n \Divides k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Divides m$ and $m \Divides k$.
   Take natural numbers $l,l'$ such that $n \Mul l \Eq m$ and $m \Mul l' \Eq k$.
@@ -160,10 +160,10 @@
   Hence $n \Divides k$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \NotEq \Zero$.
   If $n \Divides m$ and $m \Divides n$ then $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Divides m$ and $m \Divides n$.
   Take natural numbers $k,k'$ such that $n \Mul k \Eq m$ and $m \Mul k' \Eq n$.
@@ -176,10 +176,10 @@
   Therefore $n \Eq m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Divides m$ then $k \Mul n \Divides k \Mul m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Divides m$.
   Take a natural number $l$ such that $n \Mul l \Eq m$.
@@ -189,11 +189,11 @@
   Hence $k \Mul n \Divides k \Mul m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   Assume $k \NotEq \Zero$.
   If $k \Mul n \Divides k \Mul m$ then $n \Divides m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $k \Mul n \Divides k \Mul m$.
   Take a natural number $l$ such that $(k \Mul n) \Mul l \Eq k \Mul m$.
@@ -202,11 +202,11 @@
   Thus $n \Divides m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $k \Divides n$ and $k \Divides m$ then $k \Divides (n' \Mul n) \Plus (m' \Mul m)$
   for all natural numbers $n', m'$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $k \Divides n$ and $k \Divides m$.
   Let $n', m'$ be natural numbers.
@@ -219,10 +219,10 @@
   \[    \Eq (n' \Mul n) \Plus (m' \Mul m).                      \]
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $k \Divides n$ and $k \Divides m$ then $k \Divides n \Plus m$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume $k \Divides n$ and $k \Divides m$.
   Take $n' \Eq \One$ and $m' \Eq \One$.
@@ -231,10 +231,10 @@
   Hence $k \Divides n \Plus m$.
 \end{proof}
 
-\begin{proposition}[forthel,name=divisibility of summands]
+\begin{proposition*}[forthel,name=divisibility of summands]
   Let $n, m, k$ be natural numbers.
   If $k \Divides n$ and $k \Divides n \Plus m$ then $k \Divides m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $k \Divides n$ and $k \Divides n \Plus m$.
 
@@ -262,10 +262,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n, m \NotEq \Zero$.
   If $m \Divides n$ then $m \Leq n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $m \Divides n$.
   Take a natural number $k$ such that $m \Mul k \Eq n$.

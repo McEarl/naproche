@@ -11,31 +11,31 @@
 \symdef{List}[name=list,args=a,op=[\,]]{\comp[\argsep{#1}{\comp,}\comp]}
 \symdef{Cons}[op=::]{\,{::}\,}
 
-\begin{signature}[forthel,for=List]
+\begin{signature*}[forthel,for=List]
   A \emph{list} is an object.
-\end{signature}
+\end{signature*}
 
-\begin{signature}[forthel,for=List]
+\begin{signature*}[forthel,for=List]
   $\emph{\List{}}$ is a list.
-\end{signature}
+\end{signature*}
 
-\begin{signature}[forthel,for=List]
+\begin{signature*}[forthel,for=List]
   Let $a$ be an object and $L$ be a list.
   $\emph{a \Cons L}$ is a list.
   Let $\emph{\List{a}}$ stand for $a \Cons \List{}$.
   Let $\emph{\List{a,b}}$ stand for $a \Cons \List{b}$.
   Let $\emph{\List{a,b,c}}$ stand for $a \Cons \List{b,c}$.
-\end{signature}
+\end{signature*}
 
-\begin{axiom}[forthel,for=List]
+\begin{axiom*}[forthel,for=List]
   Let $L$ be a list.
   Then $L \Eq \List{}$ or $L \Eq a \Cons L'$ for some object $a$ and some list $L'$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel,for=List]
+\begin{axiom*}[forthel,for=List]
   Let $a$ be an object and $L$ be a list.
   Then $L \ILess a \Cons L$.
-\end{axiom}
+\end{axiom*}
 
 \end{smodule}
 \end{document}

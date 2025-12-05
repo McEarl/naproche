@@ -36,7 +36,7 @@
 \symdecl*{complement}
 \symdecl*{disjoint}
 
-\begin{definition}[forthel,for={subclass,Subclass,superclass,Superclass,proper subclass,ProperSubclass,proper superclass,ProperSuperclass,include}]
+\begin{definition*}[forthel,for={subclass,Subclass,superclass,Superclass,proper subclass,ProperSubclass,proper superclass,ProperSuperclass,include}]
   Let $A$ be a class.
   A \emph{subclass of $A$} is a class $B$ such that every element of $B$ is an
   element of $A$.
@@ -49,21 +49,21 @@
   Let $\emph{B \ProperSuperclass A}$ stand for $B$ is a proper superclass of $A$.
   Let \emph{$A$ includes $B$} stand for $B \Subclass A$.
   Let $B$ is \emph{included in $A$} stand for $B \Subclass A$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A \Subclass A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Every element of $A$ is contained in $A$.
   Therefore $A \Subclass A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   If $A \Subclass B$ and $B \Subclass C$ then $A \Subclass C$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $A \Subclass B$ and $B \Subclass C$.
   Then every element of $A$ is contained in $B$ and every element of $B$ is contained in $C$.
@@ -71,30 +71,30 @@
   Thus $A \Subclass C$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   If $A \Subclass B$ and $B \Subclass A$ then $A \Eq B$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $A \Subclass B$ and $B \Subclass A$.
   Then every element of $A$ is contained in $B$ and every element of $B$ is contained in $A$.
   Hence $A \Eq B$.
 \end{proof}
 
-\begin{definition}[forthel,for={empty,nonempty}]
+\begin{definition*}[forthel,for={empty,nonempty}]
   Let $A$ be a class.
   $A$ is \emph{empty} iff $A$ has no elements.
   Let $A$ is \emph{nonempty} stand for $A$ is not empty.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=EmptyClass]
+\begin{definition*}[forthel,for=EmptyClass]
   $\emph{\EmptyClass} \DefEq \CClass{x}{x \NotEq x}$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   $A$ is empty iff $A \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We can show that $\EmptyClass$ is empty.
   Indeed any element $x$ of $\EmptyClass$ is nonequal to $x$.
@@ -104,44 +104,44 @@
   Thus if $A$ is empty then $A \Eq \EmptyClass$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   $\EmptyClass$ is empty.
-\end{corollary}
+\end{corollary*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $A$ be a class.
   Then $\EmptyClass \Subclass A$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   $\EmptyClass$ has no elements.
   Hence every element of $\EmptyClass$ is contained in $A$.
 \end{proof}
 
-\begin{definition}[forthel,for={Pair,unordered pair}]
+\begin{definition*}[forthel,for={Pair,unordered pair}]
   Let $a, b$ be objects.
   $\emph{\Pair{a}{b}} \DefEq \CClass{x}{x \Eq a\text{ or }x \Eq b}$.
   Let the \emph{unordered pair of $a$ and $b$} stand for $\Pair{a}{b}$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=unordered pair]
+\begin{definition*}[forthel,for=unordered pair]
   An \emph{unordered pair} is a class $A$ such that $A \Eq \Pair{a}{b}$ for some distinct objects $a, b$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Singleton,singleton class}]
+\begin{definition*}[forthel,for={Singleton,singleton class}]
   Let $a$ be an object.
   $\emph{\Singleton{a}} \DefEq \CClass{x}{x \Eq a}$.
   Let the \emph{singleton class of $a$} stand for $\Singleton{a}$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=singleton class]
+\begin{definition*}[forthel,for=singleton class]
   A \emph{singleton class} is a class $A$ such that $A \Eq \Singleton{a}$ for some object $a$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $a, a', b, b'$ be objects.
   Assume $\Pair{a}{b} \Eq \Pair{a'}{b'}$.
   Then ($a \Eq a'$ and $b \Eq b'$) or ($a \Eq b'$ and $b \Eq a'$).
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $a \Eq a'$ or $a \Eq b'$.
   If $a \Eq a'$ then $b \Eq b'$.
@@ -149,48 +149,48 @@
   Hence ($a \Eq a'$ and $b \Eq b'$) or ($a \Eq b'$ and $b \Eq a'$).
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $a, a'$ be objects.
   If $\Singleton{a} \Eq \Singleton{a'}$ then $a \Eq a'$.
-\end{corollary}
+\end{corollary*}
 
-\begin{definition}[forthel,for=unique element]
+\begin{definition*}[forthel,for=unique element]
   Let $A$ be a class.
   A \emph{unique element of $A$} is an element $a$ of $A$ such that for each $x \Elem A$ we have $x \Eq a$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A$ has a unique element iff $A \Eq \Singleton{a}$ for some object $a$.
-\end{proposition}
+\end{proposition*}
 
-\begin{definition}[forthel,for={Union,union}]
+\begin{definition*}[forthel,for={Union,union}]
   Let $A, B$ be classes.
   $\emph{A \Union B} \DefEq \CClass{x}{x \Elem A\text{ or }x \Elem B}$.
   Let the \emph{union of $A$ and $B$} stand for $A \Union B$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Intersect,intersection}]
+\begin{definition*}[forthel,for={Intersect,intersection}]
   Let $A, B$ be classes.
   $\emph{A \Intersect B} \DefEq \CClass{x}{x \Elem A\text{ and }x \Elem B}$.
   Let the \emph{intersection of $A$ and $B$} stand for $A \Intersect B$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Diff,complement}]
+\begin{definition*}[forthel,for={Diff,complement}]
   Let $A, B$ be classes.
   $\emph{A \Diff B} \DefEq \CClass{x}{x \Elem A\text{ and }x \NotElem B}$.
   Let the \emph{complement of $B$ in $A$} stand for $A \Diff B$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=disjoint]
+\begin{definition*}[forthel,for=disjoint]
   Let $A, B$ be classes.
   $A$ and $B$ are \emph{disjoint} iff $A$ and $B$ have no common elements.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A$ and $B$ are disjoint iff $A \Intersect B$ is empty.
-\end{proposition}
+\end{proposition*}
 
 \end{smodule}
 \end{document}

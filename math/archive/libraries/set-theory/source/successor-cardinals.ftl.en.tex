@@ -13,9 +13,9 @@
 
 \symdecl*{successor cardinal}
 
-\begin{lemma}[forthel]
+\begin{lemma*}[forthel]
   For every ordinal $\alpha$ there exists a cardinal greater than $\alpha$.
-\end{lemma}
+\end{lemma*}
 \begin{proof}[forthel]
   Let $\alpha$ be an ordinal.
   Take $\kappa \Eq \Card{\Pow(\alpha)}$.
@@ -34,19 +34,19 @@
   End.
 \end{proof}
 
-\begin{definition}[forthel,for=SuccCard]
+\begin{definition*}[forthel,for=SuccCard]
   Let $\kappa$ be a cardinal.
   $\emph{\SuccCard{\kappa}}$ is the cardinal such that $\kappa \Less \SuccCard{\kappa}$ and there is no cardinal $\nu$ such that $\kappa \Less \nu \Less \SuccCard{\kappa}$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=successor cardinal]
+\begin{definition*}[forthel,for=successor cardinal]
   A \emph{successor cardinal} is a cardinal number $\kappa$ such that $\kappa \Eq \SuccCard{\nu}$ for some cardinal number $\nu$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $\kappa$ be a cardinal.
   Then $\Card{\alpha} \Leq \kappa$ for every $\alpha \Elem \SuccCard{\kappa}$.
-\end{proposition}
+\end{proposition*}
 
 \end{smodule}
 \end{document}

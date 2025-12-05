@@ -15,53 +15,53 @@
 \symdecl*{system of nonempty sets}
 \symdecl*{system of subsets}
 
-\begin{definition}[forthel,for=system of sets]
+\begin{definition*}[forthel,for=system of sets]
   A \emph{system of sets} is a class $X$ such that every element of $X$ is a set.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=system of nonempty sets]
+\begin{definition*}[forthel,for=system of nonempty sets]
   A \emph{system of nonempty sets} is a class $X$ such that every element of $X$ is a nonempty set.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=system of subsets]
+\begin{definition*}[forthel,for=system of subsets]
   Let $A$ be a class.
   A \emph{system of subsets of $A$} is a class $X$ such that every element of $X$ is a subset of $A$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $\EmptyClass$ is a system of subsets of $A$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $\Pow(A)$ is a system of subsets of $A$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X, Y$ be systems of sets.
   Then $X \Union Y$ is a system of sets.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X, Y$ be systems of sets.
   Then $X \Intersect Y$ is a system of sets.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X, Y$ be systems of sets.
   Then $X \Diff Y$ is a system of sets.
-\end{proposition}
+\end{proposition*}
 
-\begin{definition}[forthel,for=union over]
+\begin{definition*}[forthel,for=union over]
   Let $X$ be a system of sets.
   $\emph{\UnionOver X} \DefEq \CClass{a}{a \Elem x\text{ for some }x \Elem X}$.
   Let \emph{union over $X$} stand for $\UnionOver X$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   $\UnionOver \EmptyClass \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\UnionOver \EmptyClass \Eq \CClass{a}{a \Elem x\text{ for some }x \Elem \EmptyClass}$.
   $\EmptyClass$ has no elements.
@@ -69,10 +69,10 @@
   Thus $\UnionOver \EmptyClass \Eq \EmptyClass$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be sets.
   Then $\UnionOver \Pair{x}{y} \Eq x \Union y$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\UnionOver \Pair{x}{y} \Subclass x \Union y$.
     Let $a \Elem \UnionOver \Pair{x}{y}$.
@@ -89,20 +89,20 @@
   End.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $x$ be a set.
   Then $\UnionOver \Singleton{x} \Eq x$.
-\end{corollary}
+\end{corollary*}
 
-\begin{definition}[forthel,for=intersection over]
+\begin{definition*}[forthel,for=intersection over]
   Let $X$ be a system of sets.
   $\emph{\IntersectOver X} \DefEq \CClass{a}{a \Elem x\text{ for all }x \Elem X}$.
   Let the \emph{intersection over $X$} stand for $\IntersectOver X$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   $\IntersectOver \EmptyClass$ is the class of all objects.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $V \DefEq \CClass{x}{x\text{ is an object}}$.
   We have $\IntersectOver \EmptyClass \Subclass V$.
@@ -117,10 +117,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be sets.
   Then $\IntersectOver \Pair{x}{y} \Eq x \Intersect y$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\IntersectOver \Pair{x}{y} \Subclass x \Intersect y$.
     Let $a \Elem \IntersectOver \Pair{x}{y}$.
@@ -137,10 +137,10 @@
   End.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $x$ be a set.
   Then $\IntersectOver \Singleton{x} \Eq x$.
-\end{corollary}
+\end{corollary*}
 
 \end{smodule}
 \end{document}

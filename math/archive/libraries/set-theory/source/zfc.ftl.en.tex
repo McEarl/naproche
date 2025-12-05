@@ -18,9 +18,9 @@
 \importmodule[libraries/foundations]{pairs-and-products.ftl}
 \importmodule[libraries/foundations]{invertible-maps.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   $\EmptyClass$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take a set $x$ (by \sn{Set Existence Axiom}).
   Define $A \DefEq \SClass{y}{x}{y \NotEq y}$.
@@ -29,10 +29,10 @@
   Hence $\EmptyClass$ is a set.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be sets.
   Then $x \Union y$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take $X \Eq \Pair{x}{y}$.
   Then $X$ is a set.
@@ -42,28 +42,28 @@
   Thus $x \Union y$ is a set.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be sets.
   Then $x \Intersect y$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $x \Intersect y \Subclass x$.
   Hence $x \Intersect y$ is a set (by \sn{Separation Axiom}).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be sets.
   Then $x \Diff y$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $x \Diff y \Subclass x$.
   Hence $x \Diff y$ is a set (by \sn{Separation Axiom}).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be sets.
   Then $x \Prod y$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\Singleton{a}$ and $\Pair{a}{b}$ are sets for each $a \Elem x$ and each $b \Elem y$.
   Define $P \DefEq \CClass{\Pair{\Singleton{a}}{\Pair{a}{b}}}{a \Elem x\text{ and }b \Elem y}$.
@@ -169,30 +169,30 @@
   Therefore $x \Prod y$ is a set (by \sn{Replacement Axiom}).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $X$ be a nonempty system of sets.
   Then $\IntersectOver X$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take an element $x$ of $X$.
   Then $\IntersectOver X \Subclass x$.
   Hence $\IntersectOver X$ is a set (by \sn{Separation Axiom}).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $f$ be a map such that $\Dom(f)$ is a set.
   Then $\Range(f)$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\Range(f) \Eq \Im{f}{\Dom(f)}$ and $\Im{f}{\Dom(f)}$ is a set.
   Hence $\Range(f)$ is a set (by \sn{Replacement Axiom}).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class and $x$ be a set.
   Assume that there exists an injective map from $A$ to $x$.
   Then $A$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Consider an injective map $f$ from $A$ to $x$.
   Then $\Inv{f}$ is a bijection between $\Range(f)$ and $A$.
@@ -201,9 +201,9 @@
   Thus $A$ is a set (by \sn{Replacement Axiom}).
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   There exist no sets $x, y$ such that $x \Elem y$ and $y \Elem x$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
   Take sets $x,y$ such that $x \Elem y$ and $y \Elem x$.
@@ -224,21 +224,21 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $x$ be a set.
   Then $x \NotElem x$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $f, g$ be functions.
   Assume that $\Dom(f) \Eq \Dom(g)$ and $f(a) \Eq g(a)$ for all $a \Elem \Dom(f)$.
   Then $f \Eq g$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $x, y$ be sets.
   Then $\FunSpace{x}{y}$ is a set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $R \DefEq \SClass{F}{\Pow(x \Prod y)}{\text{ (for all }a \Elem x\text{ there exists a }b \Elem y\text{ such that }(a,b) \Elem F\text{) and for all }a \Elem x\text{ and all }b, b' \Elem y\text{ such that }(a,b), (a,b') \Elem F\text{ we have }b \Eq b'}$.
 

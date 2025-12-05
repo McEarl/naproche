@@ -8,45 +8,45 @@
 
 \importmodule[libraries/foundations]{maps.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X \Subclass A$.
   Then $\Im{f}{X} \Eq \CClass{f(x)}{x \Elem X}$.
-\end{proposition}
+\end{proposition*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$.
   Then $\Im{f}{A} \Eq \Range(f)$.
-\end{corollary}
+\end{corollary*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X \Subclass A$.
   Then $\Im{f}{X} \Eq \Range(f \Rest X)$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class and $X \Subclass A$.
   Then $\Im{\Id{A}}{X} \Eq X$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $B$ be a class and $Y \Subclass B$.
   Then $\PreIm{\Id{B}}{Y} \Eq Y$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y \Subclass B$ and $a \Elem A$.
   Then $f(a) \Elem Y$ iff $a \Elem \PreIm{f}{Y}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\PreIm{f}{Y} \Eq \SClass{x}{A}{f(x) \Elem Y}$.
   Hence $a \Elem \PreIm{f}{Y}$ iff $a \Elem A$ and $f(a) \Elem Y$.
   Then we have the thesis.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$.
   Then $\Im{f}{A} \Subclass B$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\Im{f}{A}
     \Eq \Im{f}{\Dom(f)}
@@ -54,20 +54,20 @@
     \Subclass B$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$.
   Then $\PreIm{f}{B} \Eq A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $\PreIm{f}{B} \Eq \SClass{a}{A}{f(a) \Elem B}$.
   $f(a) \Elem B$ for all $a \Elem A$.
   Hence the thesis.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$.
   Then $\Im{f}{\PreIm{f}{B}} \Eq \Im{f}{A}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\Im{f}{\PreIm{f}{B}} \Subclass \Im{f}{A}$.
     Let $b \Elem \Im{f}{\PreIm{f}{B}}$.
@@ -87,10 +87,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$.
   Then $\PreIm{f}{\Im{f}{A}} \Eq A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\PreIm{f}{\Im{f}{A}} \Eq \SClass{a}{A}{f(a) \Elem \Im{f}{A}}$.
   For all $a \Elem A$ we have $f(a) \Elem \Im{f}{A}$.
@@ -98,10 +98,10 @@
   Thus $\PreIm{f}{\Im{f}{A}} \Eq A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y \Subclass B$.
   Then $\Im{f}{\PreIm{f}{Y}} \Eq Y \Intersect \Im{f}{A}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\Im{f}{\PreIm{f}{Y}} \Subclass Y \Intersect \Im{f}{A}$.
     Let $b \Elem \Im{f}{\PreIm{f}{Y}}$.
@@ -118,15 +118,15 @@
   End.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y \Subclass B$.
   Then $\Im{f}{\PreIm{f}{Y}} \Subclass Y$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X \Subclass A$.
   Then $\PreIm{f}{\Im{f}{X}} \Superclass X$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $a \Elem X$.
   Then $f(a) \Elem \Im{f}{X}$.
@@ -134,10 +134,10 @@
   Indeed $\Im{f}{X} \Subclass B$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X \Subclass A$.
   Then $\Im{f}{X} \Eq \EmptyClass$ iff $X \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$\Im{f}{X}$ is empty.}
     Then there is no $a \Elem X$ such that $f(a) \Elem \Im{f}{X}$.
@@ -152,10 +152,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y \Subclass B$.
   Then $\PreIm{f}{Y} \Eq \EmptyClass$ iff $Y \Subclass B \Diff \Im{f}{A}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$\PreIm{f}{Y}$ is empty.}
     Let $b \Elem Y$.
@@ -182,10 +182,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X \Subclass A$ and $Y \Subclass B$.
   Then $\Im{f}{X} \Intersect Y \Eq \EmptyClass$ iff $X \Intersect \PreIm{f}{Y} \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$\Im{f}{X} \Intersect Y$ is empty.}
     Assume that $X \Intersect \PreIm{f}{Y}$ is nonempty.
@@ -206,10 +206,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes and $f \FromTo{A}{B}$ and $g \FromTo{B}{C}$ and $X \Subclass A$.
   Then $\Im{g \Comp f}{X} \Eq \Im{g}{\Im{f}{X}}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\Im{g \Comp f}{X} \Eq \CClass{g(f(a))}{a \Elem X}$.
   $\Im{f}{X}$ is a subclass of $B$.
@@ -218,10 +218,10 @@
   Therefore $\Im{g \Comp f}{X} \Eq \Im{g}{\Im{f}{X}}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes and $f \FromTo{A}{B}$ and $g \FromTo{B}{C}$ and $Z \Subclass C$.
   Then $\PreIm{g \Comp f}{Z} \Eq \PreIm{f}{\PreIm{g}{Z}}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $\PreIm{g \Comp f}{Z} \Eq \SClass{a}{A}{g(f(a)) \Elem Z}$.
   We have $\PreIm{g}{Z} \Eq \SClass{b}{B}{g(b) \Elem Z}$ and $\PreIm{f}{\PreIm{g}{Z}} \Eq \SClass{a}{A}{f(a) \Elem \PreIm{g}{Z}}$.
@@ -229,10 +229,10 @@
   Thus $\PreIm{g \Comp f}{Z} \Eq \PreIm{f}{\PreIm{g}{Z}}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X, X' \Subclass A$.
   If $X \Subclass X'$ then $\Im{f}{X} \Subclass \Im{f}{X'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $X \Subclass X'$.
   Let $b \Elem \Im{f}{X}$.
@@ -241,10 +241,10 @@
   Hence $b \Eq f(a) \Elem \Im{f}{X'}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y, Y' \Subclass B$.
   If $Y \Subclass Y'$ then $\PreIm{f}{Y} \Subclass \PreIm{f}{Y'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $Y \Subclass Y'$.
   Let $a \Elem \PreIm{f}{Y}$.
@@ -253,10 +253,10 @@
   Thus $a \Elem \PreIm{f}{Y'}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X, X' \Subclass A$.
   Then $\Im{f}{X \Union X'} \Eq \Im{f}{X} \Union \Im{f}{X'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\Im{f}{X \Union X'} \Subclass \Im{f}{X} \Union \Im{f}{X'}$.
     Let $b \Elem \Im{f}{X \Union X'}$.
@@ -283,10 +283,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y, Y' \Subclass B$.
   Then $\PreIm{f}{Y \Union Y'} \Eq \PreIm{f}{Y} \Union \PreIm{f}{Y'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\PreIm{f}{Y \Union Y'} \Subclass \PreIm{f}{Y} \Union \PreIm{f}{Y'}$.
     Let $a \Elem \PreIm{f}{Y \Union Y'}$.
@@ -307,10 +307,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X, X' \Subclass A$.
   Then $\Im{f}{X \Intersect X'} \Subclass \Im{f}{X} \Intersect \Im{f}{X'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $b \Elem \Im{f}{X \Intersect X'}$.
   Take $a \Elem X \Intersect X'$ such that $b \Eq f(a)$.
@@ -319,10 +319,10 @@
   Thus $b \Elem \Im{f}{X} \Intersect \Im{f}{X}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y, Y' \Subclass B$.
   Then $\PreIm{f}{Y \Intersect Y'} \Eq \PreIm{f}{Y} \Intersect \PreIm{f}{Y'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\PreIm{f}{Y \Intersect Y'} \Subclass \PreIm{f}{Y} \Intersect \PreIm{f}{Y'}$.
     Let $a \Elem \PreIm{f}{Y \Intersect Y'}$.
@@ -341,10 +341,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $X, X' \Subclass A$.
   Then $\Im{f}{X \Diff X'} \Superclass \Im{f}{X} \Diff \Im{f}{X'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let $b \Elem \Im{f}{X} \Diff \Im{f}{X'}$.
   Then $b \Elem \Im{f}{X}$ and $b \NotElem \Im{f}{X'}$.
@@ -355,10 +355,10 @@
   Therefore $b \Eq f(a) \Elem \Im{f}{X \Diff X'}$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes and $f \FromTo{A}{B}$ and $Y, Y' \Subclass B$.
   Then $\PreIm{f}{Y \Diff Y'} \Eq \PreIm{f}{Y} \Diff \PreIm{f}{Y'}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $\PreIm{f}{Y \Diff Y'} \Subclass \PreIm{f}{Y} \Diff \PreIm{f}{Y'}$.
     Let $a \Elem \PreIm{f}{Y \Diff Y'}$.

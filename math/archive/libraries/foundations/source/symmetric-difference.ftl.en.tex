@@ -10,16 +10,16 @@
 
 \symdef{SymDiff}[name=symmetric difference]{\,\triangle\,}
 
-\begin{definition}[forthel,for=symmetric difference]
+\begin{definition*}[forthel,for=symmetric difference]
   Let $A, B$ be classes.
   $\emph{A \SymDiff B} \DefEq (A \Union B) \Diff (A \Intersect B)$.
   Let the \emph{symmetric difference of $A$ and $B$} stand for $A \SymDiff B$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \SymDiff B \Eq (A \Diff B) \Union (B \Diff A)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Let us show that $A \SymDiff B \Subclass (A \Diff B) \Union (B \Diff A)$.
     Let $u \Elem A \SymDiff B$.
@@ -43,10 +43,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \SymDiff B \Eq B \SymDiff A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \SymDiff B
     \Eq (A \Union B) \Diff (A \Intersect B)
@@ -54,10 +54,10 @@
     \Eq B \SymDiff A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $(A \SymDiff B) \SymDiff C \Eq A \SymDiff (B \SymDiff C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take a class $X$ such that $X \Eq (((A \Diff B) \Union (B \Diff A)) \Diff C) \Union (C \Diff ((A \Diff B) \Union (B \Diff A)))$.
 
@@ -158,10 +158,10 @@
   End.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \Intersect (B \SymDiff C) \Eq (A \Intersect B) \SymDiff (A \Intersect C)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \Intersect (B \SymDiff C)
     \Eq A \Intersect ((B \Diff C) \Union (C \Diff B))
@@ -175,10 +175,10 @@
     \Eq (A \Intersect B) \SymDiff (A \Intersect C)$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Subclass B \Iff A \SymDiff B \Eq B \Diff A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$A \Subclass B$.}
     Then $A \Union B \Eq B$ and $A \Intersect B \Eq A$.
@@ -197,10 +197,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B, C$ be classes.
   Then $A \SymDiff B \Eq A \SymDiff C \Iff B \Eq C$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$A \SymDiff B \Eq A \SymDiff C$.}
 
@@ -248,10 +248,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A \SymDiff A \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \SymDiff A
     \Eq (A \Union A) \Diff (A \Intersect A)
@@ -259,10 +259,10 @@
     \Eq \EmptyClass$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class.
   Then $A \SymDiff \EmptyClass \Eq A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   $A \SymDiff \EmptyClass
     \Eq (A \Union \EmptyClass) \Diff (A \Intersect \EmptyClass)
@@ -270,10 +270,10 @@
     \Eq A$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A, B$ be classes.
   Then $A \Eq B \Iff A \SymDiff B \Eq \EmptyClass$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$A \Eq B$.}
     Then $A \SymDiff B

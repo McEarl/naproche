@@ -9,10 +9,10 @@
 \importmodule[libraries/arithmetics]{exponentiation-and-ordering.ftl}
 \importmodule[libraries/arithmetics]{divisibility.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers such that $n, m \NotEq \Zero$ and $k \Greater \One$.
   Then $\Exp{k}{n} \Divides \Exp{k}{m}$ iff $n \Leq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$\Exp{k}{n} \Divides \Exp{k}{m}$.}
     Assume $n \Greater m$.
@@ -35,10 +35,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a composite natural number.
   Then $n$ has a nontrivial divisor $m$ such that $\Exp{m}{\Two} \Leq n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $A \DefEq \SClass{m}{\Naturals}{m\text{ is a nontrivial divisor of }n}$.
   $A$ is nonempty.

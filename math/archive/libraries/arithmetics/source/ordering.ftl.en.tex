@@ -29,7 +29,7 @@
 \symdecl*{induction II}
 \symdecl*{induction III}
 
-\begin{definition}[forthel,for={less,NotLess,greater,NotGreater}]
+\begin{definition*}[forthel,for={less,NotLess,greater,NotGreater}]
   Let $n, m$ be natural numbers.
   $\emph{n \Less m}$ iff there exists a nonzero natural number $k$ such that $m \Eq n \Plus k$.
   Let $n$ is \emph{less than $m$} stand for $n \Less m$.
@@ -37,24 +37,24 @@
   Let $n$ is \emph{greater than $m$} stand for $n \Greater m$.
   Let $\emph{n \NotLess m}$ stand for $n$ is not less than $m$.
   Let $\emph{n \NotGreater m}$ stand for $n$ is not greater than $m$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=NatLess]
+\begin{definition*}[forthel,for=NatLess]
   Let $n$ be a natural number.
   $\emph{\NatLess{n}} \DefEq \SClass{k}{\Naturals}{k \Less n}$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=NatGreater]
+\begin{definition*}[forthel,for=NatGreater]
   Let $n$ be a natural number.
   $\emph{\NatGreater{n}} \DefEq \SClass{k}{\Naturals}{k \Greater n}$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=positive]
+\begin{definition*}[forthel,for=positive]
   Let $n$ be a natural number.
   $n$ is \emph{positive} iff $n \Greater \Zero$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for={Leq,Geq,NotLeq,NotGeq}]
+\begin{definition*}[forthel,for={Leq,Geq,NotLeq,NotGeq}]
   Let $n, m$ be natural numbers.
   $\emph{n \Leq m}$ iff there exists a natural number $k$ such that $m \Eq n \Plus k$.
   Let $n$ is \emph{less than or equal to $m$} stand for $n \Leq m$.
@@ -62,22 +62,22 @@
   Let $n$ is \emph{greater than or equal to $m$} stand for $n \Geq m$.
   Let $\emph{n \NotLeq m}$ stand for $n$ is not less than or equal to $m$.
   Let $\emph{n \NotGeq m}$ stand for $n$ is not greater than or equal to $m$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=NatLeq]
+\begin{definition*}[forthel,for=NatLeq]
   Let $n$ be a natural number.
   $\emph{\NatLeq{n}} \DefEq \SClass{k}{\Naturals}{k \Leq n}$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=NatGeq]
+\begin{definition*}[forthel,for=NatGeq]
   Let $n$ be a natural number.
   $\emph{\NatGeq{n}} \DefEq \SClass{k}{\Naturals}{k \Geq n }$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   $n \Leq m$ iff $n \Less m$ or $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \Leq m$.}
     Take a natural number $k$ such that $m \Eq n \Plus k$.
@@ -91,20 +91,20 @@
   \end{case}
 \end{proof}
 
-\begin{definition}[forthel,for=predecessor]
+\begin{definition*}[forthel,for=predecessor]
   Let $n$ be a natural number.
   A \emph{predecessor of $n$} is a natural number that is less than $n$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=successor]
+\begin{definition*}[forthel,for=successor]
   Let $n$ be a natural number.
   A \emph{successor of $n$} is a natural number that is greater than $n$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n$ is positive iff $n$ is nonzero.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n$ is positive.}
     Take a positive natural number $k$ such that $n \Eq \Zero \Plus k \Eq k$.
@@ -119,10 +119,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then \[ n \NotLess n. \]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
   Then we can take a positive natural number $k$ such that $n \Eq n \Plus k$.
@@ -130,10 +130,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Then \[ n \Less m \Implies n \NotEq m. \]
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Less m$.
   Take a positive natural number $k$ such that $m \Eq n \Plus k$.
@@ -141,10 +141,10 @@
   Hence $n \NotEq m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   If $n \Leq m$ and $m \Leq n$ then $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Leq m$ and $m \Leq n$.
   Take natural numbers $k, l$ such that $m \Eq n \Plus k$ and $n \Eq m \Plus l$.
@@ -159,10 +159,10 @@
   Therefore $m \Eq n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Less m \Less k$ then $n \Less k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Less m \Less k$.
   Take a positive natural number $a$ such that $m \Eq n \Plus a$.
@@ -175,10 +175,10 @@
   Hence $n \Less k$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Leq m \Leq k$ then $n \Leq k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Leq m \Leq k$.
   \begin{case}{$n \Eq m \Eq k$.} \end{case}
@@ -187,30 +187,30 @@
   \begin{case}{$n \Less m \Less k$.} \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Leq m \Less k$ then $n \Less k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Leq m \Less k$.
   If $n \Eq m$ then $n \Less k$.
   If $n \Less m$ then $n \Less k$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers.
   If $n \Less m \Leq k$ then $n \Less k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Less m \Leq k$.
   If $m \Eq k$ then $n \Less k$.
   If $m \Less k$ then $n \Less k$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   If $n \Less m$ then $n \Plus \One \Leq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Less m$.
   Take a positive natural number $k$ such that $m \Eq n \Plus k$.
@@ -231,10 +231,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Then $n \Less m$ or $n \Eq m$ or $n \Greater m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{m'}{\Naturals}{n \Less m'\text{ or }n \Eq m'\text{ or }n \Greater m'}$.
 
@@ -265,10 +265,10 @@
   Therefore $n \Less m$ or $n \Eq m$ or $n \Greater m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Then $n \NotLess m$ iff $n \Geq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \NotLess m$.}
     Then $n \Eq m$ or $n \Greater m$.
@@ -283,10 +283,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   If $n \Less m \Leq n \Plus \One$ then $m \Eq n \Plus \One$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Less m \Leq n \Plus \One$.
   Take a positive natural number $k$ such that $m \Eq n \Plus k$.
@@ -339,10 +339,10 @@
     \Eq m$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   If $n \Leq m \Less n \Plus \One$ then $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $n \Leq m \Less n \Plus \One$.
 
@@ -354,10 +354,10 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n$ be a natural number.
   There is no natural number $m$ such that $n \Less m \Less n \Plus \One$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Assume the contrary.
   Take a natural number $m$ such that $n \Less m \Less n \Plus \One$.
@@ -367,10 +367,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n \Plus \One \Geq \One$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \Eq \Zero$.} \end{case}
 
@@ -380,10 +380,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel,name=preservation of ordering under right-addition]
+\begin{proposition*}[forthel,name=preservation of ordering under right-addition]
   Let $n, m, k$ be natural numbers.
   Then $n \Less m$ iff $n \Plus k \Less m \Plus k$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \Less m$.}
     Take a positive natural number $l$ such that $m \Eq n \Plus l$.
@@ -405,29 +405,29 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $n \Less m$ iff $k \Plus n \Less k \Plus m$.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   We have $k \Plus n \Eq n \Plus k$ and $k \Plus m \Eq m \Plus k$.
   Hence $k \Plus n \Less k \Plus m$ iff $n \Plus k \Less m \Plus k$.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $n \Leq m$ iff $k \Plus n \Leq k \Plus m$.
-\end{corollary}
+\end{corollary*}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m, k$ be natural numbers.
   Then $n \Leq m$ iff $n \Plus k \Leq m \Plus k$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel,name=wellfoundedness of ordering]
+\begin{proposition*}[forthel,name=wellfoundedness of ordering]
   Let $A$ be a nonempty subclass of $\Naturals$.
   Then there exists a $m \Elem A$ such that $m \Leq n$ for all $n \Elem A$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
 
@@ -464,11 +464,11 @@
   Contradiction.
 \end{proof}
 
-\begin{theorem}[forthel,name=induction II]
+\begin{theorem*}[forthel,name=induction II]
   Let $A$ be a class.
   Assume for all $n \Elem \Naturals$ if $A$ contains all predecessors of $n$ then $A$ contains $n$.
   Then $A$ contains every natural number.
-\end{theorem}
+\end{theorem*}
 \begin{proof}[forthel]
   Assume the contrary.
   Take a natural number $n$ that is not contained in $A$.
@@ -480,12 +480,12 @@
   Contradiction.
 \end{proof}
 
-\begin{theorem}[forthel,name=induction III]
+\begin{theorem*}[forthel,name=induction III]
   Let $A$ be a class.
   Let $k$ be a natural number such that $k \Elem A$.
   Assume that for all $n \Elem \NatGeq{k}$ if $n \Elem A$ then $n \Plus \One \Elem A$.
   Then for all $n \Elem \NatGeq{k}$ we have $n \Elem A$.
-\end{theorem}
+\end{theorem*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n}{\Naturals}{\text{ if }n \Geq k\text{ then }n \Elem A}$.
 

@@ -13,16 +13,16 @@
 \symdecl*{Dedekind Recursion Existence}
 \symdecl*{Dedekind Recursion Uniqueness}
 
-\begin{definition}[forthel,for=recursively defined]
+\begin{definition*}[forthel,for=recursively defined]
   Let $a$ be an object and $f$ be a map.
   Let $\varphi$ be a map from $\Naturals$ to $\Dom(f)$.
   $\varphi$ is \emph{recursively defined by $a$ and $f$} iff $\varphi(\Zero) \Eq a$ and $\varphi(n \Plus \One) \Eq f(\varphi(n))$ for every $n \Elem \Naturals$.
-\end{definition}
+\end{definition*}
 
-\begin{theorem}[forthel,title=Dedekind's Recursion Theorem: Existence,name=Dedekind Recursion Existence]
+\begin{theorem*}[forthel,title=Dedekind's Recursion Theorem: Existence,name=Dedekind Recursion Existence]
   Let $A$ be a set and $a \Elem A$ and $f \FromTo{A}{A}$.
   Then there exists a $\varphi \FromTo{\Naturals}{A}$ that is recursively defined by $a$ and $f$.
-\end{theorem}
+\end{theorem*}
 \begin{proof}[forthel]
   (a) Define \[ \Phi \DefEq \SClass{H}{\Pow(\Naturals \Prod A)}{\classtext{$(\Zero, a) \Elem H$ and for all $n \Elem \Naturals$ and all $x \Elem A$ if $(n, x) \Elem H$ then $(n \Plus \One, f(x)) \Elem H$}}. \]
 
@@ -286,13 +286,13 @@
   \end{proof}
 \end{proof}
 
-\begin{theorem}[forthel,title=Dedekind's Recursion Theorem: Uniqueness,name=Dedekind Recursion Uniqueness]
+\begin{theorem*}[forthel,title=Dedekind's Recursion Theorem: Uniqueness,name=Dedekind Recursion Uniqueness]
   Let $A$ be a set and $a \Elem A$ and $f \FromTo{A}{A}$.
   Let $\varphi, \varphi' \FromTo{\Naturals}{A}$.
   Assume that $\varphi$ and $\varphi'$ are recursively defined by $a$ and
   $f$.
   Then $\varphi \Eq \varphi'$.
-\end{theorem}
+\end{theorem*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{n}{\Naturals}{\varphi(n) \Eq \varphi'(n)}$.
 

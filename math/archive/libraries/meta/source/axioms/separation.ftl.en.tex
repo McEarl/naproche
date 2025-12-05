@@ -12,18 +12,18 @@
 \importmodule[libraries/meta]{relations?equality.ftl}
 
 \begin{fakeforthel}
-  \begin{axiom}
+  \begin{axiom*}
     Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
     If $A$ is a set then $\SClass{\tau}{A}{\varphi}$ is a set.
-  \end{axiom}
+  \end{axiom*}
 \end{fakeforthel}
 
 \begin{forthel}
-  \begin{corollary}
+  \begin{corollary*}
     Let $A$ be a set and $B$ be a class.
     Assume that every element of $B$ is an element of $A$.
     Then $B$ is a set.
-  \end{corollary}
+  \end{corollary*}
   \begin{proof}
     Define $C \DefEq \SClass{x}{A}{x \Elem B}$.
     Then $C$ is a set and $C \Eq B$.

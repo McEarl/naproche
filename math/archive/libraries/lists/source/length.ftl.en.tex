@@ -11,19 +11,19 @@
 
 \symdef{Length}{\textsf{length}}
 
-\begin{signature}[forthel,for=Length]
+\begin{signature*}[forthel,for=Length]
   Let $L$ be a list.
   $\emph{\Length(L)}$ is a natural number.
-\end{signature}
+\end{signature*}
 
-\begin{axiom}[forthel,for=Length]
+\begin{axiom*}[forthel,for=Length]
   $\Length(\List{}) \Eq \Zero$.
-\end{axiom}
+\end{axiom*}
 
-\begin{axiom}[forthel,for=Length]
+\begin{axiom*}[forthel,for=Length]
   Let $a$ be an object and $L$ be a list.
   Then $\Length(a \Cons L) \Eq \Length(L) \Plus \One$.
-\end{axiom}
+\end{axiom*}
 
 \end{smodule}
 \end{document}

@@ -10,15 +10,15 @@
 
 \symdef{NatSegment}[args=2]{\comp{\{}#1\comp{,\dots,}#2\comp{\}}}
 
-\begin{definition}[forthel,for=NatSegment]
+\begin{definition*}[forthel,for=NatSegment]
   Let $n, m$ be natural numbers.
   $\emph{\NatSegment{n}{m}} \DefEq \SClass{k}{\Naturals}{n \Leq k \Leq m}$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   If $\NatSegment{\One}{n} \Eq \NatSegment{\One}{m}$ then $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\NatSegment{\One}{n} \Eq \NatSegment{\One}{m}$.
 
@@ -63,10 +63,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $\NatSegment{\One}{n \Plus \One} \Eq \NatSegment{\One}{n} \Union \Singleton{n \Plus \One}$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have
   $\NatSegment{\One}{n \Plus \One} \Subclass \NatSegment{\One}{n} \Union \Singleton{n \Plus \One}$ and $\NatSegment{\One}{n} \Union \Singleton{n \Plus \One} \Subclass \NatSegment{\One}{n \Plus \One}$.

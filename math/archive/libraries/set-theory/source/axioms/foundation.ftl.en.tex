@@ -12,21 +12,21 @@
 \symdecl*{wellfoundedness of membership relation}
 \symdecl*{epsilon induction}
 
-\begin{axiom}[forthel,title=Foundation,name=Foundation Axiom]
+\begin{axiom*}[forthel,title=Foundation,name=Foundation Axiom]
   Let $X$ be a nonempty system of sets.
   Then $X$ has an element $x$ such that $X$ and $x$ are disjoint.
-\end{axiom}
+\end{axiom*}
 
-\begin{corollary}[forthel,name=wellfoundedness of membership relation]
+\begin{corollary*}[forthel,name=wellfoundedness of membership relation]
   Let $X$ be a nonempty system of sets.
   Then $X$ has an element $x$ such that for no $y \Elem X$ we have $y \Elem x$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel,name=epsilon induction]
+\begin{proposition*}[forthel,name=epsilon induction]
   Let $\Phi$ be a class.
   Assume that for all sets $x$ if $\Phi$ contains every element of $x$ that is a set then $\Phi$ contains $x$.
   Then $\Phi$ contains every set.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
   Define $M \DefEq \CClass{x}{x\text{ is a set such that }x \NotElem \Phi}$.

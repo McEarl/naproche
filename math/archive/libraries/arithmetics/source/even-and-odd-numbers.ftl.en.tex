@@ -12,20 +12,20 @@
 \symdecl*{even}
 \symdecl*{odd}
 
-\begin{definition}[forthel,for=even]
+\begin{definition*}[forthel,for=even]
   Let $n$ be a natural number.
   $n$ is \emph{even} iff $n$ is divisible by $\Two$.
-\end{definition}
+\end{definition*}
 
-\begin{definition}[forthel,for=odd]
+\begin{definition*}[forthel,for=odd]
   Let $n$ be a natural number.
   $n$ is \emph{odd} iff $n$ is not divisible by $\Two$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   $n$ is even iff $n \Eq \Two \Mul m$ for some natural number $m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n$ is even.}
     Then $\Two$ divides $n$.
@@ -38,10 +38,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   $n$ is odd iff $n \Eq (\Two \Mul m) \Plus \One$ for some natural number $m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n$ is odd.}
     (a) Define $\Phi \DefEq \SClass{n'}{\Naturals}{\text{ if }n'\text{ is odd then }n' \Eq (\Two \Mul m) \Plus \One\text{ for some natural number }m}$.
@@ -91,10 +91,10 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   $n$ is odd iff $n \Eq (\Two \Mul m) \Minus  \One$ for some positive natural number $m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n$ is odd.}
     Consider a natural number $k$ such that $n \Eq (\Two \Mul k) \Plus  \One$.
@@ -128,11 +128,11 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ and $m$ are even.
   Then $n \Plus m$ is even.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq \Two \Mul k$ and $m \Eq \Two \Mul l$.
   Then $n \Plus m
@@ -141,11 +141,11 @@
   Hence $n \Plus m$ is even.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ is even and $m$ is odd.
   Then $n \Plus m$ is odd.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq \Two \Mul k$ and $m \Eq (\Two \Mul l) \Plus  \One$.
   Then $n \Plus m
@@ -155,17 +155,17 @@
   Hence $n \Plus m$ is odd.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ is odd and $m$ is even.
   Then $n \Plus m$ is odd.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ and $m$ are odd.
   Then $n \Plus m$ is even.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq (\Two \Mul k) \Plus  \One$ and $m \Eq (\Two \Mul l) \Plus  \One$.
   Then $n \Plus m
@@ -181,11 +181,11 @@
     Hence $n \Plus m$ is even.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   Assume that $n, m$ are even.
   Then $n \Minus m$ is even.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq \Two \Mul k$ and $m \Eq \Two \Mul l$.
   Then $k \Geq l$.
@@ -195,11 +195,11 @@
   Thus $n \Minus m$ is even.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   Assume that $n$ is even and $m$ is odd.
   Then $n \Minus m$ is odd.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq \Two \Mul k$ and $m \Eq (\Two \Mul l) \Plus  \One$.
   Then $k \Geq l$ and $\Two \Mul (k \Minus l) \Geq  \One$.
@@ -210,11 +210,11 @@
   Thus $n \Minus m$ is odd.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   Assume that $n$ is odd and $m$ is even.
   Then $n \Minus m$ is odd.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq (\Two \Mul k) \Plus  \One$ and $m \Eq \Two \Mul l$.
   Then $k \Geq l$.
@@ -228,11 +228,11 @@
   Thus $n \Minus m$ is odd.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   Assume that $n, m$ are odd.
   Then $n \Minus m$ is even.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq (\Two \Mul k) \Plus  \One$ and $m \Eq (\Two \Mul l) \Plus  \One$.
   Then $k \Geq l$.
@@ -249,11 +249,11 @@
   Therefore $n \Minus m$ is even.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ is even or $n$ is even.
   Then $n \Mul m$ is even.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n$ is even.}
     Take a natural number $k$ such that $n \Eq \Two \Mul k$.
@@ -274,11 +274,11 @@
   \end{case}
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ and $m$ are odd.
   Then $n \Mul m$ is odd.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take natural numbers $k, l$ such that $n \Eq (\Two \Mul k) \Plus  \One$ and $m \Eq (\Two \Mul l) \Plus  \One$.
   Then $n \Mul m

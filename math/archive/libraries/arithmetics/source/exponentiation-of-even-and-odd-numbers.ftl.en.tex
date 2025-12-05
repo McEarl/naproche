@@ -9,11 +9,11 @@
 \importmodule[libraries/arithmetics]{exponentiation.ftl}
 \importmodule[libraries/arithmetics]{even-and-odd-numbers.ftl}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $m \Greater \Zero$.
   Assume that $n$ is even.
   Then $\Exp{n}{m}$ is even.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Take a natural number $k$ such that $n \Eq \Two \Mul k$.
   Consider a natural number $m'$ such that $m \Eq m' \Plus \One$.
@@ -27,11 +27,11 @@
   Hence $\Exp{n}{m}$ is even.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers.
   Assume that $n$ is odd.
   Then $\Exp{n}{m}$ is odd.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Define $\Phi \DefEq \SClass{m'}{\Naturals}{\Exp{n}{m'}\text{ is odd}}$.
 

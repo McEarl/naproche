@@ -12,16 +12,16 @@
 
 \symdecl*{associativity of addition and subtraction}
 
-\begin{definition}[forthel,for=difference]
+\begin{definition*}[forthel,for=difference]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   $\emph{n \Minus m}$ is the natural number $k$ such that $n \Eq m \Plus k$.
   Let the \emph{difference of $n$ and $m$} stand for $n \Minus m$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   Then $n \Minus m \Eq \Zero$ iff $n \Eq m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   \begin{case}{$n \Minus m \Eq \Zero$.}
     Then $n
@@ -39,34 +39,34 @@
   \end{case}
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   Let $n$ be a natural number.
   Then $n \Minus n \Eq \Zero$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n$ be a natural number.
   Then $n \Minus \Zero \Eq n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $n
     \Eq (n \Minus \Zero) \Plus \Zero
     \Eq n \Minus \Zero$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   Then $n \Minus m \Leq n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have $(n \Minus m) \Plus m \Eq n$.
   Hence $n \Minus m \Leq n$.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m$ be natural numbers such that $n \Geq m$.
   If $\Zero \NotEq m \Less n$ then $n \Minus m \Less n$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume $\Zero \NotEq m \Less n$.
   Suppose $n \Minus m \Geq n$.
@@ -79,10 +79,10 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers such that $n \Geq m$.
   Then $(n \Minus m) \Plus k \Eq (n \Plus k) \Minus m$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have
   \[  ((n \Minus m) \Plus k) \Plus m       \]
@@ -93,15 +93,15 @@
   Hence $(n \Minus m) \Plus k \Eq (n \Plus k) \Minus m$.
 \end{proof}
 
-\begin{corollary}[forthel,name=associativity of addition and subtraction]
+\begin{corollary*}[forthel,name=associativity of addition and subtraction]
   Let $n, m, k$ be natural numbers such that $n \Geq m$.
   Then $k \Plus (n \Minus m) \Eq (k \Plus n) \Minus m$.
-\end{corollary}
+\end{corollary*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n, m, k$ be natural numbers such that $n \Geq  m \Plus k$.
   Then $(n \Minus m) \Minus k \Eq n \Minus (m \Plus k)$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   We have
   \[  ((n \Minus m) \Minus k) \Plus (m \Plus k)       \]

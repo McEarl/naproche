@@ -12,22 +12,22 @@
 
 \symdecl*{recursive}
 
-\begin{definition}[forthel,for=OrdFunSpace]
+\begin{definition*}[forthel,for=OrdFunSpace]
   Let $A$ be a class.
   \[ \emph{\OrdFunSpace{A}} \DefEq \CClass{f}{f\text{ is a map from }\alpha\text{ to }A\text{ for some ordinal }\alpha}. \]
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $A$ be a class and $f$ be a map to $A$ such that $\Dom(f)$ is a transitive subclass of $\Ordinals$ and $\alpha \Elem \Dom(f)$.
   Then $f \Rest \alpha \Elem \OrdFunSpace{A}$.
-\end{proposition}
+\end{proposition*}
 
 \inlineforthel{[prover vampire]}
 
-\begin{definition}[forthel,for=recursive]
+\begin{definition*}[forthel,for=recursive]
   Let $H$ be a map and $G \FromTo{\OrdFunSpace{A}}{A}$ for some class $A$ such that $H$ is a map to $A$.
   $H$ is \emph{recursive regarding $G$} iff $\Dom(H)$ is a transitive subclass of $\Ordinals$ and for all $\alpha \Elem \Dom(H)$ we have \[ H(\alpha) \Eq G(H \Rest \alpha). \]
-\end{definition}
+\end{definition*}
 
 \inlineforthel{[prover eprover]}
 

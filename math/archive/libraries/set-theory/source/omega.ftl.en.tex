@@ -14,26 +14,26 @@
 \symdecl*{natural number}
 \symdecl*{transfinite induction III}
 
-\begin{definition}[forthel,for={Infinity,natural number}]
+\begin{definition*}[forthel,for={Infinity,natural number}]
   \[ \emph{\Infinity} \DefEq \SClass{n}{\Ordinals}{\classtext{$n \Elem X$ for every $X \Subclass \Ordinals$ such that $\Zero \Elem X$ and for all $x \Elem X$ we have $\Succ(x) \Elem X$}}. \]
   Let a \emph{natural number} stand for an element of $\Infinity$.
-\end{definition}
+\end{definition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   $\Zero \Elem \Infinity$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n \Elem \Infinity$.
   Then $\Succ(n) \Elem \Infinity$.
-\end{proposition}
+\end{proposition*}
 
-\begin{proposition}[forthel,name=transfinite induction III]
+\begin{proposition*}[forthel,name=transfinite induction III]
   Let $\Phi \Subclass \Infinity$.
   Assume that $\Zero \Elem \Phi$ and for every $x \Elem \Phi$ we have
   $\Succ(x) \Elem \Phi$.
   Then $\Phi \Eq \Infinity$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Suppose $\Phi \NotEq \Infinity$.
   Consider an element $n$ of $\Infinity$ that is not contained in $\Phi$.
@@ -64,9 +64,9 @@
   Contradiction.
 \end{proof}
 
-\begin{corollary}[forthel]
+\begin{corollary*}[forthel]
   $\Infinity$ is a set.
-\end{corollary}
+\end{corollary*}
 \begin{proof}[forthel]
   Define $f(n) \DefEq \Succ(n)$ for $n \Elem \Infinity$.
   Take a subset $X$ of $\Infinity$ that is inductive regarding $\Zero$ and $f$.
@@ -76,10 +76,10 @@
   Therefore $\Infinity$ is a set.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Let $n \Elem \Infinity$.
   Then $n \Eq \Zero$ or $n \Eq \Succ(m)$ for some $m \Elem \Infinity$.
-\end{proposition}
+\end{proposition*}
 \begin{proof}[forthel]
   Assume the contrary.
   Consider a $k \Elem \Infinity$ such that neither $k \Eq \Zero$ nor $k \Eq \Succ(m)$ for
@@ -102,9 +102,9 @@
   Contradiction.
 \end{proof}
 
-\begin{proposition}[forthel]
+\begin{proposition*}[forthel]
   Every element of $\Infinity$ is an ordinal.
-\end{proposition}
+\end{proposition*}
 
 \end{smodule}
 \end{document}
