@@ -43,15 +43,93 @@ access to all macros described in this document.
 We therefore provide some symbolic notations for logical connectives and
 quantifiers that are supported by \ForTheL:
 
+
+\subsection{Truth}\label{sec:truth}
+
 \inputref[libraries/meta]{propositions/truth.ftl.en.tex}
+
+\begin{axiom*}
+  $\TRUE$ is true.
+\end{axiom*}
+
+
+\subsection{Falsity}\label{sec:falsity}
+
 \inputref[libraries/meta]{propositions/falsity.ftl.en.tex}
+
+\begin{axiom*}
+  $\FALSE$ is false.
+\end{axiom*}
+
+
+\subsection{Negation}\label{sec:negation}
+
 \inputref[libraries/meta]{propositions/negation.ftl.en.tex}
+
+\begin{axiom*}
+  Let $\varphi$ be a formula.
+  $\NOT\varphi$ is true iff $\varphi$ is false.
+\end{axiom*}
+
+
+\subsection{Conjunction}\label{sec:conjunction}
+
 \inputref[libraries/meta]{propositions/conjunction.ftl.en.tex}
+
+\begin{axiom*}
+  Let $\varphi, \psi$ be formulas.
+  $\varphi \AND\psi$ is true iff $\varphi$ is true and $\psi$ is true.
+\end{axiom*}
+
+
+\subsection{Disjunction}\label{sec:disjunction}
+
 \inputref[libraries/meta]{propositions/disjunction.ftl.en.tex}
+
+\begin{axiom*}
+  Let $\varphi, \psi$ be formulas.
+  $\varphi \OR \psi$ is true iff $\varphi$ is true or $\psi$ is true.
+\end{axiom*}
+
+
+\subsection{Implication}\label{sec:implication}
+
 \inputref[libraries/meta]{propositions/implication.ftl.en.tex}
+
+\begin{axiom*}
+  Let $\varphi, \psi$ be formulas.
+  $\varphi \IMPLIES \psi$ is true iff $\varphi$ is true implies that $\psi$ is true.
+\end{axiom*}
+
+
+\subsection{Equivalence}\label{sec:equivalence}
+
 \inputref[libraries/meta]{propositions/equivalence.ftl.en.tex}
+
+\begin{axiom*}
+  Let $\varphi, \psi$ be formulas.
+  $\varphi \IFF \psi$ is true iff $\varphi$ is true if and only if $\psi$ is true.
+\end{axiom*}
+
+
+\subsection{Universal Quantification}\label{sec:universal-quantification}
+
 \inputref[libraries/meta]{propositions/universal-quantification.ftl.en.tex}
+
+\begin{axiom*}
+  Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+  $\FORALL x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for all terms $\sigma$ such that $\sigma \mathrel{R} \tau$.
+\end{axiom*}
+
+
+\subsection{Existential Quantification}\label{sec:existential-quantification}
+
 \inputref[libraries/meta]{propositions/existential-quantification.ftl.en.tex}
+
+\begin{axiom*}
+  Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+  $\EXISTS x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for some term $\sigma$ such that $\sigma \mathrel{R} \tau$.
+\end{axiom*}
 
 
 \section{Notions}\label{sec:notions}
@@ -72,6 +150,11 @@ contained in classes.
 \subsection{Classes and Sets}\label{sec:classes-and-sets}
 
 \inputref[libraries/meta]{notions/classes.ftl.en.tex}
+
+\begin{axiom*}[title=Class Extensionality]
+  Let $A,B$ be classes.
+  If every element of $A$ is an element of $B$ and every element of $B$ is an element of $A$ then $A \Eq B$.
+\end{axiom*}
 
 Sets are considered to be classes that are ``small'' enough to be contained in
 other classes:
@@ -108,13 +191,53 @@ In \ForTheL we have three types of comprehension terms:
 \end{itemize}
 
 \inputref[libraries/meta]{notions/enumeration-class.ftl.en.tex}
+
+\begin{axiom*}
+  Let $a_1, \dots, a_n$ be objects.
+  Then $a \Elem \EClass{a_1, \dots, a_n}$ iff $a \Eq a_1$ or \dots{} or $a \Eq a_n$.
+\end{axiom*}
+
 \inputref[libraries/meta]{notions/comprehension-class.ftl.en.tex}
+
+\begin{axiom*}
+  Let $\tau[x_1, \dots, x_n]$ be a term and $\varphi[x_1, \dots, x_n]$ be a formula.
+  Then $a \Elem \CClass{\tau}{\varphi}$ iff
+  $a$ is an object and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
+\end{axiom*}
+
+\begin{proposition*}
+  Let $\varphi[x]$ be a formula.
+  Then $a \Elem \CClass{x}{\varphi}$ iff $a$ is an object and $\varphi[a]$.
+\end{proposition*}
+
 \inputref[libraries/meta]{notions/separation-class.ftl.en.tex}
+
+\begin{axiom*}
+  Let $\tau[x_1, \dots, x_n]$ be a term, $A$ be a class and $\varphi[x_1,\dots,x_n]$ be a formula.
+  Then $a \Elem \SClass{\tau}{A}{\varphi}$ iff
+  $a \Elem A$ and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
+\end{axiom*}
+
+\begin{proposition*}
+  Let $A$ be a class and $\varphi[x]$ be a formula.
+  Then $a \Elem \SClass{x}{A}{\varphi}$ iff
+  $a \Elem A$ and $\varphi[a]$.
+\end{proposition*}
+
+\begin{axiom*}
+  Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
+  If $A$ is a set then $\SClass{\tau}{A}{\varphi}$ is a set.
+\end{axiom*}
 
 
 \subsection{Maps and Functions}\label{sec:maps-and-functions}
 
 \inputref[libraries/meta]{notions/maps.ftl.en.tex}
+
+\begin{axiom*}[title=Map Extensionality]
+  Let $f,g$ be maps.
+  If $\Dom(f) \Eq \Dom(g)$ and $f(a) \Eq g(a)$ for all $a \Elem \Dom(f)$ then $g \Eq g$.
+\end{axiom*}
 
 Similar to the notion of sets which are considered to be ``small'' classes, we
 consider \emph{functions} to be ``small'' maps.
@@ -130,6 +253,16 @@ In low-level map definitions, \ForTheL allows to define maps via
 $\lambda$-terms:
 
 \inputref[libraries/meta]{notions/map-terms.ftl.en.tex}
+
+\begin{axiom*}
+  Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term.
+  Then $\Dom(\Map{x}{A}\tau) \Eq A$.
+\end{axiom*}
+
+\begin{axiom*}
+  Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term and $a \Elem A$.
+  Then $(\Map{x}{A}\tau)(a) \Eq \tau[a]$.
+\end{axiom*}
 
 
 \section{Relations}\label{sec:relations}
@@ -148,53 +281,22 @@ $\in$-relation).
 
 \inputref[libraries/meta]{relations/induction-order.ftl.en.tex}
 
+\begin{axiom*}
+  Let $\tau[x_1, \dots, x_n]$ be a term and
+  $\psi_1[x_1]$, $\psi_2[x_1,x_2]$, \dots, $\psi_n[x_1, \dots, x_n]$ and $\varphi[x_1, \dots, x_n]$ be formulas.
+  Assume that the following holds for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$:
+  If $\tau[y_1, \dots, y_n] \ILess \tau[a_1, \dots, a_n]$
+  for all $y_1, \dots, y_n$ with $\psi_i[y_1, \dots, y_i]$ for all $i \Elem \EClass{1, \dots, n}$
+  then $\varphi[a_1, \dots, a_n]$.
+  Then $\varphi[a_1, \dots, a_n]$ for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$.
+\end{axiom*}
 
-\section{Axioms}\label{sec:axioms}
-
-\subsection{Extensionality Axioms}\label{sec:extensionality-axioms}
-
-To provide equality conditions for ordered pairs, classes and maps, the
-following extensionality axioms are hard-coded in \Naproche.
-
-\inputref[libraries/meta]{axioms/pair-extensionality.ftl.en.tex}
-\inputref[libraries/meta]{axioms/class-extensionality.ftl.en.tex}
-\inputref[libraries/meta]{axioms/map-extensionality.ftl.en.tex}
-
-
-\subsection{Comprehension Term Axioms}\label{sec:comprehension-term-axioms}
-
-The following axioms specify the elements of comprehension terms (cf. section
-\ref{sec:comprehension-terms}).
-
-\inputref[libraries/meta]{axioms/separation.ftl.en.tex}
-\inputref[libraries/meta]{axioms/enumeration-class.ftl.en.tex}
-\inputref[libraries/meta]{axioms/comprehension-class.ftl.en.tex}
-
-
-\subsection{$\lambda$-Term Axioms}\label{sec:lambda-term-axioms}
-
-The following axioms specify the domain and values of $\lambda$-terms:
-
-\inputref[libraries/meta]{axioms/map-terms.ftl.en.tex}
-
-
-\subsection{Miscellaneous Axioms}\label{sec:misc-axioms}
-
-Subclasses of sets that are formed via separation class terms (cf.
-\ref{sec:comprehension-terms}) are again sets:
-
-\inputref[libraries/meta]{axioms/separation-class.ftl.en.tex}
-
-As noted in section \ref{sec:maps-and-functions}, functions are considered to be
-``small'' maps. Whether a map is small or not is determined by the ``size'' of
-its domain:
-
-\inputref[libraries/meta]{axioms/function-condition.ftl.en.tex}
-
-To facilitate proofs by induction, \Naproche provides a hard-coded induction
-proof tactic which corresponds to the following induction principle.
-
-\inputref[libraries/meta]{axioms/induction.ftl.en.tex}
+\begin{proposition*}
+  Let $A$ be a class, and $\varphi[x]$ be a formula.
+  Assume that the following holds for all $a \Elem A$:
+  If $\varphi[b]$ for for all $b \Elem A$ with $b \ILess a$ then $\varphi[a]$.
+  Then $\varphi[a]$ for all $a \Elem A$.
+\end{proposition*}
 
 
 \printlicense[CcByNcSa]{Marcel Schütz (2025)}

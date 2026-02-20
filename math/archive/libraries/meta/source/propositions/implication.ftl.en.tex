@@ -6,20 +6,13 @@
 \begin{document}
 \begin{smodule}{implication.ftl}
 
-\symdef{Implies}{\;\comp\Longrightarrow\;}
+\symdef{IMPLIES}{\Rightarrow}
 
 \begin{fakeforthel}
-  \begin{signature*}[for=Implies]
+  \begin{signature*}[for=IMPLIES]
     Let $\varphi, \psi$ be formulas.
-    $\emph{\varphi \Implies \psi}$ is a formula.
+    $\emph{\varphi \IMPLIES \psi}$ is a formula.
   \end{signature*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{axiom*}[for=Implies]
-    Let $\varphi, \psi$ be formulas.
-    $\varphi \Implies \psi$ is true iff $\varphi$ is true implies that $\psi$ is true.
-  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

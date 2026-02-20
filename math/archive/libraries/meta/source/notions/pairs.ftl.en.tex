@@ -9,10 +9,8 @@
 \importmodule[libraries/meta]{notions?objects.ftl}
 \importmodule[libraries/meta]{relations?equality.ftl}
 
-\symdecl*{TheOrderedPairOf_And_}
-
 \begin{fakeforthel}
-  \begin{signature*}[for=TheOrderedPairOf_And_]
+  \begin{signature*}
     Let $a,b$ be objects.
     $\emph{(a,b)}$ is an object.
     \inlineforthel{Let the \emph{ordered pair of $a$ and $b$} stand for $(a,b)$.}
@@ -20,7 +18,7 @@
 \end{fakeforthel}
 
 \begin{forthel}
-  \begin{axiom*}[for=TheOrderedPairOf_And_]
+  \begin{axiom*}[title=Ordered Pair Extensionality]
     Let $a,a',b,b'$ be objects.
     If $(a, b) \Eq (a', b')$ then $a \Eq a'$ and $b \Eq b'$.
   \end{axiom*}

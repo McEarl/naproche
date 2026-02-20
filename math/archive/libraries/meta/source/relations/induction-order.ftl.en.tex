@@ -10,7 +10,7 @@
 \importmodule[libraries/meta]{notions?enumeration-class.ftl}
 \importmodule[libraries/meta]{relations?equality.ftl}
 
-\symdef{ILess}{\;\comp\prec\;}
+\symdef{ILess}{\prec}
 
 \begin{fakeforthel}
   \begin{signature*}[for=ILess]
@@ -18,27 +18,6 @@
     $\emph{x \ILess y}$ is a relation.
     Let $x$ is \emph{inductively less than $y$} stand for $x \ILess y$.
   \end{signature*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{axiom*}[for=ILess]
-    Let $\tau[x_1, \dots, x_n]$ be a term and
-    $\psi_1[x_1]$, $\psi_2[x_1,x_2]$, \dots, $\psi_n[x_1, \dots, x_n]$ and $\varphi[x_1, \dots, x_n]$ be formulas.
-    Assume that the following holds for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$:
-    If $\tau[y_1, \dots, y_n] \ILess \tau[a_1, \dots, a_n]$
-    for all $y_1, \dots, y_n$ with $\psi_i[y_1, \dots, y_i]$ for all $i \Elem \EClass{1, \dots, n}$
-    then $\varphi[a_1, \dots, a_n]$.
-    Then $\varphi[a_1, \dots, a_n]$ for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$.
-  \end{axiom*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{proposition*}[for=ILess]
-    Let $A$ be a class, and $\varphi[x]$ be a formula.
-    Assume that the following holds for all $a \Elem A$:
-    If $\varphi[b]$ for for all $b \Elem A$ with $b \ILess a$ then $\varphi[a]$.
-    Then $\varphi[a]$ for all $a \Elem A$.
-  \end{proposition*}
 \end{fakeforthel}
 
 \end{smodule}

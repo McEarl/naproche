@@ -8,20 +8,13 @@
 
 \importmodule[libraries/meta]{notions?elements.ftl}
 
-\symdef{Forall}{\forall\,}
+\symdef{FORALL}{\forall}
 
 \begin{fakeforthel}
-  \begin{signature*}[for=Forall]
+  \begin{signature*}[for=FORALL]
     Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-    $\emph{\Forall} x \mathrel{R} \tau : \varphi$ is a formula.
+    $\emph{\FORALL} x \mathrel{R} \tau : \varphi$ is a formula.
   \end{signature*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{axiom*}[for=Forall]
-    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-    $\Forall x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for all terms $\sigma$ such that $\sigma \mathrel{R} \tau$.
-  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

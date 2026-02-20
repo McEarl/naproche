@@ -8,20 +8,13 @@
 
 \importmodule[libraries/meta]{notions?elements.ftl}
 
-\symdef{Exists}{\exists\,}
+\symdef{EXISTS}{\exists}
 
 \begin{fakeforthel}
-  \begin{signature*}[for=Exists]
+  \begin{signature*}[for=EXISTS]
     Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-    $\emph{\Exists} x \mathrel{R} \tau : \varphi$ is a formula.
+    $\emph{\EXISTS} x \mathrel{R} \tau : \varphi$ is a formula.
   \end{signature*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{axiom*}[for=Exists]
-    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-    $\Exists x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for some term $\sigma$ such that $\sigma \mathrel{R} \tau$.
-  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

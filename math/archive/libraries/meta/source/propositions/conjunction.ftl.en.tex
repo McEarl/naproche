@@ -6,20 +6,13 @@
 \begin{document}
 \begin{smodule}{conjunction.ftl}
 
-\symdef{And}{\;\comp\wedge\;}
+\symdef{AND}{\wedge}
 
 \begin{fakeforthel}
-  \begin{signature*}[for=And]
+  \begin{signature*}[for=AND]
     Let $\varphi, \psi$ be formulas.
-    $\emph{\varphi \And \psi}$ is a formula.
+    $\emph{\varphi \AND\psi}$ is a formula.
   \end{signature*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{axiom*}[for=And]
-    Let $\varphi, \psi$ be formulas.
-    $\varphi \And \psi$ is true iff $\varphi$ is true and $\psi$ is true.
-  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

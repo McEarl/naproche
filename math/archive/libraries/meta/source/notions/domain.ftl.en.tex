@@ -10,22 +10,16 @@
 \importmodule[libraries/meta]{notions?classes.ftl}
 \importmodule[libraries/meta]{relations?equality.ftl}
 
-\symdef{Dom}{\comp{\textrm{dom}}}
+\symdef{Dom}{\textrm{dom}}
 
 \begin{fakeforthel}
   \begin{signature*}[for=Dom]
     Let $f$ be a map.
     $\emph{\Dom(f)}$ is a class.
     \inlineforthel{Let the \emph{domain of $f$} stand for $\Dom(f)$.}
+    \inlineforthel{Let $f$ is \emph{defined on $X$} stand for $\Dom(f) \Eq X$.}
   \end{signature*}
 \end{fakeforthel}
-
-\begin{forthel}
-  \begin{definition*}
-    Let $f$ be a map.
-    $f$ is \emph{defined on $X$} iff $\Dom(f) \Eq X$.
-  \end{definition*}
-\end{forthel}
 
 \end{smodule}
 \end{document}

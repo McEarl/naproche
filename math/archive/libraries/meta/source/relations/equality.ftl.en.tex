@@ -8,9 +8,9 @@
 
 \importmodule[libraries/meta]{propositions?negation.ftl}
 
-\symdef{DefEq}{\;\comp{:=}\;}
-\symdef{Eq}{\;\comp=\;}
-\symdef{NotEq}{\;\comp{\not=}\;}
+\symdef{DefEq}{:=}
+\symdef{Eq}{=}
+\symdef{NotEq}{\not=}
 
 \begin{fakeforthel}
   \begin{signature*}[for=Eq]
@@ -25,7 +25,7 @@
 \begin{fakeforthel}
   \begin{definition*}[for=NotEq]
     Let $x, y$ be terms.
-    $\emph{x \NotEq y}$ iff $\Not x \Eq y$.
+    $\emph{x \NotEq y}$ iff $\NOT x \Eq y$.
     \inlineforthel{Let $x$ and $y$ are \emph{distinct} stand for $x \NotEq y$.}
   \end{definition*}
 \end{fakeforthel}

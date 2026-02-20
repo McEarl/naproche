@@ -6,20 +6,13 @@
 \begin{document}
 \begin{smodule}{negation.ftl}
 
-\symdef{Not}{\comp\neg\;}
+\symdef{NOT}{\neg}
 
 \begin{fakeforthel}
-  \begin{signature*}[for=Not]
+  \begin{signature*}[for=NOT]
     Let $\varphi$ be a formula.
-    $\emph{\Not \varphi}$ is a formula.
+    $\emph{\NOT \varphi}$ is a formula.
   \end{signature*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{axiom*}[for=Not]
-    Let $\varphi$ be a formula.
-    $\Not \varphi$ is true iff $\varphi$ is false.
-  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

@@ -10,11 +10,11 @@
 \importmodule[libraries/meta]{notions?objects.ftl}
 \importmodule[libraries/meta]{propositions?negation.ftl}
 
-\symdef{Elem}{\;\comp\in\;}
-\symdef{NotElem}{\;\comp{\not\in}\;}
+\symdef{Elem}{\in}
+\symdef{NotElem}{\not\in}
 
 \begin{fakeforthel}
-  \begin{signature*}[for={Elem,NotElem}]
+  \begin{signature*}
     Let $A$ be a class.
     A \emph{element of $A$} is an object.
     \inlineforthel{Let a \emph{member of $X$} stand for an element of $X$.}
@@ -24,7 +24,7 @@
     \inlineforthel{Let $x$ \emph{lies in $X$} stand for $x$ is an element of $X$.}
     \inlineforthel{Let $x$ is \emph{in $X$} stand for $x$ is an element of $X$.}
     Let $\emph{a \Elem A}$ stand for $a$ is an element of $A$.
-    Let $\emph{a \NotElem A}$ stand for $\Not a \Elem A$.
+    Let $\emph{a \NotElem A}$ stand for $\NOT a \Elem A$.
   \end{signature*}
 \end{fakeforthel}
 

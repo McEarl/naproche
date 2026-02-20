@@ -6,20 +6,13 @@
 \begin{document}
 \begin{smodule}{disjunction.ftl}
 
-\symdef{Or}{\;\comp\vee\;}
+\symdef{OR}{\vee}
 
 \begin{fakeforthel}
-  \begin{signature*}[for=Or]
+  \begin{signature*}[for=OR]
     Let $\varphi, \psi$ be formulas.
-    $\emph{\varphi \Or \psi}$ is a formula.
+    $\emph{\varphi \OR \psi}$ is a formula.
   \end{signature*}
-\end{fakeforthel}
-
-\begin{fakeforthel}
-  \begin{axiom*}[for=Or]
-    Let $\varphi, \psi$ be formulas.
-    $\varphi \Or \psi$ is true iff $\varphi$ is true or $\psi$ is true.
-  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}
