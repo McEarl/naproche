@@ -1,25 +1,11 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{separation-class.ftl}
 
-\importmodule[libraries/meta]{notions?classes.ftl}
-\importmodule[libraries/meta]{notions?objects.ftl}
-\importmodule[libraries/meta]{relations?equality.ftl}
-\importmodule[libraries/meta]{notions?elements.ftl}
-\importmodule[libraries/meta]{notions?sets.ftl}
-
-\symdef{SClass}[args=3]{\ifstexhtml\comp{\left\{\right.}\else\left\{\fi#1\comp\in#2\,\ifstexhtml\comp{\left.\middle|\right.}\else\middle|\fi\,#3\ifstexhtml\comp{\left.\right\}}\else\right\}\fi}
-
-\begin{fakeforthel}
-  \begin{signature*}[for=SClass]
-    Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
-    $\emph{\SClass{\tau}{A}{\varphi}}$ is a class.
-  \end{signature*}
-\end{fakeforthel}
+\symdef{SClass}[args=3]{\comp{\left\{\right.}#1\comp\in#2\,\comp{\left.\middle|\right.}\,#3\comp{\left.\right\}}}
 
 \end{smodule}
 \end{document}

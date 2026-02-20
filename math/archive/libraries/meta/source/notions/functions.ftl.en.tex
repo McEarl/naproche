@@ -1,28 +1,16 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{functions.ftl}
 
-\importmodule[libraries/meta]{notions?maps.ftl}
-\importmodule[libraries/meta]{notions?objects.ftl}
 \importmodule[libraries/meta]{notions?domain.ftl}
-\importmodule[libraries/meta]{notions?sets.ftl}
 
-\begin{fakeforthel}
-  \begin{definition*}
-    A \emph{function} is a map that is an object.
-  \end{definition*}
-\end{fakeforthel}
-
-\begin{forthel}
-  \begin{axiom*}
-    Let $f$ be a map.
-    $f$ is a function iff $\Dom(f)$ is a set.
-  \end{axiom*}
-\end{forthel}
+\begin{axiom*}[forthel]
+  Let $f$ be a map.
+  $f$ is a function iff $\Dom(f)$ is a set.
+\end{axiom*}
 
 \end{smodule}
 \end{document}

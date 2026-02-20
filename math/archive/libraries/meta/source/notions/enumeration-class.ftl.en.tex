@@ -1,24 +1,11 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{enumeration-class.ftl}
 
-\importmodule[libraries/meta]{notions?classes.ftl}
-\importmodule[libraries/meta]{notions?objects.ftl}
-\importmodule[libraries/meta]{notions?elements.ftl}
-\importmodule[libraries/meta]{relations?equality.ftl}
-
-\symdef{EClass}[args=a]{\ifstexhtml\comp{\left\{\right.}\else\left\{\fi\argsep{#1}{\comp,}\ifstexhtml\comp{\left.\right\}}\else\right\}\fi}
-
-\begin{fakeforthel}
-  \begin{signature*}[for=EClass]
-    Let $a_1, \dots, a_n$ be objects.
-    $\emph{\EClass{a1, \dots, a_n}}$ is a class.
-  \end{signature*}
-\end{fakeforthel}
+\symdef{EClass}[args=a]{\comp{\left\{\right.}\argsep{#1}{\comp,}\comp{\left.\right\}}}
 
 \end{smodule}
 \end{document}

@@ -46,90 +46,133 @@ quantifiers that are supported by \ForTheL:
 
 \subsection{Truth}\label{sec:truth}
 
-\inputref[libraries/meta]{propositions/truth.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=TRUE]
+  \begin{signature*}
+    $\fakeemph{\TRUE}$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  $\TRUE$ is true.
-\end{axiom*}
+  \begin{axiom*}
+    $\TRUE$ is true.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Falsity}\label{sec:falsity}
 
-\inputref[libraries/meta]{propositions/falsity.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=FALSE]
+  \begin{signature*}
+    $\fakeemph{\FALSE}$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  $\FALSE$ is false.
-\end{axiom*}
+  \begin{axiom*}
+    $\FALSE$ is false.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Negation}\label{sec:negation}
 
-\inputref[libraries/meta]{propositions/negation.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=NOT]
+  \begin{signature*}
+    Let $\varphi$ be a formula.
+    $\fakeemph{\NOT \varphi}$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\varphi$ be a formula.
-  $\NOT\varphi$ is true iff $\varphi$ is false.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\varphi$ be a formula.
+    $\NOT\varphi$ is true iff $\varphi$ is false.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Conjunction}\label{sec:conjunction}
 
-\inputref[libraries/meta]{propositions/conjunction.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=AND]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \AND \psi}$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\varphi, \psi$ be formulas.
-  $\varphi \AND\psi$ is true iff $\varphi$ is true and $\psi$ is true.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \AND \psi$ is true iff $\varphi$ is true and $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Disjunction}\label{sec:disjunction}
 
-\inputref[libraries/meta]{propositions/disjunction.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=OR]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \OR \psi}$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\varphi, \psi$ be formulas.
-  $\varphi \OR \psi$ is true iff $\varphi$ is true or $\psi$ is true.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \OR \psi$ is true iff $\varphi$ is true or $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Implication}\label{sec:implication}
 
-\inputref[libraries/meta]{propositions/implication.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=IMPLIES]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \IMPLIES \psi}$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\varphi, \psi$ be formulas.
-  $\varphi \IMPLIES \psi$ is true iff $\varphi$ is true implies that $\psi$ is true.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \IMPLIES \psi$ is true iff $\varphi$ is true implies that $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Equivalence}\label{sec:equivalence}
 
-\inputref[libraries/meta]{propositions/equivalence.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=IFF]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \IFF \psi}$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\varphi, \psi$ be formulas.
-  $\varphi \IFF \psi$ is true iff $\varphi$ is true if and only if $\psi$ is true.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \IFF \psi$ is true iff $\varphi$ is true if and only if $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Universal Quantification}\label{sec:universal-quantification}
 
-\inputref[libraries/meta]{propositions/universal-quantification.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=FORALL]
+  \begin{signature*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\fakeemph{\FORALL} x \mathrel{R} \tau : \varphi$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-  $\FORALL x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for all terms $\sigma$ such that $\sigma \mathrel{R} \tau$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\FORALL x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for all terms $\sigma$ such that $\sigma \mathrel{R} \tau$.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Existential Quantification}\label{sec:existential-quantification}
 
-\inputref[libraries/meta]{propositions/existential-quantification.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=EXISTS]
+  \begin{signature*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\fakeemph{\EXISTS} x \mathrel{R} \tau : \varphi$ is a formula.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-  $\EXISTS x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for some term $\sigma$ such that $\sigma \mathrel{R} \tau$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\EXISTS x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for some term $\sigma$ such that $\sigma \mathrel{R} \tau$.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \section{Notions}\label{sec:notions}
@@ -139,28 +182,73 @@ quantifiers that are supported by \ForTheL:
 \emph{Objects} are mathematical entities that are ``small'' enough to be
 contained in classes.
 
-\inputref[libraries/meta]{notions/objects.ftl.en.tex}
-
+\begin{fakeforthel}
+  \begin{signature*}
+    A \emph{mathematical object} is a notion.
+    Let an \emph{object} stand for a mathematical object.
+    Let an \emph{element} stand for a mathematical object.
+  \end{signature*}
+\end{fakeforthel}
 
 \subsection{Ordered Pairs}\label{sec:ordered-pairs}
 
-\inputref[libraries/meta]{notions/pairs.ftl.en.tex}
+\begin{fakeforthel}
+  \begin{signature*}
+    Let $a,b$ be objects.
+    $\emph{(a,b)}$ is an object.
+    Let the \emph{ordered pair of $a$ and $b$} stand for $(a,b)$.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[forthel,title=Ordered Pair Extensionality]
+    Let $a,a',b,b'$ be objects.
+    If $(a, b) \Eq (a', b')$ then $a \Eq a'$ and $b \Eq b'$.
+  \end{axiom*}
+\end{fakeforthel}
 
 
 \subsection{Classes and Sets}\label{sec:classes-and-sets}
 
-\inputref[libraries/meta]{notions/classes.ftl.en.tex}
+\begin{fakeforthel}
+  \begin{signature*}
+    A \emph{class} is a notion.
+    Let a \emph{collection} stand for a class.
+  \end{signature*}
+\end{fakeforthel}
 
-\begin{axiom*}[title=Class Extensionality]
-  Let $A,B$ be classes.
-  If every element of $A$ is an element of $B$ and every element of $B$ is an element of $A$ then $A \Eq B$.
-\end{axiom*}
+\begin{fakeforthel}
+  \begin{axiom*}[title=Class Extensionality]
+    Let $A,B$ be classes.
+    If every element of $A$ is an element of $B$ and every element of $B$ is an element of $A$ then $A \Eq B$.
+  \end{axiom*}
+\end{fakeforthel}
 
 Sets are considered to be classes that are ``small'' enough to be contained in
 other classes:
 
-\inputref[libraries/meta]{notions/sets.ftl.en.tex}
-\inputref[libraries/meta]{notions/elements.ftl.en.tex}
+\begin{fakeforthel}
+  \begin{definition*}
+    A \emph{set} is a class that is an object.
+  \end{definition*}
+\end{fakeforthel}
+
+\begin{sparagraph}[style=symdoc,for={Elem,NotElem}]
+  \begin{fakeforthel}
+    \begin{signature*}
+      Let $A$ be a class.
+      A \emph{element of $A$} is an object.
+      Let a \emph{member of $X$} stand for an element of $X$.
+      Let $x$ \emph{belongs to $X$} stand for $x$ is an element of $X$.
+      Let $X$ \emph{contains $x$} stand for $x$ is an element of $X$.
+      Let $x$ is \emph{contained in $X$} stand for $x$ is an element of $X$.
+      Let $x$ \emph{lies in $X$} stand for $x$ is an element of $X$.
+      Let $x$ is \emph{in $X$} stand for $x$ is an element of $X$.
+      Let $\emph{a \Elem A}$ stand for $a$ is an element of $A$.
+      Let $\emph{a \NotElem A}$ stand for $\NOT a \Elem A$.
+    \end{signature*}
+  \end{fakeforthel}
+\end{sparagraph}
 
 
 \subsection{Comprehension Terms}\label{sec:comprehension-terms}
@@ -190,61 +278,111 @@ In \ForTheL we have three types of comprehension terms:
   $(p,n)$ of natural numbers such that $p$ is a prime divisor of $n$).
 \end{itemize}
 
-\inputref[libraries/meta]{notions/enumeration-class.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=EClass]
+  \begin{signature*}
+    Let $a_1, \dots, a_n$ be objects.
+    $\fakeemph{\EClass{a1, \dots, a_n}}$ is a class.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $a_1, \dots, a_n$ be objects.
-  Then $a \Elem \EClass{a_1, \dots, a_n}$ iff $a \Eq a_1$ or \dots{} or $a \Eq a_n$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $a_1, \dots, a_n$ be objects.
+    Then $a \Elem \EClass{a_1, \dots, a_n}$ iff $a \Eq a_1$ or \dots{} or $a \Eq a_n$.
+  \end{axiom*}
+\end{sparagraph}
 
-\inputref[libraries/meta]{notions/comprehension-class.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=CClass]
+  \begin{signature*}
+    Let $\tau$ be a term and $\varphi$ be a formula.
+    $\fakeemph{\CClass{\tau}{\varphi}}$ is a class.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\tau[x_1, \dots, x_n]$ be a term and $\varphi[x_1, \dots, x_n]$ be a formula.
-  Then $a \Elem \CClass{\tau}{\varphi}$ iff
-  $a$ is an object and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\tau[x_1, \dots, x_n]$ be a term and $\varphi[x_1, \dots, x_n]$ be a formula.
+    Then $a \Elem \CClass{\tau}{\varphi}$ iff
+    $a$ is an object and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
+  \end{axiom*}
 
-\begin{proposition*}
-  Let $\varphi[x]$ be a formula.
-  Then $a \Elem \CClass{x}{\varphi}$ iff $a$ is an object and $\varphi[a]$.
-\end{proposition*}
+  \begin{proposition*}
+    Let $\varphi[x]$ be a formula.
+    Then $a \Elem \CClass{x}{\varphi}$ iff $a$ is an object and $\varphi[a]$.
+  \end{proposition*}
+\end{sparagraph}
 
-\inputref[libraries/meta]{notions/separation-class.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=SClass]
+  \begin{signature*}
+    Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
+    $\fakeemph{\SClass{\tau}{A}{\varphi}}$ is a class.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\tau[x_1, \dots, x_n]$ be a term, $A$ be a class and $\varphi[x_1,\dots,x_n]$ be a formula.
-  Then $a \Elem \SClass{\tau}{A}{\varphi}$ iff
-  $a \Elem A$ and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\tau[x_1, \dots, x_n]$ be a term, $A$ be a class and $\varphi[x_1,\dots,x_n]$ be a formula.
+    Then $a \Elem \SClass{\tau}{A}{\varphi}$ iff
+    $a \Elem A$ and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
+  \end{axiom*}
 
-\begin{proposition*}
-  Let $A$ be a class and $\varphi[x]$ be a formula.
-  Then $a \Elem \SClass{x}{A}{\varphi}$ iff
-  $a \Elem A$ and $\varphi[a]$.
-\end{proposition*}
+  \begin{proposition*}
+    Let $A$ be a class and $\varphi[x]$ be a formula.
+    Then $a \Elem \SClass{x}{A}{\varphi}$ iff
+    $a \Elem A$ and $\varphi[a]$.
+  \end{proposition*}
 
-\begin{axiom*}
-  Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
-  If $A$ is a set then $\SClass{\tau}{A}{\varphi}$ is a set.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
+    If $A$ is a set then $\SClass{\tau}{A}{\varphi}$ is a set.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \subsection{Maps and Functions}\label{sec:maps-and-functions}
 
-\inputref[libraries/meta]{notions/maps.ftl.en.tex}
+\begin{fakeforthel}
+  \begin{signature*}
+    A \emph{map} is a notion.
+  \end{signature*}
+\end{fakeforthel}
 
-\begin{axiom*}[title=Map Extensionality]
-  Let $f,g$ be maps.
-  If $\Dom(f) \Eq \Dom(g)$ and $f(a) \Eq g(a)$ for all $a \Elem \Dom(f)$ then $g \Eq g$.
-\end{axiom*}
+\begin{fakeforthel}
+  \begin{axiom*}[title=Map Extensionality]
+    Let $f,g$ be maps.
+    If $\Dom(f) \Eq \Dom(g)$ and $f(a) \Eq g(a)$ for all $a \Elem \Dom(f)$ then $g \Eq g$.
+  \end{axiom*}
+\end{fakeforthel}
 
 Similar to the notion of sets which are considered to be ``small'' classes, we
 consider \emph{functions} to be ``small'' maps.
 
-\inputref[libraries/meta]{notions/functions.ftl.en.tex}
-\inputref[libraries/meta]{notions/domain.ftl.en.tex}
-\inputref[libraries/meta]{notions/application.ftl.en.tex}
+\begin{fakeforthel}
+  \begin{definition*}
+    A \emph{function} is a map that is an object.
+  \end{definition*}
+\end{fakeforthel}
+
+\begin{forthel}
+  \begin{axiom*}
+    Let $f$ be a map.
+    $f$ is a function iff $\Dom(f)$ is a set.
+  \end{axiom*}
+\end{forthel}
+
+\begin{sparagraph}[style=symdoc,for=Dom]
+  \begin{fakeforthel}
+    \begin{signature*}
+      Let $f$ be a map.
+      $\emph{\Dom(f)}$ is a class.
+      Let the \emph{domain of $f$} stand for $\Dom(f)$.
+      Let $f$ is \emph{defined on $X$} stand for $\Dom(f) \Eq X$.
+    \end{signature*}
+  \end{fakeforthel}
+\end{sparagraph}
+
+\begin{fakeforthel}
+  \begin{signature*}
+    Let $f$ be a map and $a \Elem \Dom(f)$.
+    $\emph{f(a)}$ is an object.
+    Let the \emph{value of $f$ at $x$} stand for $f(x)$.
+    Let $\emph{f(x,y)}$ stand for $f((x,y))$.
+  \end{signature*}
+\end{fakeforthel}
 
 
 \subsection{$\lambda$-Terms}\label{sec:lambda-terms}
@@ -252,22 +390,43 @@ consider \emph{functions} to be ``small'' maps.
 In low-level map definitions, \ForTheL allows to define maps via
 $\lambda$-terms:
 
-\inputref[libraries/meta]{notions/map-terms.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=Map]
+  \begin{signature*}
+    Let $x$ be a variable, $A$ be a class and $\tau$ be a term.
+    $\fakeemph{\Map{x}{A}\tau}$ is a map.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term.
-  Then $\Dom(\Map{x}{A}\tau) \Eq A$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term.
+    Then $\Dom(\Map{x}{A}\tau) \Eq A$.
+  \end{axiom*}
 
-\begin{axiom*}
-  Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term and $a \Elem A$.
-  Then $(\Map{x}{A}\tau)(a) \Eq \tau[a]$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term and $a \Elem A$.
+    Then $(\Map{x}{A}\tau)(a) \Eq \tau[a]$.
+  \end{axiom*}
+\end{sparagraph}
 
 
 \section{Relations}\label{sec:relations}
 
-\inputref[libraries/meta]{relations/equality.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=Eq]
+  \begin{signature*}
+    Let $x, y$ be terms.
+    $\fakeemph{x \Eq y}$ is a relation.
+    Let $x$ is \emph{equal to $y$} stand for $x \Eq y$.
+    Let $x$ and $y$ \emph{agree} stand for $x \Eq y$.
+    Let $x$ \emph{agrees with $y$} stand for $x \Eq y$.
+  \end{signature*}
+\end{sparagraph}
+
+\begin{sparagraph}[style=symdoc,for=NotEq]
+  \begin{definition*}
+    Let $x, y$ be terms.
+    $\fakeemph{x \NotEq y}$ iff $\NOT x \Eq y$.
+    Let $x$ and $y$ are \emph{distinct} stand for $x \NotEq y$.
+  \end{definition*}
+\end{sparagraph}
 
 \Naproche has a hard-coded induction proof tactic (cf. section
 \ref{sec:misc-axioms}) that relies on an ``induction ordering'' $\ILess$.
@@ -279,24 +438,30 @@ natural number arithmetics (with $\ILess$ being the $<$-relation) or the
 $\in$-induction principle from set theory (with $\ILess$ being the
 $\in$-relation).
 
-\inputref[libraries/meta]{relations/induction-order.ftl.en.tex}
+\begin{sparagraph}[style=symdoc,for=ILess]
+  \begin{signature*}
+    Let $x, y$ be terms.
+    $\fakeemph{x \ILess y}$ is a relation.
+    Let $x$ is \emph{inductively less than $y$} stand for $x \ILess y$.
+  \end{signature*}
 
-\begin{axiom*}
-  Let $\tau[x_1, \dots, x_n]$ be a term and
-  $\psi_1[x_1]$, $\psi_2[x_1,x_2]$, \dots, $\psi_n[x_1, \dots, x_n]$ and $\varphi[x_1, \dots, x_n]$ be formulas.
-  Assume that the following holds for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$:
-  If $\tau[y_1, \dots, y_n] \ILess \tau[a_1, \dots, a_n]$
-  for all $y_1, \dots, y_n$ with $\psi_i[y_1, \dots, y_i]$ for all $i \Elem \EClass{1, \dots, n}$
-  then $\varphi[a_1, \dots, a_n]$.
-  Then $\varphi[a_1, \dots, a_n]$ for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$.
-\end{axiom*}
+  \begin{axiom*}
+    Let $\tau[x_1, \dots, x_n]$ be a term and
+    $\psi_1[x_1]$, $\psi_2[x_1,x_2]$, \dots, $\psi_n[x_1, \dots, x_n]$ and $\varphi[x_1, \dots, x_n]$ be formulas.
+    Assume that the following holds for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$:
+    If $\tau[y_1, \dots, y_n] \ILess \tau[a_1, \dots, a_n]$
+    for all $y_1, \dots, y_n$ with $\psi_i[y_1, \dots, y_i]$ for all $i \Elem \EClass{1, \dots, n}$
+    then $\varphi[a_1, \dots, a_n]$.
+    Then $\varphi[a_1, \dots, a_n]$ for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$.
+  \end{axiom*}
 
-\begin{proposition*}
-  Let $A$ be a class, and $\varphi[x]$ be a formula.
-  Assume that the following holds for all $a \Elem A$:
-  If $\varphi[b]$ for for all $b \Elem A$ with $b \ILess a$ then $\varphi[a]$.
-  Then $\varphi[a]$ for all $a \Elem A$.
-\end{proposition*}
+  \begin{proposition*}
+    Let $A$ be a class, and $\varphi[x]$ be a formula.
+    Assume that the following holds for all $a \Elem A$:
+    If $\varphi[b]$ for for all $b \Elem A$ with $b \ILess a$ then $\varphi[a]$.
+    Then $\varphi[a]$ for all $a \Elem A$.
+  \end{proposition*}
+\end{sparagraph}
 
 
 \printlicense[CcByNcSa]{Marcel Schütz (2025)}

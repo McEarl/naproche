@@ -1,24 +1,11 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{induction-order.ftl}
 
-\importmodule[libraries/meta]{notions?elements.ftl}
-\importmodule[libraries/meta]{notions?enumeration-class.ftl}
-\importmodule[libraries/meta]{relations?equality.ftl}
-
-\symdef{ILess}{\prec}
-
-\begin{fakeforthel}
-  \begin{signature*}[for=ILess]
-    Let $x, y$ be terms.
-    $\emph{x \ILess y}$ is a relation.
-    Let $x$ is \emph{inductively less than $y$} stand for $x \ILess y$.
-  \end{signature*}
-\end{fakeforthel}
+\symdef{ILess}{\mathrel\prec}
 
 \end{smodule}
 \end{document}

@@ -1,32 +1,21 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{elements.ftl}
 
-\importmodule[libraries/meta]{notions?classes.ftl}
-\importmodule[libraries/meta]{notions?objects.ftl}
-\importmodule[libraries/meta]{propositions?negation.ftl}
+\symdef{Elem}{\mathrel\in}
+\symdef{NotElem}{\mathrel{\not\in}}
 
-\symdef{Elem}{\in}
-\symdef{NotElem}{\not\in}
-
-\begin{fakeforthel}
-  \begin{signature*}
-    Let $A$ be a class.
-    A \emph{element of $A$} is an object.
-    \inlineforthel{Let a \emph{member of $X$} stand for an element of $X$.}
-    \inlineforthel{Let $x$ \emph{belongs to $X$} stand for $x$ is an element of $X$.}
-    \inlineforthel{Let $X$ \emph{contains $x$} stand for $x$ is an element of $X$.}
-    \inlineforthel{Let $x$ is \emph{contained in $X$} stand for $x$ is an element of $X$.}
-    \inlineforthel{Let $x$ \emph{lies in $X$} stand for $x$ is an element of $X$.}
-    \inlineforthel{Let $x$ is \emph{in $X$} stand for $x$ is an element of $X$.}
-    Let $\emph{a \Elem A}$ stand for $a$ is an element of $A$.
-    Let $\emph{a \NotElem A}$ stand for $\NOT a \Elem A$.
-  \end{signature*}
-\end{fakeforthel}
+\begin{convention*}[forthel]
+  Let a \emph{member of $X$} stand for an element of $X$.
+  Let $x$ \emph{belongs to $X$} stand for $x$ is an element of $X$.
+  Let $X$ \emph{contains $x$} stand for $x$ is an element of $X$.
+  Let $x$ is \emph{contained in $X$} stand for $x$ is an element of $X$.
+  Let $x$ \emph{lies in $X$} stand for $x$ is an element of $X$.
+  Let $x$ is \emph{in $X$} stand for $x$ is an element of $X$.
+\end{convention*}
 
 \end{smodule}
 \end{document}

@@ -1,7 +1,6 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{application.ftl}
@@ -9,14 +8,10 @@
 \importmodule[libraries/meta]{notions?domain.ftl}
 \importmodule[libraries/meta]{notions?elements.ftl}
 
-\begin{fakeforthel}
-  \begin{signature*}
-    Let $f$ be a map and $a \Elem \Dom(f)$.
-    $\emph{f(a)}$ is an object.
-    \inlineforthel{Let the \emph{value of $f$ at $x$} stand for $f(x)$.}
-    \inlineforthel{Let $\emph{f(x,y)}$ stand for $f((x,y))$.}
-  \end{signature*}
-\end{fakeforthel}
+\begin{convention*}
+  Let the \emph{value of $f$ at $x$} stand for $f(x)$.
+  Let $\emph{f(x,y)}$ stand for $f((x,y))$.
+\end{convention*}
 
 \end{smodule}
 \end{document}

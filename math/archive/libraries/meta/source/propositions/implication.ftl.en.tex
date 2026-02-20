@@ -1,19 +1,11 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{implication.ftl}
 
-\symdef{IMPLIES}{\Rightarrow}
-
-\begin{fakeforthel}
-  \begin{signature*}[for=IMPLIES]
-    Let $\varphi, \psi$ be formulas.
-    $\emph{\varphi \IMPLIES \psi}$ is a formula.
-  \end{signature*}
-\end{fakeforthel}
+\symdef{IMPLIES}{\mathbin\Rightarrow}
 
 \end{smodule}
 \end{document}

@@ -1,21 +1,11 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{existential-quantification.ftl}
 
-\importmodule[libraries/meta]{notions?elements.ftl}
-
-\symdef{EXISTS}{\exists}
-
-\begin{fakeforthel}
-  \begin{signature*}[for=EXISTS]
-    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-    $\emph{\EXISTS} x \mathrel{R} \tau : \varphi$ is a formula.
-  \end{signature*}
-\end{fakeforthel}
+\symdef{EXISTS}{\mathop\exists}
 
 \end{smodule}
 \end{document}

@@ -50,6 +50,9 @@
   \colorlet{defcolor}{violet}
 \fi
 
+\colorlet{refcolor}{teal}
+\colorlet{varcolor}{black}
+
 
 % Package Options
 % ---------------
@@ -380,7 +383,7 @@
   \bool_if:NTF \c_naproche_emph_bool {
     \textcolor {defcolor} {#1}
   } {
-    \textcolor {black} {#1}
+    \textcolor {varcolor} {#1}
   }
 }
 
@@ -388,7 +391,7 @@
   \bool_if:NTF \c_naproche_emph_bool {
     \textcolor {defcolor} {#1}
   } {
-    \textcolor {black} {#1}
+    \textcolor {refcolor} {#1}
   }
 }
 
@@ -396,7 +399,7 @@
   \bool_if:NTF \c_naproche_emph_bool {
     \textcolor {defcolor} {#1}
   } {
-    \textcolor {black} {#1}
+    \textcolor {refcolor} {#1}
   }
 }
 
@@ -404,6 +407,6 @@
   \bool_if:NTF \c_naproche_emph_bool {
     \textcolor {defcolor} {#1}
   } {
-    \textcolor {black} {#1}
+    \textcolor {defcolor} {#1}
   }
 }

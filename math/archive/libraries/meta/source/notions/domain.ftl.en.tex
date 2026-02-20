@@ -1,25 +1,18 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{domain.ftl}
 
-\importmodule[libraries/meta]{notions?maps.ftl}
-\importmodule[libraries/meta]{notions?classes.ftl}
 \importmodule[libraries/meta]{relations?equality.ftl}
 
 \symdef{Dom}{\textrm{dom}}
 
-\begin{fakeforthel}
-  \begin{signature*}[for=Dom]
-    Let $f$ be a map.
-    $\emph{\Dom(f)}$ is a class.
-    \inlineforthel{Let the \emph{domain of $f$} stand for $\Dom(f)$.}
-    \inlineforthel{Let $f$ is \emph{defined on $X$} stand for $\Dom(f) \Eq X$.}
-  \end{signature*}
-\end{fakeforthel}
+\begin{convention*}
+  Let the \emph{domain of $f$} stand for $\Dom(f)$.
+  Let $f$ is \emph{defined on $X$} stand for $\Dom(f) \Eq X$.
+\end{convention*}
 
 \end{smodule}
 \end{document}

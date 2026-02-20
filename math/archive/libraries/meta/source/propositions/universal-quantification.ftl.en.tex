@@ -1,21 +1,11 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{universal-quantification.ftl}
 
-\importmodule[libraries/meta]{notions?elements.ftl}
-
-\symdef{FORALL}{\forall}
-
-\begin{fakeforthel}
-  \begin{signature*}[for=FORALL]
-    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
-    $\emph{\FORALL} x \mathrel{R} \tau : \varphi$ is a formula.
-  \end{signature*}
-\end{fakeforthel}
+\symdef{FORALL}{\mathop\forall}
 
 \end{smodule}
 \end{document}

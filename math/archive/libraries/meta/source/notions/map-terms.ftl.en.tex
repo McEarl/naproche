@@ -1,25 +1,11 @@
 \documentclass{stex}
 
 \libusepackage{naproche}
-\libinput{preamble}
 
 \begin{document}
 \begin{smodule}{map-terms.ftl}
 
-\importmodule[libraries/meta]{notions?classes.ftl}
-\importmodule[libraries/meta]{notions?maps.ftl}
-\importmodule[libraries/meta]{relations?equality.ftl}
-\importmodule[libraries/meta]{notions?domain.ftl}
-\importmodule[libraries/meta]{notions?elements.ftl}
-
 \symdef{Map}[args=2]{\comp\lambda#1\mathrel{\comp\in}#2\comp.\,}
-
-\begin{fakeforthel}
-  \begin{signature*}[for=Map]
-    Let $x$ be a variable, $A$ be a class and $\tau$ be a term.
-    $\emph{\Map{x}{A}\tau}$ is a map.
-  \end{signature*}
-\end{fakeforthel}
 
 \end{smodule}
 \end{document}
