@@ -1,53 +1,48 @@
 \documentclass{stex}
 \libusepackage{naproche}
+\libinput{preamble}
+
+\title{The Ontology of Naproche}
+\author{Marcel Schütz}
+\date{2026}
 
 \begin{document}
 \begin{smodule}{preliminaries.ftl}
 
-% Vocabulary
-\importmodule[libraries/meta]{vocabulary.ftl}
+\maketitle
 
-% Propositions
-\importmodule[libraries/meta]{propositions?truth.ftl}
-\importmodule[libraries/meta]{propositions?falsity.ftl}
-\importmodule[libraries/meta]{propositions?negation.ftl}
-\importmodule[libraries/meta]{propositions?conjunction.ftl}
-\importmodule[libraries/meta]{propositions?disjunction.ftl}
-\importmodule[libraries/meta]{propositions?implication.ftl}
-\importmodule[libraries/meta]{propositions?equivalence.ftl}
-\importmodule[libraries/meta]{propositions?universal-quantification.ftl}
-\importmodule[libraries/meta]{propositions?existential-quantification.ftl}
+\section{Vocabulary}
+\inputref[libraries/meta]{vocabulary.ftl.en}
 
-% Notions
-\importmodule[libraries/meta]{notions?objects.ftl}
-\importmodule[libraries/meta]{notions?pairs.ftl}
-\importmodule[libraries/meta]{notions?classes.ftl}
-\importmodule[libraries/meta]{notions?sets.ftl}
-\importmodule[libraries/meta]{notions?elements.ftl}
-\importmodule[libraries/meta]{notions?enumeration-class.ftl}
-\importmodule[libraries/meta]{notions?comprehension-class.ftl}
-\importmodule[libraries/meta]{notions?separation-class.ftl}
-\importmodule[libraries/meta]{notions?maps.ftl}
-\importmodule[libraries/meta]{notions?functions.ftl}
-\importmodule[libraries/meta]{notions?domain.ftl}
-\importmodule[libraries/meta]{notions?application.ftl}
-\importmodule[libraries/meta]{notions?map-terms.ftl}
+\section{Propositions}
+\inputref[libraries/meta]{propositions/truth.ftl.en}
+\inputref[libraries/meta]{propositions/falsity.ftl.en}
+\inputref[libraries/meta]{propositions/negation.ftl.en}
+\inputref[libraries/meta]{propositions/conjunction.ftl.en}
+\inputref[libraries/meta]{propositions/disjunction.ftl.en}
+\inputref[libraries/meta]{propositions/implication.ftl.en}
+\inputref[libraries/meta]{propositions/equivalence.ftl.en}
+\inputref[libraries/meta]{propositions/universal-quantification.ftl.en}
+\inputref[libraries/meta]{propositions/existential-quantification.ftl.en}
 
-% Relations
-\importmodule[libraries/meta]{relations?equality.ftl}
-\importmodule[libraries/meta]{relations?induction-order.ftl}
+\section{Notions}
+\inputref[libraries/meta]{notions/objects.ftl.en}
+\inputref[libraries/meta]{notions/pairs.ftl.en}
+\inputref[libraries/meta]{notions/classes.ftl.en}
+\inputref[libraries/meta]{notions/sets.ftl.en}
+\inputref[libraries/meta]{notions/elements.ftl.en}
+\inputref[libraries/meta]{notions/enumeration-class.ftl.en}
+\inputref[libraries/meta]{notions/comprehension-class.ftl.en}
+\inputref[libraries/meta]{notions/separation-class.ftl.en}
+\inputref[libraries/meta]{notions/maps.ftl.en}
+\inputref[libraries/meta]{notions/functions.ftl.en}
+\inputref[libraries/meta]{notions/domain.ftl.en}
+\inputref[libraries/meta]{notions/application.ftl.en}
+\inputref[libraries/meta]{notions/map-terms.ftl.en}
 
-% Axioms
-\importmodule[libraries/meta]{axioms?pair-extensionality.ftl}
-\importmodule[libraries/meta]{axioms?class-extensionality.ftl}
-\importmodule[libraries/meta]{axioms?map-extensionality.ftl}
-\importmodule[libraries/meta]{axioms?function-condition.ftl}
-\importmodule[libraries/meta]{axioms?enumeration-class.ftl}
-\importmodule[libraries/meta]{axioms?comprehension-class.ftl}
-\importmodule[libraries/meta]{axioms?separation-class.ftl}
-\importmodule[libraries/meta]{axioms?separation.ftl}
-\importmodule[libraries/meta]{axioms?map-terms.ftl}
-\importmodule[libraries/meta]{axioms?induction.ftl}
+\section{Relations}
+\inputref[libraries/meta]{relations/equality.ftl.en}
+\inputref[libraries/meta]{relations/induction-order.ftl.en}
 
 \end{smodule}
 \end{document}

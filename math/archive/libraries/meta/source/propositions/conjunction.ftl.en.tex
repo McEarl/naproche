@@ -9,9 +9,17 @@
 \symdef{And}{\;\comp\wedge\;}
 
 \begin{fakeforthel}
-  \begin{convention*}[for=And]
-    Let $\emph{\varphi \And \psi}$ stand for $\varphi$ and $\psi$.
-  \end{convention*}
+  \begin{signature*}[for=And]
+    Let $\varphi, \psi$ be formulas.
+    $\emph{\varphi \And \psi}$ is a formula.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=And]
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \And \psi$ is true iff $\varphi$ is true and $\psi$ is true.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

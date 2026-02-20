@@ -9,9 +9,17 @@
 \symdef{Or}{\;\comp\vee\;}
 
 \begin{fakeforthel}
-  \begin{convention*}[for=Or]
-    Let $\emph{\varphi \Or \psi}$ stand for $\varphi$ or $\psi$.
-  \end{convention*}
+  \begin{signature*}[for=Or]
+    Let $\varphi, \psi$ be formulas.
+    $\emph{\varphi \Or \psi}$ is a formula.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Or]
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \Or \psi$ is true iff $\varphi$ is true or $\psi$ is true.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

@@ -11,9 +11,17 @@
 \symdef{Exists}{\exists\,}
 
 \begin{fakeforthel}
-  \begin{convention*}[for=Exists]
-    Let $\emph{\Exists} x \mathrel{R} y : \varphi$ stand for there exists an $x \mathrel{R} y$ such that $\varphi$.
-  \end{convention*}
+  \begin{signature*}[for=Exists]
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\emph{\Exists} x \mathrel{R} \tau : \varphi$ is a formula.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Exists]
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\Exists x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for some term $\sigma$ such that $\sigma \mathrel{R} \tau$.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

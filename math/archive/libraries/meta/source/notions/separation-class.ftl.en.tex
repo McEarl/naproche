@@ -8,6 +8,9 @@
 
 \importmodule[libraries/meta]{notions?classes.ftl}
 \importmodule[libraries/meta]{notions?objects.ftl}
+\importmodule[libraries/meta]{relations?equality.ftl}
+\importmodule[libraries/meta]{notions?elements.ftl}
+\importmodule[libraries/meta]{notions?sets.ftl}
 
 \symdef{SClass}[args=3]{\ifstexhtml\comp{\left\{\right.}\else\left\{\fi#1\comp\in#2\,\ifstexhtml\comp{\left.\middle|\right.}\else\middle|\fi\,#3\ifstexhtml\comp{\left.\right\}}\else\right\}\fi}
 
@@ -16,6 +19,29 @@
     Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
     $\emph{\SClass{\tau}{A}{\varphi}}$ is a class.
   \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=SClass]
+    Let $\tau[x_1, \dots, x_n]$ be a term, $A$ be a class and $\varphi[x_1,\dots,x_n]$ be a formula.
+    Then $a \Elem \SClass{\tau}{A}{\varphi}$ iff
+    $a \Elem A$ and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
+  \end{axiom*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{proposition*}[for=SClass]
+    Let $A$ be a class and $\varphi[x]$ be a formula.
+    Then $a \Elem \SClass{x}{A}{\varphi}$ iff
+    $a \Elem A$ and $\varphi[a]$.
+  \end{proposition*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=SClass]
+    Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
+    If $A$ is a set then $\SClass{\tau}{A}{\varphi}$ is a set.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

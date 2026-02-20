@@ -8,14 +8,31 @@
 
 \importmodule[libraries/meta]{notions?classes.ftl}
 \importmodule[libraries/meta]{notions?maps.ftl}
+\importmodule[libraries/meta]{relations?equality.ftl}
+\importmodule[libraries/meta]{notions?domain.ftl}
+\importmodule[libraries/meta]{notions?elements.ftl}
 
 \symdef{Map}[args=2]{\comp\lambda#1\mathrel{\comp\in}#2\comp.\,}
 
 \begin{fakeforthel}
   \begin{signature*}[for=Map]
-    Let $v$ be a variable, $A$ be a class and $\tau$ be a term.
-    $\emph{\Map{v}{A}\tau}$ is a map.
+    Let $x$ be a variable, $A$ be a class and $\tau$ be a term.
+    $\emph{\Map{x}{A}\tau}$ is a map.
   \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Map]
+    Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term.
+    Then $\Dom(\Map{x}{A}\tau) \Eq A$.
+  \end{axiom*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Map]
+    Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term and $a \Elem A$.
+    Then $(\Map{x}{A}\tau)(a) \Eq \tau[a]$.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

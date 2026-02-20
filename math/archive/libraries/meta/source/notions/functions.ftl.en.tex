@@ -8,14 +8,21 @@
 
 \importmodule[libraries/meta]{notions?maps.ftl}
 \importmodule[libraries/meta]{notions?objects.ftl}
-
-\symdecl*{function}
+\importmodule[libraries/meta]{notions?domain.ftl}
+\importmodule[libraries/meta]{notions?sets.ftl}
 
 \begin{fakeforthel}
-  \begin{definition*}[for=function]
+  \begin{definition*}
     A \emph{function} is a map that is an object.
   \end{definition*}
 \end{fakeforthel}
+
+\begin{forthel}
+  \begin{axiom*}
+    Let $f$ be a map.
+    $f$ is a function iff $\Dom(f)$ is a set.
+  \end{axiom*}
+\end{forthel}
 
 \end{smodule}
 \end{document}

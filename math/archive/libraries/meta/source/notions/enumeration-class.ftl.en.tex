@@ -8,14 +8,23 @@
 
 \importmodule[libraries/meta]{notions?classes.ftl}
 \importmodule[libraries/meta]{notions?objects.ftl}
+\importmodule[libraries/meta]{notions?elements.ftl}
+\importmodule[libraries/meta]{relations?equality.ftl}
 
 \symdef{EClass}[args=a]{\ifstexhtml\comp{\left\{\right.}\else\left\{\fi\argsep{#1}{\comp,}\ifstexhtml\comp{\left.\right\}}\else\right\}\fi}
 
 \begin{fakeforthel}
   \begin{signature*}[for=EClass]
-    Let $a_1,\dots,a_n$ be objects.
-    $\emph{\EClass{a1,\dots,a_n}}$ is a class.
+    Let $a_1, \dots, a_n$ be objects.
+    $\emph{\EClass{a1, \dots, a_n}}$ is a class.
   \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=EClass]
+    Let $a_1, \dots, a_n$ be objects.
+    Then $a \Elem \EClass{a_1, \dots, a_n}$ iff $a \Eq a_1$ or \dots{} or $a \Eq a_n$.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

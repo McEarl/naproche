@@ -11,9 +11,17 @@
 \symdef{Forall}{\forall\,}
 
 \begin{fakeforthel}
-  \begin{convention*}[for=Forall]
-    Let $\emph{\Forall} x \mathrel{R} y : \varphi$ stand for for all $x \mathrel{R} y$ we have $\varphi$.
-  \end{convention*}
+  \begin{signature*}[for=Forall]
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\emph{\Forall} x \mathrel{R} \tau : \varphi$ is a formula.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Forall]
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\Forall x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for all terms $\sigma$ such that $\sigma \mathrel{R} \tau$.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

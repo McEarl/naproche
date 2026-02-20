@@ -9,9 +9,17 @@
 \symdef{Implies}{\;\comp\Longrightarrow\;}
 
 \begin{fakeforthel}
-  \begin{convention*}[for=Implies]
-    Let $\emph{\varphi \Implies \psi}$ stand for $\varphi$ implies $\psi$.
-  \end{convention*}
+  \begin{signature*}[for=Implies]
+    Let $\varphi, \psi$ be formulas.
+    $\emph{\varphi \Implies \psi}$ is a formula.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Implies]
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \Implies \psi$ is true iff $\varphi$ is true implies that $\psi$ is true.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

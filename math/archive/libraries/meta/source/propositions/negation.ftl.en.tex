@@ -9,9 +9,17 @@
 \symdef{Not}{\comp\neg\;}
 
 \begin{fakeforthel}
-  \begin{convention*}[for=Not]
-    Let $\emph{\Not \varphi}$ stand for not $\varphi$.
-  \end{convention*}
+  \begin{signature*}[for=Not]
+    Let $\varphi$ be a formula.
+    $\emph{\Not \varphi}$ is a formula.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Not]
+    Let $\varphi$ be a formula.
+    $\Not \varphi$ is true iff $\varphi$ is false.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}

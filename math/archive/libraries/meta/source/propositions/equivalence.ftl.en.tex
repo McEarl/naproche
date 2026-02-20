@@ -9,9 +9,17 @@
 \symdef{Iff}{\;\comp\Longleftrightarrow\;}
 
 \begin{fakeforthel}
-  \begin{convention*}[for=Iff]
-    Let $\emph{\varphi \Iff \psi}$ stand for $\varphi$ iff $\psi$.
-  \end{convention*}
+  \begin{signature*}[for=Iff]
+    Let $\varphi, \psi$ be formulas.
+    $\emph{\varphi \Iff \psi}$ is a formula.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[for=Iff]
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \Iff \psi$ is true iff $\varphi$ is true if and only if $\psi$ is true.
+  \end{axiom*}
 \end{fakeforthel}
 
 \end{smodule}
