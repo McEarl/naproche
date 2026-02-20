@@ -81,6 +81,16 @@
   Hence $A \Eq B$.
 \end{proof}
 
+\begin{proposition*}[forthel]
+  Let $A$ be a set and $B$ be a class.
+  Assume that $B \Subclass A$.
+  Then $B$ is a set.
+\end{proposition*}
+\begin{proof}
+  Define $C \DefEq \SClass{x}{A}{x \Elem B}$.
+  Then $C$ is a set and $C \Eq B$.
+\end{proof}
+
 \begin{definition*}[forthel,for={empty,nonempty}]
   Let $A$ be a class.
   $A$ is \emph{empty} iff $A$ has no elements.
