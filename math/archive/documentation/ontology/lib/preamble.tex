@@ -2,3 +2,14 @@
 \hypersetup{
   colorlinks=true
 }
+
+\newenvironment{fakeforthel}\forthel\endforthel
+
+\ExplSyntaxOn
+\NewDocumentCommand \fakeemph {m} {
+	\bool_set_true:N \c_naproche_forthel_bool
+	\emph{#1}
+	\bool_set_false:N \c_naproche_forthel_bool
+}
+\ExplSyntaxOff
+

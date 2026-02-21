@@ -1,0 +1,70 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+
+\usemodule[libraries/meta]{preliminaries.ftl}
+
+
+\section{Relations}\label{sec:relations}
+
+\begin{sparagraph}[style=symdoc,for=Eq]
+  \begin{signature*}
+    Let $x, y$ be terms.
+    $\fakeemph{x \Eq y}$ is a relation.
+    Let $x$ is \emph{equal to $y$} stand for $x \Eq y$.
+    Let $x$ and $y$ \emph{agree} stand for $x \Eq y$.
+    Let $x$ \emph{agrees with $y$} stand for $x \Eq y$.
+  \end{signature*}
+\end{sparagraph}
+
+\begin{sparagraph}[style=symdoc,for=NotEq]
+  \begin{definition*}
+    Let $x, y$ be terms.
+    $\fakeemph{x \NotEq y}$ iff $\NOT x \Eq y$.
+    Let $x$ and $y$ are \emph{distinct} stand for $x \NotEq y$.
+  \end{definition*}
+\end{sparagraph}
+
+\Naproche has a hard-coded induction proof tactic (cf. section
+\ref{sec:misc-axioms}) that relies on an ``induction ordering'' $\ILess$.
+An important special case of this tactic is the following induction principle:
+If, for all $x$, we can show that a predicate $\varphi[y]$ holds for every
+$y \ILess x$, then $\varphi[x]$ holds for every $x$.
+Typical instances of this principle are the (strong) induction principle from
+natural number arithmetics (with $\ILess$ being the $<$-relation) or the
+$\in$-induction principle from set theory (with $\ILess$ being the
+$\in$-relation).
+
+\begin{sparagraph}[style=symdoc,for=ILess]
+  \begin{signature*}
+    Let $x, y$ be terms.
+    $\fakeemph{x \ILess y}$ is a relation.
+    Let $x$ is \emph{inductively less than $y$} stand for $x \ILess y$.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\tau[x_1, \dots, x_n]$ be a term and
+    $\psi_1[x_1]$, $\psi_2[x_1,x_2]$, \dots, $\psi_n[x_1, \dots, x_n]$ and $\varphi[x_1, \dots, x_n]$ be formulas.
+    Assume that the following holds for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$:
+    If $\tau[y_1, \dots, y_n] \ILess \tau[a_1, \dots, a_n]$
+    for all $y_1, \dots, y_n$ with $\psi_i[y_1, \dots, y_i]$ for all $i \Elem \EClass{1, \dots, n}$
+    then $\varphi[a_1, \dots, a_n]$.
+    Then $\varphi[a_1, \dots, a_n]$ for all $a_1, \dots, a_n$ with $\psi_i[a_1, \dots, a_i]$ for all $i \Elem \EClass{1, \dots, n}$.
+  \end{axiom*}
+
+  \begin{proposition*}
+    Let $A$ be a class, and $\varphi[x]$ be a formula.
+    Assume that the following holds for all $a \Elem A$:
+    If $\varphi[b]$ for for all $b \Elem A$ with $b \ILess a$ then $\varphi[a]$.
+    Then $\varphi[a]$ for all $a \Elem A$.
+  \end{proposition*}
+\end{sparagraph}
+
+
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{document}

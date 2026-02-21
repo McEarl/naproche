@@ -1,0 +1,152 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+
+\usemodule[libraries/meta]{preliminaries.ftl}
+
+
+\section{Propositions}\label{sec:propositions}
+
+Since \ForTheL is essentially a surface language for (unsorted) first-order logic,
+it provides symbolic notations for logical connectives and quantifiers which are
+described in this section.
+
+
+\subsection{Truth}\label{sec:truth}
+
+\begin{sparagraph}[style=symdoc,for=TRUE]
+  \begin{signature*}
+    $\fakeemph{\TRUE}$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    $\TRUE$ is true.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Falsity}\label{sec:falsity}
+
+\begin{sparagraph}[style=symdoc,for=FALSE]
+  \begin{signature*}
+    $\fakeemph{\FALSE}$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    $\FALSE$ is false.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Negation}\label{sec:negation}
+
+\begin{sparagraph}[style=symdoc,for=NOT]
+  \begin{signature*}
+    Let $\varphi$ be a formula.
+    $\fakeemph{\NOT \varphi}$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\varphi$ be a formula.
+    $\NOT\varphi$ is true iff $\varphi$ is false.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Conjunction}\label{sec:conjunction}
+
+\begin{sparagraph}[style=symdoc,for=AND]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \AND \psi}$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \AND \psi$ is true iff $\varphi$ is true and $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Disjunction}\label{sec:disjunction}
+
+\begin{sparagraph}[style=symdoc,for=OR]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \OR \psi}$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \OR \psi$ is true iff $\varphi$ is true or $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Implication}\label{sec:implication}
+
+\begin{sparagraph}[style=symdoc,for=IMPLIES]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \IMPLIES \psi}$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \IMPLIES \psi$ is true iff $\varphi$ is true implies that $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Equivalence}\label{sec:equivalence}
+
+\begin{sparagraph}[style=symdoc,for=IFF]
+  \begin{signature*}
+    Let $\varphi, \psi$ be formulas.
+    $\fakeemph{\varphi \IFF \psi}$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\varphi, \psi$ be formulas.
+    $\varphi \IFF \psi$ is true iff $\varphi$ is true if and only if $\psi$ is true.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Universal Quantification}\label{sec:universal-quantification}
+
+\begin{sparagraph}[style=symdoc,for=FORALL]
+  \begin{signature*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\fakeemph{\FORALL} x \mathrel{R} \tau : \varphi$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\FORALL x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for all terms $\sigma$ such that $\sigma \mathrel{R} \tau$.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Existential Quantification}\label{sec:existential-quantification}
+
+\begin{sparagraph}[style=symdoc,for=EXISTS]
+  \begin{signature*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\fakeemph{\EXISTS} x \mathrel{R} \tau : \varphi$ is a formula.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $x$ be a variable and $\tau$ be a term and $R$ be a binary relation and $\varphi$ be a formula.
+    $\EXISTS x \mathrel{R} \tau : \varphi$ is true iff $\varphi[\tau/x]$ is true for some term $\sigma$ such that $\sigma \mathrel{R} \tau$.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{document}

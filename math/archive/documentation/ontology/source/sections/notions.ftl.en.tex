@@ -1,0 +1,247 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+
+\usemodule[libraries/meta]{preliminaries.ftl}
+
+
+\section{Notions}\label{sec:notions}
+
+\subsection{Objects}\label{sec:objects}
+
+\emph{Objects} are mathematical entities that are ``small'' enough to be
+contained in classes.
+
+\begin{fakeforthel}
+  \begin{signature*}
+    A \emph{mathematical object} is a notion.
+    Let an \emph{object} stand for a mathematical object.
+    Let an \emph{element} stand for a mathematical object.
+  \end{signature*}
+\end{fakeforthel}
+
+\subsection{Ordered Pairs}\label{sec:ordered-pairs}
+
+\begin{fakeforthel}
+  \begin{signature*}
+    Let $a,b$ be objects.
+    $\emph{(a,b)}$ is an object.
+    Let the \emph{ordered pair of $a$ and $b$} stand for $(a,b)$.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[forthel,title=Ordered Pair Extensionality]
+    Let $a,a',b,b'$ be objects.
+    If $(a, b) \Eq (a', b')$ then $a \Eq a'$ and $b \Eq b'$.
+  \end{axiom*}
+\end{fakeforthel}
+
+
+\subsection{Classes and Sets}\label{sec:classes-and-sets}
+
+\begin{fakeforthel}
+  \begin{signature*}
+    A \emph{class} is a notion.
+    Let a \emph{collection} stand for a class.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[title=Class Extensionality]
+    Let $A,B$ be classes.
+    If every element of $A$ is an element of $B$ and every element of $B$ is an element of $A$ then $A \Eq B$.
+  \end{axiom*}
+\end{fakeforthel}
+
+Sets are considered to be classes that are ``small'' enough to be contained in
+other classes:
+
+\begin{fakeforthel}
+  \begin{definition*}
+    A \emph{set} is a class that is an object.
+  \end{definition*}
+\end{fakeforthel}
+
+\begin{sparagraph}[style=symdoc,for={Elem,NotElem}]
+  \begin{fakeforthel}
+    \begin{signature*}
+      Let $A$ be a class.
+      A \emph{element of $A$} is an object.
+      Let a \emph{member of $X$} stand for an element of $X$.
+      Let $x$ \emph{belongs to $X$} stand for $x$ is an element of $X$.
+      Let $X$ \emph{contains $x$} stand for $x$ is an element of $X$.
+      Let $x$ is \emph{contained in $X$} stand for $x$ is an element of $X$.
+      Let $x$ \emph{lies in $X$} stand for $x$ is an element of $X$.
+      Let $x$ is \emph{in $X$} stand for $x$ is an element of $X$.
+      Let $\emph{a \Elem A}$ stand for $a$ is an element of $A$.
+      Let $\emph{a \NotElem A}$ stand for $\NOT a \Elem A$.
+    \end{signature*}
+  \end{fakeforthel}
+\end{sparagraph}
+
+
+\subsection{Comprehension Terms}\label{sec:comprehension-terms}
+
+In \ForTheL we have three types of comprehension terms:
+\begin{itemize}
+  \item ``Enumeration classes'', i.e. terms of the form
+  $\EClass{a_1,\dots,a_n}$, that represent the class that contains precisely the
+  objects $a_1,\dots,a_n$.
+  Typical examples are $\EClass{4,7,11}$ (i.e. the class consisting of the
+  numbers $4$, $7$ and $11$) or $\EClass{x,y+1,z-x}$ (i.e. the class consisting
+  of the elements $x$, $y+1$ and $z-x$ for some fixed objects $x$, $y$ and $z$).
+  \item ``Comprehension classes'', i.e. terms of the form
+  $\CClass{\tau}{\varphi}$, that represent the class of all objects of the form
+  $\tau$ such that the components of $\tau$ satisfy the condition $\varphi$.
+  Typical examples are $\CClass{p}{p \text{ is an odd prime number}}$ (i.e the
+  class of all odd prime numbers) or $\CClass{(p,n)}{n \in \mathbb{N}
+  \text{ and } p \text{ is a prime divisor of } n}$ (i.e. the class of all pairs
+  $(p,n)$ of natural numbers such that $p$ is a prime divisor of $n$).
+  \item ``Separation classes'', i.e. terms of the form
+  $\SClass{\tau}{A}{\varphi}$, that represent the subclass of a class $A$ of all
+  objects of the form $\tau$ such that the components of $\tau$ satisfy the
+  condition $\varphi$.
+  Typical examples are $\SClass{p}{\mathbb{P}}{p \text{ is odd}}$ (i.e the
+  class of all odd prime numbers) or $\SClass{(p,n)}{\mathbb{N}\times\mathbb{N}}
+  {p \text{ is a prime divisor of } n}$ (i.e. the class of all pairs
+  $(p,n)$ of natural numbers such that $p$ is a prime divisor of $n$).
+\end{itemize}
+
+\begin{sparagraph}[style=symdoc,for=EClass]
+  \begin{signature*}
+    Let $a_1, \dots, a_n$ be objects.
+    $\fakeemph{\EClass{a1, \dots, a_n}}$ is a class.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $a_1, \dots, a_n$ be objects.
+    Then $a \Elem \EClass{a_1, \dots, a_n}$ iff $a \Eq a_1$ or \dots{} or $a \Eq a_n$.
+  \end{axiom*}
+\end{sparagraph}
+
+\begin{sparagraph}[style=symdoc,for=CClass]
+  \begin{signature*}
+    Let $\tau$ be a term and $\varphi$ be a formula.
+    $\fakeemph{\CClass{\tau}{\varphi}}$ is a class.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\tau[x_1, \dots, x_n]$ be a term and $\varphi[x_1, \dots, x_n]$ be a formula.
+    Then $a \Elem \CClass{\tau}{\varphi}$ iff
+    $a$ is an object and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
+  \end{axiom*}
+
+  \begin{proposition*}
+    Let $\varphi[x]$ be a formula.
+    Then $a \Elem \CClass{x}{\varphi}$ iff $a$ is an object and $\varphi[a]$.
+  \end{proposition*}
+\end{sparagraph}
+
+\begin{sparagraph}[style=symdoc,for=SClass]
+  \begin{signature*}
+    Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
+    $\fakeemph{\SClass{\tau}{A}{\varphi}}$ is a class.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $\tau[x_1, \dots, x_n]$ be a term, $A$ be a class and $\varphi[x_1,\dots,x_n]$ be a formula.
+    Then $a \Elem \SClass{\tau}{A}{\varphi}$ iff
+    $a \Elem A$ and there exist $a_1, \dots, a_n$ such that $\varphi[a_1, \dots, a_n]$ and $a \Eq \tau[a_1, \dots, a_n]$.
+  \end{axiom*}
+
+  \begin{proposition*}
+    Let $A$ be a class and $\varphi[x]$ be a formula.
+    Then $a \Elem \SClass{x}{A}{\varphi}$ iff
+    $a \Elem A$ and $\varphi[a]$.
+  \end{proposition*}
+
+  \begin{axiom*}
+    Let $\tau$ be a term, $A$ be a class and $\varphi$ be a formula.
+    If $A$ is a set then $\SClass{\tau}{A}{\varphi}$ is a set.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\subsection{Maps and Functions}\label{sec:maps-and-functions}
+
+\begin{fakeforthel}
+  \begin{signature*}
+    A \emph{map} is a notion.
+  \end{signature*}
+\end{fakeforthel}
+
+\begin{fakeforthel}
+  \begin{axiom*}[title=Map Extensionality]
+    Let $f,g$ be maps.
+    If $\Dom(f) \Eq \Dom(g)$ and $f(a) \Eq g(a)$ for all $a \Elem \Dom(f)$ then $g \Eq g$.
+  \end{axiom*}
+\end{fakeforthel}
+
+Similar to the notion of sets which are considered to be ``small'' classes, we
+consider \emph{functions} to be ``small'' maps.
+
+\begin{fakeforthel}
+  \begin{definition*}
+    A \emph{function} is a map that is an object.
+  \end{definition*}
+\end{fakeforthel}
+
+\begin{forthel}
+  \begin{axiom*}
+    Let $f$ be a map.
+    $f$ is a function iff $\Dom(f)$ is a set.
+  \end{axiom*}
+\end{forthel}
+
+\begin{sparagraph}[style=symdoc,for=Dom]
+  \begin{fakeforthel}
+    \begin{signature*}
+      Let $f$ be a map.
+      $\emph{\Dom(f)}$ is a class.
+      Let the \emph{domain of $f$} stand for $\Dom(f)$.
+      Let $f$ is \emph{defined on $X$} stand for $\Dom(f) \Eq X$.
+    \end{signature*}
+  \end{fakeforthel}
+\end{sparagraph}
+
+\begin{fakeforthel}
+  \begin{signature*}
+    Let $f$ be a map and $a \Elem \Dom(f)$.
+    $\emph{f(a)}$ is an object.
+    Let the \emph{value of $f$ at $x$} stand for $f(x)$.
+    Let $\emph{f(x,y)}$ stand for $f((x,y))$.
+  \end{signature*}
+\end{fakeforthel}
+
+
+\subsection{$\lambda$-Terms}\label{sec:lambda-terms}
+
+In low-level map definitions, \ForTheL allows to define maps via
+$\lambda$-terms:
+
+\begin{sparagraph}[style=symdoc,for=Map]
+  \begin{signature*}
+    Let $x$ be a variable, $A$ be a class and $\tau$ be a term.
+    $\fakeemph{\Map{x}{A}\tau}$ is a map.
+  \end{signature*}
+
+  \begin{axiom*}
+    Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term.
+    Then $\Dom(\Map{x}{A}\tau) \Eq A$.
+  \end{axiom*}
+
+  \begin{axiom*}
+    Let $x$ be a variable, $A$ be a class and $\tau[x]$ be a term and $a \Elem A$.
+    Then $(\Map{x}{A}\tau)(a) \Eq \tau[a]$.
+  \end{axiom*}
+\end{sparagraph}
+
+
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{document}

@@ -1,0 +1,27 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+
+\usemodule[libraries/meta]{preliminaries.ftl}
+
+
+\section{Introduction}\label{sec:introduction}
+
+This document describes the notions and axioms hard-coded in \Naproche.
+Furthermore, it presents some additional symbolic and verbal macros that extend
+the core language of \ForTheL.
+These macros are provided by the library \path{libraries/meta} which contains a
+module \path{preliminaries.ftl} that exports all these macros.
+Every library module (excluding those in the library \path{meta}) is expected to
+import the module \path{preliminaries.ftl}.
+This ensures that by importing any library module to your formalization,
+you automatically have access to all macros described in this document.
+
+
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{document}
