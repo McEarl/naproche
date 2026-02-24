@@ -306,7 +306,7 @@
 
 \NewDocumentEnvironment {forthel} {} {
   \par
-  \addvspace \baselineskip
+  \addvspace{.5em}
   \ifstexhtml
     \begin {stex_annotate_env} {style=
       display: block;
@@ -410,3 +410,18 @@
     \textcolor {defcolor} {#1}
   }
 }
+
+
+% Documenting Symbols
+% ===================
+
+\NewDocumentEnvironment {documentation} {m +b} {
+  \par
+  \addvspace{.5em}
+  \begin{sparagraph}[style=symdoc,for={#1}]
+  \noindent
+  #2
+} {
+  \end{sparagraph}
+}
+
