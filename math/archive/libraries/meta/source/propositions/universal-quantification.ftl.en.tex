@@ -5,7 +5,14 @@
 \begin{document}
 \begin{smodule}{universal-quantification.ftl}
 
-\symdef{FORALL}{\mathop\forall}
+\symdef{FORALL}[args=1]{\mathop{\maincomp\forall}#1\comp.\,}
+
+\begin{documentation}{FORALL}
+  $\defnotation\FORALL!$ is a \Naproche primitive:
+  Let $x$ be a variable, $\nu[x]$ be a symbolic notion and $\varphi[x]$ be a symbolic formula.
+  Then $\defnotation\FORALL{\nu[x]}\varphi[x]$ is a symbolic formula.
+  (See the \Naproche User Manual for details.)
+\end{documentation}
 
 \end{smodule}
 \end{document}

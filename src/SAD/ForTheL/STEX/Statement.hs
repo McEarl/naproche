@@ -307,27 +307,26 @@ symbolicFormula  = label "a symbolic formula" $ biimplication
     implication   = disjunction >>= binary Imp (symbolicImp >> implication)
     disjunction   = conjunction >>= binary Or  (symbolicOr >> disjunction)
     conjunction   = nonbinary   >>= binary And (symbolicAnd >> conjunction)
-    universal     = liftA2 (quantified dAll Imp) (symbolicAll >> (declared =<< symNotion)) nonbinary
-    existential   = liftA2 (quantified dExi And) (symbolicExists >> (declared =<< symNotion)) nonbinary
-    nonbinary     = truth -|- falsity -|- universal -|- existential -|- negation -|- separated -|- atomic
+    universal     = liftA2 (quantified dAll Imp) symbolicAll symbolicFormula
+    existential   = liftA2 (quantified dExi And) symbolicExists symbolicFormula
+    nonbinary     = truth -|- falsity -|- universal -|- existential -|- negation -|- atomic
     truth         = symbolicTruth >> pure Top
     falsity       = symbolicFalsity >> pure Bot
     negation      = Not <$> (symbolicNot >> nonbinary)
-    separated     = token' ":" >> symbolicFormula
 
     quantified quant op (_, f, v) = flip (foldr quant) v . op f
 
     binary op p f = optLL1 f $ fmap (op f) p
 
-    symbolicIff = token "\\Iff"
-    symbolicImp = token "\\Implies"
-    symbolicOr = token "\\Or"
-    symbolicAnd = token "\\And"
-    symbolicAll = token "\\Forall"
-    symbolicExists = token "\\Exists"
-    symbolicNot = token "\\Not"
-    symbolicTruth = token "\\True"
-    symbolicFalsity = token "\\False"
+    symbolicIff = texCommand "IFF"
+    symbolicImp = texCommand "IMPLIES"
+    symbolicOr = texCommand "OR"
+    symbolicAnd = texCommand "AND"
+    symbolicAll = texCommandWithArg "FORALL" (declared =<< symNotion)
+    symbolicExists = texCommandWithArg "EXISTS" (declared =<< symNotion)
+    symbolicNot = texCommand "NOT"
+    symbolicTruth = texCommand "TRUE"
+    symbolicFalsity = texCommand "FALSEr"
 
     atomic = relation -|- parenthesised statement
       where

@@ -5,7 +5,14 @@
 \begin{document}
 \begin{smodule}{existential-quantification.ftl}
 
-\symdef{EXISTS}{\mathop\exists}
+\symdef{EXISTS}[args=1]{\mathop{\maincomp\exists}#1\comp.\,}
+
+\begin{documentation}{EXISTS}
+  $\defnotation\EXISTS!$ is a \Naproche primitive:
+  Let $x$ be a variable, $\nu[x]$ be a symbolic notion and $\varphi[x]$ be a symbolic formula.
+  Then $\defnotation\EXISTS{\nu[x]}\varphi[x]$ is a symbolic formula.
+  (See the \Naproche User Manual for details.)
+\end{documentation}
 
 \end{smodule}
 \end{document}
