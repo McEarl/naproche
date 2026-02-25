@@ -1,0 +1,138 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+\begin{smodule}{first-order-semantics}
+
+\importmodule[libraries/meta]{preliminaries.ftl}
+
+\begin{sfragment}[id=sec:first-order-semantics]{First-Order Semantics}
+   \symdecl*{formula}
+  \symdef{folsem}[name=first-order semantics,args=1,op=[\![\cdot]\!]]{\comp{[\![}#1\comp{]\!]}}
+  %
+  \begin{sparagraph}[style=symdoc,for={first-order semantics,folsem}]
+    \vardef{Evar}{E}
+    %
+    \Naproche translates \ForTheL expressions to (a variant of)
+    \sr{formula}{first-order formulas} which we refer to as the
+    \definame{first-order semantics} of \ForTheL.
+    We denote the first-order translation of an expression $\Evar$
+    by $\defnotation\folsem\Evar$.
+  \end{sparagraph}
+
+  \begin{sfragment}[id=sec:tags]{Tags}
+    \symdecl*{tag}
+    \symdef{DigTag}{\langle\textsf{dig}\rangle}
+    \symdef{DigMultiSubjectTag}{\langle\textsf{dig multi-subject}\rangle}
+    \symdef{DigMultiPairwiseTag}{\langle\textsf{dig multi-pairwise}\rangle}
+    \symdef{HeadTermTag}{\langle\textsf{head term}\rangle}
+    \symdef{InductionHypothesisTag}{\langle\textsf{induction hypothesis}\rangle}
+    \symdef{CaseHypothesisTag}{\langle\textsf{case hypothesis}\rangle}
+    \symdef{EqualityChainTag}{\langle\textsf{equality chain}\rangle}
+    \symdef{GenericMarkTag}{\langle\textsf{generic mark}\rangle}
+    \symdef{EvaluationTag}{\langle\textsf{evaluation}\rangle}
+    \symdef{ConditionTag}{\langle\textsf{condition}\rangle}
+    \symdef{DefinedTag}{\langle\textsf{defined}\rangle}
+    \symdef{DomainTag}{\langle\textsf{domain}\rangle}
+    \symdef{ReplacementTag}{\langle\textsf{replacement}\rangle}
+    \symdef{DomainTaskTag}{\langle\textsf{domain task}\rangle}
+    \symdef{ExistenceTaskTag}{\langle\textsf{existence task}\rangle}
+    \symdef{UniquenessTaskTag}{\langle\textsf{uniqueness task}\rangle}
+    \symdef{ChoiceTaskTag}{\langle\textsf{choice task}\rangle}
+    %
+    \begin{sparagraph}[style=symdoc,for={tag,DigTag,DigMultiSubjectTag,DigMultiPairwiseTag,HeadTermTag,InductionHypothesisTag,
+      CaseHypothesisTag,EqualityChainTag,GenericMarkTag,EvaluationTag,ConditionTag,DefinedTag,DomainTag,ReplacementTag,
+      DomainTaskTag,ExistenceTaskTag,UniquenessTaskTag,ChoiceTaskTag}]
+      \Sns{formula} can be annotated with one of the following \definame[post=s]{tag}:
+      \begin{enumerate}
+        \item $\defnotation\DigTag$
+        \item $\defnotation\DigMultiSubjectTag$
+        \item $\defnotation\DigMultiPairwiseTag$
+        \item $\defnotation\HeadTermTag$
+        \item $\defnotation\InductionHypothesisTag$
+        \item $\defnotation\CaseHypothesisTag$
+        \item $\defnotation\EqualityChainTag$
+        \item $\defnotation\GenericMarkTag$
+        \item $\defnotation\EvaluationTag$
+        \item $\defnotation\ConditionTag$
+        \item $\defnotation\DefinedTag$
+        \item $\defnotation\DomainTag$
+        \item $\defnotation\ReplacementTag$
+        \item $\defnotation\DomainTaskTag$
+        \item $\defnotation\ExistenceTaskTag$
+        \item $\defnotation\UniquenessTaskTag$
+        \item $\defnotation\ChoiceTaskTag$
+      \end{enumerate}
+    \end{sparagraph}
+
+    $\GenericMarkTag$, $\EvaluationTag$, $\ConditionTag$, $\DefinedTag$, $\DomainTag$ and $\ReplacementTag$ \sns{tag}
+    are used to mark certain parts of map definitions.
+    $\DomainTaskTag$, $\ExistenceTaskTag$, $\UniquenessTaskTag$ and $\ChoiceTaskTag$ \sns{tag} are used to mark
+    certain parts of well-definedness proof tasks for maps.
+  \end{sfragment}
+
+  \begin{sfragment}[id=sec:formulas]{Formulas}
+    \symdef{foltrue}{\top}
+    \symdef{folfalse}{\bot}
+    \symdef{folthis}{\textsf{this}}
+    \symdef{folneg}[args=1]{\mathop{\maincomp\neg}#1}
+    \symdef{folconj}[args=a]{\argsep{#1}{\mathbin{\maincomp\wedge}}}
+    \symdef{foldisj}[args=a]{\argsep{#1}{\mathbin{\maincomp\vee}}}
+    \symdef{folimpl}[args=2]{#1\mathbin{\maincomp\Rightarrow}#2}
+    \symdef{folequiv}[args=a]{\argsep{#1}{\mathbin{\maincomp\Leftrightarrow}}}
+    \symdef{folforall}[args=1]{\maincomp\forall#1}
+    \symdef{folexists}[args=1]{\maincomp\exists#1}
+    \symdef{foltag}[args=2]{#1\mathrel{\maincomp{::}}#2}
+    \symdef{foldbindex}[args=1,name=De Brujin index]{#1}
+    %
+    \begin{sparagraph}[style=symdoc,for={formula,foltrue,folfalse,folneg,folconj,foldisj,folimpl,folequiv,folforall,folexists,foltag,foldbindex,folsem}]
+      \vardef{phivar}{\varphi}
+      \vardef{psivar}{\psi}
+      \vardef{Tvar}{T}
+      \vardef{ivar}{i}
+      \vardef{xvar}{x}
+      \vardef{tvar}[args=a]{\maincomp t\dobrackets{#1}}
+      \vardef{nvar}{n}
+      \varseq{phiseq}{1,\ellipses,\nvar}{\maincomp\varphi_{#1}}
+      %
+      \Definame[post=s]{formula}, the target of the \sn{first-order semantics} of \Naproche,
+      are recursively defined as follows:
+      \begin{enumerate}
+        \item $\defnotation\foltrue$ is a \sn{formula};
+        \item $\defnotation\folfalse$ is a \sn{formula};
+        \item $\defnotation\folthis$ is a \sn{formula};
+        \item if $\phivar$ is a \sn{formula},
+          then $\defnotation\folneg\phivar$ is a \sn{formula};
+        \item if $\phivar$ and $\psivar$ are \sns{formula},
+          then $\defnotation\folconj{\phivar,\psivar}$ is a \sn{formula};
+        \item if $\phivar$ and $\psivar$ are \sns{formula},
+          then $\defnotation\foldisj{\phivar,\psivar}$ is a \sn{formula};
+        \item if $\phivar$ and $\psivar$ are \sns{formula},
+          then $\defnotation\folimpl{\phivar}{\psivar}$ is a \sn{formula};
+        \item if $\phivar$ and $\psivar$ are \sns{formula},
+          then $\defnotation\folequiv{\phivar,\psivar}$ is a \sn{formula};
+        \item if $\phivar$ is a \sn{formula},
+          then $\defnotation\folforall\phivar$ is a \sn{formula};
+        \item if $\phivar$ is a \sn{formula},
+          then $\defnotation\folexists\phivar$ is a \sn{formula};
+        \item if $\Tvar$ is a tag and $\phivar$ a \sn{formula},
+          then $\defnotation\foltag\Tvar\phivar$ is a \sn{formula};
+        \item if $\ivar\in\mathbb N$,
+          then $\defnotation\foldbindex\ivar$ is a \sn{formula},
+          commonly called a \definame{De Brujin index};
+        \item if $\xvar$ is a variable name,
+          then $\xvar$ is a \sn{formula};
+        \item if $\tvar!$ is a term name and $\phiseq!$ are \sns{formula},
+          then $\tvar\phiseq$ is a \sn{formula}.
+      \end{enumerate}
+    \end{sparagraph}
+  \end{sfragment}
+\end{sfragment}
+
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{smodule}
+\end{document}
