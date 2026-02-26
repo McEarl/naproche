@@ -10,7 +10,8 @@
 \importmodule[libraries/meta]{preliminaries.ftl}
 
 \begin{sfragment}[id=sec:first-order-semantics]{First-Order Semantics}
-   \symdecl*{formula}
+  \symdecl*{formula}
+  \symdecl*{term}
   \symdef{folsem}[name=first-order semantics,args=1,op=[\![\cdot]\!]]{\comp{[\![}#1\comp{]\!]}}
   %
   \begin{sparagraph}[style=symdoc,for={first-order semantics,folsem}]
@@ -74,6 +75,122 @@
     certain parts of well-definedness proof tasks for maps.
   \end{sfragment}
 
+  \begin{sfragment}[id=sec:variables]{Variables}
+    \symdecl*{variable name}
+    \symdecl*{variable declaration}
+    \symdef{constVar}[args=1,name=constant variable]{\maincomp{\textsf{x}}\dobrackets{#1}}
+    \symdef{holeVar}[args=1,name=hole variable]{\maincomp{\textsf{?}}\dobrackets{#1}}
+    \symdef{slotVar}[name=slot variable]{\textsf{!}}
+    \symdef{uVar}[args=1,name=u-variable]{\maincomp{\textsf{u}}\dobrackets{#1}}
+    \symdef{hiddenVar}[args=1,name=hidden variable]{\maincomp{\textsf{h}}\dobrackets{#1}}
+    \symdef{assumeVar}[args=1,name=assume variable]{\maincomp{\textsf{i}}\dobrackets{#1}}
+    \symdef{skolemVar}[args=1,name=Skolem variable]{\maincomp{\textsf{o}}\dobrackets{#1}}
+    \symdef{taskVar}[args=1,name=task variable]{\maincomp{\textsf{c}}\dobrackets{#1}}
+    \symdef{zVar}[args=1,name=z-variable]{\maincomp{\textsf{z}}\dobrackets{#1}}
+    \symdef{wVar}[args=1,name=w-variable]{\maincomp{\textsf{w}}\dobrackets{#1}}
+    \symdef{emptyVar}[name=empty variable]{\epsilon_{\textsf{v}}}
+    \symdef{defaultVar}[args=1,name=default variable]{\maincomp{\textsf d}\dobrackets{#1}}
+    %
+    \begin{sparagraph}[style=symdoc,for={variable name,variable declaration,constVar,holeVar,slotVar,uVar,hiddenVar,
+      assumeVar,skolemVar,taskVar,zVar,wVar,emptyVar,defaultVar}]
+      \vardef{svar}{s}
+      \vardef{nvar}{n}
+      \vardef{vvar}{v}
+      %
+      \Naproche knows two kinds of variables: \Definame[post=s]{variable name} and
+      \definame[post=s]{variable declaration}.
+      The latter is just a \sn{variable name} equipped with a natural number.
+      \Sns{variable name} subdivide into the following kinds:
+      \begin{enumerate}
+        \item \Definame[post=s]{constant variable}, denoted by $\defnotation\constVar\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{hole variable}, denoted by $\defnotation\holeVar\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{slot variable}, denoted by $\defnotation\slotVar$;
+        \item \Definame[post=s]{u-variable}, denoted by $\defnotation\uVar\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{hidden variable}, denoted by $\defnotation\hiddenVar\nvar$,
+          where $\nvar$ is an integer;
+        \item \Definame[post=s]{assume variable}, denoted by $\defnotation\assumeVar\nvar$,
+          where $\nvar$ is an integer;
+        \item \Definame[post=s]{Skolem variable}, denoted by $\defnotation\skolemVar\nvar$,
+          where $\nvar$ is an integer;
+        \item \Definame[post=s]{task variable}, denoted by $\defnotation\taskVar\vvar$,
+          where $\vvar$ is a \sn{variable name};
+        \item \Definame[post=s]{z-variable}, denoted by $\defnotation\zVar\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{w-variable}, denoted by $\defnotation\wVar\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{empty variable}, denoted by $\defnotation\emptyVar$;
+        \item \Definame[post=s]{default variable}, denoted by $\defnotation\defaultVar\svar$,
+          where $\svar$ is a string.
+        \end{enumerate}
+    \end{sparagraph}
+  \end{sfragment}
+
+  \begin{sfragment}[id=sec:terms]{Terms}
+    \symdecl*{term name}
+    \symdef{nameTerm}[args=1,name=name term]{\maincomp{\textsf{n}}\dobrackets{#1}}
+    \symdef{symbolicTerm}[args=1,name=symbolic term]{\maincomp{\textsf{s}}\dobrackets{#1}}
+    \symdef{notionTerm}[args=1,name=notion term]{\maincomp{\textsf{a}}\dobrackets{#1}}
+    \symdef{theTerm}[args=1,name=the-term]{\maincomp{\textsf{the}}\dobrackets{#1}}
+    \symdef{uAdjectiveTerm}[args=1,name=unary adjective term]{\maincomp{\textsf{is}}\dobrackets{#1}}
+    \symdef{mAdjectiveTerm}[args=1,name=multi adjective term]{\maincomp{\textsf{mis}}\dobrackets{#1}}
+    \symdef{uVerbTerm}[args=1,name=unary verb term]{\maincomp{\textsf{do}}\dobrackets{#1}}
+    \symdef{mVerbTerm}[args=1,name=multi verb term]{\maincomp{\textsf{mdo}}\dobrackets{#1}}
+    \symdef{taskTerm}[args=1,name=task term]{\maincomp{\textsf{tsk}}\dobrackets{#1}}
+    \symdef{equalityTerm}[name=equality term]{\textsf{eq}}
+    \symdef{ilessTerm}[name=inductively-less term]{\textsf{iless}}
+    \symdef{thesisTerm}[name=thesis term]{\textsf{\#TH\#}}
+    \symdef{emptyTerm}[name=empty term]{\epsilon_{\textsf{t}}}
+    %
+    \begin{sparagraph}[style=symdoc,for={term name,nameTerm,symbolicTerm,theTerm,uAdjectiveTerm,mAdjectiveTerm,
+    uVerbTerm,mVerbTerm,taskTerm,equalityTerm,ilessTerm,thesisTerm,emptyTerm}]
+      \vardef{svar}{s}
+      \vardef{nvar}{n}
+      %
+      \Sns{formula} can consist of \sns{term} which are constructed via a \definame{term name} to
+      which a list of \sns{formula} is passed as arguments.
+      \Sns{term name} can be of the following forms:
+      \begin{enumerate}
+        \item \Definame[post=s]{name term}, denoted by $\defnotation\nameTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{symbolic term}, denoted by $\defnotation\symbolicTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{notion term}, denoted by $\defnotation\notionTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{the-term}, denoted by $\defnotation\theTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{unary adjective term}, denoted by $\defnotation\uAdjectiveTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{multi adjective term}, denoted by $\defnotation\mAdjectiveTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{unary verb term}, denoted by $\defnotation\uVerbTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{multi verb term}, denoted by $\defnotation\mVerbTerm\svar$,
+          where $\svar$ is a string;
+        \item \Definame[post=s]{task term}, denoted by $\defnotation\taskTerm\nvar$,
+          where $\nvar$ is an integer;
+        \item \Definame[post=s]{equality term}, denoted by $\defnotation\equalityTerm$;
+        \item \Definame[post=s]{inductively-less term}, denoted by $\defnotation\ilessTerm$;
+        \item \Definame[post=s]{thesis term}, denoted by $\defnotation\thesisTerm$;
+        \item \Definame[post=s]{empty term}, denoted by $\defnotation\emptyTerm$.
+      \end{enumerate}
+    \end{sparagraph}
+
+    By default, \Naproche knows the following \sns{notion term}:
+    $\notionTerm{\texttt{function}}$,
+    $\notionTerm{\texttt{map}}$,
+    $\notionTerm{\texttt{set}}$,
+    $\notionTerm{\texttt{class}}$,
+    $\notionTerm{\texttt{object}}$ and
+    $\notionTerm{\texttt{elementOf}}$;
+    and the following \sns{name term}:
+    $\nameTerm{\texttt{.(.)}}$ (which denotes the map application operation),
+    $\nameTerm{\texttt{Dom(.)}}$ (which denotes the domain operation) and
+    $\nameTerm{\texttt{(.,.)}}$ (which denotes the ordered pair constructor).
+  \end{sfragment}
+
   \begin{sfragment}[id=sec:formulas]{Formulas}
     \symdef{foltrue}{\top}
     \symdef{folfalse}{\bot}
@@ -83,8 +200,8 @@
     \symdef{foldisj}[args=a]{\argsep{#1}{\mathbin{\maincomp\vee}}}
     \symdef{folimpl}[args=2]{#1\mathbin{\maincomp\Rightarrow}#2}
     \symdef{folequiv}[args=a]{\argsep{#1}{\mathbin{\maincomp\Leftrightarrow}}}
-    \symdef{folforall}[args=1]{\maincomp\forall#1}
-    \symdef{folexists}[args=1]{\maincomp\exists#1}
+    \symdef{folforall}[args=2]{\maincomp\forall#1\comp.\,#2}
+    \symdef{folexists}[args=2]{\maincomp\exists#1\comp.\,#2}
     \symdef{foltag}[args=2]{#1\mathrel{\maincomp{::}}#2}
     \symdef{foldbindex}[args=1,name=De Brujin index]{#1}
     %
@@ -94,6 +211,7 @@
       \vardef{Tvar}{T}
       \vardef{ivar}{i}
       \vardef{xvar}{x}
+      \vardef{vvar}{v}
       \vardef{tvar}[args=a]{\maincomp t\dobrackets{#1}}
       \vardef{nvar}{n}
       \varseq{phiseq}{1,\ellipses,\nvar}{\maincomp\varphi_{#1}}
@@ -114,19 +232,20 @@
           then $\defnotation\folimpl{\phivar}{\psivar}$ is a \sn{formula};
         \item if $\phivar$ and $\psivar$ are \sns{formula},
           then $\defnotation\folequiv{\phivar,\psivar}$ is a \sn{formula};
-        \item if $\phivar$ is a \sn{formula},
-          then $\defnotation\folforall\phivar$ is a \sn{formula};
-        \item if $\phivar$ is a \sn{formula},
-          then $\defnotation\folexists\phivar$ is a \sn{formula};
-        \item if $\Tvar$ is a tag and $\phivar$ a \sn{formula},
+        \item if $\xvar$ is a \sn{variable declaration} and $\phivar$ a \sn{formula},
+          then $\defnotation\folforall\xvar\phivar$ is a \sn{formula};
+        \item if $\xvar$ is a \sn{variable declaration} and $\phivar$ a \sn{formula},
+          then $\defnotation\folexists\xvar\phivar$ is a \sn{formula};
+        \item if $\Tvar$ is a \sn{tag} and $\phivar$ a \sn{formula},
           then $\defnotation\foltag\Tvar\phivar$ is a \sn{formula};
         \item if $\ivar\in\mathbb N$,
           then $\defnotation\foldbindex\ivar$ is a \sn{formula},
           commonly called a \definame{De Brujin index};
-        \item if $\xvar$ is a variable name,
-          then $\xvar$ is a \sn{formula};
-        \item if $\tvar!$ is a term name and $\phiseq!$ are \sns{formula},
-          then $\tvar\phiseq$ is a \sn{formula}.
+        \item if $\vvar$ is a \sn{variable name},
+          then $\vvar$ is a \sn{formula};
+        \item if $\tvar!$ is a \sn{term name} and $\phiseq!$ are \sns{formula},
+          then $\tvar\phiseq$ is a \sn{formula};
+          in this case $\tvar\phiseq$ is called a \definame{term}.
       \end{enumerate}
     \end{sparagraph}
   \end{sfragment}

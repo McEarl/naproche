@@ -22,6 +22,7 @@
     \vardef{nuvar}{\nu}
     \vardef{Svar}{S}
     \vardef{Rvar}{R}
+    \vardef{xvar}{x}
     %
     \Definame[post=s]{symbolic formula} are recursively defined as follows:
     \begin{enumerate}
@@ -57,8 +58,10 @@
       \item $\folsem{\phivar\OR\psivar}=\foldisj{\folsem\phivar,\folsem\psivar}$;
       \item $\folsem{\phivar\IMPLIES\psivar}=\folimpl{\folsem\phivar}{\folsem\psivar}$;
       \item $\folsem{\phivar\IFF\psivar}=\folequiv{\folsem\phivar,\folsem\psivar}$;
-      \item $\folsem{\FORALL\nuvar\phivar}={???}$;
-      \item $\folsem{\EXISTS\nuvar\phivar}={???}$;
+      \item $\folsem{\FORALL\nuvar\phivar}=\folforall\xvar{\folimpl{\folsem\nuvar}{\folsem\phivar}}$,
+        where $\xvar$ is the variable declaration given by $\nuvar$;
+      \item $\folsem{\EXISTS\nuvar\phivar}=\folexists\xvar{\folconj{\folsem\nuvar,\folsem\phivar}}$,
+        where $\xvar$ is the variable declaration given by $\nuvar$;
       \item $\folsem{(\Svar)}=\folsem\Svar$.
     \end{enumerate}
 
