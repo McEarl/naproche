@@ -1,3 +1,19 @@
+\usepackage{amsfonts,mathrsfs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% https://tex.stackexchange.com/a/641668
+% CC BY-SA 4.0 (c) https://tex.stackexchange.com/users/4427/egreg
+\usepackage{amsmath}
+\DeclareFontFamily{U}{mathx}{}
+\DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathAccent\widehat0{mathx}{"70}
+\DeclareMathAccent\widecheck0{mathx}{"71}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\widevec[1]{\overset\rightarrow{#1}}
+\newcommand\widebar[1]{\overline{#1}}
+
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true
