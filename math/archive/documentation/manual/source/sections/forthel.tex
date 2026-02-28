@@ -1,0 +1,47 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+\begin{smodule}{forthel}
+
+\ifinputref\else\setsectionlevel{section}\fi
+
+\begin{sfragment}[id=sec:forthel]{\ForTheL}
+  \textsymdecl{forthel}{\ForTheL}
+  \textsymdecl{asciidialect}{ASCII dialect}
+  \textsymdecl{texdialect}{\TeX{} dialect}
+  \textsymdecl{stexdialect}{\sTeX{} dialect}
+  %
+  \begin{sparagraph}[style=symdoc,for={forthel,asciidialect,texdialect,stexdialect}]
+    The input language of \Naproche is called \defnotation\forthel
+    (``\definiendum{forthel}{\textbf{For}mula \textbf{The}ory \textbf{L}anguage}'').
+    \forthel comes in three dialects:
+    \begin{enumerate}
+      \item The \defnotation\asciidialect (which \Naproche expects when it reads a
+        file whose file name ends with ``\texttt{.ftl}'') is a simple plain text format.
+        Its name comes from the restriction that only characters from the Basic Latin
+        Unicode block -- i.e.\ US-ASCII characters -- are allowed in \texttt{.ftl} files.
+      \item The \defnotation\texdialect (which \Naproche expects when it reads a
+        file whose file name ends with ``\texttt{.ftl.tex}'') is a \LaTeX-compatible
+        format. This means that any document written in the \texdialect can directly
+        be passed to a \TeX{} engine (e.g.\ \texttt{pdflatex} or \texttt{rustex}) to be
+        converted to, e.g., PDF or HTML.
+      \item The \defnotation\stexdialect (which \Naproche expects when it reads a
+        file whose file name ends with ``\texttt{.ftl.en.tex}'') is an
+        \textbf{experimental} \sTeX-compatible format which produces semantically
+        annotated PDF or HTML documents when processed via \texttt{pdflatex} or
+        \texttt{rustex}.
+        The long-term goal is to automatically convert \forthel texts written in the
+        \sr{asciidialect}{ASCII} or \texdialect to the \stexdialect so that
+        texts in this format neither need to be written manually nor parsed by \Naproche.
+    \end{enumerate}
+  \end{sparagraph}
+\end{sfragment}
+
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{smodule}
+\end{document}
