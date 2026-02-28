@@ -7,6 +7,7 @@
 \begin{document}
 \begin{smodule}{symbolic-formulas}
 
+\importmodule{sections?forthel}
 \importmodule{sections?first-order-semantics}
 \importmodule[libraries/meta]{preliminaries.ftl}
 
@@ -24,91 +25,96 @@
     \vardef{Rvar}{R}
     \vardef{xvar}{x}
     %
-    \Definame[post=s]{symbolic formula} are recursively defined as follows:
+    In the \asciidialect, \definame[post=s]{symbolic formula} are recursively defined as follows:
     \begin{enumerate}
-      \item $\defnotation\TRUE$ is a \sn{symbolic formula};
-      \item $\defnotation\FALSE$ is a \sn{symbolic formula};
+      \item ``\texttt{true}'' is a \sn{symbolic formula};
+      \item ``\texttt{false}'' is a \sn{symbolic formula};
       \item if $\phivar$ is a \sn{symbolic formula},
-        then $\defnotation\NOT\phivar$ is a \sn{symbolic formula};
+        then ``\texttt{not :} $\phivar$'' is a \sn{symbolic formula};
       \item if $\phivar$ and $\psivar$ are \sn{symbolic formula},
-        then $\phivar\defnotation\AND\psivar$ is a \sn{symbolic formula};
+        then ``$\phivar$ \texttt{/\char`\\} $\psivar$'' is a \sn{symbolic formula};
       \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
-        then $\phivar\defnotation\OR\psivar$ is a \sn{symbolic formula};
+        then ``$\phivar$ \texttt{\char`\\/} $\psivar$'' is a \sn{symbolic formula};
       \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
-        then $\phivar\defnotation\IMPLIES\psivar$ is a \sn{symbolic formula};
+        then ``$\phivar$ \texttt{=>} $\psivar$'' is a \sn{symbolic formula};
       \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
-        then $\phivar\defnotation\IFF\psivar$ is a \sn{symbolic formula};
+        then ``$\phivar$ \texttt{<=>} $\psivar$'' is a \sn{symbolic formula};
       \item if $\nuvar$ a symbolic notion and $\phivar$ a \sn{symbolic formula},
-        then $\defnotation\FORALL\nu\phivar$ is a \sn{symbolic formula};
+        then ``\texttt{forall} $\nuvar$ \texttt: $\phivar$'' is a \sn{symbolic formula};
       \item if $\nuvar$ a symbolic notion and $\phivar$ a \sn{symbolic formula},
-        then $\defnotation\EXISTS\nuvar\phivar$ is a \sn{symbolic formula};
+        then ``\texttt{exists} $\nuvar$ \texttt: $\phivar$'' is a \sn{symbolic formula};
       \item if $\Svar$ is a statement,
-        then $(\Svar)$ is a \sn{symbolic formula};
+        then ``\texttt($\Svar$\texttt)'' is a \sn{symbolic formula};
       \item if $\Rvar$ is a symbolic relation,
-        then $\Rvar$ is a \sn{symbolic formula}.
+        then ``$\Rvar$'' is a \sn{symbolic formula}.
+    \end{enumerate}
+
+    In the \texdialect, \definame[post=s]{symbolic formula} are recursively defined as follows:
+    \begin{enumerate}
+      \item ``\texttt{\char`\\top}'' is a \sn{symbolic formula};
+      \item ``\texttt{\char`\\bot}'' is a \sn{symbolic formula};
+      \item if $\phivar$ is a \sn{symbolic formula},
+        then ``\texttt{\char`\\neg} $\phivar$'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sn{symbolic formula},
+        then ``$\phivar$ \texttt{\char`\\wedge} $\psivar$'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
+        then ``$\phivar$ \texttt{\char`\\vee} $\psivar$'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
+        then ``$\phivar$ \texttt{\char`\\implies} $\psivar$'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
+        then ``$\phivar$ \texttt{\char`\\iff} $\psivar$'' is a \sn{symbolic formula};
+      \item if $\nuvar$ a symbolic notion and $\phivar$ a \sn{symbolic formula},
+        then ``\texttt{\char`\\forall} $\nuvar$ \texttt: $\phivar$'' is a \sn{symbolic formula};
+      \item if $\nuvar$ a symbolic notion and $\phivar$ a \sn{symbolic formula},
+        then ``\texttt{\char`\\exists} $\nuvar$ \texttt: $\phivar$'' is a \sn{symbolic formula};
+      \item if $\Svar$ is a statement,
+        then ``\texttt($\Svar$\texttt)'' is a \sn{symbolic formula};
+      \item if $\Rvar$ is a symbolic relation,
+        then ``$\Rvar$'' is a \sn{symbolic formula}.
+    \end{enumerate}
+
+    In the \stexdialect, \definame[post=s]{symbolic formula} are recursively defined as follows:
+    \begin{enumerate}
+      \item ``\texttt{\char`\\TRUE}'' is a \sn{symbolic formula};
+      \item ``\texttt{\char`\\FALSE}'' is a \sn{symbolic formula};
+      \item if $\phivar$ is a \sn{symbolic formula},
+        then ``\texttt{\char`\\NOT\char`\{}$\phivar$\texttt{\char`\}}'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sn{symbolic formula},
+        then ``\texttt{\char`\\AND\char`\{}$\phivar$\texttt{\char`\}\char`\{}$\psivar$\texttt{\char`\}}'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
+        then ``\texttt{\char`\\OR\char`\{}$\phivar$\texttt{\char`\}\char`\{}$\psivar$\texttt{\char`\}}'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
+        then ``\texttt{\char`\\IMPLIES\char`\{}$\phivar$\texttt{\char`\}\char`\{}$\psivar$\texttt{\char`\}}'' is a \sn{symbolic formula};
+      \item if $\phivar$ and $\psivar$ are \sns{symbolic formula},
+        then ``\texttt{\char`\\IFF\char`\{}$\phivar$\texttt{\char`\}\char`\{}$\psivar$\texttt{\char`\}}'' is a \sn{symbolic formula};
+      \item if $\nuvar$ a symbolic notion and $\phivar$ a \sn{symbolic formula},
+        then ``\texttt{\char`\\FORALL\char`\{}$\nuvar$\texttt{\char`\}\char`\{}$\phivar$\texttt{\char`\}}'' is a \sn{symbolic formula};
+      \item if $\nuvar$ a symbolic notion and $\phivar$ a \sn{symbolic formula},
+        then ``\texttt{\char`\\EXISTS\char`\{}$\nuvar$\texttt{\char`\}\char`\{}$\phivar$\texttt{\char`\}}'' is a \sn{symbolic formula};
+      \item if $\Svar$ is a statement,
+        then ``\texttt($\Svar$\texttt)'' is a \sn{symbolic formula};
+      \item if $\Rvar$ is a symbolic relation,
+        then ``$\Rvar$'' is a \sn{symbolic formula}.
     \end{enumerate}
 
     \noindent
-    The \sn{first-order semantics} of \sns{symbolic formula} is given as follows:
+    The \sn{first-order semantics} of \sns{symbolic formula} is given as follows
+    (we only state them for the \asciidialect; the \sr{first-order semantics}{semantics}
+    for the \sr{texdialect}{\TeX} and \stexdialect is defined analogous):
     \begin{enumerate}
-      \item $\folsem\TRUE=\foltrue$;
-      \item $\folsem\FALSE=\folfalse$;
-      \item $\folsem{\NOT\phivar}=\folneg{\folsem\phivar}$;
-      \item $\folsem{\phivar\AND\psivar}=\folconj{\folsem\phivar,\folsem\psivar}$;
-      \item $\folsem{\phivar\OR\psivar}=\foldisj{\folsem\phivar,\folsem\psivar}$;
-      \item $\folsem{\phivar\IMPLIES\psivar}=\folimpl{\folsem\phivar}{\folsem\psivar}$;
-      \item $\folsem{\phivar\IFF\psivar}=\folequiv{\folsem\phivar,\folsem\psivar}$;
-      \item $\folsem{\FORALL\nuvar\phivar}=\folforall\xvar{\folimpl{\folsem\nuvar}{\folsem\phivar}}$,
+      \item $\folsem{\texttt{true}}=\foltrue$;
+      \item $\folsem{\texttt{false}}=\folfalse$;
+      \item $\folsem{\texttt{not }\phivar}=\folneg{\folsem\phivar}$;
+      \item $\folsem{\phivar\texttt{ /\char`\\\ }\psivar}=\folconj{\folsem\phivar,\folsem\psivar}$; % the non-breaking space is intended!
+      \item $\folsem{\phivar\texttt{ \char`\\/ }\psivar}=\foldisj{\folsem\phivar,\folsem\psivar}$;
+      \item $\folsem{\phivar\texttt{ => }\psivar}=\folimpl{\folsem\phivar}{\folsem\psivar}$;
+      \item $\folsem{\phivar\texttt{ <=> }\psivar}=\folequiv{\folsem\phivar,\folsem\psivar}$;
+      \item $\folsem{\texttt{forall }\nuvar\texttt{ : }\phivar}=\folforall\xvar{\folimpl{\folsem\nuvar}{\folsem\phivar}}$,
         where $\xvar$ is the variable declaration given by $\nuvar$;
-      \item $\folsem{\EXISTS\nuvar\phivar}=\folexists\xvar{\folconj{\folsem\nuvar,\folsem\phivar}}$,
+      \item $\folsem{\texttt{exists }\nuvar\texttt{ : }\phivar}=\folexists\xvar{\folconj{\folsem\nuvar,\folsem\phivar}}$,
         where $\xvar$ is the variable declaration given by $\nuvar$;
-      \item $\folsem{(\Svar)}=\folsem\Svar$.
+      \item $\folsem{\texttt(\Svar\texttt)}=\folsem\Svar$.
     \end{enumerate}
-
-    \Sns{symbolic formula} can be used in a \ForTheL text via the notation given in the
-    table below:
-
-    \begin{center}
-      \begin{tabular}{|l||l|l|l|}
-        \hline
-        & ASCII Dialect & \TeX Dialect & \sTeX Dialect \\\hline\hline
-        $\TRUE$ &
-          \texttt{true} &
-          \texttt{\char`\\top} &
-          \texttt{\char`\\TRUE} \\\hline
-        $\FALSE$ &
-          \texttt{false} &
-          \texttt{\char`\\bot} & \texttt{\char`\\FALSE} \\\hline
-        $\NOT\phivar$ &
-          \texttt{not :} $\phivar$ &
-          \texttt{\char`\\neg} $\phivar$
-           & \texttt{\char`\\NOT} $\phivar$ \\\hline
-        $\phivar\AND\psivar$ &
-          $\phivar$ \texttt{/\char`\\} $\psivar$ &
-          $\phivar$ \texttt{\char`\\wedge} $\psivar$ &
-          $\phivar$ \texttt{\char`\\AND} $\psivar$ \\\hline
-        $\phivar\OR\psivar$ &
-          $\phivar$ \texttt{\char`\\/} $\psivar$ &
-          $\phivar$ \texttt{\char`\\vee} $\psivar$ &
-          $\phivar$ \texttt{\char`\\OR} $\psivar$ \\\hline
-        $\phivar\IMPLIES\phivar$ &
-          $\phivar$ \texttt{=>} $\psivar$ &
-          $\phivar$ \texttt{\char`\\implies} $\psivar$ &
-          $\phivar$ \texttt{\char`\\IMPLIES} $\psivar$ \\\hline
-        $\phivar\IFF\phivar$ &
-          $\phivar$ \texttt{<=>} $\psivar$ &
-          $\phivar$ \texttt{\char`\\iff} $\psivar$ &
-          $\phivar$ \texttt{\char`\\IFF} $\psivar$ \\\hline
-        $\FORALL\nuvar\phivar$ &
-          \texttt{forall} $\nuvar$ \texttt: $\phivar$ &
-          \texttt{\char`\\forall} $\nuvar$ \texttt: $\phivar$ &
-          \texttt{\char`\\FORALL\char`\{}$\nuvar$\texttt{\char`\}} $\phivar$ \\\hline
-        $\EXISTS\nuvar\phivar$ &
-          \texttt{exists} $\nuvar$ \texttt: $\phivar$ &
-          \texttt{\char`\\exists} $\nuvar$ \texttt: $\phivar$ &
-          \texttt{\char`\\EXISTS\char`\{}$\nuvar$\texttt{\char`\}} $\phivar$ \\\hline
-      \end{tabular}
-    \end{center}
   \end{sparagraph}
 \end{sfragment}
 
