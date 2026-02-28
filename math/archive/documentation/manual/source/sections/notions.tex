@@ -1,0 +1,149 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+\begin{smodule}{notions}
+
+\importmodule{sections?characters}
+\importmodule{sections?forthel}
+\importmodule{sections?first-order-semantics}
+
+\ifinputref\else\setsectionlevel{section}\fi
+
+\begin{sfragment}[id=sec:symbolic-notions]{Symbolic Notions}
+  \symdecl*{symbolic notion}
+  %
+  \begin{sparagraph}[style=symdoc,for=symbolic notion]
+    \vardef{tvar}{t}
+    \vardef{vvar}{v}
+    %
+    A \definame{symbolic notion} is a \ForTheL expression of one of the following forms:
+    \begin{enumerate}
+      \item ``$\tvar$'', where $\tvar$ is a symbolic term
+      \item ``$\texttt(\tvar\texttt)$'', wheere $\tvar$ is a symbolic term
+      \item ``$\vvar$'', where $\vvar$ is a primitive typed variable
+    \end{enumerate}
+  \end{sparagraph}
+\end{sfragment}
+
+\begin{sfragment}[id=sec:variables]{Variables}
+  \symdecl*{variable}
+  \symdecl*{Greek letter macro}
+  \symdecl*{semantic variable macro}
+  %
+  \begin{sparagraph}[style=symdoc,for=variable]
+    \vardef{Svar}{S}
+    \vardef{svar}{s}
+    \vardef{Evar}{E}
+    %
+    In the \asciidialect of \ForTheL, a \definame{variable} is a single \sn{letter} followed by zero or more
+    \sns{alphanumeric} characters followed by zero or more ``\texttt''' \sns{symbol}.
+
+    In the \texdialect, a \definame{variable} is an expression that can be constructed by the following rules:
+    \begin{enumerate}
+      \item\label{var:1} A single \sn{letter} is a \sn{variable}.
+      \item\label{var:2} A single \sn{Greek letter macro} is a \sn{variable}.
+      \item\label{var:3} ``\texttt{\char`\\mathcal\char`\{$\Svar$\char`\}}'',
+        ``\texttt{\char`\\mathscr\char`\{$\Svar$\char`\}}'' and
+        ``\texttt{\char`\\mathbb\char`\{$\Svar$\char`\}}'' is a \sn{variable},
+        where $\Svar$ is a string consisting of one or more \sn{uppercase} \sns{letter}.
+      \item\label{var:4} ``\texttt{\char`\\mathfrak\char`\{$\svar$\char`\}}'',
+        ``\texttt{\char`\\mathbf\char`\{$\svar$\char`\}}'',
+        ``\texttt{\char`\\mathrm\char`\{$\svar$\char`\}}'',
+        ``\texttt{\char`\\mathit\char`\{$\svar$\char`\}}'',
+        ``\texttt{\char`\\mathsf\char`\{$\svar$\char`\}}'' and
+        ``\texttt{\char`\\mathtt\char`\{$\svar$\char`\}}'' is a \sn{variable},
+        where $\svar$ is a string consisting of one or more \sns{letter}.
+      \item\label{var:5} ``\texttt{\char`\\widehat\char`\{$\Evar$\char`\}}'',
+        ``\texttt{\char`\\widecheck\char`\{$\Evar$\char`\}}'',
+        ``\texttt{\char`\\widetilde\char`\{$\Evar$\char`\}}'',
+        ``\texttt{\char`\\widebar\char`\{$\Evar$\char`\}}'' and
+        ``\texttt{\char`\\widevec\char`\{$\Evar$\char`\}}'' is a \sn{variable},
+        where $\Evar$ is an expression constructed by rules \ref{var:1}--\ref{var:4}.
+      \item\label{var:6} Any expression constructed by rules \ref{var:1}--\ref{var:5} followed
+        by one or more ``\texttt''' \sns{symbol} is a \sn{variable}.
+    \end{enumerate}
+
+    In the \stexdialect, a \definame{variable} is a \TeX{} macro of the form
+    \texttt{\char`\\$\svar$var}, where $\svar$ is a string consisting of one or more \sns{letter}.
+    Those macros are intended to be defined via \sTeX's \texttt{\char`\\vardef} command within the
+    top-level section, \texttt{proof} or \texttt{forthel} environment in which the variable occurs.
+  \end{sparagraph}
+
+  \vspace{1em}
+  \begin{sparagraph}[style=symdoc,for=Greek letter macro]
+    \noindent
+    A \definame{Greek letter macro} is one of the following \TeX{} macros:
+    \begin{center}
+      \begin{tabular}{llll}
+        \texttt{\char`\\alpha} ($\alpha$) &
+        \texttt{\char`\\beta} ($\beta$) &
+        \texttt{\char`\\gamma} ($\gamma$) &
+        \texttt{\char`\\delta} ($\delta$)
+        \\
+        \texttt{\char`\\epsilon} ($\epsilon$) &
+        \texttt{\char`\\zeta} ($\zeta$) &
+        \texttt{\char`\\eta} ($\eta$) &
+        \texttt{\char`\\theta} ($\theta$)
+        \\
+        \texttt{\char`\\iota} ($\iota$) &
+        \texttt{\char`\\kappa} ($\kappa$) &
+        \texttt{\char`\\lambda} ($\lambda$) &
+        \texttt{\char`\\mu} ($\mu$)
+        \\
+        \texttt{\char`\\nu} ($\nu$) &
+        \texttt{\char`\\xi} ($\xi$) &
+        \texttt{\char`\\pi} ($\pi$) &
+        \texttt{\char`\\rho} ($\rho$)
+        \\
+        \texttt{\char`\\sigma} ($\sigma$) &
+        \texttt{\char`\\tau} ($\tau$) &
+        \texttt{\char`\\upsilon} ($\upsilon$) &
+        \texttt{\char`\\phi} ($\phi$)
+        \\
+        \texttt{\char`\\chi} ($\chi$) &
+        \texttt{\char`\\psi} ($\psi$) &
+        \texttt{\char`\\omega} ($\omega$) &
+        \texttt{\char`\\varepsilon} ($\varepsilon$)
+        \\
+        \texttt{\char`\\vartheta} ($\vartheta$) &
+        \texttt{\char`\\varkappa} ($\varkappa$) &
+        \texttt{\char`\\varpi} ($\varpi$) &
+        \texttt{\char`\\varrho} ($\varrho$)
+        \\
+        \texttt{\char`\\varsigma} ($\varsigma$) &
+        \texttt{\char`\\varphi} ($\varphi$) &
+        \texttt{\char`\\Gamma} ($\Gamma$) &
+        \texttt{\char`\\Delta} ($\Delta$)
+        \\
+        \texttt{\char`\\Theta} ($\Theta$) &
+        \texttt{\char`\\Lambda} ($\Lambda$) &
+        \texttt{\char`\\Xi} ($\Xi$) &
+        \texttt{\char`\\Pi} ($\Pi$)
+        \\
+        \texttt{\char`\\Sigma} ($\Sigma$) &
+        \texttt{\char`\\Upsilon} ($\Upsilon$) &
+        \texttt{\char`\\Phi} ($\Phi$) &
+        \texttt{\char`\\Psi} ($\Psi$)
+        \\
+        \texttt{\char`\\Omega} ($\Omega$)
+      \end{tabular}
+    \end{center}
+  \end{sparagraph}
+
+  \vspace{1em}
+  \begin{sparagraph}
+    \vardef{svar}{s}
+    %
+    \noindent
+    The \sn{first-order semantics} of a \sn{variable} consisting of the string $\svar$ is
+    given by $\folsem\svar = \constVar\svar$.
+  \end{sparagraph}
+\end{sfragment}
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{smodule}
+\end{document}
