@@ -1,0 +1,55 @@
+\documentclass{stex}
+
+\libusepackage{naproche}
+\libusepackage{copyright}
+\libinput{preamble}
+
+\begin{document}
+\begin{smodule}{characters}
+
+\importmodule{sections?first-order-semantics}
+
+\ifinputref\else\setsectionlevel{section}\fi
+
+\begin{sfragment}[id=sec:characters]{Characters}
+  \symdecl*{letter}
+  \symdecl*{uppercase}
+  \symdecl*{lowercase}
+  \symdecl*{digit}
+  \symdecl*{alphanumeric}
+  \symdecl*{symbol}
+  %
+  \begin{sparagraph}[style=symdoc,for={letter,uppercase,lowercase}]
+    A \definame{letter} is a character from the Basic Latin Unicode block
+    in the ranges \texttt{A}--\texttt{Z} (\unicode{0041}--\unicode{005A}) and
+    \texttt{a}--\texttt{z} (\unicode{0061}--\unicode{007A}).
+    A \sn{letter} in the former range is called an \definame{uppercase}
+    \sn{letter} and one from the latter range a \definame{lowercase}
+    \sn{letter}.
+  \end{sparagraph}
+
+  \begin{sparagraph}[style=symdoc,for=digit]
+    A \definame{digit} is a character from the Basic Latin Unicode block
+    in the range \texttt{0}--\texttt{9} (\unicode{0030}--\unicode{0039}).
+  \end{sparagraph}
+
+  \begin{sparagraph}[style=symdoc,for=alphanumeric]
+    \Sns{letter} and \sns{digit} are called \definame{alphanumeric} characters.
+  \end{sparagraph}
+  
+  \begin{sparagraph}[style=symdoc,for=symbol]
+    A \definame{symbol} is a character from the Basic Latin Unicode block
+    in the ranges
+    \unicode{0021}--\unicode{002F},
+    \unicode{003A}--\unicode{0040},
+    \unicode{005B}--\unicode{0060} and
+    \unicode{007B}--\unicode{007E},
+    i.e. any character that is neither a control character, a space character,
+    a \sn{digit} nor a \sn{letter}.
+  \end{sparagraph}
+\end{sfragment}
+
+\ifinputref\else\printlicense[CcByNcSa]{Marcel Schütz (2026)}\fi
+
+\end{smodule}
+\end{document}
