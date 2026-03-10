@@ -13,7 +13,7 @@ module SAD.Data.Rules where
 
 import SAD.Data.Formula
 import SAD.Export.Representation
-import SAD.Helpers (intercalate)
+import SAD.Helpers (intercalate, failWithMessage)
 
 import Data.Text.Lazy (Text)
 
@@ -27,7 +27,10 @@ data Rule = Rule {
   label     :: Text}   -- label
 
 instance Representation Rule where
+  -- PIDE
   represent PIDE rl =
     represent PIDE (left rl) <> " = " <> represent PIDE (right rl) <>
     ", Cond: " <> intercalate "," (map (represent PIDE) (condition rl)) <>
     ", Label: " <> make_bytes (label rl)
+  -- TPTP
+  represent TPTP xs = failWithMessage "SAD.Data.Rules:represent" "TPTP format not implemented for \"Rule\""

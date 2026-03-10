@@ -26,17 +26,18 @@ import SAD.Data.Terms
 import SAD.Export.Representation
 
 import Isabelle.Position qualified as Position
-import Isabelle.Bytes
+import Isabelle.Bytes (Bytes)
 import Isabelle.Library
-import SAD.Helpers
+import SAD.Helpers (failWithMessage, intercalate, parens, parensIf, isAsciiLetter)
 
 
 instance Representation Formula where
   represent :: Format -> Formula -> Bytes
-  represent PIDE = showFormula PIDE 0
+  represent fmt = showFormula fmt 0
 
 showFormula :: Format -> Int -> Formula -> Bytes
--- Quantifier chain:
+-- PIDE
+--- Quantifier chain:
 showFormula PIDE d (All _ f@(All _ _)) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
 showFormula PIDE d (All _ f@(Exi _ _)) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
 showFormula PIDE d (All _ f@(Not (Exi _ _))) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
@@ -46,52 +47,80 @@ showFormula PIDE d (Exi _ f@(Not (Exi _ _))) = "\\<exists>" <> showBindingVar PI
 showFormula PIDE d (Not (Exi _ f@(All _ _))) = "\\<nexists>" <> showBindingVar  PIDE d <> showFormula PIDE (d + 1) f
 showFormula PIDE d (Not (Exi _ f@(Exi _ _))) = "\\<nexists>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
 showFormula PIDE d (Not (Exi _ f@(Not (Exi _ _)))) = "\\<nexists>" <> showBindingVar  PIDE d <> showFormula PIDE (d + 1) f
--- Single quantifier:
+--- Single quantifier:
 showFormula PIDE d (All _ f) = "\\<forall>" <> showBindingVar  PIDE d <> parens (showFormula PIDE (d + 1) f)
 showFormula PIDE d (Exi _ f) = "\\<exists>" <> showBindingVar PIDE d <> parens (showFormula PIDE (d + 1) f)
--- Negated existential quantifier:
+--- Negated existential quantifier:
 showFormula PIDE d (Not (Exi _ f)) = "\\<nexists>" <> showBindingVar  PIDE d <> parens (showFormula PIDE (d + 1) f)
--- Equivalence:
+--- Equivalence:
 showFormula PIDE d (Iff f g) = showFormulaL PIDE d f <> " \\<Longleftrightarrow> " <> showFormulaR PIDE d g
--- Implication:
+--- Implication:
 showFormula PIDE d (Imp f g) = showFormulaL PIDE d f <> " \\<Longrightarrow> " <> showFormulaR PIDE d g
--- Disjunction chain:
+--- Disjunction chain:
 showFormula PIDE d (Or f@(Or _ _) g) = showFormula PIDE d f <> " \\<or> " <> showFormulaR PIDE d g
 showFormula PIDE d (Or f g@(Or _ _)) = showFormulaL PIDE d f <> " \\<or> " <> showFormula PIDE d g
--- Disjunction:
+--- Disjunction:
 showFormula PIDE d (Or  f g) = showFormulaL PIDE d f <> " \\<or> " <> showFormulaR PIDE d g
--- Conjunction chain:
+--- Conjunction chain:
 showFormula PIDE d (And f@(And _ _) g) = showFormula PIDE d f <> " \\<and> " <> showFormulaR PIDE d g
 showFormula PIDE d (And f g@(And _ _)) = showFormulaL PIDE d f <> " \\<and> " <> showFormula PIDE d g
--- Conjunction:
+--- Conjunction:
 showFormula PIDE d (And f g) = showFormulaL PIDE d f <> " \\<and> " <> showFormulaR PIDE d g
--- Tagged formula:
+--- Tagged formula:
 showFormula PIDE d (Tag a f) = represent PIDE a <> " \\<Colon> " <> showFormulaR PIDE d f
--- Inequality:
+--- Inequality:
 showFormula PIDE d (Not Trm{trmName = TermEquality, trmArgs = [l, r]}) = showFormula PIDE d l <> " \\<noteq> " <> showFormula PIDE d r
--- Negation:
+--- Negation:
 showFormula PIDE d (Not f) = "\\<not>" <> showFormulaR PIDE d f
--- Truth:
+--- Truth:
 showFormula PIDE d Top = "\\<top>"
--- Falsity:
+--- Falsity:
 showFormula PIDE d Bot = "\\<bottom>"
--- @ThisT@:
+--- @ThisT@:
 showFormula PIDE d ThisT = "ThisT"
--- Thesis:
+--- Thesis:
 showFormula PIDE d Trm{trmName = TermThesis} = "thesis"
--- Equality:
+--- Equality:
 showFormula PIDE d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula PIDE d l <> " = " <> showFormula PIDE d r
--- Symbolic formula/term:
+--- Symbolic formula/term:
 showFormula PIDE d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode PIDE (Text.unpack tName) tArgs d ""
--- Non-symbolic formula/term:
+--- Non-symbolic formula/term:
 showFormula PIDE d Trm{trmName = tName, trmArgs = tArgs} = represent PIDE tName <> showArguments PIDE d tArgs
--- Free variables:
+--- Free variables:
 showFormula PIDE d Var{varName = VarConstant s} = make_bytes s
 showFormula PIDE d Var{varName = vName} = make_bytes $ represent PIDE vName
--- De Brujin index:
+--- De Brujin index:
 showFormula PIDE d Ind{indIndex = i}
   | i < d = "v" <> make_bytes (show $ d - i - 1)
   | otherwise = "v?" <> make_bytes (show i)
+
+-- TPTP
+showFormula TPTP d (All _ f) =  "( ! " <> binder d f <> ")"
+showFormula TPTP d (Exi _ f) = "( ? " <> binder d f <> ")"
+showFormula TPTP d (Iff f g) = sinfix d " <=> " f g
+showFormula TPTP d (Imp f g) = sinfix d " => " f g
+showFormula TPTP d (Or  f g) = sinfix d " | " f g
+showFormula TPTP d (And f g) = sinfix d " & " f g
+showFormula TPTP d (Tag _ f) = showFormula TPTP d f
+showFormula TPTP d (Not f) = "( ~ " <> showFormula TPTP d f <> ")"
+showFormula TPTP d Top = "$true"
+showFormula TPTP d Bot = "$false"
+showFormula TPTP d Trm {trmName = TermEquality, trmArgs = args} =
+  case args of
+    [l, r] -> sinfix d " = " l r
+    _ -> failWithMessage "SAD.Data.Formula.Show:showFormula" "Invalid number of arguments in equality expression"
+showFormula TPTP d t@Trm {trmName = name, trmArgs = args}
+  | null args = represent TPTP name
+  | otherwise = represent TPTP name <> "(" <> intercalate "," (map (showFormula TPTP d) args) <> ")"
+showFormula TPTP d Var {varName = v} = represent TPTP v
+showFormula TPTP d Ind {indIndex = i} = "W" <> make_bytes (show (d - 1 - i))
+showFormula TPTP d ThisT = failWithMessage "SAD.Data.Formula.Show:showFormula" "TPTP format not implemented for \"ThisT\""
+
+sinfix :: Int -> Bytes -> Formula -> Formula -> Bytes
+sinfix d o f g  = "(" <> showFormula TPTP d f <> o <> showFormula TPTP d g <> ")"
+
+binder :: Int -> Formula -> Bytes
+binder d f = "[" <> showFormula TPTP (d + 1) (Ind 0 Position.none) <> "] : " <> showFormula TPTP (d + 1) f
 
 -- | Show a formula that occurs on the left-hand side of a logical connective.
 showFormulaL :: Format -> Int -> Formula -> Bytes

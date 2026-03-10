@@ -38,6 +38,7 @@ data Equation = Equation Formula Formula
 
 instance Representation Equation where
     represent PIDE (Equation l r) = represent PIDE l <> " = " <> represent PIDE r
+    represent TPTP _ = failWithMessage "SAD.Core.Completion:represent" "TPTP format not implemented for \"Equation\""
 
 toFormula :: Equation -> Formula
 toFormula (Equation lhs rhs) = Trm TermEquality [lhs, rhs] [] EqualityId

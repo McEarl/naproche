@@ -9,25 +9,16 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module SAD.Export.TPTP (
-  Role(..),
-  renderRole,
-  Sequent,
-  renderLogicFormula,
-  renderSequent
-) where
+module SAD.Export.TPTP where
 
 import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as Text
 
-import SAD.Data.Formula (Formula(..), TermName(..), showTrName)
-import SAD.Helpers (failWithMessage)
+import SAD.Data.Formula (Formula)
 import SAD.Export.Representation
 
-import Isabelle.Position qualified as Position
 import Isabelle.Library
 
-import Naproche.TPTP (atomic_word)
 
 data Role =
     Axiom
@@ -74,7 +65,7 @@ renderLogicFormula name role formula =
   "fof(m"
   <> (if Text.null name then "_" else name)
   <> ", " <> renderRole role <> ", "
-  <> tptpTerm 0 formula
+  <> Text.fromStrict (make_text (represent TPTP formula))
   <> ")."
 
 -- | Render a sequent.
@@ -83,35 +74,8 @@ renderSequent name role (premises, conclusions) =
   "fof(m"
   <> (if Text.null name then "_" else name)
   <> ", " <> renderRole role <> ", ["
-  <> Text.intercalate ", " (map (tptpTerm 0) premises)
+  <> Text.intercalate ", " (map (Text.fromStrict . make_text . represent TPTP) premises)
   <> "] --> ["
-  <> Text.intercalate ", " (map (tptpTerm 0) conclusions)
+  <> Text.intercalate ", " (map (Text.fromStrict . make_text . represent TPTP) conclusions)
   <> "])."
 
-tptpName :: Formula -> Text
-tptpName = Text.fromStrict . make_text . atomic_word . make_bytes . showTrName PIDE -- TODO: Replace PIDE with TPTP format
-
-tptpTerm :: Int -> Formula -> Text
-tptpTerm d = term
-  where
-    term (All _ f)  =  "( ! " <> binder f <> ")"
-    term (Exi _ f)  = "( ? " <> binder f <> ")"
-    term (Iff f g)  = sinfix " <=> " f g
-    term (Imp f g)  = sinfix " => " f g
-    term (Or  f g)  = sinfix " | " f g
-    term (And f g)  = sinfix " & " f g
-    term (Tag _ f)  = term f
-    term (Not f)    = "( ~ " <> term f <> ")"
-    term Top        = "$true"
-    term Bot        = "$false"
-    term t@Trm {trmName = TermEquality} = let [l, r] = trmArgs t in sinfix " = " l r
-    term t@Trm {}
-      | null (trmArgs t) = tptpName t
-      | otherwise = tptpName t <> "(" <> Text.intercalate "," (map term $ trmArgs t) <> ")"
-    term v@Var {}   = tptpName v
-    term i@Ind {}   = "W" <> Text.pack (show (d - 1 - indIndex i))
-    term ThisT      = failWithMessage "SAD.Export.TPTP" "Didn't expect ThisT here"
-
-    sinfix o f g  = "(" <> term f <> o <> term g <> ")"
-
-    binder f  = "[" <> tptpTerm (d + 1) (Ind 0 Position.none) <> "] : " <> tptpTerm (d + 1) f

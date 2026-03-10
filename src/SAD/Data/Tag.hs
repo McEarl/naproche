@@ -12,6 +12,7 @@
 module SAD.Data.Tag where
 
 import SAD.Export.Representation
+import SAD.Helpers (failWithMessage)
 
 data Tag =
   Dig | DigMultiSubject | DigMultiPairwise | HeadTerm |
@@ -23,6 +24,7 @@ data Tag =
   deriving (Eq, Ord)
 
 instance Representation Tag where
+  -- PIDE
   represent PIDE Dig = "Dig"
   represent PIDE DigMultiSubject = "DigMultiSublject"
   represent PIDE DigMultiPairwise = "DigMultiPairwise"
@@ -40,6 +42,8 @@ instance Representation Tag where
   represent PIDE ExistenceTask = "ExistenceTask"
   represent PIDE UniquenessTask = "UniquenessTask"
   represent PIDE ChoiceTask = "ChoiceTask"
+  -- TPTP
+  represent TPTP xs = failWithMessage "SAD.Export.Representation:represent" "TPTP format not implemented for \"Tag\""
 
 -- | whether a Tag marks a part in a map proof task
 fnTag :: Tag -> Bool

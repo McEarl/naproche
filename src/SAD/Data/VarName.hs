@@ -32,6 +32,7 @@ import Data.Function (on)
 
 import SAD.Core.Message (show_position)
 import SAD.Export.Representation
+import SAD.Helpers (failWithMessage)
 
 import Isabelle.Position qualified as Position
 import Isabelle.Library
@@ -58,6 +59,7 @@ isVarHole (VarHole _) = True
 isVarHole _ = False
 
 instance Representation VariableName where
+  -- PIDE
   represent PIDE (VarConstant s) = "x" <> make_bytes s
   represent PIDE (VarHole s) = "?" <> make_bytes s
   represent PIDE VarSlot = "!"
@@ -70,6 +72,9 @@ instance Representation VariableName where
   represent PIDE (VarW s) = "w" <> make_bytes s
   represent PIDE VarEmpty = ""
   represent PIDE (VarDefault s) = make_bytes s
+  -- TPTP
+  represent TPTP (VarConstant s) = "x" <> make_bytes s
+  represent TPTP _ = failWithMessage "SAD.Data.VarName:represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\""
 
 data PosVar = PosVar
   { posVarName :: VariableName

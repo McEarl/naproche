@@ -60,6 +60,7 @@ termSplit (TermMultiVerb t) = (TermMultiVerb, t)
 termSplit _ = undefined
 
 instance Representation TermName where
+  -- PIDE
   represent PIDE (TermName t) = make_bytes t
   represent PIDE (TermSymbolic t) = "s" <> make_bytes t
   represent PIDE (TermNotion t) = "a" <> make_bytes t
@@ -73,6 +74,8 @@ instance Representation TermName where
   represent PIDE TermLess  = "iLess"
   represent PIDE TermThesis = "#TH#"
   represent PIDE TermEmpty = ""
+  -- TPTP
+  represent TPTP t = represent PIDE t 
 
 data TermId
   = EqualityId
