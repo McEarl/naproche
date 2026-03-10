@@ -36,33 +36,34 @@ import SAD.Data.Rules qualified as Rule
 import SAD.Data.Text.Block qualified as Block (body, link, position)
 import SAD.Data.Text.Context qualified as Context
 
-import Isabelle.Library ()
+import Isabelle.Library
 import Isabelle.Position qualified as Position
+import Isabelle.Bytes (Bytes)
 
 
 -- Lexicographic path ordering
 
 {- a weighting to parametrize the LPO -}
-type Weighting = Text -> Text -> Bool
+type Weighting = Bytes -> Bytes -> Bool
 
 
 {- standard implementation of LPO -}
-lpoGe :: Weighting -> Formula -> Formula -> Bool
-lpoGe w t s = twins t s || lpoGt w t s
+lpoGe :: Format -> Weighting -> Formula -> Formula -> Bool
+lpoGe fmt w t s = twins t s || lpoGt fmt w t s
 
 
-lpoGt :: Weighting -> Formula -> Formula -> Bool
-lpoGt w tr@Trm {trmName = t, trmArgs = ts} sr@Trm {trmName = s, trmArgs = ss} =
-   any (\ti -> lpoGe w ti sr) ts
-    || (all (lpoGt w tr) ss
-    && ((t == s && lexord (lpoGt w) ts ss)
-    || w (toLazyText $ represent t) (toLazyText $ represent s)))
-lpoGt w Trm { trmName = t, trmArgs = ts} v@Var {varName = x} =
-  w (toLazyText $ represent t) (toLazyText $ represent x) || any (\ti -> lpoGe w ti v) ts
-lpoGt w v@Var {varName = x} Trm {trmName = t, trmArgs = ts} =
-  w (toLazyText $ represent x) (toLazyText $ represent t) && all (lpoGt w v) ts
-lpoGt w Var{varName = x} Var {varName = y} = w (toLazyText $ represent x) (toLazyText $ represent y)
-lpoGt _ _ _ = False
+lpoGt :: Format -> Weighting -> Formula -> Formula -> Bool
+lpoGt fmt w tr@Trm {trmName = t, trmArgs = ts} sr@Trm {trmName = s, trmArgs = ss} =
+   any (\ti -> lpoGe fmt w ti sr) ts
+    || (all (lpoGt fmt w tr) ss
+    && ((t == s && lexord (lpoGt fmt w) ts ss)
+    || w (represent fmt t) (represent fmt s)))
+lpoGt fmt w Trm { trmName = t, trmArgs = ts} v@Var {varName = x} =
+  w (represent fmt t) (represent fmt x) || any (\ti -> lpoGe fmt w ti v) ts
+lpoGt fmt w v@Var {varName = x} Trm {trmName = t, trmArgs = ts} =
+  w (represent fmt x) (represent fmt t) && all (lpoGt fmt w v) ts
+lpoGt fmt w Var{varName = x} Var {varName = y} = w (represent fmt x) (represent fmt y)
+lpoGt _ _ _ _ = False
 
 
 lexord :: (Formula -> Formula -> Bool) -> [Formula] -> [Formula] -> Bool
@@ -80,8 +81,8 @@ type SimpInfo = ([Formula], Text)
 
 {- performs one simplification step. We always try to simplify in a
 leftmost-bottommost fashion with respect to the term structure -}
-simpstep :: [Rule] -> Weighting -> Formula -> [(Formula, SimpInfo)]
-simpstep rules w = flip runStateT undefined . dive
+simpstep :: Format -> [Rule] -> Weighting -> Formula -> [(Formula, SimpInfo)]
+simpstep fmt rules w = flip runStateT undefined . dive
   where
     dive t@Trm {trmName = tName, trmArgs = tArgs} =
       (do newArgs <- try tArgs; return t {trmArgs = newArgs}) `mplus` applyRule t
@@ -104,18 +105,18 @@ simpstep rules w = flip runStateT undefined . dive
             then (Rule.left rule, Rule.right rule)
             else (Rule.right rule, Rule.left rule)
       sbs <- match l t; let nr = sbs r
-      guard $ full nr && lpoGt w (sbs l) nr -- simplified term must be lighter
+      guard $ full nr && lpoGt fmt w (sbs l) nr -- simplified term must be lighter
       return (sbs r, map sbs $ Rule.condition rule, rule)
 
     full Var {varName = VarHole _} = False; full f = allF full f
 
 
 {- finds ALL normalforms and their corresponding simplification paths -}
-findNormalform :: [Rule] -> Weighting -> Formula -> [[(Formula, SimpInfo)]]
-findNormalform rules w t = map (reverse . (:) (t, trivialSimpInfo)) $ dive t
+findNormalform :: Format -> [Rule] -> Weighting -> Formula -> [[(Formula, SimpInfo)]]
+findNormalform fmt rules w t = map (reverse . (:) (t, trivialSimpInfo)) $ dive t
   where
     trivialSimpInfo = (pure Top, mempty)
-    dive t = case simpstep rules w t of
+    dive t = case simpstep fmt rules w t of
       [] -> return []
       simplifications -> do
         (simplifiedTerm, simpInfo) <- simplifications
@@ -125,10 +126,10 @@ findNormalform rules w t = map (reverse . (:) (t, trivialSimpInfo)) $ dive t
 {- finds two matching normalforms and outputs all conditions accumulated
 during their rewriting -}
 generateConditions ::
-  Position.T -> Bool -> [Rule] -> Weighting -> Formula -> Formula -> VerifyMonad [SimpInfo]
-generateConditions pos verbositySetting rules w l r =
-  let leftNormalForms  = findNormalform rules w l
-      rightNormalForms = findNormalform rules w r
+  Format -> Position.T -> Bool -> [Rule] -> Weighting -> Formula -> Formula -> VerifyMonad [SimpInfo]
+generateConditions fmt pos verbositySetting rules w l r =
+  let leftNormalForms  = findNormalform fmt rules w l
+      rightNormalForms = findNormalform fmt rules w r
       paths = simpPaths leftNormalForms rightNormalForms
   in  if   null paths
       then log (head leftNormalForms) (head rightNormalForms) >> mzero
@@ -148,22 +149,22 @@ generateConditions pos verbositySetting rules w l r =
       simpLog Message.WRITELN pos "no matching normal forms found"
       showPath leftNormalForm; showPath rightNormalForm
     showPath ((t,_):rest) = when verbositySetting $ do
-      simpLog Message.WRITELN pos (show t)
+      simpLog Message.WRITELN pos (represent fmt t)
       mapM_ (simpLog Message.WRITELN pos . format) rest
     -- formatting of paths
-    format (t, simpInfo) = " --> " <> show t <> conditions simpInfo
+    format (t, simpInfo) = " --> " <> make_string (represent fmt t) <> conditions simpInfo
     conditions (conditions, name) =
       (if Text.null name then "" else " by " <> Text.unpack name <> ",") <>
       (if null conditions then "" else " conditions: " <>
-        unwords (intersperse "," $ map show conditions))
+        unwords (intersperse "," $ map (make_string . represent fmt) conditions))
 
 
 {- applies computational reasoning to an equality chain -}
-equalityReasoning :: Position.T -> Context -> VerifyMonad ()
-equalityReasoning pos thesis
+equalityReasoning :: Format -> Position.T -> Context -> VerifyMonad ()
+equalityReasoning fmt pos thesis
   | body = whenInstruction printreasonParam $ reasonLog Message.WRITELN pos "equality chain concluded"
-  | notNull link = getLinkedRules pos link >>= rewrite pos equation
-  | otherwise = rules >>= rewrite pos equation -- if no link is given -> all rules
+  | notNull link = getLinkedRules pos link >>= rewrite fmt pos equation
+  | otherwise = rules >>= rewrite fmt pos equation -- if no link is given -> all rules
   where
     equation = strip $ Context.formula thesis
     link = Context.link thesis
@@ -196,17 +197,17 @@ rules = asks rewriteRules
 
 {- applies rewriting to both sides of an equation
 and compares the resulting normal forms -}
-rewrite :: Position.T -> Formula -> [Rule] -> VerifyMonad ()
-rewrite pos Trm {trmName = TermEquality, trmArgs = [l,r]} rules = do
+rewrite :: Format -> Position.T -> Formula -> [Rule] -> VerifyMonad ()
+rewrite fmt pos Trm {trmName = TermEquality, trmArgs = [l,r]} rules = do
   verbositySetting <- asks (getInstruction printsimpParam)
-  conditions <- generateConditions pos verbositySetting rules (>) l r;
-  mapM_ (dischargeConditions pos verbositySetting . fst) conditions
-rewrite _ _ _ = error "SAD.Core.Rewrite.rewrite: non-equation argument"
+  conditions <- generateConditions fmt pos verbositySetting rules (>) l r;
+  mapM_ (dischargeConditions fmt pos verbositySetting . fst) conditions
+rewrite _ _ _ _ = error "SAD.Core.Rewrite.rewrite: non-equation argument"
 
 
 {- dischargeConditions accumulated during rewriting -}
-dischargeConditions :: Position.T -> Bool -> [Formula] -> VerifyMonad ()
-dischargeConditions pos verbositySetting conditions =
+dischargeConditions :: Format -> Position.T -> Bool -> [Formula] -> VerifyMonad ()
+dischargeConditions fmt pos verbositySetting conditions =
   local setup $ easy >>= hard
   where
     easy = mapM trivialityCheck conditions
@@ -218,7 +219,7 @@ dischargeConditions pos verbositySetting conditions =
       | otherwise = do
           log (header lefts hardConditions <> thead (rights hardConditions))
           thesis <- asks currentThesis
-          mapM_ (proveThesis' pos . Context.setFormula (wipeLink thesis)) (lefts hardConditions)
+          mapM_ (proveThesis' fmt pos . Context.setFormula (wipeLink thesis)) (lefts hardConditions)
 
     setup state =
       let
@@ -231,7 +232,7 @@ dischargeConditions pos verbositySetting conditions =
     format conditions =
       if   null conditions
       then " - "
-      else unwords . intersperse "," . map show $ reverse conditions
+      else unwords . intersperse "," . map (make_string . represent fmt) $ reverse conditions
     log msg =
       when verbositySetting $ asks currentThesis >>=
         flip (simpLog Message.WRITELN . Block.position . Context.head) msg

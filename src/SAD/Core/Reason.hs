@@ -14,6 +14,7 @@
 
 {-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module SAD.Core.Reason (
   withContext,
@@ -42,6 +43,7 @@ import SAD.Data.Instr
 import SAD.Data.Text.Context (Context(Context))
 import SAD.Data.Text.Decl (newDecl)
 import SAD.Export.Prover qualified as Prover
+import SAD.Export.Representation
 import SAD.Prove.MESON qualified as MESON
 import SAD.Core.Message qualified as Message
 import SAD.Data.Definition qualified as Definition
@@ -52,8 +54,10 @@ import SAD.Data.Text.Context qualified as Context
 import SAD.Data.Formula.HOL qualified as HOL
 
 import Isabelle.Position qualified as Position
+import Isabelle.Bytes (Bytes)
 import Isabelle.Bytes qualified as Bytes
 import Isabelle.Isabelle_Thread qualified as Isabelle_Thread
+import Isabelle.Library
 
 import Naproche.Program qualified as Program
 import Naproche.Prover qualified as Prover
@@ -69,17 +73,17 @@ withContext :: VerifyMonad a -> [Context] -> VerifyMonad a
 withContext action context =
   local (\st -> st { currentContext = context }) action
 
-proveThesis' :: Position.T -> Context -> VerifyMonad ()
-proveThesis' pos tc =
-  local (\st -> st {currentThesis = tc}) (proveThesis pos)
+proveThesis' :: Format -> Position.T -> Context -> VerifyMonad ()
+proveThesis' fmt pos tc =
+  local (\st -> st {currentThesis = tc}) (proveThesis fmt pos)
 
-proveThesis :: Position.T -> VerifyMonad ()
-proveThesis pos = do
+proveThesis :: Format -> Position.T -> VerifyMonad ()
+proveThesis fmt pos = do
   depthlimit <- asks (getInstruction depthlimitParam)
   guard (depthlimit > 0) -- Fallback to defaulting of the underlying CPS Maybe monad.
   context <- asks currentContext
   thesis <- asks currentThesis
-  filterContext pos context (proveGoals pos depthlimit (splitGoal thesis))
+  filterContext pos context (proveGoals fmt pos depthlimit (splitGoal thesis))
   justIO $ do
     program_context <- Program.thread_context
     when (Program.is_isabelle program_context) $ do
@@ -88,8 +92,8 @@ proveThesis pos = do
       _ <- HOL.export_sequent program_context binding sequent
       return ()
 
-proveGoals :: Position.T -> Int -> [Formula] -> VerifyMonad ()
-proveGoals pos depthlimit = prove 0
+proveGoals :: Format -> Position.T -> Int -> [Formula] -> VerifyMonad ()
+proveGoals fmt pos depthlimit = prove 0
   where
     prove _ [] = return ()
     prove iteration (goal : restGoals) = do
@@ -98,21 +102,21 @@ proveGoals pos depthlimit = prove 0
       where
         reducedGoal = reduceWithEvidence goal
         trivial = guard (isTop reducedGoal) >> updateTrivialStatistics
-        prover = launchProver pos iteration
+        prover = launchProver fmt pos iteration
         reason =
           if iteration >= depthlimit then warnDepthExceeded >> mzero
           else do
-            newTask <- unfold pos
+            newTask <- unfold fmt pos
             let Context {Context.formula = Not newGoal} : newContext = newTask
             prove (iteration + 1) [newGoal] `withContext` newContext
 
         warnDepthExceeded =
           whenInstruction printreasonParam $
-            reasonLog Message.WARNING pos "reasoning depth exceeded"
+            reasonLog Message.WARNING pos ("reasoning depth exceeded" :: Bytes)
 
         updateTrivialStatistics =
           unless (isTop goal) $ whenInstruction printreasonParam $ do
-            reasonLog Message.WRITELN pos ("trivial: " <> show goal)
+            reasonLog Message.WRITELN pos ("trivial: " <> represent fmt goal)
             incrementCounter TrivialGoals
 
 splitGoal :: Context -> [Formula]
@@ -129,8 +133,8 @@ normalizedSplit = split . albet
 
 -- Call prover
 
-launchProver :: Position.T -> Int -> VerifyMonad ()
-launchProver pos iteration = do
+launchProver :: Format -> Position.T -> Int -> VerifyMonad ()
+launchProver fmt pos iteration = do
   instrList <- asks instructions
   goal <- asks currentThesis
   context <- asks currentContext
@@ -138,8 +142,8 @@ launchProver pos iteration = do
 
   whenInstruction printfulltaskParam $ do
     reasonLog Message.WRITELN pos $ "prover task:\n" <>
-      concatMap (\c -> "  " <> show (Context.formula c) <> "\n") (reverse context) <>
-      "  |- " <> show (Context.formula goal) <> "\n"
+      Bytes.concat (map (\c -> "  " <> represent fmt (Context.formula c) <> "\n") (reverse context)) <>
+      "  |- " <> represent fmt (Context.formula goal) <> "\n"
 
   status <- timeWith ProofTimer (justIO $ Prover.export cache pos iteration instrList context goal)
   trackers <- readTrackers
@@ -148,7 +152,7 @@ launchProver pos iteration = do
     Prover.Contradictory_Axioms -> do
       checkConsistency <- asks (getInstruction checkconsistencyParam)
       if checkConsistency then do
-        reasonLog Message.WARNING pos "Found contradictory axioms. Make sure you are in a proof by contradiction!"
+        reasonLog Message.WARNING pos ("Found contradictory axioms. Make sure you are in a proof by contradiction!" :: Bytes)
         mzero
       else pure ()
     _ -> mzero
@@ -265,8 +269,8 @@ data UnfoldState = UF {
   unfoldSetSetting :: Bool }
 
 
-unfold :: Position.T -> VerifyMonad [Context]
-unfold pos = do
+unfold :: Format -> Position.T -> VerifyMonad [Context]
+unfold fmt pos = do
   thesis <- asks currentThesis
   context <- asks currentContext
   let task = Context.setFormula thesis (Not $ Context.formula thesis) : context
@@ -297,12 +301,12 @@ unfold pos = do
   return $ newLowLevelContext ++ topLevelContext
   where
     nothingToUnfold =
-      whenInstruction printunfoldParam $ reasonLog Message.WRITELN pos "nothing to unfold"
+      whenInstruction printunfoldParam $ reasonLog Message.WRITELN pos ("nothing to unfold" :: Bytes)
 
     unfoldLog (goal:lowLevelContext) =
       whenInstruction printunfoldParam $ reasonLog Message.WRITELN pos $ "unfold to:\n"
-        <> unlines (reverse $ map ((<>) "  " . show . Context.formula) lowLevelContext)
-        <> "  |- " <> show (neg $ Context.formula goal)
+        <> make_bytes (unlines (reverse $ map ((<>) "  " . make_string . represent fmt . Context.formula) lowLevelContext))
+        <> "  |- " <> represent fmt (neg $ Context.formula goal)
 
     neg (Not f) = f
     neg f = f

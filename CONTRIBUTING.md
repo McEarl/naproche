@@ -45,6 +45,7 @@ eps    | epsilon
 eq     | equal/equality
 err    | error
 expr   | expression
+fmt    | format
 fun    | function
 hypo   | hypothesis
 inc    | increment

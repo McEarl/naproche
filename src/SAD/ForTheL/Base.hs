@@ -27,10 +27,12 @@ import SAD.Parser.Combinators
 import SAD.Parser.Primitives
 import SAD.Parser.Token (showToken)
 import SAD.Data.Text.Decl
-import SAD.Export.Representation (represent, toLazyText)
+import SAD.Export.Representation
 import SAD.Helpers(isAsciiLetter)
 
 import Isabelle.Position qualified as Position
+import Isabelle.Library
+import Isabelle.Bytes qualified as Bytes
 
 import Naproche.Program as Program
 
@@ -79,6 +81,9 @@ data FState = FState {
   serialCounter :: Int,
 
   reports :: [Position.Report],
+  
+  format :: Format,             -- ^ Format of everything that is represented
+                                -- as a string during parsing
 
   program :: Program.Context
 }
@@ -98,14 +103,15 @@ data FState = FState {
 --  * @"(" ... "," ... ")"@ (function expression)
 --  * @"...(...)@" (function expression)
 --
-initFState :: Program.Context -> FState
-initFState = FState
+initFState :: Format -> Program.Context -> FState
+initFState fmt = FState
   primAdjs [] primNotions primSymbNotions
   circFunctions rightFunctions [] []
   [] [] [] primInfixPredicates
   [] [] mempty
   0 0 0
   []
+  fmt
   where
     primAdjs = [
         equalAdj,
@@ -391,8 +397,9 @@ varList = var `sepBy` token' "," >>= nodups
 
 nodups :: IsVar a => [a] -> FTL (Set a)
 nodups vs = do
+  fmt <- gets format
   unless ((null :: [b] -> Bool) $ duplicateNames vs) $
-    fail $ "duplicate names: " ++ show (map (Text.unpack . toLazyText . represent) vs)
+    fail $ make_string $ "duplicate names: " <> Bytes.concat (map (represent fmt) vs)
   pure $ Set.fromList vs
 
 hidden :: FTL PosVar
@@ -493,16 +500,16 @@ bindings :: Set VariableName -> Formula -> FTL (Set Decl)
 bindings vs f = makeDecls $ fvToVarSet $ excludeSet (decl f) vs
 
 
-freeOrOverlapping :: Set VariableName -> Formula -> Maybe Text
-freeOrOverlapping vs f
+freeOrOverlapping :: Format -> Set VariableName -> Formula -> Maybe Text
+freeOrOverlapping fmt vs f
     | mkVar VarSlot `occursIn` f = Just $ "too few subjects for an m-predicate " <> info
     | not (Text.null sbs) = Just $ "free undeclared variables: "   <> sbs <> info
     | not (Text.null ovl) = Just $ "overlapped variables: "        <> ovl <> info
     | otherwise      = Nothing
   where
-    sbs = Text.unwords $ map showVar $ Set.toList $ fvToVarSet $ excludeSet (free f) vs
-    ovl = Text.unwords $ map showVar $ Set.toList $ over vs f
-    info = "\n in translation: " <> Text.pack (show f)
+    sbs = Text.unwords $ map (Text.pack . make_string . represent fmt) $ Set.toList $ fvToVarSet $ excludeSet (free f :: FV VariableName) vs
+    ovl = Text.unwords $ map (Text.pack . make_string . represent fmt) $ Set.toList $ over vs f
+    info = Text.pack . make_string $ "\n in translation: " <> represent fmt f
 
     over :: Set VariableName -> Formula -> Set VariableName
     over vs (All v f) = boundVars vs (declName v) f
@@ -579,10 +586,3 @@ upperGreek = [
     "Sigma", "Upsilon", "Phi", "Psi", "Omega"
   ]
 
-
--- * Show function
-
--- | Print a variable (just for now).
-showVar :: VariableName -> Text
-showVar (VarConstant nm) = nm
-showVar nm = toLazyText $ represent nm

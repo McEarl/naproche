@@ -12,10 +12,11 @@ module SAD.Data.Terms where
 
 import Debug.Trace
 import Data.Text.Lazy (Text)
-import Data.Text.Lazy.Builder (fromLazyText, fromString)
 
 import SAD.Export.Representation
 import SAD.Helpers (failureMessage)
+
+import Isabelle.Library
 
 
 data TermName
@@ -59,19 +60,19 @@ termSplit (TermMultiVerb t) = (TermMultiVerb, t)
 termSplit _ = undefined
 
 instance Representation TermName where
-  represent (TermName t) = fromLazyText t
-  represent (TermSymbolic t) = "s" <> fromLazyText t
-  represent (TermNotion t) = "a" <> fromLazyText t
-  represent (TermThe t) = "the" <> fromLazyText t
-  represent (TermUnaryAdjective t) = "is" <> fromLazyText t
-  represent (TermMultiAdjective t) = "mis" <> fromLazyText t
-  represent (TermUnaryVerb t) = "do" <> fromLazyText t
-  represent (TermMultiVerb t) = "mdo" <> fromLazyText t
-  represent (TermTask n) = "tsk " <> fromString (show n)
-  represent TermEquality = "="
-  represent TermLess  = "iLess"
-  represent TermThesis = "#TH#"
-  represent TermEmpty = ""
+  represent PIDE (TermName t) = make_bytes t
+  represent PIDE (TermSymbolic t) = "s" <> make_bytes t
+  represent PIDE (TermNotion t) = "a" <> make_bytes t
+  represent PIDE (TermThe t) = "the" <> make_bytes t
+  represent PIDE (TermUnaryAdjective t) = "is" <> make_bytes t
+  represent PIDE (TermMultiAdjective t) = "mis" <> make_bytes t
+  represent PIDE (TermUnaryVerb t) = "do" <> make_bytes  t
+  represent PIDE (TermMultiVerb t) = "mdo" <> make_bytes t
+  represent PIDE (TermTask n) = "tsk " <> make_bytes  (show n)
+  represent PIDE TermEquality = "="
+  represent PIDE TermLess  = "iLess"
+  represent PIDE TermThesis = "#TH#"
+  represent PIDE TermEmpty = ""
 
 data TermId
   = EqualityId

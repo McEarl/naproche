@@ -36,6 +36,7 @@ import SAD.ForTheL.STEX.Pattern qualified as STEX
 import SAD.ForTheL.STEX.Statement qualified as STEX
 import SAD.Parser.Primitives
 import SAD.Parser.Combinators
+import SAD.Export.Representation
 
 import Isabelle.Position qualified as Position
 
@@ -51,7 +52,8 @@ structSigExtend = sigStructure
 
 defPredicat :: FTL Formula
 defPredicat = do
-  (f, g) <- wellFormedCheck prdVars defn
+  fmt <- gets format
+  (f, g) <- wellFormedCheck (prdVars fmt) defn
   return $ Iff (Tag HeadTerm f) g
   where
     defn = do f <- newPredicat; equiv; g <- STEX.statement; return (f,g)
@@ -59,7 +61,8 @@ defPredicat = do
 
 defNotion :: FTL Formula
 defNotion = do
-  ((n,h),u) <- wellFormedCheck (notionVars . fst) defn; uDecl <- makeDecl u
+  fmt <- gets format
+  ((n,h),u) <- wellFormedCheck (notionVars fmt . fst) defn; uDecl <- makeDecl u
   return $ dAll uDecl $ Iff (Tag HeadTerm n) h
   where
     defn = do
@@ -74,7 +77,8 @@ defNotion = do
 
 sigPredicat :: FTL Formula
 sigPredicat = do
-  (f,g) <- wellFormedCheck prdVars sig
+  fmt <- gets format
+  (f,g) <- wellFormedCheck (prdVars fmt) sig
   return $ Imp (Tag HeadTerm f) g
   where
     sig    = do f <- newPredicat; imp; g <- STEX.statement </> noInfo; return (f,g)
@@ -83,7 +87,8 @@ sigPredicat = do
 
 sigNotion :: FTL Formula
 sigNotion = do
-  ((n,h),u) <- wellFormedCheck (notionVars . fst) sig
+  fmt <- gets format
+  ((n,h),u) <- wellFormedCheck (notionVars fmt . fst) sig
   uDecl <- makeDecl u
   return $ dAll uDecl $ Imp (Tag HeadTerm n) h
   where
@@ -101,7 +106,8 @@ sigNotion = do
 
 sigStructure :: FTL (Formula, Formula)
 sigStructure = do
-  ((n,h),u) <- wellFormedCheck (notionVars . fst) sig
+  fmt <- gets format
+  ((n,h),u) <- wellFormedCheck (notionVars fmt . fst) sig
   uDecl <- makeDecl u
   return (n, dAll uDecl $ Imp (Tag HeadTerm n) h)
   where
@@ -127,22 +133,23 @@ newNotion = do
 introduceMacro :: FTL ProofText
 introduceMacro = do
   pos1 <- getPos
+  fmt <- gets format
   Reports.markupToken Reports.macroLet "let"
-  (pos2, (f, g)) <- narrow2 (prd -|- notion)
+  (pos2, (f, g)) <- narrow2 fmt (prd fmt -|- notion fmt)
   let pos = Position.range_position (pos1, pos2)
   Reports.addMacroReport pos
   st <- get
   addExpr f (ignoreNames g) False st
   return $ ProofTextMacro pos
   where
-    prd, notion :: FTL (Position.T, (Formula, Formula))
-    prd = wellFormedCheck (prdVars . snd) $ do
+    prd, notion :: Format -> FTL (Position.T, (Formula, Formula))
+    prd fmt = wellFormedCheck (prdVars fmt . snd) $ do
       f <- STEX.newPrdPattern singleLetterVariable
       Reports.markupTokenSeqOf Reports.macroLet standForPhrases
       g <- STEX.statement
       (_, pos2) <- dot
       return (pos2, (f, g))
-    notion = wellFormedCheck (funVars . snd) $ do
+    notion fmt = wellFormedCheck (funVars fmt . snd) $ do
       (n, u) <- STEX.unnamedNotion singleLetterVariable
       Reports.markupTokenSeqOf Reports.macroLet standForPhrases
       (q, f) <- STEX.anotion
@@ -152,14 +159,16 @@ introduceMacro = do
 
 pretypeVariable :: FTL ProofText
 pretypeVariable = do
-  (pos, tv) <- narrow2 typeVar
+  fmt <- gets format
+  (pos, tv) <- narrow2 fmt typeVar
   modify $ upd tv
   return $ ProofTextPretyping pos (fst tv)
   where
     typeVar = do
+      fmt <- gets format
       pos1 <- getPos; Reports.markupToken Reports.synonymLet "let"; vs <- varList; Reports.markupTokenSeqOf Reports.synonymLet standForPhrases
       when (Set.size vs == 0) $ fail "empty variable list in let binding"
-      (g, pos2) <- wellFormedCheck (freeOrOverlapping mempty . fst) holedNotion
+      (g, pos2) <- wellFormedCheck (freeOrOverlapping fmt mempty . fst) holedNotion
       let pos = Position.range_position (pos1, pos2)
       Reports.addPretypingReport pos $ map posVarPosition $ Set.toList vs;
       return (pos, (vs, ignoreNames g))

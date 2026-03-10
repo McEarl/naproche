@@ -16,7 +16,6 @@ import Data.Maybe (fromMaybe)
 import Data.Either (lefts,rights, isRight)
 import Control.Monad (MonadPlus(..), guard)
 import Control.Monad.Reader
-import Data.Text.Lazy qualified as Text
 
 import SAD.Core.Base
 import SAD.Core.Reason as Reason
@@ -27,13 +26,15 @@ import SAD.Data.Text.Context (Context)
 import SAD.Core.Message qualified as Message
 import SAD.Data.Text.Block qualified as Block (link, position)
 import SAD.Data.Text.Context qualified as Context
+import SAD.Export.Representation
 
 import Isabelle.Position qualified as Position
+import Isabelle.Library
 
 
 {- check definitions and fortify terms with evidences in a formula -}
-fillDef :: Position.T -> Context -> VerifyMonad Formula
-fillDef pos context = fill True False [] (Just True) 0 (Context.formula context)
+fillDef :: Format -> Position.T -> Context -> VerifyMonad Formula
+fillDef fmt pos context = fill True False [] (Just True) 0 (Context.formula context)
   where
     fill :: Bool -> Bool -> [Formula] -> Maybe Bool -> Int -> Formula -> VerifyMonad Formula
     fill isPredicate isNewWord localContext sign n = \case
@@ -53,7 +54,7 @@ fillDef pos context = fill True False [] (Just True) 0 (Context.formula context)
           userInfoSetting <- asks (getInstruction infoParam)
           fortifiedArgs   <- mapM (fill False isNewWord localContext sign n) tArgs
           newContext      <- cnRaise context localContext
-          fortifiedTerm   <- setDef pos isNewWord context term{trmArgs = fortifiedArgs} `withContext` newContext
+          fortifiedTerm   <- setDef fmt pos isNewWord context term{trmArgs = fortifiedArgs} `withContext` newContext
           collectInfo (not isPredicate && userInfoSetting) fortifiedTerm `withContext` newContext -- fortify term
 
       f -> roundFM VarW (fill isPredicate isNewWord) localContext sign n f
@@ -73,16 +74,16 @@ cnRaise thisBlock local = do
 
 
 
-setDef :: Position.T -> Bool -> Context -> Formula -> VerifyMonad Formula
-setDef pos isNewWord context term@Trm{trmName = t, trId = tId} =
+setDef :: Format -> Position.T -> Bool -> Context -> Formula -> VerifyMonad Formula
+setDef fmt pos isNewWord context term@Trm{trmName = t, trId = tId} =
   incrementCounter Symbols >>
     (    (guard isNewWord >> return term) -- do not check new word
-    <|>  (findDef term >>= testDef pos context term) -- check term's definition
+    <|>  (findDef term >>= testDef fmt pos context term) -- check term's definition
     <|>  (out >> mzero )) -- failure message
   where
     out =
       reasonLog Message.ERROR (Block.position (Context.head context)) $
-        "unrecognized: " <> Text.pack (showsPrec 2 term "")
+        "unrecognized: " <> represent fmt term
 
 
 -- Find relevant definitions and test them
@@ -106,8 +107,8 @@ check it. setup and cleanup take care of the special proof times that we allow
 an ontological check. easyCheck are inbuild reasoning methods, hardCheck passes
 a task to an ATP.
 -}
-testDef :: Position.T -> Context -> Formula -> (Guards, FortifiedTerm) -> VerifyMonad Formula
-testDef pos context term (guards, fortifiedTerm) = do
+testDef :: Format -> Position.T -> Context -> Formula -> (Guards, FortifiedTerm) -> VerifyMonad Formula
+testDef fmt pos context term (guards, fortifiedTerm) = do
   userCheckSetting <- asks (getInstruction checkParam)
   if   userCheckSetting
   then local setup $ easyCheck >>= hardCheck >> return fortifiedTerm
@@ -121,7 +122,7 @@ testDef pos context term (guards, fortifiedTerm) = do
       | otherwise =
           incrementCounter HardChecks >>
           defLog (header lefts hardGuards <> thead (rights hardGuards)) >>
-          mapM_ (proveThesis' pos . Context.setFormula (wipeLink context)) (lefts hardGuards) >>
+          mapM_ (proveThesis' fmt pos . Context.setFormula (wipeLink context)) (lefts hardGuards) >>
           incrementCounter SuccessfulChecks
 
     setup state =
@@ -136,9 +137,9 @@ testDef pos context term (guards, fortifiedTerm) = do
 
 
     header select guards =
-      "check: " <> showsPrec 2 term " vs " <> format (select guards)
+      "check: " <> make_string (represent fmt term) <> " vs " <> format (select guards)
     thead [] = ""; thead guards = "(trivial: " <> format guards <> ")"
-    format guards = if null guards then " - " else unwords . map show $ guards
+    format guards = if null guards then " - " else unwords . map (make_string . represent fmt) $ guards
     defLog =
       whenInstruction printcheckParam .
         reasonLog Message.WRITELN (Block.position (head $ Context.branch context))

@@ -7,6 +7,8 @@
 -- Helper functions.
 
 
+{-# LANGUAGE OverloadedStrings #-}
+
 module SAD.Helpers (
   notNull,
   nubOrd,
@@ -21,6 +23,7 @@ module SAD.Helpers (
 
   parens,
   parensIf,
+  intercalate,
 
   failureMessage,
   failWithMessage,
@@ -40,7 +43,8 @@ import System.FilePath.Posix
 import Naproche.Program qualified as Program
 
 import Isabelle.Library (make_bytes, getenv, make_string)
-
+import Isabelle.Bytes (Bytes)
+import Isabelle.Bytes qualified as Bytes
 
 -- | Returns @False@ if the list is empty and @True@ otherwise.
 notNull :: [a] -> Bool
@@ -138,17 +142,21 @@ isAsciiPeriod :: Char -> Bool
 isAsciiPeriod c = c == '\x002E'
 
 
--- * String Operations
+-- * Bytes Operations
 
 -- | Wrap a string in parentheses.
-parens :: String -> String
-parens string = "(" ++ string ++ ")"
+parens :: Bytes -> Bytes
+parens bs = "(" <> bs <> ")"
 
 -- | Wrap a string in parentheses if a predicate holds true, otherwise return
 -- the string unmodified.
-parensIf :: Bool -> String -> String
+parensIf :: Bool -> Bytes -> Bytes
 parensIf pred string = if pred then parens string else string
 
+intercalate :: Bytes -> [Bytes] -> Bytes
+intercalate _ [] = ""
+intercalate _ [b] = b
+intercalate s (b : bs) = Bytes.concat [b, s] <> intercalate s bs
 
 -- * Error Messages
 
@@ -165,12 +173,12 @@ failWithMessage functionId message = error $ failureMessage functionId message
 
 -- | Get the path to the naproche directory.
 getNaprocheHome :: IO FilePath
-getNaprocheHome = make_string <$> getenv (make_bytes "NAPROCHE_HOME")
+getNaprocheHome = make_string <$> getenv "NAPROCHE_HOME"
 
 -- | Get the path to the formalizations directory.
 getNaprocheFormalizations :: IO FilePath
-getNaprocheFormalizations = make_string <$> getenv (make_bytes "NAPROCHE_FORMALIZATIONS")
+getNaprocheFormalizations = make_string <$> getenv "NAPROCHE_FORMALIZATIONS"
 
 -- | Get the path to the formalizations directory.
 getNaprocheMathhub :: IO FilePath
-getNaprocheMathhub = make_string <$> getenv (make_bytes "NAPROCHE_MATHHUB")
+getNaprocheMathhub = make_string <$> getenv "NAPROCHE_MATHHUB"

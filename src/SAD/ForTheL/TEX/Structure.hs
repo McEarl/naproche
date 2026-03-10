@@ -15,7 +15,7 @@ module SAD.ForTheL.TEX.Structure where
 import Data.List
 import Control.Applicative
 import Control.Monad
-import Control.Monad.State.Class (modify)
+import Control.Monad.State.Class (modify, gets)
 import Data.Text.Lazy (Text)
 import Data.Functor ((<&>))
 import Data.Foldable (foldr')
@@ -171,10 +171,11 @@ axiomSection = do
 -- | Parse a theorem (TEX)
 theoremSection :: FTL [ProofText]
 theoremSection = do
+  fmt <- gets format
   (keyword, starred) <- try $ beginTopLevelSection ["theorem", "proposition", "lemma", "corollary"]
   label <- optionalEnvLabel
   content <- addAssumptions . topLevelProof $
-             pretypeSentence Affirmation (affirmationHeader >> TEX.statement) affirmVars finishWithOptLink <* endTopLevelSection keyword starred
+             pretypeSentence Affirmation (affirmationHeader >> TEX.statement) (affirmVars fmt) finishWithOptLink <* endTopLevelSection keyword starred
   proofText <- addMetadata Theorem content label
   return [proofText]
 
@@ -193,13 +194,16 @@ conventionSection = do
 -- * Top-level section bodies
 
 signatureBody :: FTL [ProofText]
-signatureBody = addAssumptions $ pretype $ pretypeSentence Posit TEX.sigExtend defVars finishWithoutLink
+signatureBody = do
+  fmt <- gets format
+  addAssumptions $ pretype $ pretypeSentence Posit TEX.sigExtend (defVars fmt) finishWithoutLink
 
 structSignatureBody :: FTL ([Block], [ProofText])
 structSignatureBody = do
-  (varForm, pSent) <- pretypeSentence' Posit TEX.structSigExtend defVars structFinish
+  fmt <- gets format
+  (varForm, pSent) <- pretypeSentence' Posit TEX.structSigExtend (defVars fmt) structFinish
   structProofText <- addAssumptions $ pretype $ pure pSent
-  varAssumption <- pretypeSentence Assumption (pure varForm) assumeVars (pure [])
+  varAssumption <- pretypeSentence Assumption (pure varForm) (assumeVars fmt) (pure [])
   return ([varAssumption], structProofText)
   where
     structFinish = do
@@ -208,10 +212,14 @@ structSignatureBody = do
       return []
 
 definitionBody :: FTL [ProofText]
-definitionBody = addAssumptions $ pretype $ pretypeSentence Posit TEX.defExtend defVars finishWithoutLink
+definitionBody = do
+  fmt <- gets format
+  addAssumptions $ pretype $ pretypeSentence Posit TEX.defExtend (defVars fmt) finishWithoutLink
 
 axiomBody :: FTL [ProofText]
-axiomBody = addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> TEX.statement) affirmVars finishWithoutLink
+axiomBody = do
+  fmt <- gets format
+  addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> TEX.statement) (affirmVars fmt) finishWithoutLink
 
 
 -- | Adds parser for parsing any number of assumptions before the passed content
@@ -221,7 +229,9 @@ addAssumptions content = body
   where
     body = assumption <|> content
     assumption = topAssume `pretypeBefore` body
-    topAssume = pretypeSentence Assumption (assumptionHeader >> TEX.statement) assumeVars finishWithoutLink
+    topAssume = do
+      fmt <- gets format
+      pretypeSentence Assumption (assumptionHeader >> TEX.statement) (assumeVars fmt) finishWithoutLink
 
 
 -- * Resetting variable pretypings at new sections (TEX)
@@ -270,26 +280,35 @@ exitInstruction text = case text of
 
 -- | Parse a choice expression.
 choose :: FTL Block
-choose = sentence Choice (choiceHeader >> TEX.choice) assumeVars finishWithOptLink
+choose = do
+  fmt <- gets format
+  sentence Choice (choiceHeader >> TEX.choice) (assumeVars fmt) finishWithOptLink
 
 -- | Parse a case hypothesis:
 -- @"\begin" "{" "case "}" "{" <statement> "." "}"@
 caseHypothesis :: FTL Block
 caseHypothesis = do
+  fmt <- gets format
   label "\"\\begin{case}\"" . texBegin $ markupToken Reports.proofStart "case"
-  braced $ sentence Block.CaseHypothesis (finish TEX.statement) affirmVars (pure [])
+  braced $ sentence Block.CaseHypothesis (finish TEX.statement) (affirmVars fmt) (pure [])
 
 -- | Parse an affirmation.
 affirmation :: FTL Block
-affirmation = sentence Affirmation (affirmationHeader >> TEX.statement) affirmVars finishWithOptLink </> eqChain
+affirmation = do
+  fmt <- gets format
+  sentence Affirmation (affirmationHeader >> TEX.statement) (affirmVars fmt) finishWithOptLink </> eqChain
 
 -- | Parse an assumption.
 assumption :: FTL Block
-assumption = sentence Assumption (assumptionHeader >> TEX.statement) assumeVars finishWithoutLink
+assumption = do
+  fmt <- gets format
+  sentence Assumption (assumptionHeader >> TEX.statement) (assumeVars fmt) finishWithoutLink
 
 -- | Parse a low-level definition.
 lowLevelDefinition :: FTL Block
-lowLevelDefinition = sentence LowDefinition (lowLevelDefinitionHeader >> TEX.classNotion </> TEX.mapNotion) llDefnVars finishWithoutLink
+lowLevelDefinition = do
+  fmt <- gets format
+  sentence LowDefinition (lowLevelDefinitionHeader >> TEX.classNotion </> TEX.mapNotion) (llDefnVars fmt) finishWithoutLink
 
 
 -- ** Links
@@ -497,15 +516,16 @@ caseDestinctionEnd = label "\"\\end{case}\"" . texEnd $ markupToken Reports.proo
 
 eqChain :: FTL Block
 eqChain = do
+  fmt <- gets format
   dvs <- getDecl; nm <- opt "__" (parenthesised identifier); inp <- getInput
-  body <- wellFormedCheck (chainVars dvs) $ sTerm >>= nextTerm
+  body <- wellFormedCheck (chainVars fmt dvs) $ sTerm >>= nextTerm
   toks <- getTokens inp
   let Tag EqualityChain Trm{trmArgs = [t,_]} = Block.formula $ head body
       Tag EqualityChain Trm{trmArgs = [_,s]} = Block.formula $ last body
       fr = Tag EqualityChain $ mkEquality t s; tBody = map ProofTextBlock body
   return $ Block.makeBlock fr tBody Affirmation nm [] toks
   where
-    chainVars dvs = affirmVars dvs . foldl1 And . map Block.formula
+    chainVars fmt dvs = affirmVars fmt dvs . foldl1 And . map Block.formula
 
 eqTail :: Formula -> FTL [Block]
 eqTail t = nextTerm t </> (token "." >> return [])
@@ -555,4 +575,6 @@ caseDestinction_old = do
 -- | FTL-style case hypothesis:
 -- @<statement> [ "by" <references> ] "."@
 caseHypothesis_old :: FTL Block
-caseHypothesis_old = sentence Block.CaseHypothesis (FTL.caseHeader >> TEX.statement) affirmVars finishWithOptLink
+caseHypothesis_old = do
+  fmt <- gets format
+  sentence Block.CaseHypothesis (FTL.caseHeader >> TEX.statement) (affirmVars fmt) finishWithOptLink

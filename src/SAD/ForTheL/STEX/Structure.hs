@@ -17,6 +17,7 @@ module SAD.ForTheL.STEX.Structure (
 import Data.List
 import Control.Applicative
 import Control.Monad
+import Control.Monad.State.Class (gets)
 import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as Text
 import Data.Functor ((<&>))
@@ -178,10 +179,11 @@ axiomSection = do
 -- | Parse a theorem (TEX)
 theoremSection :: FTL [ProofText]
 theoremSection = do
+  fmt <- gets format
   (keyword, starred) <- try $ beginTopLevelSection ["theorem", "proposition", "lemma", "corollary"]
   label <- optTlsOptions
   content <- TEX.addAssumptions . topLevelProof $
-             pretypeSentence Affirmation (affirmationHeader >> STEX.statement) affirmVars finishWithOptLink <* endTopLevelSection keyword starred
+             pretypeSentence Affirmation (affirmationHeader >> STEX.statement) (affirmVars fmt) finishWithOptLink <* endTopLevelSection keyword starred
   proofText <- addMetadata Theorem content label
   return [proofText]
 
@@ -200,13 +202,16 @@ conventionSection = do
 -- * Top-level section bodies
 
 signatureBody :: FTL [ProofText]
-signatureBody = TEX.addAssumptions $ pretype $ pretypeSentence Posit STEX.sigExtend defVars finishWithoutLink
+signatureBody = do
+  fmt <- gets format
+  TEX.addAssumptions $ pretype $ pretypeSentence Posit STEX.sigExtend (defVars fmt) finishWithoutLink
 
 structSignatureBody :: FTL ([Block], [ProofText])
 structSignatureBody = do
-  (varForm, pSent) <- pretypeSentence' Posit STEX.structSigExtend defVars structFinish
+  fmt <- gets format
+  (varForm, pSent) <- pretypeSentence' Posit STEX.structSigExtend (defVars fmt) structFinish
   structProofText <- TEX.addAssumptions $ pretype $ pure pSent
-  varAssumption <- pretypeSentence Assumption (pure varForm) assumeVars (pure [])
+  varAssumption <- pretypeSentence Assumption (pure varForm) (assumeVars fmt) (pure [])
   return ([varAssumption], structProofText)
   where
     structFinish = do
@@ -215,10 +220,14 @@ structSignatureBody = do
       return []
 
 definitionBody :: FTL [ProofText]
-definitionBody = TEX.addAssumptions $ pretype $ pretypeSentence Posit STEX.defExtend defVars finishWithoutLink
+definitionBody = do
+  fmt <- gets format
+  TEX.addAssumptions $ pretype $ pretypeSentence Posit STEX.defExtend (defVars fmt) finishWithoutLink
 
 axiomBody :: FTL [ProofText]
-axiomBody = TEX.addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> STEX.statement) affirmVars finishWithoutLink
+axiomBody = do
+  fmt <- gets format
+  TEX.addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> STEX.statement) (affirmVars fmt) finishWithoutLink
 
 
 -- * Importing Modules
@@ -262,26 +271,35 @@ instruction =
 
 -- | Parse a choice expression.
 choose :: FTL Block
-choose = sentence Choice (choiceHeader >> STEX.choice) assumeVars finishWithOptLink
+choose = do
+  fmt <- gets format
+  sentence Choice (choiceHeader >> STEX.choice) (assumeVars fmt) finishWithOptLink
 
 -- | Parse a case hypothesis:
 -- @"\begin" "{" "case "}" "{" <statement> "." "}"@
 caseHypothesis :: FTL Block
 caseHypothesis = do
+  fmt <- gets format
   label "\"\\begin{case}\"" . texBegin $ markupToken Reports.proofStart "case"
-  braced $ sentence Block.CaseHypothesis (finish STEX.statement) affirmVars (pure [])
+  braced $ sentence Block.CaseHypothesis (finish STEX.statement) (affirmVars fmt) (pure [])
 
 -- | Parse an affirmation.
 affirmation :: FTL Block
-affirmation = sentence Affirmation (affirmationHeader >> STEX.statement) affirmVars finishWithOptLink </> eqChain
+affirmation = do
+  fmt <- gets format
+  sentence Affirmation (affirmationHeader >> STEX.statement) (affirmVars fmt) finishWithOptLink </> eqChain
 
 -- | Parse an assumption.
 assumption :: FTL Block
-assumption = sentence Assumption (assumptionHeader >> STEX.statement) assumeVars finishWithoutLink
+assumption = do
+  fmt <- gets format
+  sentence Assumption (assumptionHeader >> STEX.statement) (assumeVars fmt) finishWithoutLink
 
 -- | Parse a low-level definition.
 lowLevelDefinition :: FTL Block
-lowLevelDefinition = sentence LowDefinition (lowLevelDefinitionHeader >> STEX.classNotion </> STEX.mapNotion) llDefnVars finishWithoutLink
+lowLevelDefinition = do
+  fmt <- gets format
+  sentence LowDefinition (lowLevelDefinitionHeader >> STEX.classNotion </> STEX.mapNotion) (llDefnVars fmt) finishWithoutLink
 
 
 -- ** Links
@@ -541,15 +559,16 @@ caseDestinction = do
 
 eqChain :: FTL Block
 eqChain = do
+  fmt <- gets format
   dvs <- getDecl; nm <- opt "__" (parenthesised identifier); inp <- getInput
-  body <- wellFormedCheck (chainVars dvs) $ sTerm >>= nextTerm
+  body <- wellFormedCheck (chainVars fmt dvs) $ sTerm >>= nextTerm
   toks <- getTokens inp
   let Tag EqualityChain Trm{trmArgs = [t,_]} = Block.formula $ head body
       Tag EqualityChain Trm{trmArgs = [_,s]} = Block.formula $ last body
       fr = Tag EqualityChain $ mkEquality t s; tBody = map ProofTextBlock body
   return $ Block.makeBlock fr tBody Affirmation nm [] toks
   where
-    chainVars dvs = affirmVars dvs . foldl1 And . map Block.formula
+    chainVars fmt dvs = affirmVars fmt dvs . foldl1 And . map Block.formula
 
 eqTail :: Formula -> FTL [Block]
 eqTail t = nextTerm t </> (token "." >> return [])

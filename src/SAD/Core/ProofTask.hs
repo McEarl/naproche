@@ -17,17 +17,20 @@ import SAD.Data.Formula
 import SAD.Data.Text.Block (Section(..))
 import SAD.Prove.Normalize
 import SAD.Data.Text.Decl
+import SAD.Export.Representation
+
+import Isabelle.Library
 
 
 -- * Proof tasks
 
 -- Generate proof task associated with a block
-generateProofTask :: Section -> Set VariableName -> Formula -> Formula
-generateProofTask Choice vs f = foldr mbExi f vs
-generateProofTask LowDefinition _ f
-  | mapDcl f = mapTask f
-  | classDcl f = classTask f
-generateProofTask _ _ f = f
+generateProofTask :: Format -> Section -> Set VariableName -> Formula -> Formula
+generateProofTask _ Choice vs f = foldr mbExi f vs
+generateProofTask fmt LowDefinition _ f
+  | mapDcl f = mapTask fmt f
+  | classDcl fmt f = classTask fmt f
+generateProofTask _ _ _ f = f
 
 -- Check whether a formula is a map definition
 mapDcl :: Formula -> Bool
@@ -35,34 +38,34 @@ mapDcl ((f `And` _) `And` _) = trmId f == MapId
 mapDcl _ = False
 
 -- Check whether a formula is a class definition
-classDcl :: Formula -> Bool
-classDcl (Trm{trId = id} `And` _) = id == SetId || id == ClassId
-classDcl (f `And` _) = classDcl f
-classDcl f = error $ "SAD.Core.ProofTask.classDcl: misformed definition: " ++ show f
+classDcl :: Format -> Formula -> Bool
+classDcl fmt (Trm{trId = id} `And` _) = id == SetId || id == ClassId
+classDcl fmt (f `And` _) = classDcl fmt f
+classDcl fmt f = error $ make_string $ "SAD.Core.ProofTask.classDcl: misformed definition: " <> represent fmt f
 
 
 -- ** Proof tasks for classes
 
-classTask :: Formula -> Formula
+classTask :: Format -> Formula -> Formula
 -- {x_1, ..., x_n}
-classTask (_ `And` (All x (_ `Iff` (Trm{trId = ObjectId} `And` _)))) = Top
+classTask _ (_ `And` (All x (_ `Iff` (Trm{trId = ObjectId} `And` _)))) = Top
 -- {t(x_1, ..., x_n) | ...}
-classTask (_ `And` (All x (_ `Iff` (Tag Replacement f)))) = Top
+classTask _ (_ `And` (All x (_ `Iff` (Tag Replacement f)))) = Top
 -- {t(x_1,...,x_n) in X | ...}
-classTask (_ `And` (All _ (_ `Iff` f))) = Top
+classTask _ (_ `And` (All _ (_ `Iff` f))) = Top
 -- Anything else
-classTask f = error $ "SAD.Core.ProofTask.classTask: misformed definition: " ++ show f
+classTask fmt f = error $ make_string $ "SAD.Core.ProofTask.classTask: misformed definition: " <> represent fmt f
 
 
 -- ** Proof tasks for maps
 
 -- Takes a statement of the form
 -- @(aMap(F) and (Domain :: ...)) and ...@
-mapTask :: Formula -> Formula
-mapTask h@((_ `And` g) `And` f) =
+mapTask :: Format -> Formula -> Formula
+mapTask fmt h@((_ `And` g) `And` f) =
   let c = domainCondition g
-  in  domainTask g `blAnd` c (choiceTask f `blAnd` existenceTask f `blAnd` uniquenessTask f)
-mapTask _ = error "SAD.Core.ProofTask.mapTask: misformed definition"
+  in  domainTask fmt g `blAnd` c (choiceTask fmt f `blAnd` existenceTask f `blAnd` uniquenessTask f)
+mapTask _ _ = error "SAD.Core.ProofTask.mapTask: misformed definition"
 
 -- Takes a statement of one of the following forms:
 --
@@ -71,18 +74,18 @@ mapTask _ = error "SAD.Core.ProofTask.mapTask: misformed definition"
 --
 --  2. @Domain :: Dom(F) = t@
 --     when the domain of @F@ is defined via a term @t@
-domainTask :: Formula -> Formula
-domainTask (Tag Domain (All _ (_ `Iff` f))) = Tag DomainTask $ separation f
-domainTask (Tag Domain Trm{trmName = TermEquality, trmArgs = [_,t]}) = Tag DomainTask $ mkClass t
-domainTask _ = error "SAD.Core.ProofTask.domainTask: misformed definition"
+domainTask :: Format -> Formula -> Formula
+domainTask fmt (Tag Domain (All _ (_ `Iff` f))) = Tag DomainTask $ separation fmt f
+domainTask _ (Tag Domain Trm{trmName = TermEquality, trmArgs = [_,t]}) = Tag DomainTask $ mkClass t
+domainTask _ _ = error "SAD.Core.ProofTask.domainTask: misformed definition"
 
-choiceTask :: Formula -> Formula
-choiceTask = Tag ChoiceTask . dive
+choiceTask :: Format -> Formula -> Formula
+choiceTask fmt = Tag ChoiceTask . dive
   where
     dive (Tag Evaluation _) = Top
     dive (Tag _ f) = dive f
     dive (Exi dcl ((Tag Defined f) `And` g)) = let x = declName dcl in
-      generateProofTask LowDefinition mempty (dec $ inst x f) `blAnd`
+      generateProofTask fmt LowDefinition mempty (dec $ inst x f) `blAnd`
       dec (inst x $ f `blImp` dive g)
     dive (All x f) = bool $ All x $ dive f
     dive (f `Imp` g) = f `blImp` dive g
@@ -117,10 +120,10 @@ uniquenessTask = Tag UniquenessTask . dive
 
 -- * Misc
 
-separation :: Formula -> Formula
-separation (f `And` g) = separation f
-separation t | isElem t = dec $ mkClass $ last $ trmArgs t
-separation f = error $ "SAD.Core.ProofTask.separation: misformed argument: " ++ show f
+separation :: Format -> Formula -> Formula
+separation fmt (f `And` g) = separation fmt f
+separation _ t | isElem t = dec $ mkClass $ last $ trmArgs t
+separation fmt f = error $ make_string $ "SAD.Core.ProofTask.separation: misformed argument: " <> represent fmt f
 
 -- output a description of a map in the form
 -- @(condition_1 /\ evaluation_1) \/ ... \/ (condition_n /\ evaluation_n)@

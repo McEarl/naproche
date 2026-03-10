@@ -16,6 +16,7 @@ import Data.List
 import Data.Maybe
 import Control.Applicative
 import Control.Monad
+import Control.Monad.State.Class (gets)
 import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as Text
 import Data.Set qualified as Set
@@ -34,6 +35,10 @@ import SAD.Data.Text.Block qualified as Block
 import SAD.Data.Formula
 import SAD.Data.Text.Decl
 import SAD.Helpers
+import SAD.Export.Representation
+
+import Isabelle.Bytes qualified as Bytes
+import Isabelle.Library
 
 
 -- ** Adding meta data
@@ -235,24 +240,24 @@ sentence kind p wfVars mbLink = do
 
 -- * Variable well-formedness checks
 
-defVars, assumeVars, affirmVars :: Set VariableName -> Formula -> Maybe Text
+defVars, assumeVars, affirmVars :: Format -> Set VariableName -> Formula -> Maybe Text
 
-defVars dvs f
-  | null unusedVars = affirmVars dvs f
+defVars fmt dvs f 
+  | null unusedVars = affirmVars fmt dvs f
   | otherwise = pure errorMsg
   where
     unusedVars = let fvs = fvToVarSet $ free f in dvs `Set.difference` fvs
     errorMsg = "extra variables in the guard: " <> varText
-    varText = Text.concat $ map (Text.cons ' ' . showVar) $ Set.toList unusedVars
+    varText = Text.pack . make_string . Bytes.concat . map (\x -> " " <> represent fmt x) . Set.toList $ unusedVars
 
-llDefnVars :: Set VariableName -> Formula -> Maybe Text
-llDefnVars dvs f
-  | x `elem` dvs = Just $ "Defined variable is already in use: " <> showVar x
-  | otherwise = affirmVars (Set.insert x dvs) f
+llDefnVars :: Format -> Set VariableName -> Formula -> Maybe Text
+llDefnVars fmt dvs f
+  | x `elem` dvs = Just . Text.pack . make_string $ "Defined variable is already in use: " <> represent fmt x
+  | otherwise = affirmVars fmt (Set.insert x dvs) f
   where
     x = head . Set.elems $ declNames mempty f
 
-assumeVars dvs f = affirmVars (declNames dvs f <> dvs) f
+assumeVars fmt dvs f = affirmVars fmt (declNames dvs f <> dvs) f
 
 affirmVars = freeOrOverlapping
 
@@ -267,7 +272,7 @@ data Scheme =
   | Contradiction   -- ^ Proof by contradiction
   | InS             -- ^ Proof by induction
   | InT Formula     -- ^ Term to induce on (in a proof by induction)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Ord)
 
 -- | Low-level theorem header:
 -- @<letUs> ("prove" | "show" | "demonstrate") [<byProofMethod>] "that"@
@@ -296,9 +301,10 @@ proofMethod = contradiction <|> caseAnalysis <|> induction
 -- | Creation of induction thesis.
 indThesis :: Formula -> Scheme -> Scheme -> FTL Formula
 indThesis fr pre post = do
+  fmt <- gets format
   it <- indScheme pre post >>= indTerm fr
   dvs <- getDecl
-  indFormula (fvToVarSet $ excludeSet (free it) dvs) it fr
+  indFormula fmt (fvToVarSet $ excludeSet (free it) dvs) it fr
   where
     indScheme (InT _) (InT _) = failWF "conflicting induction schemes"
     indScheme m@(InT _) _ = return m
@@ -311,13 +317,13 @@ indThesis fr pre post = do
     indTerm _ InS = failWF "invalid induction thesis"
     indTerm _ _ = return Top
 
-    indFormula _ Top fr = return fr
-    indFormula vs it fr = insertIndTerm it <$> indStatem vs fr
+    indFormula _ _ Top fr = return fr
+    indFormula fmt vs it fr = insertIndTerm it <$> indStatem fmt vs fr
 
-    indStatem vs (Imp g f) = (Imp g .) <$> indStatem vs f
-    indStatem vs (All v f) = (dAll v .) <$> indStatem (deleteDecl v vs) f
-    indStatem vs f | Set.null vs = pure (`Imp` f)
-    indStatem _ _ = failWF $ "invalid induction thesis " <> Text.pack (show fr)
+    indStatem fmt vs (Imp g f) = (Imp g .) <$> indStatem fmt vs f
+    indStatem fmt vs (All v f) = (dAll v .) <$> indStatem fmt (deleteDecl v vs) f
+    indStatem _ vs f | Set.null vs = pure (`Imp` f)
+    indStatem fmt _ _ = failWF . Text.pack . make_string $ "invalid induction thesis " <> represent fmt fr
 
     insertIndTerm it cn = cn $ Tag InductionHypothesis $ subst it (VarHole "") $ cn $ mkLess it (mkVar (VarHole ""))
 

@@ -35,6 +35,7 @@ import SAD.Parser.STEX.Token qualified as STEX
 import SAD.Parser.Token (Token, noTokens)
 import SAD.Core.Message qualified as Message
 import SAD.Helpers (failWithMessage, getNaprocheFormalizations)
+import SAD.Export.Representation
 
 import Isabelle.File qualified as File
 import Isabelle.Library (make_bytes)
@@ -47,11 +48,11 @@ import Naproche.Program qualified as Program
 -- * Reader loop
 
 -- | Parse one or more ForTheL texts
-readProofText :: ParserKind -> [ProofText] -> IO [ProofText]
-readProofText dialect text0 = do
+readProofText :: Format -> ParserKind -> [ProofText] -> IO [ProofText]
+readProofText fmt dialect text0 = do
   context <- Program.thread_context
   naprocheFormalizationsPath <- getNaprocheFormalizations
-  (text, reports) <- reader 0 dialect naprocheFormalizationsPath [] [initState context noTokens] text0
+  (text, reports) <- reader 0 dialect naprocheFormalizationsPath [] [initState fmt context noTokens] text0
   when (Program.is_pide context) $ Message.reports reports
   return text
 
@@ -206,7 +207,7 @@ parseState state =
         Stex -> STEX.forthelText
   in launchParser parser state
 
-initState :: Program.Context -> [Token] -> State FState
-initState context tokens = State (initFState context) tokens Ftl Position.none
+initState :: Format -> Program.Context -> [Token] -> State FState
+initState fmt context tokens = State (initFState fmt context) tokens Ftl Position.none
 
 

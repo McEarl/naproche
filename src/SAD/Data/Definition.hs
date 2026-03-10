@@ -17,7 +17,7 @@ import SAD.Data.Structures.DisTree qualified as DisTree
 
 
 data DefType = Signature | Definition
-  deriving (Eq, Show)
+  deriving Eq
 
 data DefEntry = DefEntry
   { defGuards    :: [Formula]    -- ^ guards of the definitions
@@ -26,7 +26,7 @@ data DefEntry = DefEntry
   , defTerm      :: Formula      -- ^ defined term
   , defEvidence  :: [Formula]    -- ^ evidence from the defining formula
   , defTypeLikes :: [[Formula]]  -- ^ type-likes of the definition
-  } deriving Show
+  }
 
 -- | Storage of definitions by term id
 type Definitions = Map TermId DefEntry
@@ -45,4 +45,4 @@ data Evaluation = EV {
   evaluationPositives  :: Formula,  -- reduction for positive positions
   evaluationNegatives  :: Formula,  -- reduction for negative positions
   evaluationConditions :: [Formula] -- conditions
-  } deriving Show
+  }

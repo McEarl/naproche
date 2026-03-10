@@ -24,8 +24,10 @@ import SAD.Parser.Base
 import SAD.Parser.Token
 import SAD.Parser.Error
 import SAD.Parser.Primitives
+import SAD.Export.Representation
 
 import Isabelle.Position qualified as Position
+import Isabelle.Library
 
 
 -- * Choices
@@ -236,11 +238,11 @@ narrow p = Parser $ \st ok cerr eerr ->
   in  runParser p st pok cerr eerr
 
 -- | If @p@ is ambiguous, @narrow p@ fails and reports a well-formedness error.
-narrow2 :: Show b => Parser st (a, b) -> Parser st (a, b)
-narrow2 p = Parser $ \st ok cerr eerr ->
+narrow2 :: Representation b => Format -> Parser st (a, b) -> Parser st (a, b)
+narrow2 fmt p = Parser $ \st ok cerr eerr ->
   let pok err eok cok = case eok ++ cok of
         [_] -> ok err eok cok
-        ls  ->  eerr $ newErrorMessage (newWellFormednessMessage ["ambiguity error" <> Text.pack (show (map (snd . prResult) ls))]) (stPosition st)
+        ls  ->  eerr $ newErrorMessage (newWellFormednessMessage ["ambiguity error" <> Text.pack (make_string (represent fmt (map (snd . prResult) ls)))]) (stPosition st)
   in  runParser p st pok cerr eerr
 
 -- | Only take the longest possible parses (by @SourcePos@), discard all others.

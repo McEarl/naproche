@@ -34,18 +34,19 @@ import SAD.Data.Text.Block qualified as Block
 import SAD.Data.Text.Context qualified as Context
 import SAD.Prove.MESON qualified as MESON
 import SAD.Export.Prover qualified as Prover
+import SAD.Export.Representation
 
-import Isabelle.Library (trim_line, make_bytes)
+import Isabelle.Library (trim_line, make_bytes, make_string)
 import Isabelle.Position qualified as Position
 
 
 -- | verify proof text (document root)
-verifyRoot :: MESON.Cache -> Prover.Cache -> Position.T -> [ProofText] -> IO (Bool, [Tracker])
-verifyRoot mesonCache proverCache filePos text = do
+verifyRoot :: Format -> MESON.Cache -> Prover.Cache -> Position.T -> [ProofText] -> IO (Bool, [Tracker])
+verifyRoot fmt mesonCache proverCache filePos text = do
   Message.outputReasoner Message.TRACING filePos "verification started"
 
   state <- initVState mesonCache proverCache
-  result <- runVerifyMonad state (verify text)
+  result <- runVerifyMonad state (verify fmt text)
 
   trackers <- readIORef (trackers state)
   let ignoredFails = sumCounter trackers FailedGoals
@@ -59,43 +60,43 @@ verifyRoot mesonCache proverCache filePos text = do
 -- Main verification loop, based on mutual functions:
 -- verify, verifyBlock, verifyProof
 
-verify :: [ProofText] -> VerifyMonad [ProofText]
-verify [] = do
+verify :: Format -> [ProofText] -> VerifyMonad [ProofText]
+verify fmt [] = do
   motivated <- asks thesisMotivated
   prove <- asks (getInstruction proveParam)
-  when (motivated && prove) verifyThesis >> return []
-verify (ProofTextBlock block : rest) = verifyBlock block rest
-verify (ProofTextInstr pos (Command cmd) : rest) = command cmd >> verify rest
+  when (motivated && prove) (verifyThesis fmt) >> return []
+verify fmt (ProofTextBlock block : rest) = verifyBlock fmt block rest
+verify fmt (ProofTextInstr pos (Command cmd) : rest) = command cmd >> verify fmt rest
   where
     command :: Command -> VerifyMonad ()
     command PrintRules = do
       rules <- asks rewriteRules
-      message $ "current ruleset: " <> "\n" <> unlines (map show (reverse rules))
+      message $ "current ruleset: " <> "\n" <> unlines (map (make_string . represent fmt) (reverse rules))
     command PrintThesis = do
       motivated <- asks thesisMotivated
       thesis <- asks currentThesis
       let motivation = if motivated then "(motivated): " else "(not motivated): "
-      message $ "current thesis " <> motivation <> show (Context.formula thesis)
+      message $ "current thesis " <> motivation <> make_string (represent fmt (Context.formula thesis))
     command PrintContext = do
       context <- asks currentContext
       message $ "current context:\n" <>
-        concatMap (\form -> "  " <> show (Context.formula form) <> "\n") (reverse context)
+        concatMap (\form -> "  " <> make_string (represent fmt (Context.formula form)) <> "\n") (reverse context)
     command PrintContextFiltered = do
       context <- asks currentContext
       let topLevelContext = filter Context.isTopLevel context
       message $ "current filtered top-level context:\n" <>
-        concatMap (\form -> "  " <> show (Context.formula form) <> "\n") (reverse topLevelContext)
+        concatMap (\form -> "  " <> make_string (represent fmt (Context.formula form)) <> "\n") (reverse topLevelContext)
     command ResetPretyping = pure ()
     command _ = do
       message "unsupported instruction"
     message :: String -> VerifyMonad ()
     message msg = reasonLog Message.WRITELN (Position.no_range_position pos) msg
-verify (ProofTextInstr _ instr : rest) = local (addInstruction instr) (verify rest)
-verify (ProofTextDrop _ instr : rest) = local (dropInstruction instr) (verify rest)
-verify (_ : rest) = verify rest
+verify fmt (ProofTextInstr _ instr : rest) = local (addInstruction instr) (verify fmt rest)
+verify fmt (ProofTextDrop _ instr : rest) = local (dropInstruction instr) (verify fmt rest)
+verify fmt (_ : rest) = verify fmt rest
 
-verifyThesis :: VerifyMonad ()
-verifyThesis = do
+verifyThesis :: Format -> VerifyMonad ()
+verifyThesis fmt = do
   thesis <- asks currentThesis
   let block = Context.head thesis
   let text = Text.unpack $ Block.text block
@@ -104,17 +105,17 @@ verifyThesis = do
   if hasDEC (Context.formula thesis) --computational reasoning
     then do
       incrementCounter Equations
-      timeWith SimplifyTimer (equalityReasoning pos thesis) <|> (
+      timeWith SimplifyTimer (equalityReasoning fmt pos thesis) <|> (
         reasonLog Message.WARNING pos "equation failed" >>
         guardInstruction skipfailParam >> incrementCounter FailedEquations)
     else do
       unless (isTop . Context.formula $ thesis) $ incrementCounter Goals
-      proveThesis pos <|> (
+      proveThesis fmt pos <|> (
         reasonLog Message.ERROR pos "goal failed" >>
         guardInstruction skipfailParam >> incrementCounter FailedGoals)
 
-verifyBlock :: Block -> [ProofText] -> VerifyMonad [ProofText]
-verifyBlock block rest = do
+verifyBlock :: Format -> Block -> [ProofText] -> VerifyMonad [ProofText]
+verifyBlock fmt block rest = do
   state <- ask
   let VState {
       thesisMotivated = motivated,
@@ -140,16 +141,16 @@ verifyBlock block rest = do
 
   whenInstruction translationParam $
     unless (Block.isTopLevel block) $
-      translateLog Message.WRITELN (Block.position block) $ Text.pack $ show f
+      translateLog Message.WRITELN (Block.position block) $ represent fmt f
 
   fortifiedFormula <-
     if Block.isTopLevel block
       then return f
       -- For low-level blocks we check definitions and fortify terms (by supplying evidence).
       else
-        fillDef (Block.position block) contextBlock
+        fillDef fmt (Block.position block) contextBlock
 
-  let proofTask = generateProofTask kind (Block.declaredNames block) fortifiedFormula
+  let proofTask = generateProofTask fmt kind (Block.declaredNames block) fortifiedFormula
   let freshThesis = Context proofTask newBranch []
   let toBeProved = Block.needsProof block && not (Block.isTopLevel block)
   proofBody <- do
@@ -162,14 +163,14 @@ verifyBlock block rest = do
     toBeProved && notNull proofBody &&
     not (hasDEC $ Context.formula freshThesis)) $
       thesisLog Message.WRITELN (Block.position block) (length branch - 1) $
-      "thesis: " <> show (Context.formula freshThesis)
+      "thesis: " <> make_string (represent fmt (Context.formula freshThesis))
 
   fortifiedProof <-
     local (\st -> st {
       thesisMotivated = toBeProved,
       currentThesis = freshThesis,
       currentBranch = newBranch }) $
-    verifyProof (if toBeProved then proofBody else body)
+    verifyProof fmt (if toBeProved then proofBody else body)
 
   -- in what follows we prepare the current block to contribute to the context,
   -- extract rules, definitions and compute the new thesis
@@ -200,7 +201,7 @@ verifyBlock block rest = do
     hasChanged && motivated && newMotivation &&
     not (hasDEC $ Block.formula $ head branch) ) $
       thesisLog Message.WRITELN (Block.position block) (length branch - 2) $
-      "new thesis: " <> show (Context.formula newThesis)
+      "new thesis: " <> make_string (represent fmt (Context.formula newThesis))
 
   when (not newMotivation && motivated) $
     thesisLog Message.WARNING (Block.position block) (length branch - 2) "unmotivated assumption"
@@ -222,7 +223,7 @@ verifyBlock block rest = do
       currentContext = newContext,
       mesonRules = newRules,
       definitions = newDefinitions,
-      skolemCounter = intermediateSkolem}) $ verifyProof rest
+      skolemCounter = intermediateSkolem}) $ verifyProof fmt rest
 
   -- If this block made the thesis unmotivated, we must discharge a composite
   -- (and possibly quite difficult) prove task
@@ -232,7 +233,7 @@ verifyBlock block rest = do
   -- motivated && not newMotivated == True
   local (\st -> st {
     thesisMotivated = motivated && not newMotivation,
-    currentThesis = Context.setFormula thesis finalThesis }) $ verifyProof []
+    currentThesis = Context.setFormula thesis finalThesis }) $ verifyProof fmt []
   -- put everything together
   return (ProofTextBlock newBlock : newBlocks)
 
@@ -241,8 +242,8 @@ at the right point in the context; extract rewriteRules from them and further
 refine the currentThesis. Then move on with the verification loop.
 If neither inductive nor case hypothesis is present this is the same as
 verify state -}
-verifyProof :: [ProofText] -> VerifyMonad [ProofText]
-verifyProof restProofText = do
+verifyProof :: Format -> [ProofText] -> VerifyMonad [ProofText]
+verifyProof fmt restProofText = do
   state <- ask
   let VState {
     rewriteRules   = rules,
@@ -259,11 +260,11 @@ verifyProof restProofText = do
         noInductionOrCase (Context.formula newThesis) && not (null $ restProofText)) $
           thesisLog Message.WRITELN
           (Block.position $ head $ Context.branch $ head context) (length branch - 2) $
-          "new thesis " <> show (Context.formula newThesis)
+          "new thesis " <> make_string (represent fmt (Context.formula newThesis))
       local (\st -> st {
         rewriteRules = newRules,
         currentThesis = newThesis,
-        currentContext = newContext}) $ verifyProof restProofText
+        currentContext = newContext}) $ verifyProof fmt restProofText
   let
     dive :: (Formula -> Formula) -> [Context] -> Formula -> VerifyMonad [ProofText]
     dive construct context (Imp (Tag InductionHypothesis f) g)
@@ -273,7 +274,7 @@ verifyProof restProofText = do
     dive construct context (Imp f g) = dive (construct . Imp f) context g
     dive construct context (All v f) = dive (construct . All v) context f
     dive construct context (Tag tag f) = dive (construct . Tag tag) context f
-    dive _ _ _ = verify restProofText
+    dive _ _ _ = verify fmt restProofText
 
   -- extract rules, compute new thesis and move on with the verification
   dive id context $ Context.formula thesis

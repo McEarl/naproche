@@ -7,19 +7,27 @@
 -- TODO: Add description.
 
 
+{-# LANGUAGE OverloadedStrings #-}
+
 module SAD.Data.Rules where
 
-import SAD.Data.Formula (Formula)
+import SAD.Data.Formula
+import SAD.Export.Representation
+import SAD.Helpers (intercalate)
+
 import Data.Text.Lazy (Text)
+
+import Isabelle.Library
 
 
 data Rule = Rule {
   left      :: Formula,   -- left side
   right     :: Formula,   -- right side
   condition :: [Formula], -- conditions
-  label     :: Text }   -- label
+  label     :: Text}   -- label
 
-instance Show Rule where
-  show rl =
-    show (left rl) ++ " = " ++ show (right rl) ++
-    ", Cond: " ++ show (condition rl) ++ ", Label: " ++ show (label rl)
+instance Representation Rule where
+  represent PIDE rl =
+    represent PIDE (left rl) <> " = " <> represent PIDE (right rl) <>
+    ", Cond: " <> intercalate "," (map (represent PIDE) (condition rl)) <>
+    ", Label: " <> make_bytes (label rl)

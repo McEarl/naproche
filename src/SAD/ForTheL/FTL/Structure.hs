@@ -19,7 +19,7 @@ module SAD.ForTheL.FTL.Structure (
 ) where
 
 import Control.Applicative
-import Control.Monad.State.Class (modify)
+import Control.Monad.State.Class (modify, gets)
 import Data.Text.Lazy (Text)
 
 import SAD.ForTheL.Structure
@@ -115,16 +115,24 @@ theoremSection = do
 -- * Top-level section bodies
 
 signatureBody :: FTL [ProofText]
-signatureBody = addAssumptions $ pretype $ pretypeSentence Posit FTL.sigExtend defVars finishWithoutLink
+signatureBody = do
+  fmt <- gets format
+  addAssumptions $ pretype $ pretypeSentence Posit FTL.sigExtend (defVars fmt) finishWithoutLink
 
 definitionBody :: FTL [ProofText]
-definitionBody = addAssumptions $ pretype $ pretypeSentence Posit FTL.defExtend defVars finishWithoutLink
+definitionBody = do
+  fmt <- gets format
+  addAssumptions $ pretype $ pretypeSentence Posit FTL.defExtend (defVars fmt) finishWithoutLink
 
 axiomBody :: FTL [ProofText]
-axiomBody = addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> FTL.statement) affirmVars finishWithoutLink
+axiomBody = do
+  fmt <- gets format
+  addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> FTL.statement) (affirmVars fmt) finishWithoutLink
 
 theoremBody :: FTL [ProofText]
-theoremBody = addAssumptions $ topLevelProof $ pretypeSentence Affirmation (affirmationHeader >> FTL.statement) affirmVars finishWithOptLink
+theoremBody = do
+  fmt <- gets format
+  addAssumptions $ topLevelProof $ pretypeSentence Affirmation (affirmationHeader >> FTL.statement) (affirmVars fmt) finishWithOptLink
 
 
 -- | Adds parser for parsing any number of assumptions before the passed content
@@ -134,7 +142,9 @@ addAssumptions content = body
   where
     body = assumption <|> content
     assumption = topAssume `pretypeBefore` body
-    topAssume = pretypeSentence Assumption (assumptionHeader >> FTL.statement) assumeVars finishWithoutLink
+    topAssume = do
+      fmt <- gets format
+      pretypeSentence Assumption (assumptionHeader >> FTL.statement) (assumeVars fmt) finishWithoutLink
 
 
 -- * Bracket expressions (aka instructions)
@@ -172,11 +182,15 @@ exitInstruction text = case text of
 
 -- | Parse a choice expression.
 choose :: FTL Block
-choose = sentence Choice (choiceHeader >> FTL.choice) assumeVars finishWithOptLink
+choose = do
+  fmt <- gets format
+  sentence Choice (choiceHeader >> FTL.choice) (assumeVars fmt) finishWithOptLink
 
 -- | Parse a case hypothesis.
 caseHypothesis :: FTL Block
-caseHypothesis = sentence Block.CaseHypothesis (caseHeader >> FTL.statement) affirmVars finishWithOptLink
+caseHypothesis = do
+  fmt <- gets format
+  sentence Block.CaseHypothesis (caseHeader >> FTL.statement) (affirmVars fmt) finishWithOptLink
 
 -- | Header for case hypothesis:
 -- @"case"@
@@ -185,15 +199,21 @@ caseHeader = markupToken Reports.proofStart "case"
 
 -- | Parse an affirmation.
 affirmation :: FTL Block
-affirmation = sentence Affirmation (affirmationHeader >> FTL.statement) affirmVars finishWithOptLink </> eqChain
+affirmation = do
+  fmt <- gets format
+  sentence Affirmation (affirmationHeader >> FTL.statement) (affirmVars fmt) finishWithOptLink </> eqChain
 
 -- | Parse an assumption.
 assumption :: FTL Block
-assumption = sentence Assumption (assumptionHeader >> FTL.statement) assumeVars finishWithoutLink
+assumption = do
+  fmt <- gets format
+  sentence Assumption (assumptionHeader >> FTL.statement) (assumeVars fmt) finishWithoutLink
 
 -- | Parse a low-level definition.
 lowLevelDefinition :: FTL Block
-lowLevelDefinition = sentence LowDefinition (lowLevelDefinitionHeader >> FTL.classNotion </> FTL.mapNotion) llDefnVars finishWithoutLink
+lowLevelDefinition = do
+  fmt <- gets format
+  sentence LowDefinition (lowLevelDefinitionHeader >> FTL.classNotion </> FTL.mapNotion) (llDefnVars fmt) finishWithoutLink
 
 
 -- ** Links
@@ -332,15 +352,16 @@ caseDestinction = do
 
 eqChain :: FTL Block
 eqChain = do
+  fmt <- gets format
   dvs <- getDecl; nm <- opt "__" (parenthesised identifier); inp <- getInput
-  body <- wellFormedCheck (chainVars dvs) $ sTerm >>= nextTerm
+  body <- wellFormedCheck (chainVars fmt dvs) $ sTerm >>= nextTerm
   toks <- getTokens inp
   let Tag EqualityChain Trm{trmArgs = [t,_]} = Block.formula $ head body
       Tag EqualityChain Trm{trmArgs = [_,s]} = Block.formula $ last body
       fr = Tag EqualityChain $ mkEquality t s; tBody = map ProofTextBlock body
   return $ Block.makeBlock fr tBody Affirmation nm [] toks
   where
-    chainVars dvs = affirmVars dvs . foldl1 And . map Block.formula
+    chainVars fmt dvs = affirmVars fmt dvs . foldl1 And . map Block.formula
 
 eqTail :: Formula -> FTL [Block]
 eqTail t = nextTerm t </> (token "." >> return [])

@@ -30,6 +30,7 @@ import Network.Socket (Socket)
 
 import SAD.Prove.MESON qualified as MESON
 import SAD.Export.Prover qualified as Prover
+import SAD.Export.Representation
 import SAD.Data.Instr
 import SAD.API hiding (error)
 import SAD.Parser.FTL.Lexer qualified as FTL
@@ -140,8 +141,8 @@ mainTerminal initInstrs fileArgs = do
         (case mode of
           "lex" -> lexInputText dialect inputText
           "tokenize" -> tokenizeInputText dialect inputText
-          "translate" -> translateInputText dialect proofTexts
-          "verify" -> verifyInputText dialect mesonCache proverCache proofTexts
+          "translate" -> translateInputText PIDE dialect proofTexts -- TODO: Change PIDE to terminal format
+          "verify" -> verifyInputText PIDE dialect mesonCache proverCache proofTexts -- TODO: Change PIDE to terminal format
           "render" -> case mbInputPath of
             Nothing -> putStrLn "Unable to render input text: No input file given." >> return 1
             Just inputPath -> case dialect of
@@ -212,7 +213,7 @@ pideServer mesonCache proverCache initInstrs socket =
               let proofTexts = instrProofTexts ++ inputTextProofTexts
 
               rc <- do
-                verifyInputText dialect mesonCache proverCache proofTexts
+                verifyInputText PIDE dialect mesonCache proverCache proofTexts
                   `catch` (\(err :: Program.Error) -> do
                     robust_error $ Program.print_error err
                     return 0)
@@ -260,12 +261,12 @@ tokenizeInputText dialect bytes = do
   outputMain TRACING Position.none $ make_bytes $ "total " <> timeDifference finishTime
   return 0
 
-translateInputText :: ParserKind -> [ProofText] -> IO Int
-translateInputText dialect proofTexts = do
+translateInputText :: Format -> ParserKind -> [ProofText] -> IO Int
+translateInputText fmt dialect proofTexts = do
   -- Get the starting time of the parsing process:
   startTime <- getCurrentTime
   -- Parse the input text:
-  txts <- readProofText dialect proofTexts
+  txts <- readProofText fmt dialect proofTexts
   -- Translate the input text and print the result:
   mapM_ (\case ProofTextBlock bl -> print bl; _ -> return ()) txts
   -- Get the finish time of the translation process:
@@ -275,17 +276,17 @@ translateInputText dialect proofTexts = do
   outputMain TRACING Position.none $ make_bytes $ "total " <> timeDifference finishTime
   return 0
 
-verifyInputText :: ParserKind -> MESON.Cache -> Prover.Cache -> [ProofText] -> IO Int
-verifyInputText dialect mesonCache proverCache proofTexts = do
+verifyInputText :: Format -> ParserKind -> MESON.Cache -> Prover.Cache -> [ProofText] -> IO Int
+verifyInputText fmt dialect mesonCache proverCache proofTexts = do
   -- Get the starting time of the parsing process:
   startTime <- getCurrentTime
   -- Parse the input text:
-  txts <- readProofText dialect proofTexts
+  txts <- readProofText fmt dialect proofTexts
   -- Get the starting time of the verification process:
   proveStart <- getCurrentTime
   -- Verify the input text:
   (success, trackers) <- case concatMap parseErrors txts of
-    [] -> verifyRoot mesonCache proverCache Position.none txts
+    [] -> verifyRoot fmt mesonCache proverCache Position.none txts
     err : _ -> do
       errorParser (errorPos err) (show_bytes err)
       pure (False, [])

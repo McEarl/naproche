@@ -28,14 +28,13 @@ import Data.Set (Set)
 import Data.Set qualified as Set
 import GHC.Magic (oneShot)
 import Data.Text.Lazy (Text)
-import Data.Text.Lazy qualified as Text
-import Data.Text.Lazy.Builder qualified as Builder
 import Data.Function (on)
 
 import SAD.Core.Message (show_position)
 import SAD.Export.Representation
 
 import Isabelle.Position qualified as Position
+import Isabelle.Library
 
 
 -- These names may not reflect what the constructors are used for..
@@ -58,30 +57,24 @@ isVarHole :: VariableName -> Bool
 isVarHole (VarHole _) = True
 isVarHole _ = False
 
-instance Show VariableName where
-  show = Text.unpack . toLazyText . represent
-
 instance Representation VariableName where
-  represent (VarConstant s) = "x" <> Builder.fromLazyText s
-  represent (VarHole s) = "?" <> Builder.fromLazyText s
-  represent VarSlot = "!"
-  represent (VarU s) = "u" <> Builder.fromLazyText s
-  represent (VarHidden n) = "h" <> Builder.fromString (show n)
-  represent (VarAssume n) = "i" <> Builder.fromString (show n)
-  represent (VarSkolem n) = "o" <> Builder.fromString (show n)
-  represent (VarTask s) = "c" <> represent s
-  represent (VarZ s) = "z" <> Builder.fromLazyText s
-  represent (VarW s) = "w" <> Builder.fromLazyText s
-  represent VarEmpty = ""
-  represent (VarDefault s) = Builder.fromLazyText s
+  represent PIDE (VarConstant s) = "x" <> make_bytes s
+  represent PIDE (VarHole s) = "?" <> make_bytes s
+  represent PIDE VarSlot = "!"
+  represent PIDE (VarU s) = "u" <> make_bytes s
+  represent PIDE (VarHidden n) = "h" <> make_bytes (show n)
+  represent PIDE (VarAssume n) = "i" <> make_bytes (show n)
+  represent PIDE (VarSkolem n) = "o" <> make_bytes (show n)
+  represent PIDE (VarTask s) = "c" <> represent PIDE s
+  represent PIDE (VarZ s) = "z" <> make_bytes s
+  represent PIDE (VarW s) = "w" <> make_bytes s
+  represent PIDE VarEmpty = ""
+  represent PIDE (VarDefault s) = make_bytes s
 
 data PosVar = PosVar
   { posVarName :: VariableName
   , posVarPosition :: Position.T
   }
-
-instance Show PosVar where
-  show = show . posVarName
 
 instance Eq PosVar where
   (==) = (==) `on` posVarName
@@ -90,8 +83,8 @@ instance Ord PosVar where
   compare = compare `on` posVarName
 
 instance Representation PosVar where
-  represent (PosVar v pos) =
-    "(" <> represent v <> ", " <> Builder.fromString (show_position pos) <> ")"
+  represent PIDE (PosVar v pos) =
+    "(" <> represent PIDE v <> ", " <> make_bytes (show_position pos) <> ")"
 
 class (Ord a, Representation a) => IsVar a where
   buildVar :: VariableName -> Position.T -> a

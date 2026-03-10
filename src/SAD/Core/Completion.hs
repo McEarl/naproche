@@ -21,7 +21,6 @@ import Data.List
 import Data.Maybe
 import Data.Function (on)
 import Data.Map qualified as Map
-import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as Text
 import Data.Set qualified as Set
 
@@ -29,13 +28,16 @@ import SAD.Data.Formula
 import SAD.Core.Rewrite
 import SAD.Prove.Unify
 import SAD.Helpers
+import SAD.Export.Representation
+
+import Isabelle.Bytes (Bytes)
 
 
 data Equation = Equation Formula Formula
   deriving (Eq, Ord)
 
-instance Show Equation where
-    show (Equation l r) = show l ++ " = " ++ show r
+instance Representation Equation where
+    represent PIDE (Equation l r) = represent PIDE l <> " = " <> represent PIDE r
 
 toFormula :: Equation -> Formula
 toFormula (Equation lhs rhs) = Trm TermEquality [lhs, rhs] [] EqualityId
@@ -98,10 +100,10 @@ interreduce = dive []
 
 
 {-gets a list of strings as weights (descending weights) and completes and interreduces a term rewriting system-}
-completeAndSimplify :: [Text] -> [Equation] -> [Equation]
-completeAndSimplify wts eqs = (interreduce . (complete ord)) (eqs',[], allCriticalPairs eqs')
+completeAndSimplify :: Format -> [Bytes] -> [Equation] -> [Equation]
+completeAndSimplify fmt wts eqs = (interreduce . (complete ord)) (eqs',[], allCriticalPairs eqs')
   where
-    ord = lpoGe (weight wts)
+    ord = lpoGe fmt (weight wts)
     eqs' = catMaybes $ map help_normalize eqs
     help_normalize fml = normalizeAndOrient ord [] fml >>= pure . uncurry Equation
 

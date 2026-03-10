@@ -12,118 +12,113 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module SAD.Data.Formula.Show (
-  symEncode
+  symEncode,
+  substitute
 ) where
 
 import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as Text
-import Data.List qualified as List
 
 import SAD.Data.Formula.Base
 import SAD.Data.Formula.Kit
 import SAD.Data.VarName
 import SAD.Data.Terms
-import SAD.Export.Representation (toLazyText, represent)
+import SAD.Export.Representation
 
 import Isabelle.Position qualified as Position
+import Isabelle.Bytes
+import Isabelle.Library
 import SAD.Helpers
 
 
-instance Show Formula where
-  showsPrec :: Int -> Formula -> ShowS
-  showsPrec p = showsFormula p 0
+instance Representation Formula where
+  represent :: Format -> Formula -> Bytes
+  represent PIDE = showFormula PIDE 0
 
-showsFormula :: Int -> Int -> Formula -> ShowS
-showsFormula p d f s = showFormula p d f ++ s
-
--- | Show a formula (depending of the current nesting depth of quantifiers).
-showFormula :: Int -> Int -> Formula -> String
-showFormula p = dive
-  where
-    -- Quantifier chain:
-    dive d (All _ f@(All _ _)) = "\\<forall>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (All _ f@(Exi _ _)) = "\\<forall>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (All _ f@(Not (Exi _ _))) = "\\<forall>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (Exi _ f@(All _ _)) = "\\<exists>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (Exi _ f@(Exi _ _)) = "\\<exists>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (Exi _ f@(Not (Exi _ _))) = "\\<exists>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (Not (Exi _ f@(All _ _))) = "\\<nexists>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (Not (Exi _ f@(Exi _ _))) = "\\<nexists>" ++ showBindingVar p d ++ dive (d + 1) f
-    dive d (Not (Exi _ f@(Not (Exi _ _)))) = "\\<nexists>" ++ showBindingVar p d ++ dive (d + 1) f
-    -- Single quantifier:
-    dive d (All _ f) = "\\<forall>" ++ showBindingVar p d ++ parens (dive (d + 1) f)
-    dive d (Exi _ f) = "\\<exists>" ++ showBindingVar p d ++ parens (dive (d + 1) f)
-    -- Negated existential quantifier:
-    dive d (Not (Exi _ f)) = "\\<nexists>" ++ showBindingVar p d ++ parens (dive (d + 1) f)
-    -- Equivalence:
-    dive d (Iff f g) = showFormulaL p d f ++ " \\<Longleftrightarrow> " ++ showFormulaR p d g
-    -- Implication:
-    dive d (Imp f g) = showFormulaL p d f ++ " \\<Longrightarrow> " ++ showFormulaR p d g
-    -- Disjunction chain:
-    dive d (Or f@(Or _ _) g) = dive d f ++ " \\<or> " ++ showFormulaR p d g
-    dive d (Or f g@(Or _ _)) = showFormulaL p d f ++ " \\<or> " ++ dive d g
-    -- Disjunction:
-    dive d (Or  f g) = showFormulaL p d f ++ " \\<or> " ++ showFormulaR p d g
-    -- Conjunction chain:
-    dive d (And f@(And _ _) g) = dive d f ++ " \\<and> " ++ showFormulaR p d g
-    dive d (And f g@(And _ _)) = showFormulaL p d f ++ " \\<and> " ++ dive d g
-    -- Conjunction:
-    dive d (And f g) = showFormulaL p d f ++ " \\<and> " ++ showFormulaR p d g
-    -- Tagged formula:
-    dive d (Tag a f) = show a ++ " \\<Colon> " ++ showFormulaR p d f
-    -- Inequality:
-    dive d (Not Trm{trmName = TermEquality, trmArgs = [l, r]}) = dive d l ++ " \\<noteq> " ++ dive d r
-    -- Negation:
-    dive d (Not f) = "\\<not>" ++ showFormulaR p d f
-    -- Truth:
-    dive d Top = "\\<top>"
-    -- Falsity:
-    dive d Bot = "\\<bottom>"
-    -- @ThisT@:
-    dive d ThisT = "ThisT"
-    -- Thesis:
-    dive d Trm{trmName = TermThesis} = "thesis"
-    -- Equality:
-    dive d Trm{trmName = TermEquality, trmArgs = [l, r]} = dive d l ++ " = " ++ dive d r
-    -- Symbolic formula/term:
-    dive d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = decode (Text.unpack tName) tArgs p d ""
-    -- Non-symbolic formula/term:
-    dive d Trm{trmName = tName, trmArgs = tArgs} = Text.unpack (toLazyText (represent tName)) ++ showArguments p d tArgs
-    -- Free variables:
-    dive d Var{varName = VarConstant s} = Text.unpack s
-    dive d Var{varName = vName} = Text.unpack $ toLazyText $ represent vName
-    -- De Brujin index:
-    dive d Ind{indIndex = i}
-      | i < d = "v" ++ show (d - i - 1)
-      | otherwise = "v?" ++ show i
+showFormula :: Format -> Int -> Formula -> Bytes
+-- Quantifier chain:
+showFormula PIDE d (All _ f@(All _ _)) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (All _ f@(Exi _ _)) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (All _ f@(Not (Exi _ _))) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (Exi _ f@(All _ _)) = "\\<exists>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (Exi _ f@(Exi _ _)) = "\\<exists>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (Exi _ f@(Not (Exi _ _))) = "\\<exists>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (Not (Exi _ f@(All _ _))) = "\\<nexists>" <> showBindingVar  PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (Not (Exi _ f@(Exi _ _))) = "\\<nexists>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (Not (Exi _ f@(Not (Exi _ _)))) = "\\<nexists>" <> showBindingVar  PIDE d <> showFormula PIDE (d + 1) f
+-- Single quantifier:
+showFormula PIDE d (All _ f) = "\\<forall>" <> showBindingVar  PIDE d <> parens (showFormula PIDE (d + 1) f)
+showFormula PIDE d (Exi _ f) = "\\<exists>" <> showBindingVar PIDE d <> parens (showFormula PIDE (d + 1) f)
+-- Negated existential quantifier:
+showFormula PIDE d (Not (Exi _ f)) = "\\<nexists>" <> showBindingVar  PIDE d <> parens (showFormula PIDE (d + 1) f)
+-- Equivalence:
+showFormula PIDE d (Iff f g) = showFormulaL PIDE d f <> " \\<Longleftrightarrow> " <> showFormulaR PIDE d g
+-- Implication:
+showFormula PIDE d (Imp f g) = showFormulaL PIDE d f <> " \\<Longrightarrow> " <> showFormulaR PIDE d g
+-- Disjunction chain:
+showFormula PIDE d (Or f@(Or _ _) g) = showFormula PIDE d f <> " \\<or> " <> showFormulaR PIDE d g
+showFormula PIDE d (Or f g@(Or _ _)) = showFormulaL PIDE d f <> " \\<or> " <> showFormula PIDE d g
+-- Disjunction:
+showFormula PIDE d (Or  f g) = showFormulaL PIDE d f <> " \\<or> " <> showFormulaR PIDE d g
+-- Conjunction chain:
+showFormula PIDE d (And f@(And _ _) g) = showFormula PIDE d f <> " \\<and> " <> showFormulaR PIDE d g
+showFormula PIDE d (And f g@(And _ _)) = showFormulaL PIDE d f <> " \\<and> " <> showFormula PIDE d g
+-- Conjunction:
+showFormula PIDE d (And f g) = showFormulaL PIDE d f <> " \\<and> " <> showFormulaR PIDE d g
+-- Tagged formula:
+showFormula PIDE d (Tag a f) = represent PIDE a <> " \\<Colon> " <> showFormulaR PIDE d f
+-- Inequality:
+showFormula PIDE d (Not Trm{trmName = TermEquality, trmArgs = [l, r]}) = showFormula PIDE d l <> " \\<noteq> " <> showFormula PIDE d r
+-- Negation:
+showFormula PIDE d (Not f) = "\\<not>" <> showFormulaR PIDE d f
+-- Truth:
+showFormula PIDE d Top = "\\<top>"
+-- Falsity:
+showFormula PIDE d Bot = "\\<bottom>"
+-- @ThisT@:
+showFormula PIDE d ThisT = "ThisT"
+-- Thesis:
+showFormula PIDE d Trm{trmName = TermThesis} = "thesis"
+-- Equality:
+showFormula PIDE d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula PIDE d l <> " = " <> showFormula PIDE d r
+-- Symbolic formula/term:
+showFormula PIDE d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode PIDE (Text.unpack tName) tArgs d ""
+-- Non-symbolic formula/term:
+showFormula PIDE d Trm{trmName = tName, trmArgs = tArgs} = represent PIDE tName <> showArguments PIDE d tArgs
+-- Free variables:
+showFormula PIDE d Var{varName = VarConstant s} = make_bytes s
+showFormula PIDE d Var{varName = vName} = make_bytes $ represent PIDE vName
+-- De Brujin index:
+showFormula PIDE d Ind{indIndex = i}
+  | i < d = "v" <> make_bytes (show $ d - i - 1)
+  | otherwise = "v?" <> make_bytes (show i)
 
 -- | Show a formula that occurs on the left-hand side of a logical connective.
-showFormulaL :: Int -> Int -> Formula -> String
-showFormulaL p d f = parensIf (isAll f || isExi f || isIff f || isImp f || isOr f || isAnd f || isTag f) (showFormula p d f)
+showFormulaL :: Format -> Int -> Formula -> Bytes
+showFormulaL fmt d f = parensIf (isAll f || isExi f || isIff f || isImp f || isOr f || isAnd f || isTag f) (showFormula fmt d f)
 
 -- | Show a formula that occurs on the right-hand side of a logical connective.
-showFormulaR :: Int -> Int -> Formula -> String
-showFormulaR p d f = parensIf (isIff f || isImp f || isOr f || isAnd f || isTag f) (showFormula p d f)
+showFormulaR :: Format -> Int -> Formula -> Bytes
+showFormulaR fmt d f = parensIf (isIff f || isImp f || isOr f || isAnd f || isTag f) (showFormula fmt d f)
 
 -- | Show the arguments of a formula/term.
-showArguments :: Int -> Int -> [Formula] -> String
+showArguments :: Format -> Int -> [Formula] -> Bytes
 showArguments _ _ [] = ""
-showArguments p d terms =
-  let showTerm = showFormula p d
-  in "(" ++ List.intercalate "," (map showTerm terms) ++ ")"
+showArguments format d terms =
+  let showTerm = showFormula format d
+  in "(" <> intercalate "," (map showTerm terms) <> ")"
 
--- | Show a binding variable.
-showBindingVar :: Int -> Int -> String
-showBindingVar p d = showFormula p (d + 1) (Ind 0 Position.none)
+showBindingVar :: Format -> Int -> Bytes
+showBindingVar fmt d = showFormula fmt (d + 1) (Ind 0 Position.none)
 
 -- | Substitute all @.@ characters in a string by given terms.
-substitute :: String -> [Formula] -> Int -> Int -> String
-substitute s [] _ _ = s
-substitute s (t : ts) p d = dec s
+substitute :: Format -> String -> [Formula] -> Int -> Bytes
+substitute _ s [] _ = make_bytes s
+substitute fmt s (t : ts) d = dec s
   where
-    dec ('.' : cs) = parensIf (ambig t) (showFormula p d t) ++ substitute cs ts p d
-    dec (c : cs@('.' : _)) | isAsciiLetter c = c : " " ++ dec cs
-    dec (c : cs) = c : dec cs
+    dec ('.' : cs) = parensIf (ambig t) (showFormula fmt d t) <> substitute fmt cs ts d
+    dec (c : cs@('.' : _)) | isAsciiLetter c = make_bytes [c] <> " " <> dec cs
+    dec (c : cs) = make_bytes [c] <> dec cs
     dec [] = ""
 
     ambig Trm {trmName = TermSymbolic tName} =
@@ -133,9 +128,9 @@ substitute s (t : ts) p d = dec s
 
 
 
-decode :: String -> [Formula] -> Int -> Int -> ShowS
-decode s [] _ _ = showString (symDecode s)
-decode s (t:ts) p d = dec s
+decode :: Format -> String -> [Formula] -> Int -> ShowS
+decode _ s [] _ = showString (symDecode s)
+decode fmt s (t:ts) d = dec s
   where
     dec ('b':'q':cs) = showChar '`' . dec cs
     dec ('t':'l':cs) = showChar '~' . dec cs
@@ -169,7 +164,7 @@ decode s (t:ts) p d = dec s
     dec ('u':'s':cs) = showChar '_' . dec cs
     dec ('h':'s':cs) = showChar '#' . dec cs
     dec ('d':'t':cs) =
-      showParen (ambig t) (showsFormula p d t) . decode cs ts p d
+      (\x -> make_string (parensIf (ambig t) (showFormula PIDE d t)) ++ x) . decode fmt cs ts d
     dec ('z':c:cs@('d':'t':_)) = showChar c . showChar ' ' . dec cs
     dec ('z':c:cs)   = showChar c . dec cs
     dec cs@(':':_)   = showString cs

@@ -28,9 +28,6 @@ data Decl = Decl {
   declSerial :: Serial
 } deriving (Eq, Ord)
 
-instance Show Decl where
-  show = show . declName
-
 {- a declaration that has no representation in the input text -}
 newDecl :: VariableName -> Decl
 newDecl v = Decl v Position.none 0

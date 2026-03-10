@@ -22,15 +22,17 @@ import Data.Text.Lazy qualified as Text
 import SAD.Data.Formula
 import SAD.ForTheL.Base
 import SAD.Data.Text.Decl
+import SAD.Export.Representation
+
+import Isabelle.Library
 
 
 -- well-formedness check
 
-funVars, notionVars, prdVars :: (Formula, Formula) -> Maybe Text
-
-funVars (f, d) | not ifq   = prdVars (f, d)
-               | not idq   = Just $ Text.pack $ "illegal function alias: " ++ show d
-               | otherwise = prdVars (t {trmArgs = v:trmArgs t}, d)
+funVars :: Format -> (Formula, Formula) -> Maybe Text
+funVars fmt (f, d) | not ifq   = prdVars fmt (f, d)
+               | not idq   = Just $ Text.pack . make_string $ "illegal function alias: " <>  represent fmt d
+               | otherwise = prdVars fmt (t {trmArgs = v:trmArgs t}, d)
   where
     ifq = isTrm f && trmName f == TermEquality && isTrm t
     idq = isTrm d && trmName d == TermEquality && not (u `occursIn` p)
@@ -38,16 +40,18 @@ funVars (f, d) | not ifq   = prdVars (f, d)
     Trm {trmName = TermEquality, trmArgs = [u, p]} = d
 
 
-notionVars (f, d) | not isFunction = prdVars (f, d)
-               | otherwise      = prdVars (t {trmArgs = v:vs}, d)
+notionVars :: Format -> (Formula, Formula) -> Maybe Text
+notionVars fmt (f, d) | not isFunction = prdVars fmt (f, d)
+               | otherwise      = prdVars fmt (t {trmArgs = v:vs}, d)
   where
     isFunction = isTrm f && trmName f == TermEquality && isTrm t
     Trm {trmName = TermEquality, trmArgs =  [v,t]} = f
     Trm {trmArgs = vs} = t
 
 
-prdVars (f, d) | not flat  = Just $ Text.pack $ "compound expression: " ++ show f
-               | otherwise = freeOrOverlapping (fvToVarSet $ free f) d
+prdVars :: Format -> (Formula, Formula) -> Maybe Text
+prdVars fmt (f, d) | not flat  = Just $ Text.pack . make_string $ "compound expression: " <> represent fmt f
+               | otherwise = freeOrOverlapping fmt (fvToVarSet $ free f) d
   where
     flat      = isTrm f && allDistinctVars (trmArgs f)
 
