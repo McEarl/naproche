@@ -10,6 +10,7 @@
 {-# LANGUAGE PolymorphicComponents #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-noncanonical-monad-instances #-}
 
 module SAD.Core.Base (
   CRM,
@@ -63,7 +64,6 @@ import SAD.Core.Message qualified as Message
 import SAD.Data.Structures.DisTree (DisTree)
 import SAD.Data.Structures.DisTree qualified as DisTree
 import SAD.Data.Text.Context qualified as Context (name)
-import SAD.Data.Text.Decl (newDecl)
 
 import Isabelle.Bytes qualified as Bytes
 import Isabelle.Position qualified as Position
@@ -121,7 +121,7 @@ instance Alternative CRM where
   (<|>) = mplus
 
 instance MonadPlus CRM where
-  mzero = CRM (\z _ -> z)
+  mzero = CRM const
   mplus m n = CRM (\z k -> runCRM m (runCRM n z k) k)
 
 

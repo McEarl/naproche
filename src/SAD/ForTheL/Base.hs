@@ -81,7 +81,7 @@ data FState = FState {
   serialCounter :: Int,
 
   reports :: [Position.Report],
-  
+
   format :: Format,             -- ^ Format of everything that is represented
                                 -- as a string during parsing
 
@@ -104,14 +104,13 @@ data FState = FState {
 --  * @"...(...)@" (function expression)
 --
 initFState :: Format -> Program.Context -> FState
-initFState fmt = FState
+initFState = FState
   primAdjs [] primNotions primSymbNotions
   circFunctions rightFunctions [] []
   [] [] [] primInfixPredicates
   [] [] mempty
   0 0 0
   []
-  fmt
   where
     primAdjs = [
         equalAdj,
@@ -417,18 +416,11 @@ var = do
   return (PosVar (VarConstant v) pos)
   where
     plainVarName = do
-      v <- satisfy $ \s -> and [
-          Text.all isAlphaNum s,
-          isAlpha (Text.head s),
-          s `notElem` keywords
-        ]
+      v <- satisfy $ \s -> Text.all isAlphaNum s && isAlpha (Text.head s) && (s `notElem` keywords)
       primes <- Text.concat . fmap (const "'") <$> many (symbolNotAfterSpace "'")
       return $ v <> primes
     greekVarName = do
-      command <- satisfy $ \s -> and [
-          Text.head s == '\\',
-          Text.tail s `elem` greek
-        ]
+      command <- satisfy $ \s -> (Text.head s == '\\') && (Text.tail s `elem` greek)
       primes <- Text.concat . fmap (const "'") <$> many (symbolNotAfterSpace "'")
       return $ command <> primes
     structVarName = do
