@@ -20,7 +20,7 @@ module SAD.Export.TPTP (
 import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as Text
 
-import SAD.Data.Formula (Formula(..), TermName(..))
+import SAD.Data.Formula (Formula(..), TermName(..), showTrName)
 import SAD.Helpers (failWithMessage)
 import SAD.Export.Representation
 
@@ -89,7 +89,7 @@ renderSequent name role (premises, conclusions) =
   <> "])."
 
 tptpName :: Formula -> Text
-tptpName = Text.fromStrict . make_text . atomic_word . represent PIDE -- TODO: Replace PIDE with TPTP format
+tptpName = Text.fromStrict . make_text . atomic_word . make_bytes . showTrName PIDE -- TODO: Replace PIDE with TPTP format
 
 tptpTerm :: Int -> Formula -> Text
 tptpTerm d = term
