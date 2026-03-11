@@ -141,8 +141,8 @@ mainTerminal initInstrs fileArgs = do
         (case mode of
           "lex" -> lexInputText dialect inputText
           "tokenize" -> tokenizeInputText dialect inputText
-          "translate" -> translateInputText PIDE dialect proofTexts -- TODO: Change PIDE to terminal format
-          "verify" -> verifyInputText PIDE dialect mesonCache proverCache proofTexts -- TODO: Change PIDE to terminal format
+          "translate" -> translateInputText Console dialect proofTexts
+          "verify" -> verifyInputText Console dialect mesonCache proverCache proofTexts
           "render" -> case mbInputPath of
             Nothing -> putStrLn "Unable to render input text: No input file given." >> return 1
             Just inputPath -> case dialect of

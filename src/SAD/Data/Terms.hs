@@ -74,6 +74,8 @@ instance Representation TermName where
   represent PIDE TermLess  = "iLess"
   represent PIDE TermThesis = "#TH#"
   represent PIDE TermEmpty = ""
+  -- Console
+  represent Console t = represent PIDE t
   -- TPTP
   represent TPTP t = represent PIDE t 
 

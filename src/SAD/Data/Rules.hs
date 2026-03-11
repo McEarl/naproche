@@ -32,5 +32,10 @@ instance Representation Rule where
     represent PIDE (left rl) <> " = " <> represent PIDE (right rl) <>
     ", Cond: " <> intercalate "," (map (represent PIDE) (condition rl)) <>
     ", Label: " <> make_bytes (label rl)
+  -- Console
+  represent Console rl =
+    represent Console (left rl) <> " = " <> represent Console (right rl) <>
+    ", Cond: " <> intercalate "," (map (represent Console) (condition rl)) <>
+    ", Label: " <> make_bytes (label rl)
   -- TPTP
   represent TPTP xs = failWithMessage "SAD.Data.Rules:represent" "TPTP format not implemented for \"Rule\""

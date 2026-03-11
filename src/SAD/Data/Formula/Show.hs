@@ -94,6 +94,50 @@ showFormula PIDE d Ind{indIndex = i}
   | i < d = "v" <> make_bytes (show $ d - i - 1)
   | otherwise = "v?" <> make_bytes (show i)
 
+-- Console
+--- Quantifier:
+showFormula Console d (All _ f) = "!" <> showBindingVar  Console d <> " " <> parens (showFormula Console (d + 1) f)
+showFormula Console d (Exi _ f) = "?" <> showBindingVar Console d <> " " <> parens (showFormula Console (d + 1) f)
+--- Equivalence:
+showFormula Console d (Iff f g) = showFormulaL Console d f <> " => " <> showFormulaR Console d g
+--- Implication:
+showFormula Console d (Imp f g) = showFormulaL Console d f <> " <=> " <> showFormulaR Console d g
+--- Disjunction chain:
+showFormula Console d (Or f@(Or _ _) g) = showFormula Console d f <> " | " <> showFormulaR Console d g
+showFormula Console d (Or f g@(Or _ _)) = showFormulaL Console d f <> " | " <> showFormula Console d g
+--- Disjunction:
+showFormula Console d (Or  f g) = showFormulaL Console d f <> " | " <> showFormulaR Console d g
+--- Conjunction chain:
+showFormula Console d (And f@(And _ _) g) = showFormula Console d f <> " & " <> showFormulaR Console d g
+showFormula Console d (And f g@(And _ _)) = showFormulaL Console d f <> " & " <> showFormula Console d g
+--- Conjunction:
+showFormula Console d (And f g) = showFormulaL Console d f <> " & " <> showFormulaR Console d g
+--- Tagged formula:
+showFormula Console d (Tag a f) = represent Console a <> " :: " <> showFormulaR Console d f
+--- Negation:
+showFormula Console d (Not f) = "> " <> showFormulaR Console d f
+--- Truth:
+showFormula Console d Top = "$true"
+--- Falsity:
+showFormula Console d Bot = "$false"
+--- @ThisT@:
+showFormula Console d ThisT = "$ThisT"
+--- Thesis:
+showFormula Console d Trm{trmName = TermThesis} = "$thesis"
+--- Equality:
+showFormula Console d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula Console d l <> " = " <> showFormula Console d r
+--- Symbolic formula/term:
+showFormula Console d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode Console (Text.unpack tName) tArgs d ""
+--- Non-symbolic formula/term:
+showFormula Console d Trm{trmName = tName, trmArgs = tArgs} = represent Console tName <> showArguments Console d tArgs
+--- Free variables:
+showFormula Console d Var{varName = VarConstant s} = make_bytes s
+showFormula Console d Var{varName = vName} = make_bytes $ represent Console vName
+--- De Brujin index:
+showFormula Console d Ind{indIndex = i}
+  | i < d = "v" <> make_bytes (show $ d - i - 1)
+  | otherwise = "v?" <> make_bytes (show i)
+
 -- TPTP
 showFormula TPTP d (All _ f) =  "( ! " <> binder d f <> ")"
 showFormula TPTP d (Exi _ f) = "( ? " <> binder d f <> ")"
@@ -193,7 +237,7 @@ decode fmt s (t:ts) d = dec s
     dec ('u':'s':cs) = showChar '_' . dec cs
     dec ('h':'s':cs) = showChar '#' . dec cs
     dec ('d':'t':cs) =
-      (\x -> make_string (parensIf (ambig t) (showFormula PIDE d t)) ++ x) . decode fmt cs ts d
+      (\x -> make_string (parensIf (ambig t) (showFormula fmt d t)) ++ x) . decode fmt cs ts d
     dec ('z':c:cs@('d':'t':_)) = showChar c . showChar ' ' . dec cs
     dec ('z':c:cs)   = showChar c . dec cs
     dec cs@(':':_)   = showString cs

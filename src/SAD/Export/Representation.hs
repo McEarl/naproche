@@ -23,6 +23,7 @@ import Isabelle.Bytes
 -- Usefull to render formulas in different formats.
 data Format =
     PIDE
+  | Console
   | TPTP
 
 class Representation a where
@@ -33,6 +34,10 @@ instance Representation a => Representation [a] where
   represent PIDE [] = ""
   represent PIDE (x : xs) =
     "[" <> represent PIDE x <> "," <> represent PIDE xs <> "]"
+  -- Console
+  represent Console [] = ""
+  represent Console (x : xs) =
+    "[" <> represent Console x <> "," <> represent Console xs <> "]"
   -- TPTP
   represent TPTP xs = failWithMessage "SAD.Export.Representation:represent" "TPTP format not implemented for \"[a]\""
 
@@ -41,6 +46,9 @@ instance (Representation a, Representation b) => Representation (a,b) where
   -- PIDE
   represent PIDE (x, y) =
     "(" <> represent PIDE x <> "," <> represent PIDE y <> ")"
+  -- Console
+  represent Console (x, y) =
+    "(" <> represent Console x <> "," <> represent Console y <> ")"
   -- TPTP
   represent TPTP xs = failWithMessage "SAD.Export.Representation:represent" "TPTP format not implemented for \"(a,b)\""
 
@@ -49,6 +57,9 @@ instance Representation a => Representation (Set a) where
   represent PIDE x =
     let elements = Set.toList x
     in "{" <> represent PIDE elements <> "}"
+  -- Console
+  represent Console x =
+    let elements = Set.toList x
+    in "{" <> represent Console elements <> "}"
   -- TPTP
   represent TPTP xs = failWithMessage "SAD.Export.Representation:represent" "TPTP format not implemented for \"Set a\""
-

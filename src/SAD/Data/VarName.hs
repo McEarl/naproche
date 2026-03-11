@@ -72,6 +72,8 @@ instance Representation VariableName where
   represent PIDE (VarW s) = "w" <> make_bytes s
   represent PIDE VarEmpty = ""
   represent PIDE (VarDefault s) = make_bytes s
+  -- Console
+  represent Console var = represent PIDE var
   -- TPTP
   represent TPTP (VarConstant s) = "x" <> make_bytes s
   represent TPTP _ = failWithMessage "SAD.Data.VarName:represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\""
@@ -88,8 +90,14 @@ instance Ord PosVar where
   compare = compare `on` posVarName
 
 instance Representation PosVar where
+  -- PIDE
   represent PIDE (PosVar v pos) =
     "(" <> represent PIDE v <> ", " <> make_bytes (show_position pos) <> ")"
+  -- Console
+  represent Console (PosVar v pos) =
+    "(" <> represent Console v <> ", " <> make_bytes (show_position pos) <> ")"
+  -- TPTP
+  represent TPTP _ = failWithMessage "SAD.Data.VarName:represent" "TPTP format not implemented for \"PosVar\""
 
 class (Ord a, Representation a) => IsVar a where
   buildVar :: VariableName -> Position.T -> a
