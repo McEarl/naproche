@@ -99,9 +99,9 @@ showFormula PIDE d Ind{indIndex = i}
 showFormula Console d (All _ f) = "!" <> showBindingVar  Console d <> " " <> parens (showFormula Console (d + 1) f)
 showFormula Console d (Exi _ f) = "?" <> showBindingVar Console d <> " " <> parens (showFormula Console (d + 1) f)
 --- Equivalence:
-showFormula Console d (Iff f g) = showFormulaL Console d f <> " => " <> showFormulaR Console d g
+showFormula Console d (Iff f g) = showFormulaL Console d f <> " <=> " <> showFormulaR Console d g
 --- Implication:
-showFormula Console d (Imp f g) = showFormulaL Console d f <> " <=> " <> showFormulaR Console d g
+showFormula Console d (Imp f g) = showFormulaL Console d f <> " => " <> showFormulaR Console d g
 --- Disjunction chain:
 showFormula Console d (Or f@(Or _ _) g) = showFormula Console d f <> " | " <> showFormulaR Console d g
 showFormula Console d (Or f g@(Or _ _)) = showFormulaL Console d f <> " | " <> showFormula Console d g
@@ -115,7 +115,7 @@ showFormula Console d (And f g) = showFormulaL Console d f <> " & " <> showFormu
 --- Tagged formula:
 showFormula Console d (Tag a f) = represent Console a <> " :: " <> showFormulaR Console d f
 --- Negation:
-showFormula Console d (Not f) = "> " <> showFormulaR Console d f
+showFormula Console d (Not f) = "~ " <> showFormulaR Console d f
 --- Truth:
 showFormula Console d Top = "$true"
 --- Falsity:
