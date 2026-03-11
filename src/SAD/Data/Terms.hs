@@ -77,7 +77,9 @@ instance Representation TermName where
   -- Console
   represent Console t = represent PIDE t
   -- TPTP
-  represent TPTP t = represent PIDE t 
+  represent TPTP t = represent PIDE t
+  -- Informal
+  represent Informal t = represent PIDE t
 
 data TermId
   = EqualityId

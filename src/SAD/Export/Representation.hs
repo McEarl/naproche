@@ -25,6 +25,7 @@ data Format =
     PIDE
   | Console
   | TPTP
+  | Informal
 
 class Representation a where
   represent :: Format -> a -> Bytes
@@ -39,7 +40,9 @@ instance Representation a => Representation [a] where
   represent Console (x : xs) =
     "[" <> represent Console x <> "," <> represent Console xs <> "]"
   -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Export.Representation:represent" "TPTP format not implemented for \"[a]\""
+  represent TPTP xs = failWithMessage "SAD.Export.Representation.represent" "TPTP format not implemented for \"[a]\""
+  -- Informal
+  represent Informal xs = failWithMessage "SAD.Export.Representation.represent" "Informal format not implemented for \"[a]\""
 
 
 instance (Representation a, Representation b) => Representation (a,b) where
@@ -50,7 +53,9 @@ instance (Representation a, Representation b) => Representation (a,b) where
   represent Console (x, y) =
     "(" <> represent Console x <> "," <> represent Console y <> ")"
   -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Export.Representation:represent" "TPTP format not implemented for \"(a,b)\""
+  represent TPTP xs = failWithMessage "SAD.Export.Representation.represent" "TPTP format not implemented for \"(a,b)\""
+  -- Informal
+  represent Informal xs = failWithMessage "SAD.Export.Representation.represent" "Informal format not implemented for \"(a,b)\""
 
 instance Representation a => Representation (Set a) where
   -- PIDE
@@ -62,4 +67,6 @@ instance Representation a => Representation (Set a) where
     let elements = Set.toList x
     in "{" <> represent Console elements <> "}"
   -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Export.Representation:represent" "TPTP format not implemented for \"Set a\""
+  represent TPTP xs = failWithMessage "SAD.Export.Representation.represent" "TPTP format not implemented for \"Set a\""
+  -- Informal
+  represent Informal xs = failWithMessage "SAD.Export.Representation.represent" "Informal format not implemented for \"Set a\""

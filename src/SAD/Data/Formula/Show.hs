@@ -152,13 +152,59 @@ showFormula TPTP d Bot = "$false"
 showFormula TPTP d Trm {trmName = TermEquality, trmArgs = args} =
   case args of
     [l, r] -> sinfix d " = " l r
-    _ -> failWithMessage "SAD.Data.Formula.Show:showFormula" "Invalid number of arguments in equality expression"
+    _ -> failWithMessage "SAD.Data.Formula.Show.showFormula" "Invalid number of arguments in equality expression"
 showFormula TPTP d t@Trm {trmName = name, trmArgs = args}
   | null args = represent TPTP name
   | otherwise = represent TPTP name <> "(" <> intercalate "," (map (showFormula TPTP d) args) <> ")"
 showFormula TPTP d Var {varName = v} = represent TPTP v
 showFormula TPTP d Ind {indIndex = i} = "W" <> make_bytes (show (d - 1 - i))
-showFormula TPTP d ThisT = failWithMessage "SAD.Data.Formula.Show:showFormula" "TPTP format not implemented for \"ThisT\""
+showFormula TPTP d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "TPTP format not implemented for \"ThisT\""
+
+
+-- Informal
+--- Quantifier:
+showFormula Informal d (All _ f) = "for all " <> showBindingVar  Informal d <> ", " <> showFormula Informal (d + 1) f
+showFormula Informal d (Exi _ f) = "for some " <> showBindingVar Informal d <> ", " <> showFormula Informal (d + 1) f
+--- Equivalence:
+showFormula Informal d (Iff f g) = showFormulaL Informal d f <> " iff " <> showFormulaR Informal d g
+--- Implication:
+showFormula Informal d (Imp f g) = showFormulaL Informal d f <> " implies that " <> showFormulaR Informal d g
+--- Disjunction chain:
+showFormula Informal d (Or f@(Or _ _) g) = showFormula Informal d f <> " or " <> showFormulaR Informal d g
+showFormula Informal d (Or f g@(Or _ _)) = showFormulaL Informal d f <> " or " <> showFormula Informal d g
+--- Disjunction:
+showFormula Informal d (Or  f g) = showFormulaL Informal d f <> " or " <> showFormulaR Informal d g
+--- Conjunction chain:
+showFormula Informal d (And f@(And _ _) g) = showFormula Informal d f <> " and " <> showFormulaR Informal d g
+showFormula Informal d (And f g@(And _ _)) = showFormulaL Informal d f <> " and " <> showFormula Informal d g
+--- Conjunction:
+showFormula Informal d (And f g) = showFormulaL Informal d f <> " and " <> showFormulaR Informal d g
+--- Tagged formula:
+showFormula Informal d (Tag _ f) = showFormula Informal d f
+--- Negation:
+showFormula Informal d (Not f) = "it is wrong that " <> showFormulaR Informal d f
+--- Truth:
+showFormula Informal d Top = "true"
+--- Falsity:
+showFormula Informal d Bot = "false"
+--- @ThisT@:
+showFormula Informal d ThisT = "$ThisT"
+--- Thesis:
+showFormula Informal d Trm{trmName = TermThesis} = "the thesis"
+--- Equality:
+showFormula Informal d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula Informal d l <> " = " <> showFormula Informal d r
+--- Symbolic formula/term:
+showFormula Informal d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode Informal (Text.unpack tName) tArgs d ""
+--- Non-symbolic formula/term:
+showFormula Informal d Trm{trmName = tName, trmArgs = tArgs} = represent Informal tName <> showArguments Informal d tArgs
+--- Free variables:
+showFormula Informal d Var{varName = VarConstant s} = make_bytes s
+showFormula Informal d Var{varName = vName} = make_bytes $ represent Informal vName
+--- De Brujin index:
+showFormula Informal d Ind{indIndex = i}
+  | i < d = "v" <> make_bytes (show $ d - i - 1)
+  | otherwise = "v?" <> make_bytes (show i)
+
 
 sinfix :: Int -> Bytes -> Formula -> Formula -> Bytes
 sinfix d o f g  = "(" <> showFormula TPTP d f <> o <> showFormula TPTP d g <> ")"

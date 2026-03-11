@@ -101,6 +101,7 @@ mainTerminal initInstrs fileArgs = do
               "console" -> Console
               "pide" -> PIDE
               "tptp" -> TPTP
+              "informal" -> Informal
               _ -> error $ "Invalid format: " ++ make_string formatArg
       -- Get the input text (either via a given file path or if no file path is
       -- provided via the stdin stream) as a proof text:

@@ -76,7 +76,10 @@ instance Representation VariableName where
   represent Console var = represent PIDE var
   -- TPTP
   represent TPTP (VarConstant s) = "x" <> make_bytes s
-  represent TPTP _ = failWithMessage "SAD.Data.VarName:represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\""
+  represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\""
+  -- Informal
+  represent Informal (VarConstant s) = make_bytes s
+  represent Informal _ = failWithMessage "SAD.Data.VarName.represent" "Informal format not implemented for \"VariableName\"s other than \"VarConstant\""
 
 data PosVar = PosVar
   { posVarName :: VariableName
@@ -97,7 +100,9 @@ instance Representation PosVar where
   represent Console (PosVar v pos) =
     "(" <> represent Console v <> ", " <> make_bytes (show_position pos) <> ")"
   -- TPTP
-  represent TPTP _ = failWithMessage "SAD.Data.VarName:represent" "TPTP format not implemented for \"PosVar\""
+  represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"PosVar\""
+  -- Informal
+  represent Informal _ = failWithMessage "SAD.Data.VarName.represent" "Informal format not implemented for \"PosVar\""
 
 class (Ord a, Representation a) => IsVar a where
   buildVar :: VariableName -> Position.T -> a
