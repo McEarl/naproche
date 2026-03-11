@@ -92,9 +92,16 @@ mainTerminal initInstrs fileArgs = do
       -- Turn the initial instructions into proof texts:
       let locatedInitInstrs = reverse $ map (Position.none,) initInstrs
           initInstrProofTexts = map (uncurry ProofTextInstr) locatedInitInstrs
-          mode = getInstr modeParam initInstrs
-          texExe = getInstr texExeParam initInstrs
-          bibtexExe = getInstr bibtexExeParam initInstrs
+          modeArg = getInstr modeParam initInstrs
+          formatArg = getInstr formatParam initInstrs
+          texExeArg = getInstr texExeParam initInstrs
+          bibtexExeArg = getInstr bibtexExeParam initInstrs
+          format =
+            case formatArg of
+              "console" -> Console
+              "pide" -> PIDE
+              "tptp" -> TPTP
+              _ -> error $ "Invalid format: " ++ make_string formatArg
       -- Get the input text (either via a given file path or if no file path is
       -- provided via the stdin stream) as a proof text:
       (dialect, inputText, mbInputPath) <- do
@@ -138,17 +145,17 @@ mainTerminal initInstrs fileArgs = do
       Program.init_console
       context <- Program.thread_context
       resultCode <- do
-        (case mode of
+        (case modeArg of
           "lex" -> lexInputText dialect inputText
           "tokenize" -> tokenizeInputText dialect inputText
-          "translate" -> translateInputText Console dialect proofTexts
-          "verify" -> verifyInputText Console dialect mesonCache proverCache proofTexts
+          "translate" -> translateInputText format dialect proofTexts
+          "verify" -> verifyInputText format dialect mesonCache proverCache proofTexts
           "render" -> case mbInputPath of
             Nothing -> putStrLn "Unable to render input text: No input file given." >> return 1
             Just inputPath -> case dialect of
               Ftl -> putStrLn "Unable to render input text: No \".ftl.tex\" file given." >> return 1
-              Tex -> renderInputFile inputPath (make_string texExe) (make_string bibtexExe)
-              Stex -> renderInputFile inputPath (make_string texExe) (make_string bibtexExe)
+              Tex -> renderInputFile inputPath (make_string texExeArg) (make_string bibtexExeArg)
+              Stex -> renderInputFile inputPath (make_string texExeArg) (make_string bibtexExeArg)
           modeArg -> putStrLn ("Invalid mode: " ++ make_string modeArg) >> return 1)
         `catch` (\Exception.UserInterrupt -> do
           Program.exit_thread
@@ -406,6 +413,7 @@ options = [
   optSwitch "h" helpParam True "",
   optArgument "M" modeParam "MODE",
   optArgument "" dialectParam "DIALECT",
+  optArgument "" formatParam "FORMAT",
   optFlag "" translationParam,
   optSwitch "" serverParam True "",
   optArgument "P" proverParam "NAME",

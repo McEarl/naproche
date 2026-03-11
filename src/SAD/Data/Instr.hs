@@ -20,7 +20,7 @@ module SAD.Data.Instr (
   printsimpParam, printthesisParam, unfoldParam, unfoldsfParam, unfoldlowParam, unfoldlowsfParam,
   translationParam,
   helpParam, serverParam, onlytranslateParam, onlytokenizeParam,
-  modeParam, dialectParam, proverParam, texExeParam, bibtexExeParam,
+  modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam,
   keywordsCommand, keywordsSynonym, keywordsLimit, keywordsFlag, keywordsArgument, keywordsModule,
   keywordsDropLimit, keywordsDropFlag
 ) where
@@ -152,10 +152,11 @@ textFlags@[proveParam, checkParam, checkconsistencyParam, symsignParam, infoPara
     Param.flag "translation" "print first-order translation of sentences" False]
 
 textArgs :: [Param.T Bytes]
-modeParam, dialectParam, proverParam, texExeParam, bibtexExeParam :: Param.T Bytes
-textArgs@[modeParam, dialectParam, proverParam, texExeParam, bibtexExeParam] =
+modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam :: Param.T Bytes
+textArgs@[modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam] =
    [Param.bytes "mode" "run Naproche in mode MODE" "verify",
     Param.bytes "dialect" "use the DIALECT dialect of ForTheL" "ftl",
+    Param.bytes "format" "print output text in the FORMAT format" "console",
     Param.bytes "prover" "use prover NAME" (Prover.get_name Prover.eprover),
     Param.bytes "tex-exe" "TeX executable EXE" "pdflatex",
     Param.bytes "bibtex-exe" "BibTeX executable EXE" "bibtex"]
