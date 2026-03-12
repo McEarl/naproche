@@ -168,7 +168,7 @@ showFormula Informal d (Exi _ f) = "for some " <> showBindingVar Informal d <> "
 --- Equivalence:
 showFormula Informal d (Iff f g) = showFormulaL Informal d f <> " iff " <> showFormulaR Informal d g
 --- Implication:
-showFormula Informal d (Imp f g) = showFormulaL Informal d f <> " implies that " <> showFormulaR Informal d g
+showFormula Informal d (Imp f g) = "if " <> showFormulaL Informal d f <> " then " <> showFormulaR Informal d g
 --- Disjunction chain:
 showFormula Informal d (Or f@(Or _ _) g) = showFormula Informal d f <> " or " <> showFormulaR Informal d g
 showFormula Informal d (Or f g@(Or _ _)) = showFormulaL Informal d f <> " or " <> showFormula Informal d g
