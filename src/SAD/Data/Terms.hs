@@ -32,7 +32,6 @@ data TermName
   | TermEquality
   | TermLess
   | TermThesis
-  | TermEmpty
   deriving (Eq, Ord, Show)
 
 termFunction :: TermName
@@ -73,7 +72,6 @@ instance Representation TermName where
   represent PIDE TermEquality = "="
   represent PIDE TermLess  = "iLess"
   represent PIDE TermThesis = "#TH#"
-  represent PIDE TermEmpty = ""
   -- Console
   represent Console t = represent PIDE t
   -- TPTP

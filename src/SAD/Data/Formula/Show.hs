@@ -191,7 +191,6 @@ showFormula Informal d Bot = "$\\bot$"
 showFormula Informal d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"ThisT\""
 --- Thesis:
 showFormula Informal d Trm{trmName = TermThesis} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermThesis\""
-showFormula Informal d Trm{trmName = TermEmpty} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermEmpty\""
 showFormula Informal d Trm{trmName = TermTask _} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermTask _\""
 --- Equality:
 showFormula Informal d Trm{trmName = TermEquality, trmArgs = [l, r]} = "$" <> showFormula Informal d l <> " = " <> showFormula Informal d r <> "$"
