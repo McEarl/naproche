@@ -163,8 +163,8 @@ showFormula TPTP d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "
 
 -- Informal
 --- Quantifier:
-showFormula Informal d (All _ f) = "for all " <> showBindingVar  Informal d <> ", " <> showFormula Informal (d + 1) f
-showFormula Informal d (Exi _ f) = "for some " <> showBindingVar Informal d <> ", " <> showFormula Informal (d + 1) f
+showFormula Informal d (All _ f) = "for all $" <> showBindingVar  Informal d <> "$, " <> showFormula Informal (d + 1) f
+showFormula Informal d (Exi _ f) = "for some $" <> showBindingVar Informal d <> "$, " <> showFormula Informal (d + 1) f
 --- Equivalence:
 showFormula Informal d (Iff f g) = showFormulaL Informal d f <> " iff " <> showFormulaR Informal d g
 --- Implication:
@@ -184,17 +184,21 @@ showFormula Informal d (Tag _ f) = showFormula Informal d f
 --- Negation:
 showFormula Informal d (Not f) = "it is wrong that " <> showFormulaR Informal d f
 --- Truth:
-showFormula Informal d Top = "true"
+showFormula Informal d Top = "$\\top$"
 --- Falsity:
-showFormula Informal d Bot = "false"
+showFormula Informal d Bot = "$\\bot$"
 --- @ThisT@:
-showFormula Informal d ThisT = "$ThisT"
+showFormula Informal d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"ThisT\""
 --- Thesis:
-showFormula Informal d Trm{trmName = TermThesis} = "the thesis"
+showFormula Informal d Trm{trmName = TermThesis} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermThesis\""
+showFormula Informal d Trm{trmName = TermEmpty} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermEmpty\""
+showFormula Informal d Trm{trmName = TermTask _} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermTask _\""
 --- Equality:
-showFormula Informal d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula Informal d l <> " = " <> showFormula Informal d r
+showFormula Informal d Trm{trmName = TermEquality, trmArgs = [l, r]} = "$" <> showFormula Informal d l <> " = " <> showFormula Informal d r <> "$"
+--- ILess:
+showFormula Informal d Trm{trmName = TermLess, trmArgs = [l, r]} = "$" <> showFormula Informal d l <> " \\prec " <> showFormula Informal d r <> "$"
 --- Symbolic formula/term:
-showFormula Informal d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode Informal (Text.unpack tName) tArgs d ""
+showFormula Informal d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = "$" <> (make_bytes $ decode Informal (Text.unpack tName) tArgs d "") <> "$"
 --- Non-symbolic formula/term:
 showFormula Informal d Trm{trmName = tName, trmArgs = tArgs} = represent Informal tName <> showArguments Informal d tArgs
 --- Free variables:
