@@ -82,6 +82,8 @@ showFormula PIDE d ThisT = "ThisT"
 showFormula PIDE d Trm{trmName = TermThesis} = "thesis"
 --- Equality:
 showFormula PIDE d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula PIDE d l <> " = " <> showFormula PIDE d r
+--- Induction ordering:
+showFormula PIDE d Trm{trmName = TermLess, trmArgs = [l, r]} = represent PIDE TermLess <> "(" <> showFormula PIDE d l <> "," <> showFormula PIDE d r <> ")"
 --- Symbolic formula/term:
 showFormula PIDE d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode PIDE (Text.unpack tName) tArgs d ""
 --- Non-symbolic formula/term:
@@ -126,6 +128,8 @@ showFormula Console d ThisT = "$ThisT"
 showFormula Console d Trm{trmName = TermThesis} = "$thesis"
 --- Equality:
 showFormula Console d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula Console d l <> " = " <> showFormula Console d r
+--- Induction ordering:
+showFormula Console d Trm{trmName = TermLess, trmArgs = [l, r]} = represent Console TermLess <> "(" <> showFormula Console d l <> "," <> showFormula Console d r <> ")"
 --- Symbolic formula/term:
 showFormula Console d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode Console (Text.unpack tName) tArgs d ""
 --- Non-symbolic formula/term:
@@ -193,9 +197,9 @@ showFormula Informal d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormul
 showFormula Informal d Trm{trmName = TermThesis} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermThesis\""
 showFormula Informal d Trm{trmName = TermTask _} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermTask _\""
 --- Equality:
-showFormula Informal d Trm{trmName = TermEquality, trmArgs = [l, r]} = "$" <> showFormula Informal d l <> " = " <> showFormula Informal d r <> "$"
+showFormula Informal d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula Informal d l <> " is equal to " <> showFormula Informal d r
 --- ILess:
-showFormula Informal d Trm{trmName = TermLess, trmArgs = [l, r]} = "$" <> showFormula Informal d l <> " \\prec " <> showFormula Informal d r <> "$"
+showFormula Informal d Trm{trmName = TermLess, trmArgs = [l, r]} = showFormula Informal d l <> " is inductively less than " <> showFormula Informal d r
 --- Symbolic formula/term:
 showFormula Informal d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = "$" <> (make_bytes $ decode Informal (Text.unpack tName) tArgs d "") <> "$"
 --- Non-symbolic formula/term:

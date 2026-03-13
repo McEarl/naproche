@@ -106,7 +106,7 @@ data FState = FState {
 initFState :: Format -> Program.Context -> FState
 initFState = FState
   primAdjs [] primNotions primSymbNotions
-  circFunctions rightFunctions [] []
+  [] [] [] []
   [] [] [] primInfixPredicates
   [] [] mempty
   0 0 0
@@ -124,13 +124,13 @@ initFState = FState
         classNotion,
         objectNotion,
         mathObjectNotion,
-        elementOfNotion
+        elementOfNotion,
+        valueOfUnderNotion,
+        domainNotion,
+        pairNotion
       ]
     primSymbNotions = []
     primInfixPredicates = []
-    circFunctions = [pairFunction]
-    rightFunctions = [applicationFunction]
-
     -- "equal to x"
     equalAdj = ([Word ["equal"], Word ["to"], Vr], mkTrm EqualityId TermEquality)
     -- "nonequal to x"
@@ -151,10 +151,12 @@ initFState = FState
     mathObjectNotion = ([Word ["mathematical"], Word ["object", "objects"], Nm], mkObject . head)
     -- "an element x of X"
     elementOfNotion = ([Word ["element", "elements"], Nm, Word ["of"], Vr], \(x:m:_) -> mkElem x m)
-    -- "(x,y)"
-    pairFunction = ([Symbol "(", Vr, Symbol ",", Vr, Symbol ")"], \(x:y:_) -> mkPair x y)
-    -- "f(x)"
-    applicationFunction = ([Symbol "(", Vr, Symbol ")"], \(f:x:_) -> mkApp f x)
+    -- "the value of x under f"
+    valueOfUnderNotion = ([Word ["value"], Word ["of"], Vr, Word ["under"], Vr], \(x:f:_) -> mkApp f x)
+    -- "the domain of f"
+    domainNotion = ([Word ["domain"], Word ["of"], Vr], \(f:_) -> mkDom f)
+    -- "the ordered pair of x and y"
+    pairNotion = ([Word ["ordered"], Word ["pair"], Word ["of"], Vr, Word ["and"], Vr], \(x:y:_) -> mkPair x y)
 
 
 getExpr :: (FState -> [a]) -> (a -> FTL b) -> FTL b

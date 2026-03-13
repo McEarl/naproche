@@ -14,7 +14,7 @@ import Debug.Trace
 import Data.Text.Lazy (Text)
 
 import SAD.Export.Representation
-import SAD.Helpers (failureMessage)
+import SAD.Helpers (failureMessage, failWithMessage)
 
 import Isabelle.Library
 
@@ -34,20 +34,17 @@ data TermName
   | TermThesis
   deriving (Eq, Ord, Show)
 
-termFunction :: TermName
+termFunction, termMap, termSet, termClass, termElement, termObject,
+  termApplication, termDomain, termPair :: TermName
 termFunction = TermNotion "Function"
-
-termMap, termSet, termClass, termElement, termObject :: TermName
 termMap = TermNotion "Map"
 termSet = TermNotion "Set"
 termClass = TermNotion "Class"
 termObject = TermNotion "Object"
 termElement = TermNotion "ElementOf"
-
-termApplication, termDomain, termPair :: TermName
-termApplication = TermSymbolic "dtlpdtrp" -- ".(.)"
-termDomain = TermSymbolic "zDzozmlpdtrp"  -- "Dom(.)"
-termPair = TermSymbolic "lpdtcmdtrp"      -- "(.,.)"
+termApplication = TermThe "ValueOfUnder"
+termDomain = TermThe "DomainOf"
+termPair = TermThe "OrderedPairOfAnd"
 
 termSplit :: TermName -> (Text -> TermName, Text)
 termSplit (TermNotion t) = (TermNotion, t)
@@ -69,9 +66,9 @@ instance Representation TermName where
   represent PIDE (TermUnaryVerb t) = "do" <> make_bytes  t
   represent PIDE (TermMultiVerb t) = "mdo" <> make_bytes t
   represent PIDE (TermTask n) = "tsk " <> make_bytes  (show n)
-  represent PIDE TermEquality = "="
-  represent PIDE TermLess  = "iLess"
-  represent PIDE TermThesis = "#TH#"
+  represent PIDE TermEquality = failWithMessage "SAD.Data.Term.represent" "PIDE format not implemented for \"TermEquality\""
+  represent PIDE TermLess  = "isInductivelyLessThan"
+  represent PIDE TermThesis = failWithMessage "SAD.Data.Term.represent" "PIDE format not implemented for \"TermThesis\""
   -- Console
   represent Console t = represent PIDE t
   -- TPTP

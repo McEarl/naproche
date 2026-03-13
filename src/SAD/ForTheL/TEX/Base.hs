@@ -20,14 +20,18 @@ import SAD.ForTheL.Base
 
 -- | Add primitive expressions to the state.
 addInits :: FState -> FState
-addInits state@FState{symbNotionExpr = sn, cfnExpr = cfn, iprExpr = ipr} = state {
+addInits state@FState{symbNotionExpr = sn, cfnExpr = cfn, rfnExpr = rfn, iprExpr = ipr} = state {
     symbNotionExpr = unionBy comparePatterns sn [
         equalSymbNotion,
         elementOfSymbNotion
       ],
-    cfnExpr = unionBy comparePatterns cfn [
-        domFunction
+    rfnExpr = unionBy comparePatterns rfn [
+        applicationFunction
       ],
+    cfnExpr = unionBy comparePatterns cfn [
+        domFunction,
+        pairFunction
+    ],
     iprExpr = unionBy comparePatterns ipr [
         equalityPredicate,
         inequalityPredicate,
@@ -53,6 +57,10 @@ addInits state@FState{symbNotionExpr = sn, cfnExpr = cfn, iprExpr = ipr} = state
     inPredicate = ([Symbol "\\in"], \(x:m:_) -> mkElem x m)
     -- "x \notin X"
     notinPredicate = ([Symbol "\\notin"], \(x:m:_) -> Not $ mkElem x m)
+    -- "(x,y)"
+    pairFunction = ([Symbol "(", Vr, Symbol ",", Vr, Symbol ")"], \(x:y:_) -> mkPair x y)
+    -- "f(x)"
+    applicationFunction = ([Symbol "(", Vr, Symbol ")"], \(f:x:_) -> mkApp f x)
 
     -- Compare the pattern of two primitive expressions
     comparePatterns p p' = fst p == fst p'
