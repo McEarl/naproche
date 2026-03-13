@@ -80,7 +80,8 @@ instance Representation VariableName where
   represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\" and \"VarGlobal\""
   -- Informal
   represent Informal (VarConstant s) = make_bytes s
-  represent Informal _ = failWithMessage "SAD.Data.VarName.represent" "Informal format not implemented for \"VariableName\"s other than \"VarConstant\""
+  represent Informal (VarGlobal s) = "w" <> make_bytes s
+  represent Informal _ = failWithMessage "SAD.Data.VarName.represent" "Informal format not implemented for \"VariableName\"s other than \"VarConstant\" and \"VarGlobal\""
 
 data PosVar = PosVar
   { posVarName :: VariableName
