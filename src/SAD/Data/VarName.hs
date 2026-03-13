@@ -76,7 +76,8 @@ instance Representation VariableName where
   represent Console var = represent PIDE var
   -- TPTP
   represent TPTP (VarConstant s) = "x" <> make_bytes s
-  represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\""
+  represent TPTP (VarW s) = "w" <> make_bytes s
+  represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\" and \"VarW\""
   -- Informal
   represent Informal (VarConstant s) = make_bytes s
   represent Informal _ = failWithMessage "SAD.Data.VarName.represent" "Informal format not implemented for \"VariableName\"s other than \"VarConstant\""
