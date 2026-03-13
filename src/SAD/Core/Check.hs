@@ -57,7 +57,7 @@ fillDef fmt pos context = fill True False [] (Just True) 0 (Context.formula cont
           fortifiedTerm   <- setDef fmt pos isNewWord context term{trmArgs = fortifiedArgs} `withContext` newContext
           collectInfo (not isPredicate && userInfoSetting) fortifiedTerm `withContext` newContext -- fortify term
 
-      f -> roundFM VarW (fill isPredicate isNewWord) localContext sign n f
+      f -> roundFM VarGlobal (fill isPredicate isNewWord) localContext sign n f
 
 
     collectInfo :: Bool -> Formula -> VerifyMonad Formula

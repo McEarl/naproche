@@ -49,7 +49,7 @@ data VariableName
   | VarSkolem Int        -- ^ previously starting with o
   | VarTask VariableName -- ^ previously starting with c
   | VarZ Text            -- ^ previously starting with z
-  | VarW Text            -- ^ previously starting with w
+  | VarGlobal Text       -- ^ previously starting with w
   | VarEmpty             -- ^ previously ""
   | VarDefault Text      -- ^ everything else
   deriving (Eq, Ord)
@@ -69,15 +69,15 @@ instance Representation VariableName where
   represent PIDE (VarSkolem n) = "o" <> make_bytes (show n)
   represent PIDE (VarTask s) = "c" <> represent PIDE s
   represent PIDE (VarZ s) = "z" <> make_bytes s
-  represent PIDE (VarW s) = "w" <> make_bytes s
+  represent PIDE (VarGlobal s) = "w" <> make_bytes s
   represent PIDE VarEmpty = ""
   represent PIDE (VarDefault s) = make_bytes s
   -- Console
   represent Console var = represent PIDE var
   -- TPTP
   represent TPTP (VarConstant s) = "x" <> make_bytes s
-  represent TPTP (VarW s) = "w" <> make_bytes s
-  represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\" and \"VarW\""
+  represent TPTP (VarGlobal s) = "w" <> make_bytes s
+  represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\" and \"VarGlobal\""
   -- Informal
   represent Informal (VarConstant s) = make_bytes s
   represent Informal _ = failWithMessage "SAD.Data.VarName.represent" "Informal format not implemented for \"VariableName\"s other than \"VarConstant\""
