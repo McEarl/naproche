@@ -293,12 +293,13 @@ showTerm Informal d (TermThe patterns) formulas = "the " <> dive patterns formul
     dive [] _ = ""
     dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
     dive [Word (w : _)] _ = make_bytes w
+    dive [Word (w : _), Nm] fs = make_bytes w
     dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
     dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermThe\" term."
     dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermThe\" pattern."
     dive [Vr] (f : _) = showFormula Informal d f
     dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
-    dive (Nm: ps) fs = dive ps fs
+    dive (Nm : ps) fs = dive ps fs
 showTerm Informal d (TermUnaryAdjective patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermUnaryAdjective\" term has no arguments."
 showTerm Informal d (TermUnaryAdjective patterns) (headFormula : tailFormulas) =
   showFormula Informal d headFormula <> " is " <> dive patterns tailFormulas
