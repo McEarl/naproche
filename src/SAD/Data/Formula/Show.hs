@@ -287,7 +287,6 @@ showTerm Informal d (TermNotion patterns) (nameFormula : formulas) =
     beginsWithVowel t = case Text.uncons t of
       Nothing -> False
       Just (c, _) -> c `elem` ['a', 'e', 'i', 'o', 'u'] 
-showTerm Informal d (TermThe patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermThe\" term has no arguments."
 showTerm Informal d (TermThe patterns) formulas = "the " <> dive patterns formulas
   where
     dive :: [Pattern] -> [Formula] -> Bytes
@@ -299,7 +298,7 @@ showTerm Informal d (TermThe patterns) formulas = "the " <> dive patterns formul
     dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermThe\" pattern."
     dive [Vr] (f : _) = showFormula Informal d f
     dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
-    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermThe\" term."
+    dive (Nm: ps) fs = dive ps fs
 showTerm Informal d (TermUnaryAdjective patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermUnaryAdjective\" term has no arguments."
 showTerm Informal d (TermUnaryAdjective patterns) (headFormula : tailFormulas) =
   showFormula Informal d headFormula <> " is " <> dive patterns tailFormulas
