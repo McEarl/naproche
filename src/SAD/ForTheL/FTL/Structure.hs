@@ -117,22 +117,22 @@ theoremSection = do
 signatureBody :: FTL [ProofText]
 signatureBody = do
   fmt <- gets format
-  addAssumptions $ pretype $ pretypeSentence Posit FTL.sigExtend (defVars fmt) finishWithoutLink
+  addAssumptions $ pretype $ pretypeSentence fmt Posit FTL.sigExtend (defVars fmt) finishWithoutLink
 
 definitionBody :: FTL [ProofText]
 definitionBody = do
   fmt <- gets format
-  addAssumptions $ pretype $ pretypeSentence Posit FTL.defExtend (defVars fmt) finishWithoutLink
+  addAssumptions $ pretype $ pretypeSentence fmt Posit FTL.defExtend (defVars fmt) finishWithoutLink
 
 axiomBody :: FTL [ProofText]
 axiomBody = do
   fmt <- gets format
-  addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> FTL.statement) (affirmVars fmt) finishWithoutLink
+  addAssumptions $ pretype $ pretypeSentence fmt Posit (affirmationHeader >> FTL.statement) (affirmVars fmt) finishWithoutLink
 
 theoremBody :: FTL [ProofText]
 theoremBody = do
   fmt <- gets format
-  addAssumptions $ topLevelProof $ pretypeSentence Affirmation (affirmationHeader >> FTL.statement) (affirmVars fmt) finishWithOptLink
+  addAssumptions $ topLevelProof $ pretypeSentence fmt Affirmation (affirmationHeader >> FTL.statement) (affirmVars fmt) finishWithOptLink
 
 
 -- | Adds parser for parsing any number of assumptions before the passed content
@@ -144,7 +144,7 @@ addAssumptions content = body
     assumption = topAssume `pretypeBefore` body
     topAssume = do
       fmt <- gets format
-      pretypeSentence Assumption (assumptionHeader >> FTL.statement) (assumeVars fmt) finishWithoutLink
+      pretypeSentence fmt Assumption (assumptionHeader >> FTL.statement) (assumeVars fmt) finishWithoutLink
 
 
 -- * Bracket expressions (aka instructions)
@@ -306,7 +306,8 @@ addBody qed link pre post b = proofBody qed link $ b {Block.kind = kind}
 -- @<assumption> | ((<affirmation> | <choose>) <proof>) | <lowLevelDefinition>@
 confirmationBody :: Block -> FTL Block
 confirmationBody block = do
-  pbl <- narrow assumption </> proof (narrow $ affirmation </> choose) </> narrow lowLevelDefinition
+  fmt <- gets format
+  pbl <- narrow fmt assumption </> proof (narrow fmt $ affirmation </> choose) </> narrow fmt lowLevelDefinition
   return block {Block.body = [ProofTextBlock pbl]}
 
 -- | Proof body + proof end + link
@@ -331,10 +332,11 @@ proofText qed =
   (qed >> return []) <|>
   (unfailing (fmap ProofTextBlock lowtext <|> instruction) `updateDeclbefore` proofText qed)
   where
-    lowtext =
-      narrow assumption </>
-      proof (narrow $ affirmation </> choose </> lowLevelDefinition) </>
-      caseDestinction
+    lowtext = do
+      fmt <- gets format
+      narrow fmt assumption </>
+        proof (narrow fmt $ affirmation </> choose </> lowLevelDefinition) </>
+        caseDestinction
     instruction =
       fmap (uncurry ProofTextDrop) instrDrop </>
       fmap (uncurry ProofTextInstr) instr
@@ -343,7 +345,8 @@ proofText qed =
 -- @<caseHypothesis> <proofBody>@
 caseDestinction :: FTL Block
 caseDestinction = do
-  bl@Block { Block.formula = fr } <- narrow caseHypothesis
+  fmt <- gets format
+  bl@Block { Block.formula = fr } <- narrow fmt caseHypothesis
   proofBody proofEnd finishWithOptLink $ bl {
   Block.formula = Imp (Tag Tag.CaseHypothesis fr) mkThesis}
 

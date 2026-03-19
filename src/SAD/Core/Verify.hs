@@ -135,7 +135,7 @@ verifyBlock fmt block rest = do
   incrementCounter Sections
   whenInstruction printsectionParam $ justIO $
     Message.outputForTheL Message.WRITELN (Block.position block) $
-    make_bytes (trim_line (Block.showForm 0 block ""))
+    make_bytes (trim_line (represent fmt block))
   let newBranch = block : branch
   let contextBlock = Context f newBranch []
 

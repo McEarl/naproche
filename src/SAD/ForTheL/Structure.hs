@@ -181,12 +181,13 @@ statementBlock' kind p mbLink = do
   return (x, Block.makeBlock fr [] kind nm link toks)
 
 
-pretypeSentence :: Section
+pretypeSentence :: Format
+                -> Section
                 -> FTL Formula
                 -> (Set VariableName -> Formula -> Maybe Text)
                 -> FTL [Text]
                 -> FTL Block
-pretypeSentence kind p wfVars mbLink = narrow $ do
+pretypeSentence fmt kind p wfVars mbLink = narrow fmt $ do
   dvs <- getDecl
   tvr <- fmap (Set.unions . map fst) getPretyped
   bl <- wellFormedCheck (wf dvs tvr) $ statementBlock kind p mbLink
@@ -206,8 +207,9 @@ pretypeSentence' :: Section
                  -> FTL [Text]
                  -> FTL (a, Block)
 pretypeSentence' kind p wfVars mbLink = do
+    fmt <- gets format
     (x, bl) <- prtp
-    bl' <- narrow (pure bl)
+    bl' <- narrow fmt (pure bl)
     return (x, bl')
   where
     prtp = do

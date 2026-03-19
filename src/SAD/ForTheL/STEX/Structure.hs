@@ -183,7 +183,7 @@ theoremSection = do
   (keyword, starred) <- try $ beginTopLevelSection ["theorem", "proposition", "lemma", "corollary"]
   label <- optTlsOptions
   content <- TEX.addAssumptions . topLevelProof $
-             pretypeSentence Affirmation (affirmationHeader >> STEX.statement) (affirmVars fmt) finishWithOptLink <* endTopLevelSection keyword starred
+             pretypeSentence fmt Affirmation (affirmationHeader >> STEX.statement) (affirmVars fmt) finishWithOptLink <* endTopLevelSection keyword starred
   proofText <- addMetadata Theorem content label
   return [proofText]
 
@@ -204,14 +204,14 @@ conventionSection = do
 signatureBody :: FTL [ProofText]
 signatureBody = do
   fmt <- gets format
-  TEX.addAssumptions $ pretype $ pretypeSentence Posit STEX.sigExtend (defVars fmt) finishWithoutLink
+  TEX.addAssumptions $ pretype $ pretypeSentence fmt Posit STEX.sigExtend (defVars fmt) finishWithoutLink
 
 structSignatureBody :: FTL ([Block], [ProofText])
 structSignatureBody = do
   fmt <- gets format
   (varForm, pSent) <- pretypeSentence' Posit STEX.structSigExtend (defVars fmt) structFinish
   structProofText <- TEX.addAssumptions $ pretype $ pure pSent
-  varAssumption <- pretypeSentence Assumption (pure varForm) (assumeVars fmt) (pure [])
+  varAssumption <- pretypeSentence fmt Assumption (pure varForm) (assumeVars fmt) (pure [])
   return ([varAssumption], structProofText)
   where
     structFinish = do
@@ -222,12 +222,12 @@ structSignatureBody = do
 definitionBody :: FTL [ProofText]
 definitionBody = do
   fmt <- gets format
-  TEX.addAssumptions $ pretype $ pretypeSentence Posit STEX.defExtend (defVars fmt) finishWithoutLink
+  TEX.addAssumptions $ pretype $ pretypeSentence fmt Posit STEX.defExtend (defVars fmt) finishWithoutLink
 
 axiomBody :: FTL [ProofText]
 axiomBody = do
   fmt <- gets format
-  TEX.addAssumptions $ pretype $ pretypeSentence Posit (affirmationHeader >> STEX.statement) (affirmVars fmt) finishWithoutLink
+  TEX.addAssumptions $ pretype $ pretypeSentence fmt Posit (affirmationHeader >> STEX.statement) (affirmVars fmt) finishWithoutLink
 
 
 -- * Importing Modules
@@ -511,10 +511,11 @@ addBody qed link pre post b = proofBody qed link $ b {Block.kind = kind}
 -- @<assumption> | ((<affirmation> | <choose>) <proof>) | <lowLevelDefinition>@
 confirmationBody :: Block -> FTL Block
 confirmationBody block = do
+  fmt <- gets format
   pbl <-
-    narrow assumption </>
-    lowLevelProof (narrow $ affirmation </> choose) </>
-    narrow lowLevelDefinition
+    narrow fmt assumption </>
+    lowLevelProof (narrow fmt $ affirmation </> choose) </>
+    narrow fmt lowLevelDefinition
   return block {Block.body = [ProofTextBlock pbl]}
 
 -- | Proof body + proof end + link
@@ -538,10 +539,11 @@ proofText qed =
   (qed >> return []) <|>
   (TEX.unfailing (fmap ProofTextBlock lowtext <|> instruction) `updateDeclbefore` proofText qed)
   where
-    lowtext =
-      narrow assumption </>
-      lowLevelProof (narrow $ affirmation </> choose </> lowLevelDefinition) </>
-      caseDestinction
+    lowtext = do
+      fmt <- gets format
+      narrow fmt assumption </>
+        lowLevelProof (narrow fmt $ affirmation </> choose </> lowLevelDefinition) </>
+        caseDestinction
     instruction =
       fmap (uncurry ProofTextDrop) instrDrop </>
       fmap (uncurry ProofTextInstr) instr
@@ -550,7 +552,8 @@ proofText qed =
 -- @<caseHypothesis> <proofBody>@
 caseDestinction :: FTL Block
 caseDestinction = do
-  bl@Block { Block.formula = fr } <- narrow caseHypothesis
+  fmt <- gets format
+  bl@Block { Block.formula = fr } <- narrow fmt caseHypothesis
   proofBody TEX.caseDestinctionEnd (pure []) $ bl {
   Block.formula = Imp (Tag Tag.CaseHypothesis fr) mkThesis}
 

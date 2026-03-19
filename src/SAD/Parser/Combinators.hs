@@ -230,11 +230,11 @@ repeatUntil step = fmap (uncurry (<>)) . repeatUntil' step
 -- * Control ambiguity
 
 -- | If @p@ is ambiguous, @narrow p@ fails and reports a well-formedness error.
-narrow :: Show a => Parser st a -> Parser st a
-narrow p = Parser $ \st ok cerr eerr ->
+narrow :: Representation a => Format -> Parser st a -> Parser st a
+narrow fmt p = Parser $ \st ok cerr eerr ->
   let pok err eok cok = case eok ++ cok of
         [_] -> ok err eok cok
-        ls  ->  eerr $ newErrorMessage (newWellFormednessMessage ["ambiguity error" <> Text.pack (show (map prResult ls))]) (stPosition st)
+        ls  ->  eerr $ newErrorMessage (newWellFormednessMessage ["ambiguity error" <> (Text.pack . make_string $ represent fmt (map prResult ls))]) (stPosition st)
   in  runParser p st pok cerr eerr
 
 -- | If @p@ is ambiguous, @narrow p@ fails and reports a well-formedness error.

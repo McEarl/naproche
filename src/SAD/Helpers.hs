@@ -14,7 +14,7 @@ module SAD.Helpers (
   nubOrd,
   nubOrdBy,
   nubOrdOn,
-  
+
   isAsciiSymbol,
   isAsciiDigit,
   isAsciiLetter,
@@ -24,6 +24,7 @@ module SAD.Helpers (
   parens,
   parensIf,
   intercalate,
+  indent,
 
   failureMessage,
   failWithMessage,
@@ -36,13 +37,8 @@ module SAD.Helpers (
 import Control.Arrow
 import Data.Function
 import Data.Char qualified as Char
-import System.Environment (getExecutablePath)
-import Data.List.Extra (dropEnd)
-import System.FilePath.Posix
 
-import Naproche.Program qualified as Program
-
-import Isabelle.Library (make_bytes, getenv, make_string)
+import Isabelle.Library (getenv, make_string)
 import Isabelle.Bytes (Bytes)
 import Isabelle.Bytes qualified as Bytes
 
@@ -157,6 +153,10 @@ intercalate :: Bytes -> [Bytes] -> Bytes
 intercalate _ [] = ""
 intercalate _ [b] = b
 intercalate s (b : bs) = Bytes.concat [b, s] <> intercalate s bs
+
+indent :: Int -> Bytes -> Bytes
+indent n bs = Bytes.pack (replicate (2 * n) 0x20) <> bs
+
 
 -- * Error Messages
 
