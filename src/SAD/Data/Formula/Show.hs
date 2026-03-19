@@ -11,10 +11,7 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module SAD.Data.Formula.Show (
-  symEncode,
-  substitute
-) where
+module SAD.Data.Formula.Show where
 
 import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as Text
@@ -28,7 +25,7 @@ import SAD.Export.Representation
 import Isabelle.Position qualified as Position
 import Isabelle.Bytes (Bytes)
 import Isabelle.Library
-import SAD.Helpers (failWithMessage, intercalate, parens, parensIf, isAsciiLetter)
+import SAD.Helpers (failWithMessage, intercalate, parens, parensIf)
 
 
 instance Representation Formula where
@@ -78,16 +75,8 @@ showFormula PIDE d Top = "\\<top>"
 showFormula PIDE d Bot = "\\<bottom>"
 --- @ThisT@:
 showFormula PIDE d ThisT = "ThisT"
---- Thesis:
-showFormula PIDE d Trm{trmName = TermThesis} = "thesis"
---- Equality:
-showFormula PIDE d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula PIDE d l <> " = " <> showFormula PIDE d r
---- Induction ordering:
-showFormula PIDE d Trm{trmName = TermLess, trmArgs = [l, r]} = represent PIDE TermLess <> "(" <> showFormula PIDE d l <> "," <> showFormula PIDE d r <> ")"
---- Symbolic formula/term:
-showFormula PIDE d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode PIDE (Text.unpack tName) tArgs d ""
---- Non-symbolic formula/term:
-showFormula PIDE d Trm{trmName = tName, trmArgs = tArgs} = represent PIDE tName <> showArguments PIDE d tArgs
+--- Terms:
+showFormula PIDE d Trm{trmName = name, trmArgs = args} = showTerm PIDE d name args
 --- Free variables:
 showFormula PIDE d Var{varName = VarConstant s} = make_bytes s
 showFormula PIDE d Var{varName = vName} = make_bytes $ represent PIDE vName
@@ -124,16 +113,8 @@ showFormula Console d Top = "$true"
 showFormula Console d Bot = "$false"
 --- @ThisT@:
 showFormula Console d ThisT = "$ThisT"
---- Thesis:
-showFormula Console d Trm{trmName = TermThesis} = "$thesis"
---- Equality:
-showFormula Console d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula Console d l <> " = " <> showFormula Console d r
---- Induction ordering:
-showFormula Console d Trm{trmName = TermLess, trmArgs = [l, r]} = represent Console TermLess <> "(" <> showFormula Console d l <> "," <> showFormula Console d r <> ")"
---- Symbolic formula/term:
-showFormula Console d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = make_bytes $ decode Console (Text.unpack tName) tArgs d ""
---- Non-symbolic formula/term:
-showFormula Console d Trm{trmName = tName, trmArgs = tArgs} = represent Console tName <> showArguments Console d tArgs
+--- Terms:
+showFormula Console d Trm{trmName = name, trmArgs = args} = showTerm Console d name args
 --- Free variables:
 showFormula Console d Var{varName = VarConstant s} = make_bytes s
 showFormula Console d Var{varName = vName} = make_bytes $ represent Console vName
@@ -153,26 +134,19 @@ showFormula TPTP d (Tag _ f) = showFormula TPTP d f
 showFormula TPTP d (Not f) = "( ~ " <> showFormula TPTP d f <> ")"
 showFormula TPTP d Top = "$true"
 showFormula TPTP d Bot = "$false"
-showFormula TPTP d Trm {trmName = TermEquality, trmArgs = args} =
-  case args of
-    [l, r] -> sinfix d " = " l r
-    _ -> failWithMessage "SAD.Data.Formula.Show.showFormula" "Invalid number of arguments in equality expression"
-showFormula TPTP d t@Trm {trmName = name, trmArgs = args}
-  | null args = represent TPTP name
-  | otherwise = represent TPTP name <> "(" <> intercalate "," (map (showFormula TPTP d) args) <> ")"
+showFormula TPTP d Trm{trmName = name, trmArgs = args} = showTerm TPTP d name args
 showFormula TPTP d Var {varName = v} = represent TPTP v
 showFormula TPTP d Ind {indIndex = i} = "W" <> make_bytes (show (d - 1 - i))
 showFormula TPTP d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "TPTP format not implemented for \"ThisT\""
 
-
 -- Informal
 --- Quantifier:
-showFormula Informal d (All _ f) = "for all $" <> showBindingVar  Informal d <> "$, " <> showFormula Informal (d + 1) f
-showFormula Informal d (Exi _ f) = "for some $" <> showBindingVar Informal d <> "$, " <> showFormula Informal (d + 1) f
+showFormula Informal d (All _ f) = "for all " <> showBindingVar  Informal d <> ", " <> showFormula Informal (d + 1) f
+showFormula Informal d (Exi _ f) = "for some " <> showBindingVar Informal d <> ", " <> showFormula Informal (d + 1) f
 --- Equivalence:
 showFormula Informal d (Iff f g) = showFormulaL Informal d f <> " iff " <> showFormulaR Informal d g
 --- Implication:
-showFormula Informal d (Imp f g) = "if " <> showFormulaL Informal d f <> " then " <> showFormulaR Informal d g
+showFormula Informal d (Imp f g) = "if " <> showFormula Informal d f <> " then " <> showFormulaR Informal d g
 --- Disjunction chain:
 showFormula Informal d (Or f@(Or _ _) g) = showFormula Informal d f <> " or " <> showFormulaR Informal d g
 showFormula Informal d (Or f g@(Or _ _)) = showFormulaL Informal d f <> " or " <> showFormula Informal d g
@@ -188,22 +162,13 @@ showFormula Informal d (Tag _ f) = showFormula Informal d f
 --- Negation:
 showFormula Informal d (Not f) = "it is wrong that " <> showFormulaR Informal d f
 --- Truth:
-showFormula Informal d Top = "$\\top$"
+showFormula Informal d Top = "truth holds"
 --- Falsity:
-showFormula Informal d Bot = "$\\bot$"
+showFormula Informal d Bot = "falsity holds"
 --- @ThisT@:
 showFormula Informal d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"ThisT\""
---- Thesis:
-showFormula Informal d Trm{trmName = TermThesis} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermThesis\""
-showFormula Informal d Trm{trmName = TermTask _} = failWithMessage "SAD.Data.Formula.Show.showFormula" "Informal format not implemented for \"Trm\"s with \"trmName = TermTask _\""
---- Equality:
-showFormula Informal d Trm{trmName = TermEquality, trmArgs = [l, r]} = showFormula Informal d l <> " is equal to " <> showFormula Informal d r
---- ILess:
-showFormula Informal d Trm{trmName = TermLess, trmArgs = [l, r]} = showFormula Informal d l <> " is inductively less than " <> showFormula Informal d r
---- Symbolic formula/term:
-showFormula Informal d Trm{trmName = TermSymbolic tName, trmArgs = tArgs} = "$" <> (make_bytes $ decode Informal (Text.unpack tName) tArgs d "") <> "$"
---- Non-symbolic formula/term:
-showFormula Informal d Trm{trmName = tName, trmArgs = tArgs} = represent Informal tName <> showArguments Informal d tArgs
+--- Terms:
+showFormula Informal d Trm{trmName = name, trmArgs = args} = showTerm Informal d name args
 --- Free variables:
 showFormula Informal d Var{varName = VarConstant s} = make_bytes s
 showFormula Informal d Var{varName = vName} = make_bytes $ represent Informal vName
@@ -211,6 +176,194 @@ showFormula Informal d Var{varName = vName} = make_bytes $ represent Informal vN
 showFormula Informal d Ind{indIndex = i}
   | i < d = "v" <> make_bytes (show $ d - i - 1)
   | otherwise = "v?" <> make_bytes (show i)
+
+
+showTerm :: Format -> Int -> TermName -> [Formula] -> Bytes
+-- PIDE
+showTerm PIDE d (TermSymbolic patterns) formulas = dive patterns formulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive [Symbol s] _ = make_bytes s
+    dive (Symbol s : p@Symbol{} : ps) fs = make_bytes s <> dive (p : ps) fs
+    dive (Symbol s : p@Word{} : ps) fs = make_bytes s <> dive (p : ps) fs
+    dive (Symbol s : ps) fs = make_bytes s <> " " <> dive ps fs
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"Symbolic\" pattern."
+    dive [Vr] (f : _) = showFormula PIDE d f
+    dive (Vr : ps) (f : fs) = showFormula PIDE d f <> " " <> dive ps fs
+    dive (Nm : ps) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermSymbolic\" term."
+showTerm PIDE d t@(TermNotion patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE d t@(TermThe patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE d t@(TermUnaryAdjective patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE d t@(TermMultiAdjective patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE d t@(TermUnaryVerb patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE d t@(TermMultiVerb patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE _ t@(TermTask _) _ = represent PIDE t
+showTerm PIDE d t@TermEquality [l, r] = showFormula PIDE d l <> " " <> represent PIDE t <> " " <> showFormula PIDE d r
+showTerm PIDE _ t@TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
+showTerm PIDE d t@TermLess formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE _ t@TermThesis _ = represent PIDE t
+-- Console
+showTerm Console d (TermSymbolic patterns) formulas = dive patterns formulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive [Symbol s] _ = make_bytes s
+    dive (Symbol s : p@Symbol{} : ps) fs = make_bytes s <> dive (p : ps) fs
+    dive (Symbol s : p@Word{} : ps) fs = make_bytes s <> dive (p : ps) fs
+    dive (Symbol s : ps) fs = make_bytes s <> " " <> dive ps fs
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"Symbolic\" pattern."
+    dive [Vr] (f : _) = showFormula Console d f
+    dive (Vr : ps) (f : fs) = showFormula Console d f <> " " <> dive ps fs
+    dive (Nm : ps) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermSymbolic\" term."
+showTerm Console d t@(TermNotion patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console d t@(TermThe patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console d t@(TermUnaryAdjective patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console d t@(TermMultiAdjective patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console d t@(TermUnaryVerb patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console d t@(TermMultiVerb patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console _ t@(TermTask _) _ = represent Console t
+showTerm Console d t@TermEquality [l, r] = showFormula Console d l <> " " <> represent Console t <> " " <> showFormula Console d r
+showTerm Console _ t@TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
+showTerm Console d t@TermLess formulas = represent Console t <> showArguments Console d formulas
+showTerm Console _ t@TermThesis _ = represent Console t
+-- TPTP
+showTerm TPTP d t@(TermSymbolic patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP d t@(TermNotion patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP d t@(TermThe patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP d t@(TermUnaryAdjective patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP d t@(TermMultiAdjective patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP d t@(TermUnaryVerb patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP d t@(TermMultiVerb patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP _ t@(TermTask _) _ = represent TPTP t
+showTerm TPTP d t@TermEquality [l, r] = showFormula TPTP d l <> " " <> represent TPTP t <> " " <> showFormula TPTP d r
+showTerm TPTP _ t@TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
+showTerm TPTP d t@TermLess formulas = represent TPTP t <> showArguments TPTP d formulas
+showTerm TPTP _ t@TermThesis _ = represent TPTP t
+-- Informal
+showTerm Informal d (TermSymbolic patterns) formulas = dive patterns formulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive [Symbol s] _ = make_bytes s
+    dive (Symbol s : p@Symbol{} : ps) fs = make_bytes s <> dive (p : ps) fs
+    dive (Symbol s : p@Word{} : ps) fs = make_bytes s <> dive (p : ps) fs
+    dive (Symbol s : ps) fs = make_bytes s <> " " <> dive ps fs
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"Symbolic\" pattern."
+    dive [Vr] (f : _) = showFormula Informal d f
+    dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
+    dive (Nm : ps) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermSymbolic\" term."
+showTerm Informal d (TermNotion patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermNotion\" term has no arguments."
+showTerm Informal d (TermNotion patterns) (nameFormula : formulas) =
+  showFormula Informal d nameFormula <>
+  " is " <>
+  (case patterns of
+    (Word (w : _) : _) | beginsWithVowel w -> "an "
+    _ -> "a ") <>
+  dive patterns formulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive [Word (w : _), Nm] fs = make_bytes w
+    dive (Word (w : _) : Nm : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermNotion\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermNotion\" pattern."
+    dive [Vr] (f : _) = showFormula Informal d f
+    dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
+    dive (Nm : ps) fs = dive ps fs
+    beginsWithVowel :: Text -> Bool
+    beginsWithVowel t = case Text.uncons t of
+      Nothing -> False
+      Just (c, _) -> c `elem` ['a', 'e', 'i', 'o', 'u'] 
+showTerm Informal d (TermThe patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermThe\" term has no arguments."
+showTerm Informal d (TermThe patterns) formulas = "the " <> dive patterns formulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermThe\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermThe\" pattern."
+    dive [Vr] (f : _) = showFormula Informal d f
+    dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
+    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermThe\" term."
+showTerm Informal d (TermUnaryAdjective patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermUnaryAdjective\" term has no arguments."
+showTerm Informal d (TermUnaryAdjective patterns) (headFormula : tailFormulas) =
+  showFormula Informal d headFormula <> " is " <> dive patterns tailFormulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermUnaryAdjective\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermUnaryAdjective\" pattern."
+    dive [Vr] (f : _) = showFormula Informal d f
+    dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
+    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermUnaryAdjective\" term."
+showTerm Informal d (TermMultiAdjective patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiAdjective\" term has no arguments."
+showTerm Informal d (TermMultiAdjective patterns) [_] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiAdjective\" term has only one argument."
+showTerm Informal d (TermMultiAdjective patterns) (headFormula1 : headFormula2 : tailFormulas) =
+  showFormula Informal d headFormula1 <> " and " <> showFormula Informal d headFormula2 <> " are " <> dive patterns tailFormulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermMultiAdjective\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermMultiAdjective\" pattern."
+    dive [Vr] (f : _) = showFormula Informal d f
+    dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
+    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermMultiAdjective\" term."
+showTerm Informal d (TermUnaryVerb patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermUnaryVerb\" term has no arguments."
+showTerm Informal d (TermUnaryVerb patterns) (headFormula : tailFormulas) =
+  showFormula Informal d headFormula <> " " <> dive patterns tailFormulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermUnaryVerb\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermUnaryVerb\" pattern."
+    dive [Vr] (f : _) = showFormula Informal d f
+    dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
+    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermUnaryVerb\" term."
+showTerm Informal d (TermMultiVerb patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiVerb\" term has no arguments."
+showTerm Informal d (TermMultiVerb patterns) [_] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiVerb\" term has only one argument."
+showTerm Informal d (TermMultiVerb patterns) (headFormula1 : headFormula2 : tailFormulas) =
+  showFormula Informal d headFormula1 <> " and " <> showFormula Informal d headFormula2 <> " " <> dive patterns tailFormulas
+  where
+    dive :: [Pattern] -> [Formula] -> Bytes
+    dive [] _ = ""
+    dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
+    dive [Word (w : _)] _ = make_bytes w
+    dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermMultiVerb\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermMultiVerb\" pattern."
+    dive [Vr] (f : _) = showFormula Informal d f
+    dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
+    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermMultiVerb\" term."
+showTerm Informal _ (TermTask _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Informal format not implemented for \"TermTask _\"."
+showTerm Informal d TermEquality [l, r] = showFormula Informal d l <> " is equal to " <> showFormula Informal d r
+showTerm Informal _ TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
+showTerm Informal d TermLess [l, r] = showFormula Informal d l <> " is inductively less than " <> showFormula Informal d r
+showTerm Informal _ TermLess _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermLess\"."
+showTerm Informal _ TermThesis _ = "the thesis holds"
 
 
 sinfix :: Int -> Bytes -> Formula -> Formula -> Bytes
@@ -237,129 +390,3 @@ showArguments format d terms =
 showBindingVar :: Format -> Int -> Bytes
 showBindingVar fmt d = showFormula fmt (d + 1) (Ind 0 Position.none)
 
--- | Substitute all @.@ characters in a string by given terms.
-substitute :: Format -> String -> [Formula] -> Int -> Bytes
-substitute _ s [] _ = make_bytes s
-substitute fmt s (t : ts) d = dec s
-  where
-    dec ('.' : cs) = parensIf (ambig t) (showFormula fmt d t) <> substitute fmt cs ts d
-    dec (c : cs@('.' : _)) | isAsciiLetter c = make_bytes [c] <> " " <> dec cs
-    dec (c : cs) = make_bytes [c] <> dec cs
-    dec [] = ""
-
-    ambig Trm {trmName = TermSymbolic tName} =
-      ("." `Text.isPrefixOf` tName && Text.drop 2 tName /= "(.)") ||
-      "." `Text.isSuffixOf` tName
-    ambig _ = False
-
-
-
-decode :: Format -> String -> [Formula] -> Int -> ShowS
-decode _ s [] _ = showString (symDecode s)
-decode fmt s (t:ts) d = dec s
-  where
-    dec ('b':'q':cs) = showChar '`' . dec cs
-    dec ('t':'l':cs) = showChar '~' . dec cs
-    dec ('e':'x':cs) = showChar '!' . dec cs
-    dec ('a':'t':cs) = showChar '@' . dec cs
-    dec ('d':'l':cs) = showChar '$' . dec cs
-    dec ('p':'c':cs) = showChar '%' . dec cs
-    dec ('c':'f':cs) = showChar '^' . dec cs
-    dec ('e':'t':cs) = showChar '&' . dec cs
-    dec ('a':'s':cs) = showChar '*' . dec cs
-    dec ('l':'p':cs) = showChar '(' . dec cs
-    dec ('r':'p':cs) = showChar ')' . dec cs
-    dec ('m':'n':cs) = showChar '-' . dec cs
-    dec ('p':'l':cs) = showChar '+' . dec cs
-    dec ('e':'q':cs) = showChar '=' . dec cs
-    dec ('l':'b':cs) = showChar '[' . dec cs
-    dec ('r':'b':cs) = showChar ']' . dec cs
-    dec ('l':'c':cs) = showChar '{' . dec cs
-    dec ('r':'c':cs) = showChar '}' . dec cs
-    dec ('c':'l':cs) = showChar ':' . dec cs
-    dec ('q':'t':cs) = showChar '\'' . dec cs
-    dec ('d':'q':cs) = showChar '"' . dec cs
-    dec ('l':'s':cs) = showChar '<' . dec cs
-    dec ('g':'t':cs) = showChar '>' . dec cs
-    dec ('s':'l':cs) = showChar '/' . dec cs
-    dec ('q':'u':cs) = showChar '?' . dec cs
-    dec ('b':'s':cs) = showChar '\\' . dec cs
-    dec ('b':'r':cs) = showChar '|' . dec cs
-    dec ('s':'c':cs) = showChar ';' . dec cs
-    dec ('c':'m':cs) = showChar ',' . dec cs
-    dec ('u':'s':cs) = showChar '_' . dec cs
-    dec ('h':'s':cs) = showChar '#' . dec cs
-    dec ('d':'t':cs) =
-      (\x -> make_string (parensIf (ambig t) (showFormula fmt d t)) ++ x) . decode fmt cs ts d
-    dec ('z':c:cs@('d':'t':_)) = showChar c . showChar ' ' . dec cs
-    dec ('z':c:cs)   = showChar c . dec cs
-    dec cs@(':':_)   = showString cs
-    dec []           = showString ""
-    dec _            = showString s
-
-    ambig Trm {trmName = TermSymbolic tName} | "dt" `Text.isPrefixOf` tName = not $ appPattern (Text.drop 3 tName)
-    ambig Trm {trmName = TermSymbolic tName} =
-      snd (Text.splitAt (Text.length tName - 2) tName) == "dt"
-    ambig _ = False
-
-    -- map application: "(.)"
-    appPattern "lpdtrp" = True
-    appPattern _ = False
--- Symbolic names
-
-symEncode :: Text -> Text
-symEncode = Text.concat . map chc . Text.chunksOf 1
-  where
-    chc :: Text -> Text
-    chc "`" = "bq" ; chc "~"  = "tl" ; chc "!" = "ex"
-    chc "@" = "at" ; chc "$"  = "dl" ; chc "%" = "pc"
-    chc "^" = "cf" ; chc "&"  = "et" ; chc "*" = "as"
-    chc "(" = "lp" ; chc ")"  = "rp" ; chc "-" = "mn"
-    chc "+" = "pl" ; chc "="  = "eq" ; chc "[" = "lb"
-    chc "]" = "rb" ; chc "{"  = "lc" ; chc "}" = "rc"
-    chc ":" = "cl" ; chc "\'" = "qt" ; chc "\"" = "dq"
-    chc "<" = "ls" ; chc ">"  = "gt" ; chc "/" = "sl"
-    chc "?" = "qu" ; chc "\\" = "bs" ; chc "|" = "br"
-    chc ";" = "sc" ; chc ","  = "cm" ; chc "." = "dt"
-    chc "_" = "us" ; chc "#"  = "hs"
-    chc c   = Text.cons 'z' c
-
-symDecode :: String -> String
-symDecode s = sname [] s
-  where
-    sname ac ('b':'q':cs) = sname ('`':ac) cs
-    sname ac ('t':'l':cs) = sname ('~':ac) cs
-    sname ac ('e':'x':cs) = sname ('!':ac) cs
-    sname ac ('a':'t':cs) = sname ('@':ac) cs
-    sname ac ('d':'l':cs) = sname ('$':ac) cs
-    sname ac ('p':'c':cs) = sname ('%':ac) cs
-    sname ac ('c':'f':cs) = sname ('^':ac) cs
-    sname ac ('e':'t':cs) = sname ('&':ac) cs
-    sname ac ('a':'s':cs) = sname ('*':ac) cs
-    sname ac ('l':'p':cs) = sname ('(':ac) cs
-    sname ac ('r':'p':cs) = sname (')':ac) cs
-    sname ac ('m':'n':cs) = sname ('-':ac) cs
-    sname ac ('p':'l':cs) = sname ('+':ac) cs
-    sname ac ('e':'q':cs) = sname ('=':ac) cs
-    sname ac ('l':'b':cs) = sname ('[':ac) cs
-    sname ac ('r':'b':cs) = sname (']':ac) cs
-    sname ac ('l':'c':cs) = sname ('{':ac) cs
-    sname ac ('r':'c':cs) = sname ('}':ac) cs
-    sname ac ('c':'l':cs) = sname (':':ac) cs
-    sname ac ('q':'t':cs) = sname ('\'':ac) cs
-    sname ac ('d':'q':cs) = sname ('"':ac) cs
-    sname ac ('l':'s':cs) = sname ('<':ac) cs
-    sname ac ('g':'t':cs) = sname ('>':ac) cs
-    sname ac ('s':'l':cs) = sname ('/':ac) cs
-    sname ac ('q':'u':cs) = sname ('?':ac) cs
-    sname ac ('b':'s':cs) = sname ('\\':ac) cs
-    sname ac ('b':'r':cs) = sname ('|':ac) cs
-    sname ac ('s':'c':cs) = sname (';':ac) cs
-    sname ac ('c':'m':cs) = sname (',':ac) cs
-    sname ac ('d':'t':cs) = sname ('.':ac) cs
-    sname ac ('u':'s':cs) = sname ('_':ac) cs
-    sname ac ('h':'s':cs) = sname ('#':ac) cs
-    sname ac ('z':c:cs)   = sname (c:ac) cs
-    sname ac cs@(':':_)   = reverse ac ++ cs
-    sname ac []           = reverse ac
-    sname _ _             = s

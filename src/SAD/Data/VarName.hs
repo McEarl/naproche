@@ -32,6 +32,7 @@ import Data.Function (on)
 
 import SAD.Core.Message (show_position)
 import SAD.Export.Representation
+import SAD.Data.Terms (symEncode)
 import SAD.Helpers (failWithMessage)
 
 import Isabelle.Position qualified as Position
@@ -75,8 +76,8 @@ instance Representation VariableName where
   -- Console
   represent Console var = represent PIDE var
   -- TPTP
-  represent TPTP (VarConstant s) = "x" <> make_bytes s
-  represent TPTP (VarGlobal s) = "w" <> make_bytes s
+  represent TPTP (VarConstant s) = "local_variable_" <> make_bytes (symEncode s)
+  represent TPTP (VarGlobal s) = "global_variable_" <> make_bytes (symEncode s)
   represent TPTP _ = failWithMessage "SAD.Data.VarName.represent" "TPTP format not implemented for \"VariableName\"s other than \"VarConstant\" and \"VarGlobal\""
   -- Informal
   represent Informal (VarConstant s) = make_bytes s

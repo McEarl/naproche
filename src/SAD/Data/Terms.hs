@@ -12,69 +12,152 @@ module SAD.Data.Terms where
 
 import Debug.Trace
 import Data.Text.Lazy (Text)
+import Data.Text.Lazy qualified as Text
 
 import SAD.Export.Representation
 import SAD.Helpers (failureMessage, failWithMessage)
 
+import Isabelle.Bytes (Bytes)
 import Isabelle.Library
 
 
+-- * Patterns
+
+data Pattern =
+    Word [Text]
+  | Symbol Text
+  | Vr
+  | Nm
+  deriving (Eq, Ord, Show)
+
+
+-- ** Presenting Patterns Symbolically
+
+showSymbolPatterns :: [Pattern] -> Bytes
+showSymbolPatterns = foldr ((<>) . showSymbolPattern) ""
+
+showSymbolPattern :: Pattern -> Bytes
+showSymbolPattern (Word []) = failWithMessage "SAD.Data.Terms.showSymbolPattern" "Empty list of synonyms given."
+showSymbolPattern (Word (word : _)) = make_bytes word
+showSymbolPattern (Symbol symbol) = make_bytes symbol
+showSymbolPattern Nm = "."
+showSymbolPattern Vr = "."
+
+showWordPatterns :: [Pattern] -> Bytes
+showWordPatterns = foldr ((<>) . showWordPattern) ""
+
+showWordPattern :: Pattern -> Bytes
+showWordPattern (Word []) = failWithMessage "SAD.Data.Terms.showWordPattern" "Empty list of synonyms given."
+showWordPattern (Word (word : _)) = make_bytes . Text.toTitle $ word
+showWordPattern (Symbol symbol) = make_bytes symbol
+showWordPattern Nm = ""
+showWordPattern Vr = ""
+
+
+-- * Presenting Patterns Verbally
+
+verbalizeSymbolPatterns :: [Pattern] -> Bytes
+verbalizeSymbolPatterns = foldr ((<>) . showSymbolPattern) ""
+
+verbalizeSymbolPattern :: Pattern -> Bytes
+verbalizeSymbolPattern (Word []) = failWithMessage "SAD.Data.Terms.verbalizeSymbolPattern" "Empty list of synonyms given."
+verbalizeSymbolPattern (Word (word : _)) = make_bytes word
+verbalizeSymbolPattern (Symbol symbol) = make_bytes symbol
+verbalizeSymbolPattern Nm = "_"
+verbalizeSymbolPattern Vr = "_"
+
+verbalizeWordPatterns :: [Pattern] -> Bytes
+verbalizeWordPatterns = foldr ((<>) . showWordPattern) " "
+
+verbalizeWordPattern :: Pattern -> Bytes
+verbalizeWordPattern (Word []) = failWithMessage "SAD.Data.Terms.verbalizeWordPattern" "Empty list of synonyms given."
+verbalizeWordPattern (Word (word : _)) = make_bytes word
+verbalizeWordPattern (Symbol symbol) = make_bytes symbol
+verbalizeWordPattern Nm = "_"
+verbalizeWordPattern Vr = "_"
+
+
+-- * Term Names
+
 data TermName
-  = TermName Text
-  | TermSymbolic Text
-  | TermNotion Text
-  | TermThe Text
-  | TermUnaryAdjective Text
-  | TermMultiAdjective Text
-  | TermUnaryVerb Text
-  | TermMultiVerb Text
+  = TermSymbolic [Pattern]
+  | TermNotion [Pattern]
+  | TermThe [Pattern]
+  | TermUnaryAdjective [Pattern]
+  | TermMultiAdjective [Pattern]
+  | TermUnaryVerb [Pattern]
+  | TermMultiVerb [Pattern]
   | TermTask Int
   | TermEquality
   | TermLess
   | TermThesis
   deriving (Eq, Ord, Show)
 
+-- | Names of hard-coded notions and functions.
 termFunction, termMap, termSet, termClass, termElement, termObject,
   termApplication, termDomain, termPair :: TermName
-termFunction = TermNotion "Function"
-termMap = TermNotion "Map"
-termSet = TermNotion "Set"
-termClass = TermNotion "Class"
-termObject = TermNotion "Object"
-termElement = TermNotion "ElementOf"
-termApplication = TermThe "ValueOfUnder"
-termDomain = TermThe "DomainOf"
-termPair = TermThe "OrderedPairOfAnd"
-
-termSplit :: TermName -> (Text -> TermName, Text)
-termSplit (TermNotion t) = (TermNotion, t)
-termSplit (TermThe t) = (TermThe, t)
-termSplit (TermUnaryAdjective t) = (TermUnaryAdjective, t)
-termSplit (TermMultiAdjective t) = (TermMultiAdjective, t)
-termSplit (TermUnaryVerb t) = (TermUnaryVerb, t)
-termSplit (TermMultiVerb t) = (TermMultiVerb, t)
-termSplit _ = undefined
+termFunction = TermNotion [Word ["function"], Nm]
+termMap = TermNotion [Word ["map"], Nm]
+termSet = TermNotion [Word ["set"], Nm]
+termClass = TermNotion [Word ["class"], Nm]
+termObject = TermNotion [Word ["object"], Nm]
+termElement = TermNotion [Word ["element"], Nm, Word ["of"], Vr]
+termApplication = TermThe [Word ["value"], Word["of"], Vr, Word ["under"], Vr]
+termDomain = TermThe [Word ["domain"], Word["of"], Vr]
+termPair = TermThe [Word ["ordered"], Word["pair"], Word["of"], Vr, Word ["and"], Vr]
 
 instance Representation TermName where
   -- PIDE
-  represent PIDE (TermName t) = make_bytes t
-  represent PIDE (TermSymbolic t) = "s" <> make_bytes t
-  represent PIDE (TermNotion t) = "a" <> make_bytes t
-  represent PIDE (TermThe t) = "the" <> make_bytes t
-  represent PIDE (TermUnaryAdjective t) = "is" <> make_bytes t
-  represent PIDE (TermMultiAdjective t) = "mis" <> make_bytes t
-  represent PIDE (TermUnaryVerb t) = "do" <> make_bytes  t
-  represent PIDE (TermMultiVerb t) = "mdo" <> make_bytes t
-  represent PIDE (TermTask n) = "tsk " <> make_bytes  (show n)
-  represent PIDE TermEquality = failWithMessage "SAD.Data.Term.represent" "PIDE format not implemented for \"TermEquality\""
-  represent PIDE TermLess  = "isInductivelyLessThan"
-  represent PIDE TermThesis = failWithMessage "SAD.Data.Term.represent" "PIDE format not implemented for \"TermThesis\""
+  represent PIDE (TermSymbolic patterns) = showSymbolPatterns patterns
+  represent PIDE (TermNotion patterns) = "a" <> showWordPatterns patterns
+  represent PIDE (TermThe patterns) = "the" <> showWordPatterns patterns
+  represent PIDE (TermUnaryAdjective patterns) = "is" <> showWordPatterns patterns
+  represent PIDE (TermMultiAdjective patterns) = "mis" <> showWordPatterns patterns
+  represent PIDE (TermUnaryVerb patterns) = "do" <> showWordPatterns patterns
+  represent PIDE (TermMultiVerb patterns) = "mdo" <> showWordPatterns patterns
+  represent PIDE (TermTask n) = "tsk_" <> make_bytes (show n)
+  represent PIDE TermEquality = "="
+  represent PIDE TermLess = "iLess"
+  represent PIDE TermThesis = "thesis"
   -- Console
-  represent Console t = represent PIDE t
+  represent Console (TermSymbolic patterns) = showSymbolPatterns patterns
+  represent Console (TermNotion patterns) = "a" <> showWordPatterns patterns
+  represent Console (TermThe patterns) = "the" <> showWordPatterns patterns
+  represent Console (TermUnaryAdjective patterns) = "is" <> showWordPatterns patterns
+  represent Console (TermMultiAdjective patterns) = "mis" <> showWordPatterns patterns
+  represent Console (TermUnaryVerb patterns) = "do" <> showWordPatterns patterns
+  represent Console (TermMultiVerb patterns) = "mdo" <> showWordPatterns patterns
+  represent Console (TermTask n) = "tsk_" <> make_bytes (show n)
+  represent Console TermEquality = "="
+  represent Console TermLess = "iLess"
+  represent Console TermThesis = "$thesis"
   -- TPTP
-  represent TPTP t = represent PIDE t
+  represent TPTP (TermSymbolic patterns) = "symbolic_term_" <> (make_bytes . symEncode . Text.fromStrict . make_text . showSymbolPatterns $ patterns)
+  represent TPTP (TermNotion patterns) = "a" <> showWordPatterns patterns
+  represent TPTP (TermThe patterns) = "the" <> showWordPatterns patterns
+  represent TPTP (TermUnaryAdjective patterns) = "is" <> showWordPatterns patterns
+  represent TPTP (TermMultiAdjective patterns) = "mis" <> showWordPatterns patterns
+  represent TPTP (TermUnaryVerb patterns) = "do" <> showWordPatterns patterns
+  represent TPTP (TermMultiVerb patterns) = "mdo" <> showWordPatterns patterns
+  represent TPTP (TermTask _) = failWithMessage "SAD.Data.Term.represent" "TPTP format not implemented for \"TermTask\"."
+  represent TPTP TermEquality = "="
+  represent TPTP TermLess = "iLess"
+  represent TPTP TermThesis = failWithMessage "SAD.Data.Term.represent" "TPTP format not implemented for \"TermThesis\"."
   -- Informal
-  represent Informal t = represent PIDE t
+  represent Informal (TermSymbolic patterns) = verbalizeSymbolPatterns patterns
+  represent Informal (TermNotion patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermThe patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermUnaryAdjective patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermMultiAdjective patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermUnaryVerb patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermMultiVerb patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermTask n) = "task #" <> make_bytes (show n)
+  represent Informal TermEquality = "_ is equal to _"
+  represent Informal TermLess = "_ is inductively less than _"
+  represent Informal TermThesis = "the thesis"
+
+
+-- * Term IDs
 
 data TermId
   = EqualityId
@@ -112,3 +195,23 @@ specialId n =
   (-12) -> trace msg MapId
   (-15) -> trace msg NewId
   n -> SpecialId n
+
+-- * Encoding Symbolic Term Names
+
+-- | Encode a symbolic term name as a sequence of letters.
+symEncode :: Text -> Text
+symEncode = Text.concat . map chc . Text.chunksOf 1
+  where
+    chc :: Text -> Text
+    chc "`" = "bq" ; chc "~"  = "tl" ; chc "!" = "ex"
+    chc "@" = "at" ; chc "$"  = "dl" ; chc "%" = "pc"
+    chc "^" = "cf" ; chc "&"  = "et" ; chc "*" = "as"
+    chc "(" = "lp" ; chc ")"  = "rp" ; chc "-" = "mn"
+    chc "+" = "pl" ; chc "="  = "eq" ; chc "[" = "lb"
+    chc "]" = "rb" ; chc "{"  = "lc" ; chc "}" = "rc"
+    chc ":" = "cl" ; chc "\'" = "qt" ; chc "\"" = "dq"
+    chc "<" = "ls" ; chc ">"  = "gt" ; chc "/" = "sl"
+    chc "?" = "qu" ; chc "\\" = "bs" ; chc "|" = "br"
+    chc ";" = "sc" ; chc ","  = "cm" ; chc "." = "dt"
+    chc "_" = "us" ; chc "#"  = "hs"
+    chc c   = Text.cons 'z' c

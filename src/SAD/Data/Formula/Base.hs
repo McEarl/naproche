@@ -22,10 +22,8 @@ import SAD.Data.Tag (Tag)
 import SAD.Data.Terms
 import SAD.Data.Text.Decl (Decl)
 import SAD.Data.VarName
-import SAD.Export.Representation
 
 import Isabelle.Position qualified as Position
-import Isabelle.Library
 
 
 -- | A first-order formula, term or de Brujin index
@@ -80,11 +78,6 @@ trInfo :: Formula -> [Formula]
 trInfo Trm {trmInfo = xs} = xs
 trInfo Var {varInfo = xs} = xs
 trInfo _ = error "Formula.Base.trInfo: undefined"
-
-showTrName :: Format -> Formula -> Text
-showTrName fmt Trm{trmName = s} = Text.filter (/= ':') . Text.pack . make_string $ represent fmt s
-showTrName fmt Var{varName = s} = Text.filter (/= ':') $ Text.pack . make_string $ represent fmt s
-showTrName _ _ = Text.empty
 
 isHole :: Formula -> Bool
 isHole Var{varName} = isVarHole varName

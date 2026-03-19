@@ -16,6 +16,7 @@ module SAD.Data.Formula.HOL (
 
 import Data.Map.Strict qualified as Map
 import Data.Map.Strict (Map)
+import Data.List (uncons)
 
 import SAD.Data.VarName (VariableName (..))
 import SAD.Data.Text.Decl (Decl (..))
@@ -24,6 +25,7 @@ import SAD.Data.Formula.Base
 import SAD.Data.Text.Context (Context, formula)
 
 import Isabelle.Bytes (Bytes)
+import Isabelle.Bytes qualified as Bytes
 import Isabelle.Value qualified as Value
 import Isabelle.Name qualified as Isabelle
 import Isabelle.Term qualified as Isabelle
@@ -74,15 +76,20 @@ bound_name (VarGlobal s) = "w"
 bound_name VarEmpty = Isabelle.uu
 bound_name (VarDefault s) = make_bytes s
 
+patternToBytes :: Pattern -> Bytes
+patternToBytes (Word words) = maybe "" (make_bytes . fst) (uncons words)
+patternToBytes (Symbol symbol) = make_bytes . symEncode $ symbol
+patternToBytes Nm = ""
+patternToBytes Vr = ""
+
 term_name :: TermName -> Isabelle.Name
-term_name (TermName t) = make_bytes t
-term_name (TermSymbolic t) = "s" <> make_bytes t
-term_name (TermNotion t) = "a" <> make_bytes t
-term_name (TermThe t) = "the" <> make_bytes t
-term_name (TermUnaryAdjective t) = "is" <> make_bytes t
-term_name (TermMultiAdjective t) = "mis" <> make_bytes t
-term_name (TermUnaryVerb t) = "do" <> make_bytes t
-term_name (TermMultiVerb t) = "mdo" <> make_bytes t
+term_name (TermSymbolic t) = "s" <> Bytes.concat (map patternToBytes t)
+term_name (TermNotion t) = "a" <> Bytes.concat (map patternToBytes t)
+term_name (TermThe t) = "the" <> Bytes.concat (map patternToBytes t)
+term_name (TermUnaryAdjective t) = "is" <> Bytes.concat (map patternToBytes t)
+term_name (TermMultiAdjective t) = "mis" <> Bytes.concat (map patternToBytes t)
+term_name (TermUnaryVerb t) = "do" <> Bytes.concat (map patternToBytes t)
+term_name (TermMultiVerb t) = "mdo" <> Bytes.concat (map patternToBytes t)
 term_name (TermTask n) = "tsk " <> Value.print_int n
 term_name TermEquality = undefined
 term_name TermLess  = undefined

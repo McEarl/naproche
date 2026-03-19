@@ -16,7 +16,7 @@ import Data.Text.Lazy (Text)
 import Data.Text.Lazy qualified as T
 import Data.Tree
 import Data.Text.Lazy qualified as Text
-import Data.List (foldl')
+import Data.List (foldl', uncons)
 
 import SAD.Data.Formula as Formula
 import SAD.Structures.Formula qualified as F
@@ -83,14 +83,14 @@ toDeclaration fmt (ForthelExpr {..}) =
       go xs Top = F.Top
       go xs Bot = F.Bot
       go xs (Trm _ [f, g] _ EqualityId) = (go xs f) F.:== (go xs g)
-      go xs (Trm (TermNotion name) args info id) =
-        foldl' (F.:@) (F.TyPredicate name) (map (go xs) args)
-      go xs (Trm (TermUnaryAdjective name) args info id) =
-        foldl' (F.:@) (F.Predicate name) (map (go xs) args)
-      go xs (Trm (TermMultiAdjective name) args info id) =
-        foldl' (F.:@) (F.Predicate name) (map (go xs) args)
-      go xs (Trm name args info id) =
-        foldl' (F.:@) (F.Const (termToText name)) (map (go xs) args)
+      go xs (Trm t@(TermNotion name) args info id) =
+        foldl' (F.:@) (F.TyPredicate $ termToText t) (map (go xs) args)
+      go xs (Trm t@(TermUnaryAdjective name) args info id) =
+        foldl' (F.:@) (F.Predicate $ termToText t) (map (go xs) args)
+      go xs (Trm t@(TermMultiAdjective name) args info id) =
+        foldl' (F.:@) (F.Predicate $ termToText t) (map (go xs) args)
+      go xs (Trm t args info id) =
+        foldl' (F.:@) (F.Const (termToText t)) (map (go xs) args)
       go xs (Var name info pos) = F.Variable (varToText fmt name)
       go xs (Ind idx pos) = F.Variable (xs !! idx)
       go xs ThisT = F.Const "ThisT"
@@ -102,16 +102,21 @@ varToText :: Format -> VariableName -> Text
 varToText fmt (VarConstant t) = t
 varToText fmt v = T.pack . make_string . represent fmt $ v
 
+patternToText :: Pattern -> Text
+patternToText (Word words) = maybe "" fst (uncons words)
+patternToText (Symbol symbol) = symbol
+patternToText Nm = ""
+patternToText Vr = ""
+
 termToText :: TermName -> Text
-termToText (TermName t) = t
-termToText (TermSymbolic t) = t
-termToText (TermNotion t) = t
-termToText (TermThe t) = t
-termToText (TermUnaryAdjective t) = t
-termToText (TermMultiAdjective t) = t
-termToText (TermUnaryVerb t) = t
-termToText (TermMultiVerb t) = t
-termToText t = T.pack $ show t
+termToText (TermSymbolic t) = Text.concat $ map patternToText t
+termToText (TermNotion t) = Text.concat $ map patternToText t
+termToText (TermThe t) = Text.concat $ map patternToText t
+termToText (TermUnaryAdjective t) = Text.concat $ map patternToText t
+termToText (TermMultiAdjective t) = Text.concat $ map patternToText t
+termToText (TermUnaryVerb t) = Text.concat $ map patternToText t
+termToText (TermMultiVerb t) = Text.concat $ map patternToText t
+termToText t = undefined
 
 toLeanCode :: Format -> [ForthelExpr] -> Text
 toLeanCode fmt fs = "axiom omitted {p : Prop} : p\n\n"

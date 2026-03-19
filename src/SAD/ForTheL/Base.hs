@@ -302,10 +302,6 @@ primSnt p  = noError $ varList >>= getExpr symbNotionExpr . snt
 
 
 
-
-data Pattern = Word [Text] | Symbol Text | Vr | Nm deriving (Eq, Show)
-
-
 -- | Adding error reporting to pattern parsing.
 patternTokenOf' :: [Text] -> FTL ()
 patternTokenOf' l = label ("a word of " <> Text.pack (show l)) $ tokenOf' l

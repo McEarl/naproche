@@ -16,7 +16,6 @@ module SAD.ForTheL.TEX.Pattern (
 
 import Control.Applicative
 import Control.Monad
-import Data.Text.Lazy qualified as Text
 
 import SAD.Parser.Combinators
 import SAD.Parser.Primitives
@@ -42,17 +41,17 @@ newPrdPattern tvr = multi </> unary </> optInTexArg "emph" (newSymbPattern tvr)
 
     unaryAdj = do
       token' "is"
-      (t, vs) <- optInTexArg "emph" $ patHead unknownAlpha tvr
+      (t, vs) <- optInTexArg "emph" $ wordPatHead tvr
       return (TermUnaryAdjective t, vs)
     multiAdj = do
       token' "are"
-      (t, vs) <- optInTexArg "emph" $ patHead unknownAlpha tvr
+      (t, vs) <- optInTexArg "emph" $ wordPatHead tvr
       return (TermMultiAdjective t, vs)
     unaryVerb = do
-      (t, vs) <- optInTexArg "emph" $ patHead unknownAlpha tvr
+      (t, vs) <- optInTexArg "emph" $ wordPatHead tvr
       return (TermUnaryVerb t, vs)
     multiVerb = do
-      (t, vs) <- optInTexArg "emph" $ patHead unknownAlpha tvr
+      (t, vs) <- optInTexArg "emph" $ wordPatHead tvr
       return (TermMultiVerb t, vs)
 
 newNotionPattern :: FTL PosVar -> FTL (Formula, PosVar)
@@ -60,11 +59,11 @@ newNotionPattern tvr = (notion <|> function) </> unnamedNotion tvr
   where
     notion = do
       tokenOf' ["a", "an"]
-      (t, v:vs) <- optInTexArg "emph" $ patName unknownAlpha tvr
+      (t, v:vs) <- optInTexArg "emph" $ patName tvr
       return (mkTrm NewId (TermNotion t) $ map pVar (v:vs), v)
     function = do
       token' "the"
-      (t, v:vs) <- optInTexArg "emph" $ patName unknownAlpha tvr
+      (t, v:vs) <- optInTexArg "emph" $ patName tvr
       return (mkEquality (pVar v) $ mkTrm NewId (TermNotion t) $ map pVar vs, v)
 
 unnamedNotion :: FTL PosVar -> FTL (Formula, PosVar)
@@ -72,11 +71,11 @@ unnamedNotion tvr = (notion <|> function) </> (optInTexArg "emph" (newSymbPatter
   where
     notion = do
       tokenOf' ["a", "an"]
-      (t, v:vs) <- optInTexArg "emph" $ patNoName unknownAlpha tvr
+      (t, v:vs) <- optInTexArg "emph" $ patNoName tvr
       return (mkTrm NewId (TermNotion t) $ map pVar (v:vs), v)
     function = do
       token' "the"
-      (t, v:vs) <- optInTexArg "emph" $ patNoName unknownAlpha tvr
+      (t, v:vs) <- optInTexArg "emph" $ patNoName tvr
       return (mkEquality (pVar v) $ mkTrm NewId (TermNotion t) $ map pVar vs, v)
     equ t = do
       v <- hidden
@@ -87,9 +86,9 @@ newSymbPattern :: FTL PosVar -> FTL Formula
 newSymbPattern tvr = left -|- right
   where
     left = do
-      (t, vs) <- patHead slexem tvr
-      return $ mkTrm NewId (TermName t) $ map pVar vs
+      (t, vs) <- symbPatHead tvr
+      return $ mkTrm NewId (TermSymbolic t) $ map pVar vs
     right = do
-      (t, vs) <- patTail slexem tvr
-      guard $ not $ null $ tail $ Text.words t
-      return $ mkTrm NewId (TermName t) $ map pVar vs
+      (t, vs) <- symbPatTail tvr
+      guard $ not $ null $ tail t
+      return $ mkTrm NewId (TermSymbolic t) $ map pVar vs
