@@ -25,7 +25,33 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
 
 --------------------------------------------------------------------------------
 
-## Current development version (for Isabelle 2025-1)
+## Current development version (for Isabelle 2026)
+
+### Misc
+
+* **New:** There are four formatting options to print text during a Naproche run:
+
+  - `PIDE`
+  - `Console` 
+  - `TPTP`
+  - `Informal`
+
+  In Isabelle/jEdit, text is always formatted in the `PIDE` format; on the command
+  line, you can use the option `--format=(pide|console|tptp|informal)` to change
+  the formatting, where `Console` is the default format if this option is absent.
+  
+  Moreover, the `TPTP` format is internally used to convert formulas to TPTP
+  before they are passed to an ATP.
+
+  You can toy around with the `--mode=translate` and `--format=...` options to
+  see how each format looks like, e.g.:
+
+  ```
+  Naproche --mode=translate --format=informal examples/cantor.ftl
+  ```
+
+
+## Current development version (for Isabelle 2025-1/2)
 
 ### Changes on the LaTeX Packages
 
