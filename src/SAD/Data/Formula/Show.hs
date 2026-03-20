@@ -35,8 +35,8 @@ instance Representation Formula where
 showFormula :: Format -> Int -> Formula -> Bytes
 -- PIDE
 --- Quantifier chain:
-showFormula PIDE d (All _ f@(All _ _)) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
-showFormula PIDE d (All _ f@(Exi _ _)) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
+showFormula PIDE d (All _ f@(All _ _)) = "\\<forall>" <> showBindingVar PIDE d <> parens (showFormula PIDE (d + 1) f)
+showFormula PIDE d (All _ f@(Exi _ _)) = "\\<forall>" <> showBindingVar PIDE d <> parens (showFormula PIDE (d + 1) f)
 showFormula PIDE d (All _ f@(Not (Exi _ _))) = "\\<forall>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
 showFormula PIDE d (Exi _ f@(All _ _)) = "\\<exists>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
 showFormula PIDE d (Exi _ f@(Exi _ _)) = "\\<exists>" <> showBindingVar PIDE d <> showFormula PIDE (d + 1) f
@@ -141,8 +141,8 @@ showFormula TPTP d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "
 
 -- Informal
 --- Quantifier:
-showFormula Informal d (All _ f) = "for all " <> showBindingVar  Informal d <> ", " <> showFormula Informal (d + 1) f
-showFormula Informal d (Exi _ f) = "for some " <> showBindingVar Informal d <> ", " <> showFormula Informal (d + 1) f
+showFormula Informal d (All _ f) = "for all " <> showBindingVar  Informal d <> ", " <> parens (showFormula Informal (d + 1) f)
+showFormula Informal d (Exi _ f) = "for some " <> showBindingVar Informal d <> ", " <> parens (showFormula Informal (d + 1) f)
 --- Equivalence:
 showFormula Informal d (Iff f g) = showFormulaL Informal d f <> " iff " <> showFormulaR Informal d g
 --- Implication:
