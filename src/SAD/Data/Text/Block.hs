@@ -60,11 +60,14 @@ data ProofText =
   deriving (Eq, Ord)
 
 instance Representation ProofText where
-  represent fmt (ProofTextBlock block) = represent fmt block
-  represent _ (ProofTextInstr _ instr) = make_bytes $ show instr
-  represent _ (ProofTextDrop _ instr) = make_bytes $ show instr
-  represent _ (ProofTextError err) = make_bytes $ show err
-  represent _ _ = ""
+  represent fmt = showProofText fmt 0
+
+showProofText :: Format -> Int -> ProofText -> Bytes
+showProofText fmt p (ProofTextBlock block) = showBlock fmt p block
+showProofText _ p (ProofTextInstr _ instr) = indent p . make_bytes $ show instr
+showProofText _ p (ProofTextDrop _ instr) = indent p . make_bytes $ show instr
+showProofText _ p (ProofTextError err) = indent p . make_bytes $ show err
+showProofText _ _ _ = ""
 
 data Block = Block {
   formula           :: Formula,
@@ -155,8 +158,6 @@ file = Text.fromStrict . make_text . fromMaybe Bytes.empty . Position.file_of . 
 declaredNames :: Block -> Set VariableName
 declaredNames = Set.map declName . declaredVariables
 
--- Show instances
-
 
 instance Representation Block where
   represent fmt = showBlock fmt 0
@@ -188,7 +189,7 @@ showBlockForm fmt p block =
   indent p $ represent fmt (formulate block) <> "\n"
 
 showProof :: Format -> Int -> [ProofText] -> Bytes
-showProof fmt p = foldr (\pt bs -> indent p (represent fmt pt) <> bs) ""
+showProof fmt p = foldr (\pt bs -> showProofText fmt p pt <> bs) ""
 
 parseErrors :: ProofText -> [ParseError]
 parseErrors (ProofTextError err) = [err]
