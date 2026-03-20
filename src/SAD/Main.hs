@@ -151,6 +151,7 @@ mainTerminal initInstrs fileArgs = do
           "tokenize" -> tokenizeInputText dialect inputText
           "translate" -> translateInputText format dialect proofTexts
           "verify" -> verifyInputText format dialect mesonCache proverCache proofTexts
+          "lexicon" -> computeLexicon format dialect proofTexts
           "render" -> case mbInputPath of
             Nothing -> putStrLn "Unable to render input text: No input file given." >> return 1
             Just inputPath -> case dialect of
@@ -274,9 +275,24 @@ translateInputText fmt dialect proofTexts = do
   -- Get the starting time of the parsing process:
   startTime <- getCurrentTime
   -- Parse the input text:
-  txts <- readProofText fmt dialect proofTexts
+  (txts, _) <- readProofText fmt dialect proofTexts
   -- Translate the input text and print the result:
   mapM_ (\case ProofTextBlock bl -> putStrLn (make_string $ represent fmt bl); _ -> return ()) txts
+  -- Get the finish time of the translation process:
+  finishTime <- getCurrentTime
+  -- Print the time it took to translate the input text:
+  let timeDifference finishTime = showTimeDiff (diffUTCTime finishTime startTime)
+  outputMain TRACING Position.none $ make_bytes $ "total " <> timeDifference finishTime
+  return 0
+
+computeLexicon :: Format -> ParserKind -> [ProofText] -> IO Int
+computeLexicon fmt dialect proofTexts = do
+  -- Get the starting time of the parsing process:
+  startTime <- getCurrentTime
+  -- Parse the input text:
+  (_, state) <- readProofText fmt dialect proofTexts
+  -- Translate the input text and print the result:
+  putStrLn $ "\n" <> make_string (represent fmt state) <> "\n"
   -- Get the finish time of the translation process:
   finishTime <- getCurrentTime
   -- Print the time it took to translate the input text:
@@ -289,7 +305,7 @@ verifyInputText fmt dialect mesonCache proverCache proofTexts = do
   -- Get the starting time of the parsing process:
   startTime <- getCurrentTime
   -- Parse the input text:
-  txts <- readProofText fmt dialect proofTexts
+  (txts, _) <- readProofText fmt dialect proofTexts
   -- Get the starting time of the verification process:
   proveStart <- getCurrentTime
   -- Verify the input text:

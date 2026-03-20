@@ -48,15 +48,15 @@ import Naproche.Program qualified as Program
 -- * Reader loop
 
 -- | Parse one or more ForTheL texts
-readProofText :: Format -> ParserKind -> [ProofText] -> IO [ProofText]
+readProofText :: Format -> ParserKind -> [ProofText] -> IO ([ProofText], FState)
 readProofText fmt dialect text0 = do
   context <- Program.thread_context
   naprocheFormalizationsPath <- getNaprocheFormalizations
-  (text, reports) <- reader 0 dialect naprocheFormalizationsPath [] [initState fmt context noTokens] text0
+  (text, reports, state) <- reader 0 dialect naprocheFormalizationsPath [] [initState fmt context noTokens] text0
   when (Program.is_pide context) $ Message.reports reports
-  return text
+  return (text, state)
 
-reader :: Int -> ParserKind -> FilePath -> [FilePath] -> [State FState] -> [ProofText] -> IO ([ProofText], [Position.Report])
+reader :: Int -> ParserKind -> FilePath -> [FilePath] -> [State FState] -> [ProofText] -> IO ([ProofText], [Position.Report], FState)
 -- Take an archive path, a module path and a module name, turn it into an
 -- absolute file path and continue the reader loop with a read instruction for
 -- this file path.
@@ -69,7 +69,7 @@ reader depth dialect naprocheFormalizationsPath doneFiles stateList [ProofTextIn
       absoluteFilePath = naprocheFormalizationsPath </> "archive" </> relativeFilePath'
       instr = GetAbsoluteFilePath absoluteFilePath
   in do
-    (proofTexts, reports) <- reader (depth + 1) dialect naprocheFormalizationsPath doneFiles stateList [ProofTextInstr pos instr]
+    (proofTexts, reports, state) <- reader (depth + 1) dialect naprocheFormalizationsPath doneFiles stateList [ProofTextInstr pos instr]
     let proofTexts' = if depth == 0
           then [
               ProofTextInstr Position.none (SetBool proveParam False),
@@ -79,7 +79,7 @@ reader depth dialect naprocheFormalizationsPath doneFiles stateList [ProofTextIn
               ProofTextInstr Position.none (SetBool checkParam True)
             ]
           else proofTexts
-    return (proofTexts', reports)
+    return (proofTexts', reports, state)
 -- Take a relative file path (i.e. relative to the library directory) and turn
 -- it into an absolute path.
 reader depth dialect naprocheFormalizationsPath doneFiles stateList [ProofTextInstr pos (GetRelativeFilePath relativeFilePath)]
@@ -105,7 +105,7 @@ reader depth dialect naprocheFormalizationsPath doneFiles stateList [ProofTextIn
       let absoluteFilePath = naprocheFormalizationsPath </> relativeFilePath
           instr = GetAbsoluteFilePath absoluteFilePath
       in do
-        (proofTexts, reports) <- reader (depth + 1) dialect naprocheFormalizationsPath doneFiles stateList [ProofTextInstr pos instr]
+        (proofTexts, reports, state) <- reader (depth + 1) dialect naprocheFormalizationsPath doneFiles stateList [ProofTextInstr pos instr]
         let proofTexts' = if depth == 0
             then [
                 ProofTextInstr Position.none (SetBool proveParam False),
@@ -115,7 +115,7 @@ reader depth dialect naprocheFormalizationsPath doneFiles stateList [ProofTextIn
                 ProofTextInstr Position.none (SetBool checkParam True)
               ]
             else proofTexts
-        return (proofTexts', reports)
+        return (proofTexts', reports, state)
 
 reader depth dialect naprocheFormalizationsPath doneFiles (pState : states) [ProofTextInstr pos (GetAbsoluteFilePath absoluteFilePath)]
   | absoluteFilePath `elem` doneFiles = do
@@ -138,8 +138,8 @@ reader depth dialect naprocheFormalizationsPath doneFiles (pState : states) [Pro
 
 -- This says that we are only really processing the last instruction in a [ProofText].
 reader depth dialect naprocheFormalizationsPath doneFiles stateList (t : restProofText) = do
-  (ts, ls) <- reader depth dialect naprocheFormalizationsPath doneFiles stateList restProofText
-  return (t : ts, ls)
+  (ts, ls, state) <- reader depth dialect naprocheFormalizationsPath doneFiles stateList restProofText
+  return (t : ts, ls, state)
 
 reader depth dialect naprocheFormalizationsPath doneFiles (pState : oldState : rest) [] = do
   Message.outputParser Message.TRACING
@@ -148,17 +148,17 @@ reader depth dialect naprocheFormalizationsPath doneFiles (pState : oldState : r
         stUser = (stUser pState) {tvrExpr = tvrExpr $ stUser oldState}}
   -- Continue running a parser after eg. a read instruction was evaluated.
   (newProofText, newState) <- parseState resetState
-  (newProofText', reports) <- reader (if depth == 0 then 0 else depth - 1) dialect naprocheFormalizationsPath doneFiles (newState : rest) newProofText
+  (newProofText', reports, state) <- reader (if depth == 0 then 0 else depth - 1) dialect naprocheFormalizationsPath doneFiles (newState : rest) newProofText
   let newProofText'' = if depth == 1
         then [
             ProofTextInstr Position.none (SetBool proveParam True),
             ProofTextInstr Position.none (SetBool checkParam True)
           ] ++ newProofText'
         else newProofText'
-  return (newProofText'', reports)
+  return (newProofText'', reports, state)
 
 
-reader _ _ _ _ (state : _) [] = return ([], reports $ stUser state)
+reader _ _ _ _ (state : _) [] = return ([], reports $ stUser state, stUser state)
 
 reader _ _ _ _ _ _ = failWithMessage "SAD.Parser.Base.reader" "Invalid arguments."
 

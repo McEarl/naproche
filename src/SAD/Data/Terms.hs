@@ -30,6 +30,12 @@ data Pattern =
   | Nm
   deriving (Eq, Ord, Show)
 
+instance Representation Pattern where
+  represent _ (Word synonyms) = "Word(" <> make_bytes (Text.intercalate ", " synonyms) <> ")"
+  represent _ (Symbol symbol) = "Symbol(" <> make_bytes symbol <> ")"
+  represent _ Vr = "Variable"
+  represent _ Nm = "Name"
+
 
 -- ** Presenting Patterns Symbolically
 

@@ -28,7 +28,7 @@ import SAD.Parser.Primitives
 import SAD.Parser.Token (showToken)
 import SAD.Data.Text.Decl
 import SAD.Export.Representation
-import SAD.Helpers(isAsciiLetter)
+import SAD.Helpers(isAsciiLetter, intercalate, indent)
 
 import Isabelle.Position qualified as Position
 import Isabelle.Library
@@ -87,6 +87,45 @@ data FState = FState {
 
   program :: Program.Context
 }
+
+instance Representation FState where
+  represent fmt state =
+    "Adjective Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (adjectiveExpr state)) <>
+    "\n]\n\n" <>
+    "Verb Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (verbExpr state)) <>
+    "\n]\n\n" <>
+    "Notion Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (notionExpr state)) <>
+    "\n]\n\n" <>
+    "Symbolic Notion Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (symbNotionExpr state)) <>
+    "\n]\n\n" <>
+    "Circumfix Function Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (cfnExpr state)) <>
+    "\n]\n\n" <>
+    "Right Function Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (rfnExpr state)) <>
+    "\n]\n\n" <>
+    "Left Function Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (lfnExpr state)) <>
+    "\n]\n\n" <>
+    "Infix Function Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (ifnExpr state)) <>
+    "\n]\n\n" <>
+    "Circumfix Predicate Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (cprExpr state)) <>
+    "\n]\n\n" <>
+    "Right Predicate Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (rprExpr state)) <>
+    "\n]\n\n" <>
+    "Left Predicate Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (lprExpr state)) <>
+    "\n]\n\n" <>
+    "Infix Predicate Expressions: [\n" <>
+    intercalate ",\n" (map ((indent 1 . represent fmt) . fst) (iprExpr state)) <>
+    "\n]"
 
 
 -- | Initial state of the parsing process. Provides the following predefined

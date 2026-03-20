@@ -50,8 +50,15 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
   Naproche --mode=translate --format=informal examples/cantor.ftl
   ```
 
+* **New:** The command line option `mode` accepts a new argument `lexicon` which
+  makes Naproche print the lexicon that is generated from the input text. E.g.:
 
-## Current development version (for Isabelle 2025-1/2)
+  ```
+  Naproche --mode=lexicon examples/cantor.ftl
+  ```
+
+
+## naproche-20251110  (for Isabelle 2025-1 and Isabelle 2025-2)
 
 ### Changes on the LaTeX Packages
 

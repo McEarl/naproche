@@ -14,7 +14,7 @@ module SAD.Export.Representation where
 import Data.Set (Set)
 import Data.Set qualified as Set
 
-import SAD.Helpers (failWithMessage)
+import SAD.Helpers (intercalate)
 
 import Isabelle.Bytes
 
@@ -31,42 +31,27 @@ class Representation a where
   represent :: Format -> a -> Bytes
 
 instance Representation a => Representation [a] where
-  -- PIDE
-  represent PIDE [] = ""
-  represent PIDE (x : xs) =
-    "[" <> represent PIDE x <> "," <> represent PIDE xs <> "]"
-  -- Console
-  represent Console [] = ""
-  represent Console (x : xs) =
-    "[" <> represent Console x <> "," <> represent Console xs <> "]"
-  -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Export.Representation.represent" "TPTP format not implemented for \"[a]\""
-  -- Informal
-  represent Informal xs = failWithMessage "SAD.Export.Representation.represent" "Informal format not implemented for \"[a]\""
-
+  represent PIDE xs = "[" <> intercalate ", " (map (represent PIDE) xs) <> "]"
+  represent Console xs = "[" <> intercalate ", " (map (represent Console) xs) <> "]"
+  represent TPTP xs = "[" <> intercalate ", " (map (represent TPTP) xs) <> "]"
+  represent Informal xs = "[" <> intercalate ", " (map (represent Informal) xs) <> "]"
 
 instance (Representation a, Representation b) => Representation (a,b) where
-  -- PIDE
-  represent PIDE (x, y) =
-    "(" <> represent PIDE x <> "," <> represent PIDE y <> ")"
-  -- Console
-  represent Console (x, y) =
-    "(" <> represent Console x <> "," <> represent Console y <> ")"
-  -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Export.Representation.represent" "TPTP format not implemented for \"(a,b)\""
-  -- Informal
-  represent Informal xs = failWithMessage "SAD.Export.Representation.represent" "Informal format not implemented for \"(a,b)\""
+  represent PIDE (x, y) = "(" <> represent PIDE x <> "," <> represent PIDE y <> ")"
+  represent Console (x, y) = "(" <> represent Console x <> "," <> represent Console y <> ")"
+  represent TPTP (x, y) = "(" <> represent Informal x <> "," <> represent TPTP y <> ")"
+  represent Informal (x, y) = "(" <> represent Informal x <> "," <> represent Informal y <> ")"
 
 instance Representation a => Representation (Set a) where
-  -- PIDE
   represent PIDE x =
-    let elements = Set.toList x
-    in "{" <> represent PIDE elements <> "}"
-  -- Console
-  represent Console x =
-    let elements = Set.toList x
-    in "{" <> represent Console elements <> "}"
-  -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Export.Representation.represent" "TPTP format not implemented for \"Set a\""
-  -- Informal
-  represent Informal xs = failWithMessage "SAD.Export.Representation.represent" "Informal format not implemented for \"Set a\""
+    let xs = Set.toList x
+    in "{" <> intercalate ", " (map (represent PIDE) xs) <> "}"
+  represent Console x = 
+    let xs = Set.toList x
+    in "{" <> intercalate ", " (map (represent Console) xs) <> "}"
+  represent TPTP x = 
+    let xs = Set.toList x
+    in "{" <> intercalate ", " (map (represent TPTP) xs) <> "}"
+  represent Informal x =
+    let xs = Set.toList x
+    in "{" <> intercalate ", " (map (represent Informal) xs) <> "}"
