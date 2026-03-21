@@ -27,14 +27,16 @@ module SAD.Data.Text.Context (
 import Prelude hiding (head, tail)
 import Prelude qualified (head, tail)
 import Data.Text.Lazy (Text)
-import Data.Text.Lazy qualified as Text
 import Data.Set (Set)
 
 import SAD.Data.Text.Block (Section(..))
 import SAD.Data.Text.Block qualified as Block
 import SAD.Data.Formula (Formula, VariableName)
 import SAD.Export.TPTP qualified as TPTP
+import SAD.Helpers (intercalate)
 
+import Isabelle.Bytes (Bytes)
+import Isabelle.Library (make_bytes)
 
 data Context = Context {
   formula        :: Formula,  -- formula of the context
@@ -81,13 +83,13 @@ setFormula context f = context { formula = f }
 
 -- TPTP rendering
 
-output :: [Context] -> Context -> Text
+output :: [Context] -> Context -> Bytes
 output contexts goal =
-  Text.unlines (map (tptpForm TPTP.Hypothesis) $ reverse contexts)
+  intercalate "\n" (map (tptpForm TPTP.Hypothesis) $ reverse contexts)
   <> "\n" <> tptpForm TPTP.Conjecture goal
 
 -- Formula print
-tptpForm :: TPTP.Role -> Context -> Text
+tptpForm :: TPTP.FormulaRole -> Context -> Bytes
 tptpForm role (Context formula (Block.Block { Block.name = name } : _) _) =
-  TPTP.renderLogicFormula name role formula
+  TPTP.showFofAnnotated $ TPTP.makeFofAnnotated (make_bytes name) role formula
 tptpForm _ _ = ""

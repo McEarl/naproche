@@ -40,9 +40,6 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
   line, you can use the option `--format=(pide|console|tptp|informal)` to change
   the formatting, where `Console` is the default format if this option is absent.
   
-  Moreover, the `TPTP` format is internally used to convert formulas to TPTP
-  before they are passed to an ATP.
-
   You can toy around with the `--mode=translate` and `--format=...` options to
   see how each format looks like, e.g.:
 
