@@ -29,16 +29,9 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
 
 ### Misc
 
-* **New:** There are two formatting options to print text during a Naproche run:
-
-  - `formal` 
-  - `informal`
-
-  You can use the option `--format=(formal|informal)` to change
-  the formatting, where `formal` is the default format if this option is absent.
-  
-  You can toy around with the `--mode=translate` and `--format=...` options to
-  see how each format looks like, e.g.:
+* **New:** There is a new command line option `--format=(formal|informal)`
+  (with default value `formal`) which determines if formulas etc. are printed
+  in a formal or informal way during a Naproche run. E.g.:
 
   ```
   Naproche --mode=translate --format=informal examples/cantor.ftl
