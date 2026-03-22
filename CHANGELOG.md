@@ -29,15 +29,14 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
 
 ### Misc
 
-* **New:** There are four formatting options to print text during a Naproche run:
+* **New:** There are three formatting options to print text during a Naproche run:
 
   - `PIDE`
   - `Console` 
-  - `TPTP`
   - `Informal`
 
   In Isabelle/jEdit, text is always formatted in the `PIDE` format; on the command
-  line, you can use the option `--format=(pide|console|tptp|informal)` to change
+  line, you can use the option `--format=(pide|console|informal)` to change
   the formatting, where `Console` is the default format if this option is absent.
   
   You can toy around with the `--mode=translate` and `--format=...` options to

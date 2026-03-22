@@ -137,18 +137,6 @@ instance Representation TermName where
   represent Console TermEquality = "="
   represent Console TermLess = "iLess"
   represent Console TermThesis = "$thesis"
-  -- TPTP
-  represent TPTP (TermSymbolic patterns) = "symbolic_term_" <> (make_bytes . symEncode . Text.fromStrict . make_text . showSymbolPatterns $ patterns)
-  represent TPTP (TermNotion patterns) = "a" <> showWordPatterns patterns
-  represent TPTP (TermThe patterns) = "the" <> showWordPatterns patterns
-  represent TPTP (TermUnaryAdjective patterns) = "is" <> showWordPatterns patterns
-  represent TPTP (TermMultiAdjective patterns) = "mis" <> showWordPatterns patterns
-  represent TPTP (TermUnaryVerb patterns) = "do" <> showWordPatterns patterns
-  represent TPTP (TermMultiVerb patterns) = "mdo" <> showWordPatterns patterns
-  represent TPTP (TermTask _) = failWithMessage "SAD.Data.Term.represent" "TPTP format not implemented for \"TermTask\"."
-  represent TPTP TermEquality = "="
-  represent TPTP TermLess = "iLess"
-  represent TPTP TermThesis = failWithMessage "SAD.Data.Term.represent" "TPTP format not implemented for \"TermThesis\"."
   -- Informal
   represent Informal (TermSymbolic patterns) = verbalizeSymbolPatterns patterns
   represent Informal (TermNotion patterns) = verbalizeWordPatterns patterns

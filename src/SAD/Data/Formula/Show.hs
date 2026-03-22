@@ -123,22 +123,6 @@ showFormula Console d Ind{indIndex = i}
   | i < d = "v" <> make_bytes (show $ d - i - 1)
   | otherwise = "v?" <> make_bytes (show i)
 
--- TPTP
-showFormula TPTP d (All _ f) =  "( ! " <> binder d f <> ")"
-showFormula TPTP d (Exi _ f) = "( ? " <> binder d f <> ")"
-showFormula TPTP d (Iff f g) = sinfix d " <=> " f g
-showFormula TPTP d (Imp f g) = sinfix d " => " f g
-showFormula TPTP d (Or  f g) = sinfix d " | " f g
-showFormula TPTP d (And f g) = sinfix d " & " f g
-showFormula TPTP d (Tag _ f) = showFormula TPTP d f
-showFormula TPTP d (Not f) = "( ~ " <> showFormula TPTP d f <> ")"
-showFormula TPTP d Top = "$true"
-showFormula TPTP d Bot = "$false"
-showFormula TPTP d Trm{trmName = name, trmArgs = args} = showTerm TPTP d name args
-showFormula TPTP d Var {varName = v} = represent TPTP v
-showFormula TPTP d Ind {indIndex = i} = "W" <> make_bytes (show (d - 1 - i))
-showFormula TPTP d ThisT = failWithMessage "SAD.Data.Formula.Show.showFormula" "TPTP format not implemented for \"ThisT\""
-
 -- Informal
 --- Quantifier:
 showFormula Informal d (All _ f) = "for all " <> showBindingVar  Informal d <> ", " <> parens (showFormula Informal (d + 1) f)
@@ -233,19 +217,6 @@ showTerm Console d t@TermEquality [l, r] = showFormula Console d l <> " " <> rep
 showTerm Console _ t@TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
 showTerm Console d t@TermLess formulas = represent Console t <> showArguments Console d formulas
 showTerm Console _ t@TermThesis _ = represent Console t
--- TPTP
-showTerm TPTP d t@(TermSymbolic patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP d t@(TermNotion patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP d t@(TermThe patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP d t@(TermUnaryAdjective patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP d t@(TermMultiAdjective patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP d t@(TermUnaryVerb patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP d t@(TermMultiVerb patterns) formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP _ t@(TermTask _) _ = represent TPTP t
-showTerm TPTP d t@TermEquality [l, r] = showFormula TPTP d l <> " " <> represent TPTP t <> " " <> showFormula TPTP d r
-showTerm TPTP _ t@TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
-showTerm TPTP d t@TermLess formulas = represent TPTP t <> showArguments TPTP d formulas
-showTerm TPTP _ t@TermThesis _ = represent TPTP t
 -- Informal
 showTerm Informal d (TermSymbolic patterns) formulas = dive patterns formulas
   where
@@ -365,12 +336,6 @@ showTerm Informal d TermLess [l, r] = showFormula Informal d l <> " is inductive
 showTerm Informal _ TermLess _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermLess\"."
 showTerm Informal _ TermThesis _ = "the thesis holds"
 
-
-sinfix :: Int -> Bytes -> Formula -> Formula -> Bytes
-sinfix d o f g  = "(" <> showFormula TPTP d f <> o <> showFormula TPTP d g <> ")"
-
-binder :: Int -> Formula -> Bytes
-binder d f = "[" <> showFormula TPTP (d + 1) (Ind 0 Position.none) <> "] : " <> showFormula TPTP (d + 1) f
 
 -- | Show a formula that occurs on the left-hand side of a logical connective.
 showFormulaL :: Format -> Int -> Formula -> Bytes

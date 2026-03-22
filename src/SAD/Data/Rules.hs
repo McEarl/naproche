@@ -37,7 +37,5 @@ instance Representation Rule where
     represent Console (left rl) <> " = " <> represent Console (right rl) <>
     ", Cond: " <> intercalate "," (map (represent Console) (condition rl)) <>
     ", Label: " <> make_bytes (label rl)
-  -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Data.Rules.represent" "TPTP format not implemented for \"Rule\""
   -- Informal
   represent Informal xs = failWithMessage "SAD.Data.Rules.represent" "Informal format not implemented for \"Rule\""

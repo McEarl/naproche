@@ -43,8 +43,6 @@ instance Representation Tag where
   represent PIDE UniquenessTask = "UniquenessTask"
   represent PIDE ChoiceTask = "ChoiceTask"
   represent Console tag = represent PIDE tag
-  -- TPTP
-  represent TPTP xs = failWithMessage "SAD.Export.Representation.represent" "TPTP format not implemented for \"Tag\""
   -- Informal
   represent Informal xs = failWithMessage "SAD.Export.Representation.represent" "Informal format not implemented for \"Tag\""
 

@@ -41,8 +41,6 @@ instance Representation Equation where
   represent PIDE (Equation l r) = represent PIDE l <> " = " <> represent PIDE r
   -- Console
   represent Console (Equation l r) = represent Console l <> " = " <> represent Console r
-  -- TPTP
-  represent TPTP _ = failWithMessage "SAD.Core.Completion.represent" "TPTP format not implemented for \"Equation\""
   -- Informal
   represent Informal _ = failWithMessage "SAD.Core.Completion.represent" "Informal format not implemented for \"Equation\""
 

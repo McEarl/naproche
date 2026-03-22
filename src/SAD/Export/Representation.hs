@@ -24,7 +24,6 @@ import Isabelle.Bytes
 data Format =
     PIDE
   | Console
-  | TPTP
   | Informal
 
 class Representation a where
@@ -33,13 +32,11 @@ class Representation a where
 instance Representation a => Representation [a] where
   represent PIDE xs = "[" <> intercalate ", " (map (represent PIDE) xs) <> "]"
   represent Console xs = "[" <> intercalate ", " (map (represent Console) xs) <> "]"
-  represent TPTP xs = "[" <> intercalate ", " (map (represent TPTP) xs) <> "]"
   represent Informal xs = "[" <> intercalate ", " (map (represent Informal) xs) <> "]"
 
 instance (Representation a, Representation b) => Representation (a,b) where
   represent PIDE (x, y) = "(" <> represent PIDE x <> "," <> represent PIDE y <> ")"
   represent Console (x, y) = "(" <> represent Console x <> "," <> represent Console y <> ")"
-  represent TPTP (x, y) = "(" <> represent Informal x <> "," <> represent TPTP y <> ")"
   represent Informal (x, y) = "(" <> represent Informal x <> "," <> represent Informal y <> ")"
 
 instance Representation a => Representation (Set a) where
@@ -49,9 +46,6 @@ instance Representation a => Representation (Set a) where
   represent Console x = 
     let xs = Set.toList x
     in "{" <> intercalate ", " (map (represent Console) xs) <> "}"
-  represent TPTP x = 
-    let xs = Set.toList x
-    in "{" <> intercalate ", " (map (represent TPTP) xs) <> "}"
   represent Informal x =
     let xs = Set.toList x
     in "{" <> intercalate ", " (map (represent Informal) xs) <> "}"
