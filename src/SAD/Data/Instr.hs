@@ -20,7 +20,7 @@ module SAD.Data.Instr (
   printsimpParam, printthesisParam, unfoldParam, unfoldsfParam, unfoldlowParam, unfoldlowsfParam,
   translationParam,
   helpParam, serverParam, onlytranslateParam, onlytokenizeParam,
-  modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam,
+  modeParam, dialectParam, formatParam, exportParam, proverParam, texExeParam, bibtexExeParam,
   keywordsCommand, keywordsSynonym, keywordsLimit, keywordsFlag, keywordsArgument, keywordsModule,
   keywordsDropLimit, keywordsDropFlag
 ) where
@@ -152,11 +152,15 @@ textFlags@[proveParam, checkParam, checkconsistencyParam, symsignParam, infoPara
     Param.flag "translation" "print first-order translation of sentences" False]
 
 textArgs :: [Param.T Bytes]
-modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam :: Param.T Bytes
-textArgs@[modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam] =
+modeParam, dialectParam, formatParam, exportParam, proverParam, texExeParam, bibtexExeParam :: Param.T Bytes
+textArgs@[modeParam, dialectParam, formatParam, exportParam, proverParam, texExeParam, bibtexExeParam] =
    [Param.bytes "mode" "run Naproche in mode MODE" "verify",
     Param.bytes "dialect" "use the DIALECT dialect of ForTheL" "ftl",
     Param.bytes "format" "print output text in the FORMAT format" "formal",
+    -- "export" is the empty string by default so that it can be initialzed either
+    -- with "symbolic" or "verbal" depending on whether "format" is set to
+    -- "Console" or "informal"
+    Param.bytes "export" "export the output text to FORMAT" "",
     Param.bytes "prover" "use prover NAME" (Prover.get_name Prover.eprover),
     Param.bytes "tex-exe" "TeX executable EXE" "pdflatex",
     Param.bytes "bibtex-exe" "BibTeX executable EXE" "bibtex"]

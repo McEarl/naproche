@@ -32,6 +32,7 @@ import SAD.Prove.MESON qualified as MESON
 import SAD.Export.Prover qualified as Prover
 import SAD.Export.Representation
 import SAD.Data.Instr
+import SAD.Data.Text.Block
 import SAD.API hiding (error)
 import SAD.Parser.FTL.Lexer qualified as FTL
 import SAD.Parser.TEX.Lexer qualified as TEX
@@ -40,7 +41,7 @@ import SAD.Parser.FTL.Token qualified as FTL
 import SAD.Parser.TEX.Token qualified as TEX
 import SAD.Parser.STEX.Token qualified as STEX
 import SAD.Parser.Token (renderTokens)
-import SAD.Helpers (getNaprocheMathhub)
+import SAD.Helpers (getNaprocheMathhub, failWithMessage)
 
 import Isabelle.Bytes qualified as Bytes
 import Isabelle.Bytes (Bytes)
@@ -94,6 +95,7 @@ mainTerminal initInstrs fileArgs = do
           initInstrProofTexts = map (uncurry ProofTextInstr) locatedInitInstrs
           modeArg = getInstr modeParam initInstrs
           formatArg = getInstr formatParam initInstrs
+          exportArg = getInstr exportParam initInstrs
           texExeArg = getInstr texExeParam initInstrs
           bibtexExeArg = getInstr bibtexExeParam initInstrs
           format =
@@ -101,6 +103,14 @@ mainTerminal initInstrs fileArgs = do
               "formal" -> Console
               "informal" -> Informal
               _ -> error $ "Invalid format: " ++ make_string formatArg
+          export =
+            case exportArg of
+              "tptp" -> TPTP
+              "" -> case format of
+                Console -> Symbolic
+                Informal -> Verbal
+                PIDE -> failWithMessage "SAD.Main.mainTerminal" "Unexpected PIDE format."
+              _ -> error $ "invalid export format: \"" ++ make_string exportArg ++ "\""
       -- Get the input text (either via a given file path or if no file path is
       -- provided via the stdin stream) as a proof text:
       (dialect, inputText, mbInputPath) <- do
@@ -147,7 +157,7 @@ mainTerminal initInstrs fileArgs = do
         (case modeArg of
           "lex" -> lexInputText dialect inputText
           "tokenize" -> tokenizeInputText dialect inputText
-          "translate" -> translateInputText format dialect proofTexts
+          "translate" -> translateInputText format export dialect proofTexts
           "verify" -> verifyInputText format dialect mesonCache proverCache proofTexts
           "lexicon" -> computeLexicon format dialect proofTexts
           "render" -> case mbInputPath of
@@ -268,14 +278,14 @@ tokenizeInputText dialect bytes = do
   outputMain TRACING Position.none $ make_bytes $ "total " <> timeDifference finishTime
   return 0
 
-translateInputText :: Format -> ParserKind -> [ProofText] -> IO Int
-translateInputText fmt dialect proofTexts = do
+translateInputText :: Format -> ExportFormat -> ParserKind -> [ProofText] -> IO Int
+translateInputText fmt expFmt dialect proofTexts = do
   -- Get the starting time of the parsing process:
   startTime <- getCurrentTime
   -- Parse the input text:
   (txts, _) <- readProofText fmt dialect proofTexts
   -- Translate the input text and print the result:
-  mapM_ (\case ProofTextBlock bl -> putStrLn (make_string $ represent fmt bl); _ -> return ()) txts
+  mapM_ (\case ProofTextBlock bl -> putStrLn (make_string $ showBlock expFmt bl); _ -> return ()) txts
   -- Get the finish time of the translation process:
   finishTime <- getCurrentTime
   -- Print the time it took to translate the input text:
@@ -429,6 +439,7 @@ options = [
   optArgument "M" modeParam "MODE",
   optArgument "" dialectParam "DIALECT",
   optArgument "" formatParam "FORMAT",
+  optArgument "" exportParam "FORMAT",
   optFlag "" translationParam,
   optSwitch "" serverParam True "",
   optArgument "P" proverParam "NAME",
