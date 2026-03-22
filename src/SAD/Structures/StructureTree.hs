@@ -38,10 +38,14 @@ data ForthelExpr = ForthelExpr
   , forthelFormula :: Formula
   } deriving (Eq)
 
-extractBlocks :: ProofText -> Forest ForthelExpr
-extractBlocks (ProofTextBlock b) =
+
+extractBlock :: Block -> Forest ForthelExpr
+extractBlock b =
   [ Node (ForthelExpr (name b) [] (isTopLevel b) (needsProof b) (canDeclare (kind b)) (formula b))
     (concatMap extractBlocks (body b))]
+
+extractBlocks :: ProofText -> Forest ForthelExpr
+extractBlocks (ProofTextBlock b) = extractBlock b
 extractBlocks _ = []
 
 toStatement :: Tree ForthelExpr -> Either Text ForthelExpr

@@ -14,9 +14,10 @@ module SAD.Export.Export (
 ) where
 
 import SAD.Data.Text.Block
+import SAD.Structures.StructureTree qualified as Lean
 import SAD.Export.Representation (Format(Console,Informal))
 import SAD.Export.TPTP qualified as TPTP
-import SAD.Helpers (failWithMessage)
+import SAD.Helpers (intercalate, failWithMessage)
 
 import Isabelle.Bytes (Bytes)
 import Isabelle.Library (make_bytes)
@@ -25,6 +26,7 @@ data ExportFormat =
     Symbolic
   | Verbal
   | TPTP
+  | Lean
 
 sectionToTptpRole :: Section -> TPTP.FormulaRole
 sectionToTptpRole Definition = TPTP.Hypothesis
@@ -38,6 +40,10 @@ sectionToTptpRole section = failWithMessage "SAD.Data.Text.Block.showSection" $
 export :: ExportFormat -> Block -> Bytes
 export TPTP block@Block{body = b, name = n, kind = k} =
   TPTP.showFofAnnotated (TPTP.makeFofAnnotated (make_bytes n) (sectionToTptpRole k) (formulate block)) <> "\n"
+export Lean block@Block{body = b, name = n, kind = k} =
+  let errOrForthelExprs = map Lean.toStatement . Lean.extractBlock $ block
+      texts = map (\either -> case either of Left txt -> txt; Right forthelExpr -> Lean.toLeanCode Console [forthelExpr]) errOrForthelExprs
+  in intercalate "\n\n" (map make_bytes texts)
 export Symbolic block = showBlock Console 0 block
 export Verbal block = showBlock Informal 0 block
 

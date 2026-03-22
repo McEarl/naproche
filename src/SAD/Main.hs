@@ -107,6 +107,7 @@ mainTerminal initInstrs fileArgs = do
           export =
             case exportArg of
               "tptp" -> TPTP
+              "lean" -> Lean
               "" -> case format of
                 Console -> Symbolic
                 Informal -> Verbal
@@ -285,6 +286,9 @@ translateInputText fmt expFmt dialect proofTexts = do
   startTime <- getCurrentTime
   -- Parse the input text:
   (txts, _) <- readProofText fmt dialect proofTexts
+  case expFmt of
+    Lean -> putStrLn "\n[Warning] Exporting to Lean is an experimental feature. Please be gentle.\n"
+    _ -> pure ()
   -- Translate the input text and print the result:
   mapM_ (\case ProofTextBlock bl -> putStrLn (make_string $ export expFmt bl); _ -> return ()) txts
   -- Get the finish time of the translation process:

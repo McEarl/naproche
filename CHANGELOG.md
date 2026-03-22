@@ -56,13 +56,15 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
   Naproche --mode=lexicon examples/cantor.ftl
   ```
 
-* **New:** There is a new command line option `--export` that accepts an argument
-  `tptp`. When this option is given together with the option `--mode=translate`,
-  the input text is exported to TPTP. E.g.:
+* **New:** There is a new command line option `--export=(tptp|lean)`.
+  When this option is given together with the option `--mode=translate`,
+  the input text is exported to TPTP or Lean, resp. E.g.:
 
   ```
   Naproche --mode=translate --export=tptp examples/cantor.ftl
   ```
+
+  **Note:** Exporting to Lean is highly experimental!
 
 
 ## naproche-20251110  (for Isabelle 2025-1 and Isabelle 2025-2)
