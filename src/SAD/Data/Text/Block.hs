@@ -1,10 +1,10 @@
--- |
--- Module      : SAD.Data.Text.Block
--- Copyright   : (c) 2001 - 2008, Andrei Paskevich,
---               (c) 2017 - 2018, Steffen Frerix
--- License     : GPL-3
---
--- TODO: Add description.
+  -- |
+  -- Module      : SAD.Data.Text.Block
+  -- Copyright   : (c) 2001 - 2008, Andrei Paskevich,
+  --               (c) 2017 - 2018, Steffen Frerix
+  -- License     : GPL-3
+  --
+  -- TODO: Add description.
 
 
 {-# LANGUAGE NamedFieldPuns #-}
@@ -12,7 +12,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module SAD.Data.Text.Block (
-  ExportFormat(..),
   ProofText(..),
   Block(..),
   makeBlock,
@@ -20,7 +19,6 @@ module SAD.Data.Text.Block (
   declaredNames,
   text,
   Section(..),
-  showForm,
   formulate,
   compose,
   needsProof,
@@ -43,19 +41,13 @@ import SAD.Parser.Token
 import SAD.Data.Text.Decl
 import SAD.Parser.Error (ParseError)
 import SAD.Export.Representation
-import SAD.Export.TPTP qualified as TPTP
-import SAD.Helpers (indent, failWithMessage)
+import SAD.Helpers (indent)
 
 import Isabelle.Bytes (Bytes)
 import Isabelle.Bytes qualified as Bytes
 import Isabelle.Position qualified as Position
 import Isabelle.Library (make_text, make_bytes)
 
-
-data ExportFormat =
-    Symbolic
-  | Verbal
-  | TPTP
 
 data ProofText =
     ProofTextBlock Block
@@ -71,7 +63,7 @@ instance Representation ProofText where
   represent fmt = showProofText fmt 0
 
 showProofText :: Format -> Int -> ProofText -> Bytes
-showProofText fmt p (ProofTextBlock block) = showBlock' fmt p block
+showProofText fmt p (ProofTextBlock block) = showBlock fmt p block
 showProofText _ p (ProofTextInstr _ instr) = indent p . make_bytes $ show instr
 showProofText _ p (ProofTextDrop _ instr) = indent p . make_bytes $ show instr
 showProofText _ p (ProofTextError err) = indent p . make_bytes $ show err
@@ -88,7 +80,7 @@ data Block = Block {
   deriving (Eq, Ord)
 
 instance Representation Block where
-  represent fmt = showBlock' fmt 0
+  represent fmt = showBlock fmt 0
 
 makeBlock :: Formula -> [ProofText] -> Section -> Text -> [Text] -> [Token] -> Block
 makeBlock form body kind = Block form body kind mempty
@@ -109,27 +101,18 @@ data Section =
   ProofByContradiction
   deriving (Eq, Ord, Show)
 
-sectionToTptpRole :: Section -> TPTP.FormulaRole
-sectionToTptpRole Definition = TPTP.Hypothesis
-sectionToTptpRole Signature = TPTP.Hypothesis
-sectionToTptpRole Axiom = TPTP.Hypothesis
-sectionToTptpRole Theorem = TPTP.Conjecture
-sectionToTptpRole section = failWithMessage "SAD.Data.Text.Block.showSection" $
-  "TPTP format not implemented for \"" ++ show section ++ "\""
-
-sectionToBytes :: Section -> Bytes
-sectionToBytes Definition = "Definition"
-sectionToBytes Signature = "Signature"
-sectionToBytes Axiom = "Axiom"
-sectionToBytes Theorem = "Theorem"
-sectionToBytes CaseHypothesis = "Case hypothesis"
-sectionToBytes Assumption = "Assumption"
-sectionToBytes Choice = "Choice"
-sectionToBytes Affirmation = "Affirmation"
-sectionToBytes Posit = "Posit"
-sectionToBytes LowDefinition = "Low-level definition"
-sectionToBytes ProofByContradiction = "Proof by contradiction"
-
+showSection :: Section -> Bytes
+showSection Definition = "Definition"
+showSection Signature = "Signature"
+showSection Axiom = "Axiom"
+showSection Theorem = "Theorem"
+showSection CaseHypothesis = "Case hypothesis"
+showSection Assumption = "Assumption"
+showSection Choice = "Choice"
+showSection Affirmation = "Affirmation"
+showSection Posit = "Posit"
+showSection LowDefinition = "Low-level definition"
+showSection ProofByContradiction = "Proof by contradiction"
 
 -- Composition
 
@@ -177,17 +160,10 @@ file = Text.fromStrict . make_text . fromMaybe Bytes.empty . Position.file_of . 
 declaredNames :: Block -> Set VariableName
 declaredNames = Set.map declName . declaredVariables
 
--- | Present a block in an export format.
-showBlock :: ExportFormat -> Block -> Bytes
-showBlock TPTP block@Block{body = b, name = n, kind = k} =
-  TPTP.showFofAnnotated (TPTP.makeFofAnnotated (make_bytes n) (sectionToTptpRole k) (formulate block)) <> "\n"
-showBlock Symbolic block = showBlock' Console 0 block
-showBlock Verbal block = showBlock' Informal 0 block
-
-showBlock' :: Format -> Int -> Block -> Bytes
-showBlock' fmt p block@Block{body = b, name = name, kind = kind}
+showBlock :: Format -> Int -> Block -> Bytes
+showBlock fmt p block@Block{body = b, name = name, kind = kind}
   | null b = showForm fmt p block
-  | isTopLevel block = sectionToBytes kind <> addName <> ":\n" <> showBlockForm fmt (p + 1) block <>
+  | isTopLevel block = showSection kind <> addName <> ":\n" <> showBlockForm fmt (p + 1) block <>
       (if needsProof block
         then if null b
           then indent p "Trivial:\n"

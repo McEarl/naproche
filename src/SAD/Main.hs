@@ -31,6 +31,7 @@ import Network.Socket (Socket)
 import SAD.Prove.MESON qualified as MESON
 import SAD.Export.Prover qualified as Prover
 import SAD.Export.Representation
+import SAD.Export.Export
 import SAD.Data.Instr
 import SAD.Data.Text.Block
 import SAD.API hiding (error)
@@ -285,7 +286,7 @@ translateInputText fmt expFmt dialect proofTexts = do
   -- Parse the input text:
   (txts, _) <- readProofText fmt dialect proofTexts
   -- Translate the input text and print the result:
-  mapM_ (\case ProofTextBlock bl -> putStrLn (make_string $ showBlock expFmt bl); _ -> return ()) txts
+  mapM_ (\case ProofTextBlock bl -> putStrLn (make_string $ export expFmt bl); _ -> return ()) txts
   -- Get the finish time of the translation process:
   finishTime <- getCurrentTime
   -- Print the time it took to translate the input text:
