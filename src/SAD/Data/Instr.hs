@@ -156,7 +156,7 @@ modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam :
 textArgs@[modeParam, dialectParam, formatParam, proverParam, texExeParam, bibtexExeParam] =
    [Param.bytes "mode" "run Naproche in mode MODE" "verify",
     Param.bytes "dialect" "use the DIALECT dialect of ForTheL" "ftl",
-    Param.bytes "format" "print output text in the FORMAT format" "console",
+    Param.bytes "format" "print output text in the FORMAT format" "formal",
     Param.bytes "prover" "use prover NAME" (Prover.get_name Prover.eprover),
     Param.bytes "tex-exe" "TeX executable EXE" "pdflatex",
     Param.bytes "bibtex-exe" "BibTeX executable EXE" "bibtex"]

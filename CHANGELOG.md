@@ -29,15 +29,13 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
 
 ### Misc
 
-* **New:** There are three formatting options to print text during a Naproche run:
+* **New:** There are two formatting options to print text during a Naproche run:
 
-  - `PIDE`
-  - `Console` 
-  - `Informal`
+  - `formal` 
+  - `informal`
 
-  In Isabelle/jEdit, text is always formatted in the `PIDE` format; on the command
-  line, you can use the option `--format=(pide|console|informal)` to change
-  the formatting, where `Console` is the default format if this option is absent.
+  You can use the option `--format=(formal|informal)` to change
+  the formatting, where `formal` is the default format if this option is absent.
   
   You can toy around with the `--mode=translate` and `--format=...` options to
   see how each format looks like, e.g.:
@@ -45,6 +43,11 @@ A complete listing of all changes on Naproche since naproche-20211211 (Isabelle
   ```
   Naproche --mode=translate --format=informal examples/cantor.ftl
   ```
+
+  In Isabelle/jEdit only the formal format is available which differs a bit from
+  the formal style on the command line: The former uses "Isabelle symbols" such
+  as `\<forall>` and `\<exists>` to present formulas, whereas the latter uses a
+  TPTP-like ASCII syntax.
 
 * **New:** The command line option `mode` accepts a new argument `lexicon` which
   makes Naproche print the lexicon that is generated from the input text. E.g.:

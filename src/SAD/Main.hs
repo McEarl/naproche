@@ -98,8 +98,7 @@ mainTerminal initInstrs fileArgs = do
           bibtexExeArg = getInstr bibtexExeParam initInstrs
           format =
             case formatArg of
-              "console" -> Console
-              "pide" -> PIDE
+              "formal" -> Console
               "informal" -> Informal
               _ -> error $ "Invalid format: " ++ make_string formatArg
       -- Get the input text (either via a given file path or if no file path is
