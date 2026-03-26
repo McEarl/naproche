@@ -90,9 +90,9 @@ data TermName
   | TermNotion [Pattern]
   | TermThe [Pattern]
   | TermUnaryAdjective [Pattern]
-  | TermMultiAdjective [Pattern]
+  | TermBinaryAdjective [Pattern]
   | TermUnaryVerb [Pattern]
-  | TermMultiVerb [Pattern]
+  | TermBinaryVerb [Pattern]
   | TermTask Int
   | TermEquality
   | TermLess
@@ -118,9 +118,9 @@ instance Representation TermName where
   represent PIDE (TermNotion patterns) = "a" <> showWordPatterns patterns
   represent PIDE (TermThe patterns) = "the" <> showWordPatterns patterns
   represent PIDE (TermUnaryAdjective patterns) = "is" <> showWordPatterns patterns
-  represent PIDE (TermMultiAdjective patterns) = "mis" <> showWordPatterns patterns
-  represent PIDE (TermUnaryVerb patterns) = "do" <> showWordPatterns patterns
-  represent PIDE (TermMultiVerb patterns) = "mdo" <> showWordPatterns patterns
+  represent PIDE (TermBinaryAdjective patterns) = "are" <> showWordPatterns patterns
+  represent PIDE (TermUnaryVerb patterns) = "does" <> showWordPatterns patterns
+  represent PIDE (TermBinaryVerb patterns) = "do" <> showWordPatterns patterns
   represent PIDE (TermTask n) = "tsk_" <> make_bytes (show n)
   represent PIDE TermEquality = "="
   represent PIDE TermLess = "iLess"
@@ -130,9 +130,9 @@ instance Representation TermName where
   represent Console (TermNotion patterns) = "a" <> showWordPatterns patterns
   represent Console (TermThe patterns) = "the" <> showWordPatterns patterns
   represent Console (TermUnaryAdjective patterns) = "is" <> showWordPatterns patterns
-  represent Console (TermMultiAdjective patterns) = "mis" <> showWordPatterns patterns
-  represent Console (TermUnaryVerb patterns) = "do" <> showWordPatterns patterns
-  represent Console (TermMultiVerb patterns) = "mdo" <> showWordPatterns patterns
+  represent Console (TermBinaryAdjective patterns) = "are" <> showWordPatterns patterns
+  represent Console (TermUnaryVerb patterns) = "does" <> showWordPatterns patterns
+  represent Console (TermBinaryVerb patterns) = "do" <> showWordPatterns patterns
   represent Console (TermTask n) = "tsk_" <> make_bytes (show n)
   represent Console TermEquality = "="
   represent Console TermLess = "iLess"
@@ -142,9 +142,9 @@ instance Representation TermName where
   represent Informal (TermNotion patterns) = verbalizeWordPatterns patterns
   represent Informal (TermThe patterns) = verbalizeWordPatterns patterns
   represent Informal (TermUnaryAdjective patterns) = verbalizeWordPatterns patterns
-  represent Informal (TermMultiAdjective patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermBinaryAdjective patterns) = verbalizeWordPatterns patterns
   represent Informal (TermUnaryVerb patterns) = verbalizeWordPatterns patterns
-  represent Informal (TermMultiVerb patterns) = verbalizeWordPatterns patterns
+  represent Informal (TermBinaryVerb patterns) = verbalizeWordPatterns patterns
   represent Informal (TermTask n) = "task #" <> make_bytes (show n)
   represent Informal TermEquality = "_ is equal to _"
   represent Informal TermLess = "_ is inductively less than _"

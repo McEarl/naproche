@@ -691,12 +691,12 @@ makeAtomicWord (TermThe patterns) =
   "the" <> showWordPatterns patterns
 makeAtomicWord (TermUnaryAdjective patterns) =
   "is" <> showWordPatterns patterns
-makeAtomicWord (TermMultiAdjective patterns) =
-  "mis" <> showWordPatterns patterns
+makeAtomicWord (TermBinaryAdjective patterns) =
+  "are" <> showWordPatterns patterns
 makeAtomicWord (TermUnaryVerb patterns) =
+  "does" <> showWordPatterns patterns
+makeAtomicWord (TermBinaryVerb patterns) =
   "do" <> showWordPatterns patterns
-makeAtomicWord (TermMultiVerb patterns) =
-  "mdo" <> showWordPatterns patterns
 makeAtomicWord TermLess =
   "iLess"
 makeAtomicWord (TermTask _) =

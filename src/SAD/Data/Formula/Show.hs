@@ -182,9 +182,9 @@ showTerm PIDE d (TermSymbolic patterns) formulas = dive patterns formulas
 showTerm PIDE d t@(TermNotion patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
 showTerm PIDE d t@(TermThe patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
 showTerm PIDE d t@(TermUnaryAdjective patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
-showTerm PIDE d t@(TermMultiAdjective patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE d t@(TermBinaryAdjective patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
 showTerm PIDE d t@(TermUnaryVerb patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
-showTerm PIDE d t@(TermMultiVerb patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
+showTerm PIDE d t@(TermBinaryVerb patterns) formulas = represent PIDE t <> showArguments PIDE d formulas
 showTerm PIDE _ t@(TermTask _) _ = represent PIDE t
 showTerm PIDE d t@TermEquality [l, r] = showFormula PIDE d l <> " " <> represent PIDE t <> " " <> showFormula PIDE d r
 showTerm PIDE _ t@TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
@@ -209,9 +209,9 @@ showTerm Console d (TermSymbolic patterns) formulas = dive patterns formulas
 showTerm Console d t@(TermNotion patterns) formulas = represent Console t <> showArguments Console d formulas
 showTerm Console d t@(TermThe patterns) formulas = represent Console t <> showArguments Console d formulas
 showTerm Console d t@(TermUnaryAdjective patterns) formulas = represent Console t <> showArguments Console d formulas
-showTerm Console d t@(TermMultiAdjective patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console d t@(TermBinaryAdjective patterns) formulas = represent Console t <> showArguments Console d formulas
 showTerm Console d t@(TermUnaryVerb patterns) formulas = represent Console t <> showArguments Console d formulas
-showTerm Console d t@(TermMultiVerb patterns) formulas = represent Console t <> showArguments Console d formulas
+showTerm Console d t@(TermBinaryVerb patterns) formulas = represent Console t <> showArguments Console d formulas
 showTerm Console _ t@(TermTask _) _ = represent Console t
 showTerm Console d t@TermEquality [l, r] = showFormula Console d l <> " " <> represent Console t <> " " <> showFormula Console d r
 showTerm Console _ t@TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."
@@ -285,9 +285,9 @@ showTerm Informal d (TermUnaryAdjective patterns) (headFormula : tailFormulas) =
     dive [Vr] (f : _) = showFormula Informal d f
     dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
     dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermUnaryAdjective\" term."
-showTerm Informal d (TermMultiAdjective patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiAdjective\" term has no arguments."
-showTerm Informal d (TermMultiAdjective patterns) [_] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiAdjective\" term has only one argument."
-showTerm Informal d (TermMultiAdjective patterns) (headFormula1 : headFormula2 : tailFormulas) =
+showTerm Informal d (TermBinaryAdjective patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermBinaryAdjective\" term has no arguments."
+showTerm Informal d (TermBinaryAdjective patterns) [_] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermBinaryAdjective\" term has only one argument."
+showTerm Informal d (TermBinaryAdjective patterns) (headFormula1 : headFormula2 : tailFormulas) =
   showFormula Informal d headFormula1 <> " and " <> showFormula Informal d headFormula2 <> " are " <> dive patterns tailFormulas
   where
     dive :: [Pattern] -> [Formula] -> Bytes
@@ -295,11 +295,11 @@ showTerm Informal d (TermMultiAdjective patterns) (headFormula1 : headFormula2 :
     dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
     dive [Word (w : _)] _ = make_bytes w
     dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
-    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermMultiAdjective\" term."
-    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermMultiAdjective\" pattern."
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermBinaryAdjective\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermBinaryAdjective\" pattern."
     dive [Vr] (f : _) = showFormula Informal d f
     dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
-    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermMultiAdjective\" term."
+    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermBinaryAdjective\" term."
 showTerm Informal d (TermUnaryVerb patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermUnaryVerb\" term has no arguments."
 showTerm Informal d (TermUnaryVerb patterns) (headFormula : tailFormulas) =
   showFormula Informal d headFormula <> " " <> dive patterns tailFormulas
@@ -314,9 +314,9 @@ showTerm Informal d (TermUnaryVerb patterns) (headFormula : tailFormulas) =
     dive [Vr] (f : _) = showFormula Informal d f
     dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
     dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermUnaryVerb\" term."
-showTerm Informal d (TermMultiVerb patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiVerb\" term has no arguments."
-showTerm Informal d (TermMultiVerb patterns) [_] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermMultiVerb\" term has only one argument."
-showTerm Informal d (TermMultiVerb patterns) (headFormula1 : headFormula2 : tailFormulas) =
+showTerm Informal d (TermBinaryVerb patterns) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermBinaryVerb\" term has no arguments."
+showTerm Informal d (TermBinaryVerb patterns) [_] = failWithMessage "SAD.Data.Formula.Show.showTerm" "\"TermBinaryVerb\" term has only one argument."
+showTerm Informal d (TermBinaryVerb patterns) (headFormula1 : headFormula2 : tailFormulas) =
   showFormula Informal d headFormula1 <> " and " <> showFormula Informal d headFormula2 <> " " <> dive patterns tailFormulas
   where
     dive :: [Pattern] -> [Formula] -> Bytes
@@ -324,11 +324,11 @@ showTerm Informal d (TermMultiVerb patterns) (headFormula1 : headFormula2 : tail
     dive (Word [] : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Empty list of synonyms in \"Word\" pattern."
     dive [Word (w : _)] _ = make_bytes w
     dive (Word (w : _) : ps) fs = make_bytes w <> " " <> dive ps fs
-    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermMultiVerb\" term."
-    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermMultiVerb\" pattern."
+    dive (Symbol _ : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Symbol\" pattern in \"TermBinaryVerb\" term."
+    dive (Vr : ps) [] = failWithMessage "SAD.Data.Formula.Show.showTerm" "Fewer arguments than variables in \"TermBinaryVerb\" pattern."
     dive [Vr] (f : _) = showFormula Informal d f
     dive (Vr : ps) (f : fs) = showFormula Informal d f <> " " <> dive ps fs
-    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermMultiVerb\" term."
+    dive (Nm : _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Unexpected \"Nm\" pattern in \"TermBinaryVerb\" term."
 showTerm Informal _ (TermTask _) _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Informal format not implemented for \"TermTask _\"."
 showTerm Informal d TermEquality [l, r] = showFormula Informal d l <> " is equal to " <> showFormula Informal d r
 showTerm Informal _ TermEquality _ = failWithMessage "SAD.Data.Formula.Show.showTerm" "Invalid number of arguments for \"TermEquality\"."

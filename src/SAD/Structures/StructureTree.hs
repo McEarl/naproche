@@ -91,7 +91,7 @@ toDeclaration fmt (ForthelExpr {..}) =
         foldl' (F.:@) (F.TyPredicate $ termToText t) (map (go xs) args)
       go xs (Trm t@(TermUnaryAdjective name) args info id) =
         foldl' (F.:@) (F.Predicate $ termToText t) (map (go xs) args)
-      go xs (Trm t@(TermMultiAdjective name) args info id) =
+      go xs (Trm t@(TermBinaryAdjective name) args info id) =
         foldl' (F.:@) (F.Predicate $ termToText t) (map (go xs) args)
       go xs (Trm t args info id) =
         foldl' (F.:@) (F.Const (termToText t)) (map (go xs) args)
@@ -117,9 +117,9 @@ termToText (TermSymbolic t) = Text.concat $ map patternToText t
 termToText (TermNotion t) = Text.concat $ map patternToText t
 termToText (TermThe t) = Text.concat $ map patternToText t
 termToText (TermUnaryAdjective t) = Text.concat $ map patternToText t
-termToText (TermMultiAdjective t) = Text.concat $ map patternToText t
+termToText (TermBinaryAdjective t) = Text.concat $ map patternToText t
 termToText (TermUnaryVerb t) = Text.concat $ map patternToText t
-termToText (TermMultiVerb t) = Text.concat $ map patternToText t
+termToText (TermBinaryVerb t) = Text.concat $ map patternToText t
 termToText t = undefined
 
 toLeanCode :: Format -> [ForthelExpr] -> Text

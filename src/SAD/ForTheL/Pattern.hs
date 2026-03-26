@@ -66,7 +66,7 @@ addExpr t@Trm{trmName = TermUnaryVerb _, trmArgs = vs} f p st
     fm = substs nf $ map varName vs
     ns = st {verbExpr = (pt, fm) : verbExpr st, idCount = incId p n}
 
-addExpr t@Trm{trmName = TermMultiAdjective _, trmArgs = vs} f p st
+addExpr t@Trm{trmName = TermBinaryAdjective _, trmArgs = vs} f p st
   = put ns >> return nf
   where
     n = idCount st
@@ -75,7 +75,7 @@ addExpr t@Trm{trmName = TermMultiAdjective _, trmArgs = vs} f p st
     fm = substs nf $ map varName vs
     ns = st {adjectiveExpr = (pt, fm) : adjectiveExpr st, idCount = incId p n}
 
-addExpr t@Trm{trmName = TermMultiVerb _, trmArgs = vs} f p st
+addExpr t@Trm{trmName = TermBinaryVerb _, trmArgs = vs} f p st
   = put ns >> return nf
   where
     n = idCount st
@@ -162,7 +162,7 @@ extractWordPattern st t@Trm {trmName = TermUnaryAdjective s, trmArgs = vs} f = (
   where
     pt = map (addSynonyms st) s
     nf = replace t t {trId = NewId} f
-extractWordPattern st t@Trm {trmName = TermMultiAdjective s, trmArgs = vs} f = (pt, nf)
+extractWordPattern st t@Trm {trmName = TermBinaryAdjective s, trmArgs = vs} f = (pt, nf)
   where
     pt = map (addSynonyms st) s
     nf = replace t t {trId = NewId} f
@@ -170,7 +170,7 @@ extractWordPattern st t@Trm {trmName = TermUnaryVerb s, trmArgs = vs} f = (pt, n
   where
     pt = map (addSynonyms st) s
     nf = replace t t {trId = NewId} f
-extractWordPattern st t@Trm {trmName = TermMultiVerb s, trmArgs = vs} f = (pt, nf)
+extractWordPattern st t@Trm {trmName = TermBinaryVerb s, trmArgs = vs} f = (pt, nf)
   where
     pt = map (addSynonyms st) s
     nf = replace t t {trId = NewId} f

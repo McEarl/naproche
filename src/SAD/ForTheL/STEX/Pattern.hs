@@ -46,13 +46,13 @@ newPrdPattern tvr = multi </> unary </> optInTexArg "emph" (newSymbPattern tvr)
     multiAdj = do
       token' "are"
       (t, vs) <- optInTexArg "emph" $ wordPatHead tvr
-      return (TermMultiAdjective t, vs)
+      return (TermBinaryAdjective t, vs)
     unaryVerb = do
       (t, vs) <- optInTexArg "emph" $ wordPatHead tvr
       return (TermUnaryVerb t, vs)
     multiVerb = do
       (t, vs) <- optInTexArg "emph" $ wordPatHead tvr
-      return (TermMultiVerb t, vs)
+      return (TermBinaryVerb t, vs)
 
 newNotionPattern :: FTL PosVar -> FTL (Formula, PosVar)
 newNotionPattern tvr = (notion <|> function) </> unnamedNotion tvr
